@@ -6,6 +6,27 @@ An integrated, offline Linux electronics workbench with schematic simulation, AV
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 
+## Circuit assistant
+
+Click **Design with Coding Hub → Start circuit chat** in the Circuit lab toolbar.
+Studio prepares a separate copy and opens a ready-to-use Coding Hub workspace in
+your browser. Describe your circuit or changes, choose your configured model,
+enable **Allow edits & commands**, and send. No paths, copied setup instructions
+or extra plugin configuration are required. Coding Hub must be installed.
+
+When the assistant finishes, return to Studio: **Check for result → Bring into
+editor**. The result must be saved as `design.circuit`. Undo restores the previous
+circuit. If you changed the original in the meantime, Studio blocks replacement;
+use **Save edited copy** to keep the assistant result separately. Starting another
+chat creates another copy. Opening a workspace alone does not invoke a model.
+Keep the Studio window open for this handoff; the saved copies remain in the app's
+`assistant` data folder even after closing it.
+
+Coding Hub also has **New circuit** and **Open circuit in Studio** buttons. Its
+previous draft is preserved. This is a dedicated handoff to Coding Hub, not an
+embedded model or live synchronization of unsaved editor state.
+
+
 ## Run on Linux
 
 ```sh

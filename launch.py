@@ -5,6 +5,7 @@ import json
 import secrets
 from pic_worker import PicSessions
 from project_store import ProjectStore
+from assistant_bridge import AssistantBridge
 from analysis_backend import AnalysisBackend
 import functools
 import http.server
@@ -14,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import tempfile
 
 ROOT = Path(__file__).resolve().parent
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -32,12 +34,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.json_response({'token':self.server.cs_token,'apiVersion':2,'capabilities':['project-store','isolated-pic','ngspice-analysis']})
         super().do_GET()
     def do_POST(self):
-        if self.path not in ('/api/pic','/api/projects','/api/analysis'): return self.json_response({'error':'Not found'},404)
+        if self.path not in ('/api/pic','/api/projects','/api/analysis','/api/assistant'): return self.json_response({'error':'Not found'},404)
         if self.headers.get('Host')!=self.server.local_host or self.headers.get('Origin')!='http://'+self.server.local_host or self.headers.get('X-Studio-Token')!=self.server.cs_token:
             return self.json_response({'error':'Invalid local session'},403)
         try:
             length=int(self.headers.get('Content-Length','0'))
-            if not 0<length<=(10_000_000 if self.path=='/api/projects' else 120000): raise ValueError('Request too large or empty')
+            if not 0<length<=(10_000_000 if self.path in ('/api/projects','/api/assistant') else 120000): raise ValueError('Request too large or empty')
             request=json.loads(self.rfile.read(length))
             if not isinstance(request,dict): raise ValueError('Expected a JSON object')
             if self.path=='/api/projects':
@@ -46,6 +48,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 elif action=='list': result=self.server.projects.list()
                 elif action=='load': result=self.server.projects.load(request.get('id'))
                 else: raise ValueError('Unknown project action')
+            elif self.path=='/api/assistant':
+                result=self.server.assistant.handle(request)
             elif self.path=='/api/analysis':
                 if not self.server.analysis_lock.acquire(blocking=False):raise ValueError('An analysis is already running')
                 try:result=AnalysisBackend().run(request)
@@ -69,7 +73,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--serve', action='store_true', help='Serve only, without opening the desktop window')
     parser.add_argument('--port', type=int, default=18765)
+    parser.add_argument('--project', type=Path, help='Open a Circuit Studio project in a separate window')
     args = parser.parse_args()
+    initial=None
+    if args.project:
+        if args.project.is_symlink() or not args.project.is_file() or args.project.stat().st_size>10_000_000: parser.error('Choose a regular project file under 10 MB')
+        try:
+            initial=json.loads(args.project.read_text())
+            AssistantBridge.validate(initial)
+        except (OSError,ValueError) as error: parser.error(str(error))
     handler = functools.partial(Handler, directory=str(ROOT / 'web'))
     try:
         server = http.server.ThreadingHTTPServer(('127.0.0.1', args.port), handler)
@@ -83,6 +95,7 @@ def main():
     data_root=Path(os.environ.get('XDG_DATA_HOME',str(Path.home()/'.local/share')))/'circuit-studio'
     project_root=Path(os.environ.get('CIRCUIT_STUDIO_PROJECTS',str(data_root/'projects')))
     server.projects=ProjectStore(project_root)
+    server.assistant=AssistantBridge(ROOT,project_root.parent/'assistant',initial)
     if 'CIRCUIT_STUDIO_PROJECTS' not in os.environ and (ROOT/'projects').is_dir():
         for legacy in (ROOT/'projects').glob('*.circuit'):
             if not (project_root/legacy.name).exists():
@@ -106,15 +119,19 @@ def main():
         sys.exit('Install Chrome or Chromium, or use ./run.sh --serve and open the printed URL in your browser.')
     state = Path(os.environ.get('XDG_DATA_HOME', str(Path.home() / '.local/share'))) / 'circuit-studio'
     state.mkdir(parents=True, exist_ok=True)
+    temporary_profile=tempfile.TemporaryDirectory(prefix='circuit-studio-window-') if args.project else None
+    profile=Path(temporary_profile.name) if temporary_profile else state/'desktop-profile'
+    chrome_profile=profile if temporary_profile else state/'profile'
     threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
         with (state / 'browser.log').open('a') as log:
-            command=[browser,str(ROOT/'runtime/desktop.cjs')] if bundled.is_file() else [browser, f'--app={url}', f'--user-data-dir={state / "profile"}', '--class=CircuitStudio', '--no-first-run', '--no-default-browser-check', '--window-size=1440,940']
-            subprocess.run(command,env={**os.environ,'STUDIO_URL':url,'STUDIO_PROFILE':str(state/'desktop-profile')},stdout=log,stderr=log,check=True)
+            command=[browser,str(ROOT/'runtime/desktop.cjs')] if bundled.is_file() else [browser, f'--app={url}', f'--user-data-dir={chrome_profile}', '--class=CircuitStudio', '--no-first-run', '--no-default-browser-check', '--window-size=1440,940']
+            subprocess.run(command,env={**os.environ,'STUDIO_URL':url,'STUDIO_PROFILE':str(profile)},stdout=log,stderr=log,check=True)
     except subprocess.CalledProcessError:
         print(f'Browser could not start. See {state / "browser.log"}', file=sys.stderr)
     finally:
         server.shutdown()
+        if temporary_profile: temporary_profile.cleanup()
         if server.pic: server.pic.close()
         server.server_close()
 if __name__ == '__main__':

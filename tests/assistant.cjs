@@ -1,0 +1,34 @@
+const {chromium}=require('playwright');const {spawn}=require('node:child_process');const {createInterface}=require('node:readline');const {once}=require('node:events');const fs=require('node:fs/promises');const path=require('node:path');const assert=require('node:assert/strict');
+let browser,server,startup;
+(async()=>{
+ server=spawn('python3',['tests/assistant-fixture.py'],{stdio:['ignore','pipe','inherit']});
+ const lines=createInterface({input:server.stdout});const [line]=await once(lines,'line');const fixture=JSON.parse(line);
+ browser=await chromium.launch({executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome',headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:940}});const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
+ await page.goto(fixture.url);await page.waitForFunction(()=>window.studioSim&&window.studioProject);
+ await page.locator('#assistant').click();await page.locator('#assistantStart').click();
+ await page.locator('#assistantState').filter({hasText:'Your circuit chat is ready'}).waitFor();
+ const folders=await fs.readdir(path.join(fixture.root,'assistant'));assert.equal(folders.length,1);
+ const file=path.join(fixture.root,'assistant',folders[0],'design.circuit');const original=JSON.parse(await fs.readFile(file,'utf8'));
+ assert.equal(await fs.readFile(path.join(path.dirname(file),'fixture-opened'),'utf8'),'True');
+ await page.locator('#assistantCheck').click();await page.locator('#assistantState').filter({hasText:'No saved changes yet'}).waitFor();
+ const edited={...original,name:'Assistant divider'};await fs.writeFile(file,JSON.stringify(edited));
+ await page.locator('#assistantCheck').click();await page.locator('#assistantApply').waitFor({state:'visible'});
+ await page.locator('#assistantApply').click();await page.waitForFunction(()=>document.querySelector('#projectName').value==='Assistant divider');
+ await page.locator('#undo').click();assert.equal(await page.locator('#projectName').inputValue(),original.name);
+ // A later result must not overwrite changes made in the live editor meanwhile.
+ await page.locator('#assistant').click();await page.locator('#assistantStart').click();await page.locator('#assistantState').filter({hasText:'Your circuit chat is ready'}).waitFor();
+ const latest=(await fs.readdir(path.join(fixture.root,'assistant'))).find(x=>!folders.includes(x));const next=path.join(fixture.root,'assistant',latest,'design.circuit');
+ const nextValue=JSON.parse(await fs.readFile(next,'utf8'));nextValue.name='Second result';await fs.writeFile(next,JSON.stringify(nextValue));
+ await page.evaluate(()=>{document.querySelector('#projectName').value='My newer work';document.querySelector('#projectName').dispatchEvent(new Event('input'));});
+ await page.locator('#assistantCheck').click();await page.locator('#assistantApply').click();await page.locator('#assistantState').filter({hasText:'You changed the circuit here'}).waitFor();assert.equal(await page.locator('#projectName').inputValue(),'My newer work');
+ const download=page.waitForEvent('download');await page.locator('#assistantDownload').click();assert.equal((await download).suggestedFilename(),'assistant-result.circuit');
+ await fs.writeFile(next,'{}');await page.locator('#assistantCheck').click();await page.locator('#assistantState').filter({hasText:'Expected a Circuit Studio v2 project'}).waitFor();
+ await fs.writeFile(path.join(fixture.root,'startup.circuit'),JSON.stringify({...original,name:'Opened directly from Coding Hub'}));
+ startup=spawn('python3',['launch.py','--serve','--port','0','--project',path.join(fixture.root,'startup.circuit')],{stdio:['ignore','pipe','inherit']});
+ const startupLines=createInterface({input:startup.stdout});const [address]=await once(startupLines,'line');
+ await page.goto(address.match(/http:\/\/127\.0\.0\.1:\d+\//)[0]);await page.waitForFunction(()=>document.querySelector('#projectName').value==='Opened directly from Coding Hub');
+ await page.locator('#assistant').click();
+ assert.deepEqual(errors,[]);await page.screenshot({path:path.join(process.env.TEST_OUTPUT||'.test-output','assistant.png')});
+ console.log('PASS Circuit Studio assistant: handoff copy, result import, undo, concurrent-edit protection, download and malformed-result refusal');
+})().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{await browser?.close();server?.kill('SIGTERM');startup?.kill('SIGTERM');});

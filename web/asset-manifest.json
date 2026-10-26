@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.1",
+  "revision": "0.4.0-alpha.2",
   "assets": [
     {
       "path": "library.json",
@@ -40,7 +40,7 @@
     },
     {
       "path": "studio.js",
-      "sha256": "b7a20b150ebb1ea05659704ebe6b0840038417dc9005d242fe037d8b5eb12ccb"
+      "sha256": "a1e479108fbd8115df2df3a45455da10ab38f04c4e3192b6e7957061d2094540"
     },
     {
       "path": "engine/circuitjs.html",

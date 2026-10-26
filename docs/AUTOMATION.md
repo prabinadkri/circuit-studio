@@ -108,3 +108,21 @@ No network listener is exposed by MCP; temporary engine servers bind only to
 Coding Hub deliberately supplies empty MCP configuration to some providers and
 disables inherited plugins. Its command integration works with those existing
 restrictions; installing an MCP server globally is not required or assumed.
+
+
+## Graphical shortcuts
+
+Circuit Studio's **Design with Coding Hub** action creates a private workspace
+under the project's data root (`assistant/<random-id>`), writes `design.circuit`,
+and runs Coding Hub's `circuit workspace` initializer with literal arguments.
+Opening the chat uses the existing authenticated Coding Hub loopback service;
+its session token is never returned through the Studio API or put in query strings.
+The Coding Hub launch fragment selects the prepared project and is removed from
+the address bar. No model request is sent until the user presses Send.
+
+The result is read on demand through a token/Host/Origin-checked Studio endpoint.
+The browser validates the full project schema and original identity before import.
+A snapshot comparison refuses import over subsequent editor changes. Import is
+undoable. The assistant's copy is never automatically written back to the source.
+`launch.py --project PATH --port 0` opens a saved project in a separate window and
+uses an isolated browser profile, leaving other windows intact.
