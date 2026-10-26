@@ -10,6 +10,7 @@ const aliases={DCVoltageElm:'VoltageElm',ACVoltageElm:'VoltageElm',NTransistorEl
 export function capabilityFor(catalog,e){return findPart(catalog,e.type)||findPart(catalog,aliases[e.type])||{id:'unknown:'+e.type,revision:1,label:e.type,model:{status:'unvalidated',limits:'Imported upstream element; no Circuit Studio electrical fixture.'},fixtures:[]};}
 export function pinRole(e,p){
  const name=(p.name||'').toUpperCase();
+ if(e.mcu){const role=e.mcu.pins[p.index]?.role;return {power:'power-in',ground:'power-return',reset:'input',gpio:'bidirectional',analog:'input'}[role]||'passive';}
  if(e.type==='TimerElm')return ['open-drain','input','input','power-in','passive','output','input','power-return'][p.index]||'passive';
  if(/^(VCC|VDD|V\+|V-|GND|VSS)$/.test(name))return /GND|VSS|V-/.test(name)?'power-return':'power-in';
  if(/GroundElm/.test(e.type))return 'power-return';

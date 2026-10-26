@@ -6,6 +6,7 @@ import secrets
 from pic_worker import PicSessions
 from project_store import ProjectStore
 from assistant_bridge import AssistantBridge
+from compiler_backend import CompilerBackend
 from analysis_backend import AnalysisBackend
 import functools
 import http.server
@@ -34,7 +35,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.json_response({'token':self.server.cs_token,'apiVersion':2,'capabilities':['project-store','isolated-pic','ngspice-analysis']})
         super().do_GET()
     def do_POST(self):
-        if self.path not in ('/api/pic','/api/projects','/api/analysis','/api/assistant'): return self.json_response({'error':'Not found'},404)
+        if self.path not in ('/api/pic','/api/projects','/api/analysis','/api/assistant','/api/compiler'): return self.json_response({'error':'Not found'},404)
         if self.headers.get('Host')!=self.server.local_host or self.headers.get('Origin')!='http://'+self.server.local_host or self.headers.get('X-Studio-Token')!=self.server.cs_token:
             return self.json_response({'error':'Invalid local session'},403)
         try:
@@ -50,6 +51,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 else: raise ValueError('Unknown project action')
             elif self.path=='/api/assistant':
                 result=self.server.assistant.handle(request)
+            elif self.path=='/api/compiler':
+                if not self.server.compiler_lock.acquire(blocking=False):raise ValueError('A build is already running')
+                try:result=CompilerBackend().run(request)
+                finally:self.server.compiler_lock.release()
             elif self.path=='/api/analysis':
                 if not self.server.analysis_lock.acquire(blocking=False):raise ValueError('An analysis is already running')
                 try:result=AnalysisBackend().run(request)
@@ -92,6 +97,7 @@ def main():
     server.pic=None
     server.pic_init_lock=threading.Lock()
     server.analysis_lock=threading.Lock()
+    server.compiler_lock=threading.Lock()
     data_root=Path(os.environ.get('XDG_DATA_HOME',str(Path.home()/'.local/share')))/'circuit-studio'
     project_root=Path(os.environ.get('CIRCUIT_STUDIO_PROJECTS',str(data_root/'projects')))
     server.projects=ProjectStore(project_root)

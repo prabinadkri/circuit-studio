@@ -2514,8 +2514,10 @@ var MCU = class {
   }
   load(text) {
     const program = parseHex(text);
+    this.clock?.detach();
     this.stop();
     this.source = text;
+    this.debug = null;
     this.cpu = new CPU(program, this.spec.ramBytes);
     this.portB = new AVRIOPort(this.cpu, portBConfig);
     this.portC = new AVRIOPort(this.cpu, portCConfig);
@@ -2528,11 +2530,53 @@ var MCU = class {
     this.uart.onByteTransmit = (b) => {
       $2("serial").textContent = ($2("serial").textContent + String.fromCharCode(b)).slice(-12e3);
     };
-    for (const port of [this.portB, this.portC, this.portD]) port.addListener(() => this.syncOutputs());
+    for (const port of [this.portB, this.portC, this.portD]) port.addListener(() => {
+      if (this.coupledCapture) this.coupledCapture(this.cpu.cycles, this.outputStates());
+      else if (!this.coupled) this.syncOutputs();
+    });
     this.render();
     this.status(this.spec.label + " firmware loaded \xB7 " + text.trim().split("\n").length + " HEX records");
   }
+  outputStates() {
+    const states = {};
+    for (const pin of this.spec.pins) {
+      if (pin.analogOnly) continue;
+      const [port, n] = this.portFor(pin.name);
+      states[pin.name] = ["0", "1", "Z", "H"][port.pinState(n)];
+    }
+    return states;
+  }
+  advanceCoupled(target, inputs) {
+    if (!this.cpu) throw Error("Load firmware first");
+    this.coupled = true;
+    for (const [name, value] of Object.entries(inputs.inputs)) {
+      const [port, n] = this.portFor(name);
+      port.setPin(n, value);
+    }
+    for (const p of this.spec.pins) if ("analog" in p) this.adc.channelValues[p.analog] = inputs.analog[p.name] ?? 0;
+    const events = [];
+    let paused = false;
+    this.coupledCapture = (cycle, pins) => events.push({ cycle, pins });
+    try {
+      while (this.cpu.cycles < target) {
+        if (this.debug?.breakpoints.has(this.cpu.pc) && this.debug.skip !== this.cpu.pc) {
+          this.debug.paused = true;
+          paused = true;
+          break;
+        }
+        if (this.debug) this.debug.skip = null;
+        const start = events.length;
+        avrInstruction(this.cpu);
+        this.cpu.tick();
+        for (let i = start; i < events.length; i++) events[i].cycle = this.cpu.cycles;
+      }
+    } finally {
+      this.coupledCapture = null;
+    }
+    return { cycles: this.cpu.cycles, pins: this.outputStates(), events, paused };
+  }
   clear() {
+    this.clock?.detach();
     this.stop();
     this.releaseOutputs();
     this.source = "";
@@ -2594,6 +2638,7 @@ var MCU = class {
     loop();
   }
   stop() {
+    this.clock?.stop();
     this.running = false;
     clearTimeout(this.timer);
     if (this.active) $2("mcuRun").textContent = "\u25B6 Run firmware";

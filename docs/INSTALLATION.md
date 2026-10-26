@@ -57,3 +57,12 @@ licenses and corresponding source, normalizes archive entry timestamps, and emit
 unmodified Electron runtime and its licenses. It does not download dependencies.
 CI rebuilds and tests the app, runs real-engine automation tests, and creates the
 smaller archive. Full runtime bundles are separately verified before release.
+
+## Optional AVR C toolchain
+
+Bundled HEX examples, simulation and instruments do not require a compiler. The
+in-app C editor requires `gcc-avr`, `avr-libc` and `binutils-avr` on PATH. A user-owned
+toolchain can instead be installed under
+`~/.local/share/circuit-studio/toolchains/avr/usr/`, retaining its bin/lib layout,
+or selected with `CIRCUIT_STUDIO_AVR_BIN=/path/to/bin`. The app never installs system
+packages automatically. The compiler integration currently targets ATmega328P.

@@ -26,13 +26,18 @@ def main():
     resistor=next(e for e in simulation['components'] if e['reference']=='R2')
     assert abs(resistor['voltages'][0]-2.5)<1e-8 and abs(resistor['current']-.00025)<1e-10
     checks={}
-    for name in ('test_pic.py','test_devices.py','test_analysis.py','test_workers_store.py'):
+    for name in ('test_pic.py','test_devices.py','test_analysis.py','test_workers_store.py','test_clock.py','test_compiler.py'):
         result=run(sys.executable,'-m','unittest','discover','-s','tests','-p',name,cwd=app)
         checks[name]=result.stderr.splitlines()[-4:]
+    mcu_plan=work/'mcu-plan.json';mcu_plan.write_text(json.dumps({'version':1,'name':'MCU smoke','operations':[{'op':'mcu-package','device':'atmega328p','ref':'U1','x':160,'y':96}]}))
+    mcu_file=project.parent/'mcu.circuit'
+    mcu=json.loads(run(sys.executable,app/'circuitctl.py','new','--project',mcu_file,'--plan',mcu_plan).stdout)
+    mcu_inspect=json.loads(run(sys.executable,app/'circuitctl.py','inspect','--project',mcu_file).stdout)
+    chip=next(e for e in mcu_inspect['components'] if e['reference']=='U1');assert len(chip['pins'])==28 and chip['mcu']['device']=='atmega328p'
     hashes={name:hashlib.sha256((app/name).read_bytes()).hexdigest() for name in ['launch.py','circuitctl.py','install.py','web/asset-manifest.json']}
     payload=project.read_bytes();removed=json.loads(run(sys.executable,app/'install.py','--prefix',prefix,'--uninstall').stdout)
     assert removed['uninstalled'] and project.read_bytes()==payload and not (work/'bin/circuit-studio').exists() and not (prefix/'current').exists()
-    report={'schema':1,'platform':platform.platform(),'runtime':installed['runtime'],'network':'Desktop renderer blocks all non-local network requests; tests use only bundled files/local backend','freshInstall':True,'dividerVolts':resistor['voltages'][0],'dividerAmps':resistor['current'],'backendChecks':checks,'uninstallRetainedProject':True,'criticalFileSha256':hashes}
+    report={'schema':1,'platform':platform.platform(),'runtime':installed['runtime'],'network':'Desktop renderer blocks all non-local network requests; tests use only bundled files/local backend','freshInstall':True,'configuredMCUPackagePins':len(chip['pins']),'dividerVolts':resistor['voltages'][0],'dividerAmps':resistor['current'],'backendChecks':checks,'uninstallRetainedProject':True,'criticalFileSha256':hashes}
     args.report.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 
 

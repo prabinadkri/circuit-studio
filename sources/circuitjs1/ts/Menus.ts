@@ -541,6 +541,7 @@ export class Menus {
             "Add Audio Input",                      "AudioInputElm",
             "Add Data Input",                       "DataInputElm",
             "Add External Voltage (JavaScript)",    "ExtVoltageElm",
+            "Add MCU Package", "MCUPackageElm",
         ]);
         menu.addSubmenu(subheadHtml + Locale.LS("Inputs and Sources"), inputMenu);
 

@@ -420,7 +420,8 @@
       {
         "name": "RA4",
         "physical": 3,
-        "function": "Open-drain output; external pull-up required on hardware"
+        "function": "Open-drain output; external pull-up required on hardware",
+        "openDrain": true
       },
       {
         "name": "RB0",
@@ -511,7 +512,8 @@
       {
         "name": "RA4",
         "physical": 3,
-        "function": "Open-drain output; external pull-up required on hardware"
+        "function": "Open-drain output; external pull-up required on hardware",
+        "openDrain": true
       },
       {
         "name": "RB0",
@@ -606,7 +608,8 @@
       {
         "name": "RA4",
         "physical": 6,
-        "function": "T0CKI"
+        "function": "T0CKI",
+        "openDrain": true
       },
       {
         "name": "RA5",

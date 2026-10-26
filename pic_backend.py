@@ -76,6 +76,7 @@ class PicBackend:
         self.loaded=False
         self.device='pic'
         self.generation=None
+        self.elapsed_cycles=0
     def handle(self, request):
         with self.lock:
             if request.get('action')=='load':
@@ -91,12 +92,14 @@ class PicBackend:
                 self.device=device
                 self.generation=secrets.token_hex(16)
                 self.loaded=True
-            elif request.get('action')=='step':
+                self.elapsed_cycles=0
+            elif request.get('action') in ('step','trace'):
                 if not self.loaded: raise ValueError('Load PIC firmware first')
                 if request.get('generation',self.generation)!=self.generation:
                     raise ValueError('PIC session changed in another window. Reload firmware.')
                 count=request.get('count',1)
                 if type(count)!=int or not 1<=count<=50000: raise ValueError('Invalid step count')
+                if request.get('action')=='trace' and count>2000:raise ValueError('Trace batch exceeds 2000 instruction cycles')
                 values=request.get('inputs',{})
                 analog=request.get('analog',{})
                 pins={p['name']:p for p in DEVICES[self.device]['pins']}
@@ -109,11 +112,32 @@ class PicBackend:
                         raise ValueError('ADC input must be a supported pin and a voltage from 0 to 5 V')
                 for name,value in values.items():self.lib.cs2_input(self.context,pins[name]['physical'],int(value))
                 for name,value in analog.items():self.lib.cs2_analog(self.context,pins[name]['physical'],value)
-                self.lib.cs2_step(self.context,count)
+                events=[]
+                if request.get('action')=='trace':
+                    previous=self.pin_states()
+                    for _ in range(count):
+                        self.lib.cs2_step(self.context,1)
+                        self.elapsed_cycles+=1
+                        current=self.pin_states()
+                        if current!=previous:
+                            events.append({'cycle':self.elapsed_cycles,'pins':current});previous=current
+                else:
+                    self.lib.cs2_step(self.context,count)
+                    self.elapsed_cycles+=count
             else: raise ValueError('Unknown simulation action')
             spec=DEVICES[self.device]
-            return {'device':self.device,'generation':self.generation,'pc':self.lib.cs2_pc(self.context),'cycles':self.lib.cs2_cycles(self.context),
+            return {'device':self.device,'generation':self.generation,'pc':self.lib.cs2_pc(self.context),'cycles':self.elapsed_cycles,'coreCycles':self.lib.cs2_cycles(self.context),
                 'registers':{name:self.lib.cs2_ram(self.context,addr) for name,addr in spec['registers'].items()},
+                'drives':self.pin_states(),
+                'events':events if request.get('action')=='trace' else [],
                 'pins':[{'name':p['name'],'physical':p['physical'],'value':self.lib.cs2_pin(self.context,p['physical']),
                          'input':bool(p.get('inputOnly') or self.lib.cs2_dir(self.context,p['physical'])),
                          'analog':self.lib.cs2_type(self.context,p['physical']) in (4,5)} for p in spec['pins']]}
+
+    def pin_states(self):
+        states={}
+        for p in DEVICES[self.device]['pins']:
+            n=p['physical']
+            states[p['name']]='Z' if p.get('inputOnly') or self.lib.cs2_dir(self.context,n) or self.lib.cs2_type(self.context,n) in (4,5) else ('Z' if p.get('openDrain') else '1') if self.lib.cs2_pin(self.context,n) else '0'
+            if states[p['name']]=='Z' and p['name'].startswith('RB') and DEVICES[self.device]['family']=='PIC16' and not self.lib.cs2_ram(self.context,0x81)&0x80:states[p['name']]='H'
+        return states

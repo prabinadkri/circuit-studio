@@ -26,7 +26,7 @@ Run `npm run test:engine` for the upstream engine tests plus the local regressio
 
 See [15-ticket acceptance ledger](docs/planning/MILESTONE-15.md) for exact gates and limitations. Eight domain tests cover topology IDs, history, recovery corruption, unit parsing, independent asset validation, package transforms, ERC and malformed project rejection. Browser suites add real v1 migration, clipboard identity, unit-aware inspector/package/NC edits, diagnostic navigation, cross-domain undo, atomic local storage, 32 common component placements, responsive layouts, non-destructive board updates and standalone analysis persistence/CSV.
 
-The scheduler fixture tests actual timer PWM through the CircuitJS RC solver back into AVR ADC under UI stalls. It is an isolated feasibility experiment; production mixed-signal synchronization remains unfinished. Five ngspice references are numerically compared with circuit equations/model bounds; unsupported directives are rejected. All five must execute without skips for milestone validation.
+The scheduler fixture tests actual timer PWM through the CircuitJS RC solver back into AVR ADC under UI stalls. That earlier isolated feasibility experiment is now complemented by the production shared-runner tests described below. Five ngspice references are numerically compared with circuit equations/model bounds; unsupported directives are rejected. All five must execute without skips for milestone validation.
 
 Killed/timed-out PIC workers cannot mutate disk project files; two sessions and repeated reset/step sequences are tested. Atomic-save fault injection recovers the prior complete revision. Saved CPU execution state is intentionally outside the project contract.
 
@@ -38,7 +38,7 @@ The v0.3 multi-package fixture adds DIP-28, bottom-side rotated SOIC-8 and a rot
 
 ## Not yet validated
 
-Precise AVR/PIC-to-analog synchronization, arbitrary real-world firmware, every upstream component model, large circuit performance, manufacturer-specific footprints and complete fabrication DRC. In-app source compilation, MCU models beyond the supported catalog, PIC serial monitor, USB, SPI/I2C circuit coupling, electrical pin-drive fidelity and advanced PCB features remain outside this alpha. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.
+Silicon-cycle-accurate AVR/PIC-to-analog synchronization, arbitrary firmware, every upstream component model, manufacturer-specific footprints and complete fabrication DRC remain unvalidated. The current compiler/debugger covers AVR C; additional MCU models, PIC source debugging/serial monitoring, USB, SPI/I2C circuit coupling, chip-specific electrical fidelity and advanced PCB features remain outside this alpha. Recorded performance covers the specified fixtures, not arbitrary large designs. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.
 
 ## v0.4 automation, copper and mechanical acceptance
 
@@ -60,5 +60,15 @@ Precise AVR/PIC-to-analog synchronization, arbitrary real-world firmware, every 
 - Coding Hub's own `test_circuit_integration.py` checks command boundaries and
   instruction-context delivery; `tools/check_all.py --no-gui` passes after integration.
 
-The 3D renderer uses procedural envelopes. The roadmap's common MCU clock,
-protocol/peripheral/debugger integration and advanced routing acceptance remain open.
+The 3D renderer uses procedural envelopes. Protocol/peripheral integration and advanced routing acceptance remain open; the shared-clock/AVR-debugger gates are recorded below.
+
+## Alpha.3 embedded and usability acceptance
+
+See `docs/planning/MILESTONE-24.md` for the five newly completed ticket gates,
+fixture names and limits. `tests/coupled.cjs` uses the real analog solver and AVR
+core, including a PWM/RC/ADC roundtrip and driver contention. Native PIC traces
+are compared across request sizes and watchdog resets. `tests/instruments.cjs`
+checks actual controls, CSV, triggers and in-flight PIC cancellation.
+`tests/compiler.cjs` builds real C, navigates a real diagnostic, and pauses both
+CPU and analog time on source breakpoints. `tests/usability.cjs` records measured
+performance and effective CSS zoom/width reflow, not all OS scaling combinations.

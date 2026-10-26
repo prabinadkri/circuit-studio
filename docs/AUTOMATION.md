@@ -63,6 +63,8 @@ are explicit metadata.
 
 Supported operations:
 
+* `mcu-package`: `device` from catalog, unique `ref`, optional grid-aligned `x`/`y`. Places one configured MCU package, selects that profile and shared timing. Pin/physical-package definitions are included in catalog `devices`. Wire supplies/reset explicitly. Firmware remains in the project firmware fields and is validated when loaded/run.
+
 * `add`: `type`, `ref`, `x`, `y`, `x2`, `y2`; optional `properties` and `meta`.
 * `set`: `ref` (reference or stable UUID), `properties` and/or `meta`.
 * `connect`: `from` and `to` objects `{ "ref": "R1", "pin": 0 }`; optional

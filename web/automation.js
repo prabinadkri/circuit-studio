@@ -1,10 +1,11 @@
 // Structured, transactional editor operations for local coding agents. GPL-2.0-or-later.
+import {placePackage,packageDefinition} from './mcu-package.js';
 import {electricalCheck} from './library.js';
 import {parseEngineering} from './project.js';
 import {FOOTPRINTS} from './footprints.js';
 const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const reference=v=>typeof v==='string'&&/^[A-Za-z][A-Za-z0-9_]{0,63}$/.test(v);
-export function createAutomation({sim,project,load,validate,board,catalog,capture,changed}){
+export function createAutomation({sim,project,load,validate,board,catalog,devices,setDevice,capture,changed}){
  const find=key=>{const all=project().design.instances;const matches=all.filter(e=>e.id===key||e.reference===key);if(matches.length!==1)throw Error('Expected one component for '+key);return matches[0];};
  const pin=endpoint=>{if(!object(endpoint))throw Error('Endpoint requires ref and pin');const e=find(endpoint.ref);const p=e.pins.find(p=>Number.isInteger(endpoint.pin)?p.index===endpoint.pin:p.id===endpoint.pin);if(!p)throw Error('Unknown pin on '+endpoint.ref+'; inspect pins first (indices start at 0)');return p;};
  const set=(e,op)=>{
@@ -13,7 +14,10 @@ export function createAutomation({sim,project,load,validate,board,catalog,captur
  };
  function operation(op){
   if(!object(op))throw Error('Operation must be an object');
-  if(op.op==='add'){
+  if(op.op==='mcu-package'){
+   const spec=devices?.get(op.device);if(!spec)throw Error('Choose an available MCU profile');if(!reference(op.ref)||project().design.instances.some(e=>e.reference===op.ref))throw Error('Unique MCU reference required');
+   const id=placePackage(sim,spec,op.x??160,op.y??96);sim.setMetadata(id,{...sim.getDesignElements().find(e=>e.id===id).meta,reference:op.ref});setDevice(op.device);
+  }else if(op.op==='add'){
    if(!reference(op.ref)||project().design.instances.some(e=>e.reference===op.ref))throw Error('Unique component ref required');
    const id=sim.addElement(op.type,op.x,op.y,op.x2,op.y2);sim.setMetadata(id,{reference:op.ref});set(find(id),op);
   }else if(op.op==='set')set(find(op.ref),op);
@@ -37,7 +41,7 @@ export function createAutomation({sim,project,load,validate,board,catalog,captur
  async function execute(request){
   if(!object(request)||request.version!==1)throw Error('Expected automation version 1');
   sim.setSimRunning(false);
-  if(request.action==='catalog')return {parts:catalog.parts,footprints:FOOTPRINTS};
+  if(request.action==='catalog')return {parts:catalog.parts,footprints:FOOTPRINTS,devices:[...devices?.values()||[]].map(d=>({...d,schematic:packageDefinition(d)}))};
   if(request.action==='new'||request.action==='apply'){
    if(!Array.isArray(request.operations)||request.operations.length>500)throw Error('Provide at most 500 operations');
    const before=project(),savedHistory={entries:[...window.studioProject.history.entries],cursor:window.studioProject.history.cursor};

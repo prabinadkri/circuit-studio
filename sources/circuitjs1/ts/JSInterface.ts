@@ -67,6 +67,9 @@ export class JSInterface {
         (window as any).CircuitJS1 = {
             addElement: (type:string,x:number,y:number,x2:number,y2:number) => studio.add(type,x,y,x2,y2),
             removeElement: (id:string) => studio.remove(id),
+            advanceTo: (time:number) => studio.advanceTo(time),
+            configureMCU: (id:string,profile:any) => studio.configureMCU(id,profile),
+            setDigitalDrive: (key:string,state:string|null,supply=5) => studio.digitalDrive(key,state,supply),
             advanceSteps: (count:number) => studio.advanceSteps(count),
             getNetlist: () => studio.elements(),
             getDesignElements: () => studio.elements(),

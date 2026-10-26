@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-26T17:26:06.550Z",
+  "cpu": "12th Gen Intel(R) Core(TM) i5-12450H",
+  "memoryGiB": 15.287078857421875,
+  "platform": "linux",
+  "browser": "156.0.8078.47",
+  "method": "Effective CSS viewport for browser zoom; native desktop scaling not certified",
+  "measurements": [
+    {
+      "physicalWidth": 1280,
+      "zoom": 1,
+      "effectiveWidth": 1280,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1280,
+      "zoom": 1.5,
+      "effectiveWidth": 853,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1280,
+      "zoom": 2,
+      "effectiveWidth": 640,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1366,
+      "zoom": 1,
+      "effectiveWidth": 1366,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1366,
+      "zoom": 1.5,
+      "effectiveWidth": 911,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1366,
+      "zoom": 2,
+      "effectiveWidth": 683,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1920,
+      "zoom": 1,
+      "effectiveWidth": 1920,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1920,
+      "zoom": 1.5,
+      "effectiveWidth": 1280,
+      "reachable": true
+    },
+    {
+      "physicalWidth": 1920,
+      "zoom": 2,
+      "effectiveWidth": 960,
+      "reachable": true
+    }
+  ],
+  "perf": {
+    "captureMillionMs": 44.29999999701977,
+    "renderMs": 38.5,
+    "retained": 200000,
+    "discarded": 800000,
+    "firstTick": 800000
+  },
+  "circuitPerf": {
+    "components": 503,
+    "analyzeMs": 35.599999997764826,
+    "steps100Ms": 6.800000000745058,
+    "serializeMs": 3.800000000745058,
+    "bytes": 97935,
+    "midpoint": 2.499999999999719
+  }
+}

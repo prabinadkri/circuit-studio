@@ -30880,6 +30880,7 @@ var dip = (n) => {
 };
 var header = (n) => ({ id: "HDR-1x" + n, name: `Header 1\xD7${n} \xB7 2.54 mm`, revision: 1, width: 2.54, height: n * 2.54, pads: Array.from({ length: n }, (_, i) => pad(i + 1, 0, (i - (n - 1) / 2) * 2.54, 1.8, 1.8, 1, i === 0 ? "rect" : "circle")) });
 var FOOTPRINTS = Object.fromEntries([
+  { ...dip(28), id: "DIP-28-N", name: "DIP-28 narrow \xB7 7.62 mm", width: 9.62, pads: dip(28).pads.map((p) => ({ ...p, x: p.x / 2 })) },
   ...[8, 14, 16, 18, 20, 28, 40].map(dip),
   ...[2, 3, 4, 6, 8, 10].map(header),
   { id: "SOIC-8", name: "SOIC-8 \xB7 1.27 mm / 3.9 mm body", revision: 1, width: 6.5, height: 5, pads: Array.from({ length: 8 }, (_, i) => pad(i + 1, i < 4 ? -2.7 : 2.7, ((i < 4 ? i : 7 - i) - 1.5) * 1.27, 1.5, 0.6, 0, "rect")) },

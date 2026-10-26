@@ -1,0 +1,89 @@
+{
+  "edges": 19202,
+  "time": 0.003,
+  "first": [
+    {
+      "tick": 0,
+      "channel": "D13",
+      "value": "Z"
+    },
+    {
+      "tick": 250,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 500,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 625,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 1125,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 1250,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 1750,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 1875,
+      "channel": "D13",
+      "value": "0"
+    }
+  ],
+  "last": [
+    {
+      "tick": 5998000,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 5998125,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 5998625,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 5998750,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 5999250,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 5999375,
+      "channel": "D13",
+      "value": "0"
+    },
+    {
+      "tick": 5999875,
+      "channel": "D13",
+      "value": "1"
+    },
+    {
+      "tick": 6000000,
+      "channel": "D13",
+      "value": "0"
+    }
+  ],
+  "identicalUnderStalls": true
+}

@@ -11,6 +11,7 @@ export class StudioAPI {
    value:String(e.resistance??e.capacitance??e.inductance??e.maxVoltage??''),
    meta:structuredClone(e.studioMeta),x:e.x,y:e.y,x2:e.x2,y2:e.y2,
    pins:Array.from({length:e.getPostCount()},(_,i)=>({id:e.studioPins[i],index:i,name:e.pins?.[i]?.text||String(i+1),output:!!e.pins?.[i]?.output,net:e.nodes[i]?.index??-1,x:e.getPost(i)?.x,y:e.getPost(i)?.y})),
+   mcu:e.getClassName()==='MCUPackageElm'?structuredClone(e.definition()):undefined,
    info:e.getInfoJS(),selected:e.isSelected(),
   }));
  }
@@ -23,6 +24,31 @@ export class StudioAPI {
   if(this.app.stopMessage)throw Error(this.app.stopMessage);
   return this.app.sim.t-before;
  }
+ advanceTo(target:number):number {
+  if(!Number.isFinite(target)||target<this.app.sim.t-1e-15||target-this.app.sim.t>0.02)throw Error('Advance target must be within the next 20 ms');
+  if(this.app.simRunning)throw Error('Pause the circuit before coupled stepping');
+  const sim=this.app.sim, original=sim.maxTimeStep;
+  try {
+   let attempts=0;
+   while(target-sim.t>1e-15){
+    if(++attempts>100000)throw Error('Analog solver exceeded coupled-step budget');
+    const step=Math.min(original,target-sim.t);
+    if(sim.timeStep>step||sim.maxTimeStep!==step){sim.maxTimeStep=step;sim.timeStep=step;sim.needsStamp=true;}
+    const before=sim.t;this.advanceSteps(1);
+    if(sim.t<=before)throw Error('Analog solver made no time progress');
+   }
+  } finally {sim.maxTimeStep=original;}
+  return sim.t;
+ }
+ digitalDrive(key:string,state:string|null,supply=5):number {
+  let count=0,changed=false;
+  for(const e of this.app.elmList as any[])if(e.isExtVoltageElm()&&(key==='*'||e.studioId===key||e.getName()===key)){
+   changed=e.setDigitalDrive(state,supply)||changed;count++;
+  }
+  for(const e of this.app.elmList as any[])if(e.getClassName()==='MCUPackageElm'&&(key==='*'||key.startsWith(e.studioId+':'))){e.setDrive(key==='*'?'*':key.slice(e.studioId.length+1),state);count++;}
+  if(changed)this.app.needAnalyze();return count;
+ }
+ configureMCU(id:string,profile:any):void {const e=this.find(id);if(e.getClassName()!=='MCUPackageElm')throw Error('Select an MCU package');e.configure(profile);this.app.ensureStudioIds();this.app.needAnalyze();this.app.repaint();}
  find(id:string):any {const e=this.app.elmList.find((e:any)=>e.studioId===id);if(!e)throw Error('Component no longer exists');return e;}
  add(type:string,x:number,y:number,x2:number,y2:number):string {
   if(!this.catalog().some(e=>e.type===type))throw Error('Unknown library component: '+type);

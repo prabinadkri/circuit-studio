@@ -17,6 +17,8 @@
     along with CircuitJS1.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { CircuitElm } from "./CircuitElm";
+import { CircuitNode } from "./CircuitNode";
 import { RailElm } from "./RailElm";
 import { VoltageElm } from "./VoltageElm";
 import { CircuitXMLSerializer } from "./CircuitXMLSerializer";
@@ -30,6 +32,38 @@ import { StringTokenizer } from "./StringTokenizer";
 export class ExtVoltageElm extends RailElm {
     name: string;
     voltage: number = 0;
+    digitalState: string | null = null;
+    digitalSupply: number = 5;
+    setDigitalDrive(state: string | null, supply = 5): boolean {
+        if (state !== null && !['0','1','Z','H','L'].includes(state)) throw Error('Invalid digital drive');
+        if (!Number.isFinite(supply) || supply <= 0 || supply > 24) throw Error('Invalid digital supply');
+        const changed = (this.digitalState === null) !== (state === null);
+        this.digitalState = state; this.digitalSupply = supply;
+        if (changed) this.allocNodes();
+        return changed;
+    }
+    getInternalNodeCount(): number { return this.digitalState === null || this.digitalState === undefined ? super.getInternalNodeCount() : 1; }
+    nonLinear(): boolean { return this.digitalState !== null && this.digitalState !== undefined; }
+    setVoltageSource(n: number, source: any): void {
+        if (this.digitalState === null) { super.setVoltageSource(n, source); return; }
+        this.voltSource = source; source.setNodes(CircuitNode.ground, this.nodes[1]);
+    }
+    stamp(): void {
+        if (this.digitalState === null) { super.stamp(); return; }
+        CircuitElm.sim.stampVoltageSource(CircuitNode.ground, this.nodes[1], this.voltSource);
+        CircuitElm.sim.stampNonLinear(this.nodes[0]); CircuitElm.sim.stampNonLinear(this.nodes[1]);
+    }
+    doStep(): void {
+        if (this.digitalState === null) { super.doStep(); return; }
+        const r = this.digitalState === 'Z' ? 1e12 : ['H','L'].includes(this.digitalState) ? 30000 : 30;
+        const v = ['1','H'].includes(this.digitalState) ? this.digitalSupply : 0;
+        CircuitElm.sim.stampResistor(this.nodes[0], this.nodes[1], r);
+        CircuitElm.sim.updateVoltageSource(CircuitNode.ground, this.nodes[1], this.voltSource, v);
+    }
+    validate(): boolean { return this.digitalState === null ? super.validate() : true; }
+    getMatrixConnection(a: number, b: number): boolean {
+        return this.digitalState === null ? super.getMatrixConnection(a,b) : a !== b;
+    }
 
     constructor(xx: number, yy: number);
     constructor(xa: number, ya: number, xb: number, yb: number, f: number, st: StringTokenizer);

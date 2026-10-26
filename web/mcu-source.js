@@ -12,22 +12,32 @@ export class MCU{
  configure(spec){this.clear();this.spec=spec;this.inputs={};this.analogInputs={};this.buttons=makePins(this);}
  portFor(name){if(name.startsWith('A'))return [this.portC,Number(name.slice(1))];const n=Number(name.slice(1));return [n<8?this.portD:this.portB,n<8?n:n-8];}
  load(text){
-  const program=parseHex(text);this.stop();this.source=text;this.cpu=new CPU(program,this.spec.ramBytes);
+  const program=parseHex(text);this.clock?.detach();this.stop();this.source=text;this.debug=null;this.cpu=new CPU(program,this.spec.ramBytes);
   this.portB=new AVRIOPort(this.cpu,portBConfig);this.portC=new AVRIOPort(this.cpu,portCConfig);this.portD=new AVRIOPort(this.cpu,portDConfig);
   this.timers=[timer0Config,timer1Config,timer2Config].map(t=>new AVRTimer(this.cpu,t));
   this.eeprom=new AVREEPROM(this.cpu,new EEPROMMemoryBackend(1024),eepromConfig);
   this.adc=new AVRADC(this.cpu,adcConfig);this.uart=new AVRUSART(this.cpu,usart0Config,this.spec.clockHz);
   $('serial').textContent='';this.uart.onByteTransmit=b=>{$('serial').textContent=($('serial').textContent+String.fromCharCode(b)).slice(-12000);};
-  for(const port of [this.portB,this.portC,this.portD])port.addListener(()=>this.syncOutputs());
+  for(const port of [this.portB,this.portC,this.portD])port.addListener(()=>{if(this.coupledCapture)this.coupledCapture(this.cpu.cycles,this.outputStates());else if(!this.coupled)this.syncOutputs();});
   this.render();this.status(this.spec.label+' firmware loaded · '+text.trim().split('\n').length+' HEX records');
  }
- clear(){this.stop();this.releaseOutputs();this.source='';this.cpu=null;this.portB=null;this.portC=null;this.portD=null;if(this.spec)this.render();}
+ outputStates(){const states={};for(const pin of this.spec.pins){if(pin.analogOnly)continue;const [port,n]=this.portFor(pin.name);states[pin.name]=['0','1','Z','H'][port.pinState(n)];}return states;}
+ advanceCoupled(target,inputs){
+  if(!this.cpu)throw Error('Load firmware first');
+  this.coupled=true;for(const [name,value] of Object.entries(inputs.inputs)){const [port,n]=this.portFor(name);port.setPin(n,value);}
+  for(const p of this.spec.pins)if('analog' in p)this.adc.channelValues[p.analog]=inputs.analog[p.name]??0;
+  const events=[];let paused=false;this.coupledCapture=(cycle,pins)=>events.push({cycle,pins});
+  try{while(this.cpu.cycles<target){if(this.debug?.breakpoints.has(this.cpu.pc)&&this.debug.skip!==this.cpu.pc){this.debug.paused=true;paused=true;break;}if(this.debug)this.debug.skip=null;const start=events.length;avrInstruction(this.cpu);this.cpu.tick();for(let i=start;i<events.length;i++)events[i].cycle=this.cpu.cycles;}}
+  finally{this.coupledCapture=null;}
+  return {cycles:this.cpu.cycles,pins:this.outputStates(),events,paused};
+ }
+ clear(){this.clock?.detach();this.stop();this.releaseOutputs();this.source='';this.cpu=null;this.portB=null;this.portC=null;this.portD=null;if(this.spec)this.render();}
  releaseOutputs(){for(const pin of this.spec?.pins||[])if(!pin.analogOnly)this.getSim()?.setExtVoltage(pin.name,0);}
  syncOutputs(){const sim=this.getSim();if(!sim||!this.cpu)return;for(const pin of this.spec.pins){if(pin.analogOnly)continue;const [port,n]=this.portFor(pin.name),state=port.pinState(n);sim.setExtVoltage(pin.name,state===PinState.High||state===PinState.InputPullUp?5:0);}}
  syncInputs(){const {inputs,analog}=inputSnapshot(this);for(const [name,value] of Object.entries(inputs)){const [port,n]=this.portFor(name);port.setPin(n,value);}for(const p of this.spec.pins)if('analog' in p)this.adc.channelValues[p.analog]=analog[p.name];}
  step(){if(!this.cpu)throw Error('Load firmware first');this.stop();this.syncInputs();avrInstruction(this.cpu);this.cpu.tick();this.syncOutputs();this.render();}
  run(){if(!this.cpu)throw Error('Load firmware first');if(this.running)return;this.running=true;const loop=()=>{if(!this.running)return;try{this.syncInputs();const end=this.cpu.cycles+160000;while(this.cpu.cycles<end){avrInstruction(this.cpu);this.cpu.tick();}this.syncOutputs();this.timer=setTimeout(loop,0);}catch(e){this.stop();this.status('Firmware stopped: '+e.message);}};loop();}
- stop(){this.running=false;clearTimeout(this.timer);if(this.active)$('mcuRun').textContent='▶ Run firmware';}
+ stop(){this.clock?.stop();this.running=false;clearTimeout(this.timer);if(this.active)$('mcuRun').textContent='▶ Run firmware';}
  render(){
   if(!this.active)return;
   renderAnalogSources(this);

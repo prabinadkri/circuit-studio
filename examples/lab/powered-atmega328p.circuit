@@ -1,0 +1,2103 @@
+{
+  "format": "circuit-studio",
+  "version": 2,
+  "id": "660598b5-8b7b-45f1-be39-7b5fbd6ad85d",
+  "name": "Powered ATmega328P lab",
+  "schematic": "<cir f=\"1\" ts=\"0.000005\" ic=\"10.20027730826997\" cb=\"50\" pb=\"50\" vr=\"5\" mts=\"5e-11\">\n  <MCUPackage sid=\"48573c0f-c264-4656-8a11-2d6c1930b3a4\" sp=\"44f30cca-e460-4d48-aa93-ca1b49ccf8a3,5e721bda-bcfc-40f8-b7fb-a4c47eca397d,4ee077f9-2931-4864-9fcd-a66306752ce5,d4ec0090-b230-488c-a974-741f61887d49,31c11a24-b669-4191-8747-2765e94de0be,92835007-7749-428f-93c9-214eb10d95ad,a995b146-a4da-40de-bdbd-3323410eb6c7,564dfb31-cf3f-4569-b5e7-ead0ddea4ec7,381ff728-9987-4f6b-b535-071a4229a6cb,555c7587-8af7-4872-af27-aa7e48b68f3b,0b056aef-c01d-4ec6-b646-43a769cf6a35,e6592f0f-a956-42fc-ad28-e543ae1c268e,be14d499-b270-4490-843e-688765f4dc52,8b394c25-80a0-4420-8834-1fd06868c831,b3e9b5c3-e04a-485d-92ee-1ad4832c5bf7,8e437ea5-3c7a-410a-ac0a-84130399c739,89f70915-e30d-44dc-8b85-0f43bf994b09,9308149b-5385-428f-aa77-3982d3f49478,9fa48049-01da-409a-87e9-42c14079e84c,a286f4b8-471e-46d0-b63f-1aaacb48ad0e,7f10f40c-a9a7-4cf3-890e-55d50816a62e,fb76fa6a-44ca-4521-bc4e-88f76d2329af,b4b4e0ff-9597-4cfb-a10c-fccd328b5232,d6a0eb7b-e836-43d9-8477-56c6f5f6ef19,8c242850-64ca-41ef-a82b-f1d87ecb38eb,d0e8ce6f-ae0c-4408-839e-81d14e03a3df,4db72499-d04e-461d-9e7e-584f19d7a27c,1dbe19cb-1be3-49dc-8e06-9e32f482753d\" stype=\"MCUPackageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;U1&amp;quot;,&amp;quot;device&amp;quot;:&amp;quot;atmega328p&amp;quot;,&amp;quot;clockHz&amp;quot;:16000000,&amp;quot;footprint&amp;quot;:&amp;quot;DIP-28-N&amp;quot;,&amp;quot;padMap&amp;quot;:[&amp;quot;1&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;3&amp;quot;,&amp;quot;4&amp;quot;,&amp;quot;5&amp;quot;,&amp;quot;6&amp;quot;,&amp;quot;7&amp;quot;,&amp;quot;8&amp;quot;,&amp;quot;9&amp;quot;,&amp;quot;10&amp;quot;,&amp;quot;11&amp;quot;,&amp;quot;12&amp;quot;,&amp;quot;13&amp;quot;,&amp;quot;14&amp;quot;,&amp;quot;15&amp;quot;,&amp;quot;16&amp;quot;,&amp;quot;17&amp;quot;,&amp;quot;18&amp;quot;,&amp;quot;19&amp;quot;,&amp;quot;20&amp;quot;,&amp;quot;21&amp;quot;,&amp;quot;22&amp;quot;,&amp;quot;23&amp;quot;,&amp;quot;24&amp;quot;,&amp;quot;25&amp;quot;,&amp;quot;26&amp;quot;,&amp;quot;27&amp;quot;,&amp;quot;28&amp;quot;]}\" x=\"320 112 544 112\" f=\"0\" mp=\"{&amp;quot;device&amp;quot;:&amp;quot;atmega328p&amp;quot;,&amp;quot;label&amp;quot;:&amp;quot;ATmega328P&amp;quot;,&amp;quot;clockHz&amp;quot;:16000000,&amp;quot;pins&amp;quot;:[{&amp;quot;physical&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;RESET&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;reset&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;2&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D0&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;3&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D1&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;4&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D2&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;5&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D3&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;6&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D4&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;7&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;VCC&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;power&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;8&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;GND&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;ground&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;9&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;XTAL1&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;clock&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;10&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;XTAL2&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;clock&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;11&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D5&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;12&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D6&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;13&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D7&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;14&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D8&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;15&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D9&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;16&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D10&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;17&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D11&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;18&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D12&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;19&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;D13&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;20&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;AVCC&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;power&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;21&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;AREF&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;reference&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;22&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;GND2&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;ground&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;23&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A0&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;24&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A1&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;25&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A2&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;26&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A3&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;27&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A4&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;},{&amp;quot;physical&amp;quot;:&amp;quot;28&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;A5&amp;quot;,&amp;quot;role&amp;quot;:&amp;quot;gpio&amp;quot;}]}\"/>\n  <v sid=\"83bb50f5-f6f5-4da2-9c53-c31c04fd9ba2\" sp=\"45f95440-ce7b-44c7-a8af-3d4f87b960e0,9699a992-0f5c-4ba4-b129-4886599549d2\" stype=\"DCVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;V1&amp;quot;}\" x=\"160 256 160 160\" f=\"16\" wf=\"0\" maxv=\"5\"/>\n  <g sid=\"955d7e93-633f-4fd2-ad24-9ea6c560cbf0\" sp=\"4c8c6e0e-7e3c-48c7-872e-283694407bdb\" stype=\"GroundElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;GND1&amp;quot;}\" x=\"160 256 160 288\" f=\"0\"/>\n  <w sid=\"472e9944-ebc8-4811-9324-3563999523a3\" sp=\"dbee759e-c301-4853-b537-878d6c7082b1,ec2336a0-3655-43ac-af0a-2f378c97cbe4\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W1&amp;quot;}\" x=\"160 160 160 64\" f=\"0\"/>\n  <w sid=\"0d2cbf6e-7624-4d8b-9535-1fef317cc29d\" sp=\"251d0b10-3181-44a6-8498-8453f4e8ef02,18447f3e-9ece-4ec8-9acb-064142614802\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W2&amp;quot;}\" x=\"160 64 208 64\" f=\"0\"/>\n  <w sid=\"0f736b92-d65a-44d2-b824-a558a0ca135d\" sp=\"96c17187-d5aa-40e6-8580-2cb6443992c7,c9f5fdcf-7f2a-49df-aa7e-4845b16cb4cc\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W3&amp;quot;}\" x=\"208 64 208 336\" f=\"0\"/>\n  <w sid=\"b3f1894e-0e47-4cbf-a856-7f5ecb885a86\" sp=\"023962f7-a007-4032-ab4c-5e9ba2be8698,a856553b-8bfd-4c1e-8722-6c54bc9f390a\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W4&amp;quot;}\" x=\"208 336 320 336\" f=\"0\"/>\n  <w sid=\"a6b43160-806d-4d7b-9926-021872db2265\" sp=\"36ca24b8-e904-4bfe-a8f8-4b7fa3088109,0d568797-7d9d-445b-b6ce-cfde027889db\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W5&amp;quot;}\" x=\"160 64 640 64\" f=\"0\"/>\n  <w sid=\"9bb61c54-3fe5-4c2c-8f78-ad853fd617b6\" sp=\"153ffae7-1cbc-4852-9ccf-03481e727d25,21739703-c275-4f25-b192-22c1fdc4f041\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W6&amp;quot;}\" x=\"640 64 640 400\" f=\"0\"/>\n  <w sid=\"dd6dafa9-fd6b-4b69-9ea4-4a4566dacffb\" sp=\"1f3f2a54-a493-435b-8940-6570bfd2093f,8d945ec6-87f0-459d-a768-0d21fd514d2f\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W7&amp;quot;}\" x=\"640 400 576 400\" f=\"0\"/>\n  <r sid=\"562f7f0c-6f60-4ddd-8d80-ee59d4e50cef\" sp=\"19774c1e-a858-4924-b166-04e040e2fc23,4f986cc5-1f11-4a52-8cd0-b573fdca846d\" stype=\"ResistorElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;R_RESET&amp;quot;}\" x=\"240 144 320 144\" f=\"0\" r=\"10000\"/>\n  <w sid=\"3f4c8b30-d937-4565-84e0-aae63baf9dfe\" sp=\"0c381aa8-6a49-4136-87b6-aa2a9816779c,e7c7a323-d259-4999-8594-8c120e16e192\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W8&amp;quot;}\" x=\"208 64 240 64\" f=\"0\"/>\n  <w sid=\"94e5d149-e427-4e9a-a9a0-a450962cd4e1\" sp=\"c7b5ef48-6b72-4170-b8bb-8a58b6617766,41e9af7d-d028-43f1-ba94-924a39ab36c0\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W9&amp;quot;}\" x=\"240 64 240 144\" f=\"0\"/>\n  <w sid=\"ab333718-3698-4ece-b2bd-befeb5a86ba5\" sp=\"176cd510-c385-447b-80bc-bd7ab9eeaf73,b089ad87-fa9c-4ab9-b6d7-1273d6d50e8c\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W10&amp;quot;}\" x=\"320 368 288 368\" f=\"0\"/>\n  <w sid=\"6a3210fd-eed8-4953-bd26-93d75267852e\" sp=\"83ec966e-1a8b-4435-b395-7fac791e6ee9,64b1b264-0bc0-4db0-b04a-4caf95a9eb30\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W11&amp;quot;}\" x=\"288 368 288 656\" f=\"0\"/>\n  <w sid=\"d90cc92a-fcde-4695-a66e-f3762403d1d8\" sp=\"427f73e4-077f-40d0-b357-fccd86db4c1f,7a797fa4-c94e-41e6-a498-2a8a67f548e7\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W12&amp;quot;}\" x=\"288 656 160 656\" f=\"0\"/>\n  <w sid=\"89ea35e3-2dcb-44ac-95bc-ee94b6ee1cc1\" sp=\"2742297b-c050-4ea8-9521-6380ce2d0b2d,1ae58c3b-5b70-4133-aeb0-2da7e2dbac0b\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W13&amp;quot;}\" x=\"160 656 160 256\" f=\"0\"/>\n  <w sid=\"f4ce147d-9669-48ba-8b8f-1c7bd0871984\" sp=\"021b73e8-1c05-4a36-aa93-3d39897a8a4b,5e971772-5ff0-491f-beb8-bc0ffa7d695a\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W14&amp;quot;}\" x=\"576 336 672 336\" f=\"0\"/>\n  <w sid=\"e44da51f-8a0c-4c5e-ad70-d7c08e64e24f\" sp=\"504e247e-49ad-4b27-bdf6-e50f07297fe8,45bc1ebe-62a0-491a-8cbb-08a7a7b84fa4\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W15&amp;quot;}\" x=\"672 336 672 656\" f=\"0\"/>\n  <w sid=\"270e207c-6a8f-4382-9d1d-8c5d739537c7\" sp=\"d65db873-35e3-4f5d-aaa1-3c17d9af1e0f,214ca118-0dfc-4b80-abb4-e9c543ad73db\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W16&amp;quot;}\" x=\"672 656 288 656\" f=\"0\"/>\n  <c sid=\"603721b8-228c-47cb-92f9-3ef1a24ff70d\" sp=\"8c9ec4ea-74c2-4c82-9c5d-fc4763ca423a,02dcd268-6def-490f-8d4c-38dc999e3a5b\" stype=\"CapacitorElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;C1&amp;quot;}\" x=\"48 160 48 256\" f=\"0\" c=\"1e-7\" iv=\"0.001\" sr=\"0.1\" vd=\"0\"/>\n  <w sid=\"c4e55a19-70eb-4380-b3a6-3fa036465192\" sp=\"5cd4521f-d2fa-4525-ae20-a4d6591914c0,2214fa32-af7d-4612-a585-b3aeb44c5bcd\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W17&amp;quot;}\" x=\"48 160 160 160\" f=\"0\"/>\n  <w sid=\"48692bef-4777-4a8b-af61-c6951d161675\" sp=\"0b985618-4ea1-49a7-88ee-e410928da50f,78865682-aa1b-4055-96bb-329954c78ce1\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W18&amp;quot;}\" x=\"48 256 160 256\" f=\"0\"/>\n  <w sid=\"43cfe9d7-ed82-40ef-89e4-385cbad92814\" sp=\"814065c6-03b1-4eaa-9a91-b2446626f559,305580ea-7f1b-43f3-b8e6-b2f0763ca5a6\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W19&amp;quot;}\" x=\"576 432 704 432\" f=\"0\"/>\n  <r sid=\"c9958a33-be9b-4613-b7ac-e73ed153cabb\" sp=\"cdaa1bcb-e668-4fa6-abce-8aea254ef553,8a915c80-adc8-4832-91db-05fd294e71e0\" stype=\"ResistorElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;R_LED&amp;quot;}\" x=\"704 432 832 432\" f=\"0\" r=\"330\"/>\n  <LED sid=\"3d864770-f9ae-4785-a5b0-84fc66fb4dfe\" sp=\"ba76ce3e-1abb-4979-b2c0-3b6605f565a9,8e1be424-310e-4573-acb4-d6f5337a0285\" stype=\"LEDElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;D1&amp;quot;}\" x=\"832 432 832 528\" f=\"0\" mo=\"default-led\" cr=\"1\" cg=\"0\" cb=\"0\" mbc=\"0.01\"/>\n  <g sid=\"93c473c9-808d-4c22-8fa6-4abda5de685b\" sp=\"2bfc22a7-bd95-464b-a9c4-78a6cb2b750c\" stype=\"GroundElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;GND2&amp;quot;}\" x=\"832 528 832 560\" f=\"0\"/>\n  <ln sid=\"5c59cfb8-f810-4a11-a511-288b0e496eff\" sp=\"453d5839-40a2-4cc7-9f97-6138b32c46ee\" stype=\"LabeledNodeElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;N_OUT&amp;quot;}\" x=\"576 432 608 448\" f=\"0\" te=\"MCU_OUT\"/>\n</cir>\n",
+  "design": {
+    "schema": 1,
+    "sheetId": "239c47f4-ee5e-4e0b-b016-6b6711e96dcd",
+    "instances": [
+      {
+        "id": "48573c0f-c264-4656-8a11-2d6c1930b3a4",
+        "type": "MCUPackageElm",
+        "engineType": "MCUPackageElm",
+        "value": "",
+        "meta": {
+          "reference": "U1",
+          "device": "atmega328p",
+          "clockHz": 16000000,
+          "footprint": "DIP-28-N",
+          "padMap": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28"
+          ]
+        },
+        "x": 320,
+        "y": 112,
+        "x2": 544,
+        "y2": 112,
+        "pins": [
+          {
+            "id": "44f30cca-e460-4d48-aa93-ca1b49ccf8a3",
+            "index": 0,
+            "name": "1:RESET",
+            "output": false,
+            "net": 1,
+            "x": 320,
+            "y": 144,
+            "netId": "0d252ec0-4744-4d89-8727-a592374e9ac8"
+          },
+          {
+            "id": "5e721bda-bcfc-40f8-b7fb-a4c47eca397d",
+            "index": 1,
+            "name": "2:D0",
+            "output": false,
+            "net": 2,
+            "x": 320,
+            "y": 176,
+            "netId": "c63932eb-9552-4930-9093-e63bd1687ef9"
+          },
+          {
+            "id": "4ee077f9-2931-4864-9fcd-a66306752ce5",
+            "index": 2,
+            "name": "3:D1",
+            "output": false,
+            "net": 3,
+            "x": 320,
+            "y": 208,
+            "netId": "96306063-18f0-44b1-b066-e17aeabd0bae"
+          },
+          {
+            "id": "d4ec0090-b230-488c-a974-741f61887d49",
+            "index": 3,
+            "name": "4:D2",
+            "output": false,
+            "net": 4,
+            "x": 320,
+            "y": 240,
+            "netId": "6d98bdda-de39-415a-881e-308a402bcde2"
+          },
+          {
+            "id": "31c11a24-b669-4191-8747-2765e94de0be",
+            "index": 4,
+            "name": "5:D3",
+            "output": false,
+            "net": 5,
+            "x": 320,
+            "y": 272,
+            "netId": "9a5c3ace-fcd5-47fb-9adb-92c97f327462"
+          },
+          {
+            "id": "92835007-7749-428f-93c9-214eb10d95ad",
+            "index": 5,
+            "name": "6:D4",
+            "output": false,
+            "net": 6,
+            "x": 320,
+            "y": 304,
+            "netId": "f1cc8b16-a6f4-4865-ab8c-3ab7434e17f3"
+          },
+          {
+            "id": "a995b146-a4da-40de-bdbd-3323410eb6c7",
+            "index": 6,
+            "name": "7:VCC",
+            "output": false,
+            "net": 7,
+            "x": 320,
+            "y": 336,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "564dfb31-cf3f-4569-b5e7-ead0ddea4ec7",
+            "index": 7,
+            "name": "8:GND",
+            "output": false,
+            "net": 0,
+            "x": 320,
+            "y": 368,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "381ff728-9987-4f6b-b535-071a4229a6cb",
+            "index": 8,
+            "name": "9:XTAL1",
+            "output": false,
+            "net": 8,
+            "x": 320,
+            "y": 400,
+            "netId": "30e772b2-7b0c-425e-8fff-c3c585a29663"
+          },
+          {
+            "id": "555c7587-8af7-4872-af27-aa7e48b68f3b",
+            "index": 9,
+            "name": "10:XTAL2",
+            "output": false,
+            "net": 9,
+            "x": 320,
+            "y": 432,
+            "netId": "024c7a13-6ac2-4ece-bf39-52af4c401339"
+          },
+          {
+            "id": "0b056aef-c01d-4ec6-b646-43a769cf6a35",
+            "index": 10,
+            "name": "11:D5",
+            "output": false,
+            "net": 10,
+            "x": 320,
+            "y": 464,
+            "netId": "0e28dba8-4995-4742-942d-5d8b3645f871"
+          },
+          {
+            "id": "e6592f0f-a956-42fc-ad28-e543ae1c268e",
+            "index": 11,
+            "name": "12:D6",
+            "output": false,
+            "net": 11,
+            "x": 320,
+            "y": 496,
+            "netId": "93044eb5-4125-4f6d-b3f5-70a0375577b8"
+          },
+          {
+            "id": "be14d499-b270-4490-843e-688765f4dc52",
+            "index": 12,
+            "name": "13:D7",
+            "output": false,
+            "net": 12,
+            "x": 320,
+            "y": 528,
+            "netId": "01269690-e457-40f1-aef8-4c0fd2f6026e"
+          },
+          {
+            "id": "8b394c25-80a0-4420-8834-1fd06868c831",
+            "index": 13,
+            "name": "14:D8",
+            "output": false,
+            "net": 13,
+            "x": 320,
+            "y": 560,
+            "netId": "c7cd4c67-8da3-48ef-97e5-e47befe396e2"
+          },
+          {
+            "id": "b3e9b5c3-e04a-485d-92ee-1ad4832c5bf7",
+            "index": 14,
+            "name": "15:D9",
+            "output": false,
+            "net": 14,
+            "x": 576,
+            "y": 560,
+            "netId": "962bafb8-3643-4fb5-b9e4-238511ece5e3"
+          },
+          {
+            "id": "8e437ea5-3c7a-410a-ac0a-84130399c739",
+            "index": 15,
+            "name": "16:D10",
+            "output": false,
+            "net": 15,
+            "x": 576,
+            "y": 528,
+            "netId": "9a07686a-33d1-4bc3-9245-80b2cb920fa9"
+          },
+          {
+            "id": "89f70915-e30d-44dc-8b85-0f43bf994b09",
+            "index": 16,
+            "name": "17:D11",
+            "output": false,
+            "net": 16,
+            "x": 576,
+            "y": 496,
+            "netId": "7a47970e-76cc-4e4f-9dcb-eb443e971a44"
+          },
+          {
+            "id": "9308149b-5385-428f-aa77-3982d3f49478",
+            "index": 17,
+            "name": "18:D12",
+            "output": false,
+            "net": 17,
+            "x": 576,
+            "y": 464,
+            "netId": "19a5c8aa-5339-4df6-a635-ad81bdc2971f"
+          },
+          {
+            "id": "9fa48049-01da-409a-87e9-42c14079e84c",
+            "index": 18,
+            "name": "19:D13",
+            "output": false,
+            "net": 18,
+            "x": 576,
+            "y": 432,
+            "netId": "2c885c2e-bc66-45cd-bd65-118b4509462e"
+          },
+          {
+            "id": "a286f4b8-471e-46d0-b63f-1aaacb48ad0e",
+            "index": 19,
+            "name": "20:AVCC",
+            "output": false,
+            "net": 7,
+            "x": 576,
+            "y": 400,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "7f10f40c-a9a7-4cf3-890e-55d50816a62e",
+            "index": 20,
+            "name": "21:AREF",
+            "output": false,
+            "net": 19,
+            "x": 576,
+            "y": 368,
+            "netId": "dc2fba83-a8a3-4fa3-afe3-caaeff876a2d"
+          },
+          {
+            "id": "fb76fa6a-44ca-4521-bc4e-88f76d2329af",
+            "index": 21,
+            "name": "22:GND2",
+            "output": false,
+            "net": 0,
+            "x": 576,
+            "y": 336,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "b4b4e0ff-9597-4cfb-a10c-fccd328b5232",
+            "index": 22,
+            "name": "23:A0",
+            "output": false,
+            "net": 20,
+            "x": 576,
+            "y": 304,
+            "netId": "3bc2b9fe-1bb1-43f9-b093-a551975653f4"
+          },
+          {
+            "id": "d6a0eb7b-e836-43d9-8477-56c6f5f6ef19",
+            "index": 23,
+            "name": "24:A1",
+            "output": false,
+            "net": 21,
+            "x": 576,
+            "y": 272,
+            "netId": "b5765203-567a-47f6-ba3f-786e77f0accc"
+          },
+          {
+            "id": "8c242850-64ca-41ef-a82b-f1d87ecb38eb",
+            "index": 24,
+            "name": "25:A2",
+            "output": false,
+            "net": 22,
+            "x": 576,
+            "y": 240,
+            "netId": "daff4eb8-8717-4116-89df-2f03047e06c6"
+          },
+          {
+            "id": "d0e8ce6f-ae0c-4408-839e-81d14e03a3df",
+            "index": 25,
+            "name": "26:A3",
+            "output": false,
+            "net": 23,
+            "x": 576,
+            "y": 208,
+            "netId": "18aaf65a-4a2d-4b71-9b08-932fe7d5394b"
+          },
+          {
+            "id": "4db72499-d04e-461d-9e7e-584f19d7a27c",
+            "index": 26,
+            "name": "27:A4",
+            "output": false,
+            "net": 24,
+            "x": 576,
+            "y": 176,
+            "netId": "29800a28-a84f-444a-8cbe-5e23e72f217d"
+          },
+          {
+            "id": "1dbe19cb-1be3-49dc-8e06-9e32f482753d",
+            "index": 27,
+            "name": "28:A5",
+            "output": false,
+            "net": 25,
+            "x": 576,
+            "y": 144,
+            "netId": "f5cadbc3-7535-40b5-92e8-9b2d04457b77"
+          }
+        ],
+        "mcu": {
+          "device": "atmega328p",
+          "label": "ATmega328P",
+          "clockHz": 16000000,
+          "pins": [
+            {
+              "physical": "1",
+              "name": "RESET",
+              "role": "reset"
+            },
+            {
+              "physical": "2",
+              "name": "D0",
+              "role": "gpio"
+            },
+            {
+              "physical": "3",
+              "name": "D1",
+              "role": "gpio"
+            },
+            {
+              "physical": "4",
+              "name": "D2",
+              "role": "gpio"
+            },
+            {
+              "physical": "5",
+              "name": "D3",
+              "role": "gpio"
+            },
+            {
+              "physical": "6",
+              "name": "D4",
+              "role": "gpio"
+            },
+            {
+              "physical": "7",
+              "name": "VCC",
+              "role": "power"
+            },
+            {
+              "physical": "8",
+              "name": "GND",
+              "role": "ground"
+            },
+            {
+              "physical": "9",
+              "name": "XTAL1",
+              "role": "clock"
+            },
+            {
+              "physical": "10",
+              "name": "XTAL2",
+              "role": "clock"
+            },
+            {
+              "physical": "11",
+              "name": "D5",
+              "role": "gpio"
+            },
+            {
+              "physical": "12",
+              "name": "D6",
+              "role": "gpio"
+            },
+            {
+              "physical": "13",
+              "name": "D7",
+              "role": "gpio"
+            },
+            {
+              "physical": "14",
+              "name": "D8",
+              "role": "gpio"
+            },
+            {
+              "physical": "15",
+              "name": "D9",
+              "role": "gpio"
+            },
+            {
+              "physical": "16",
+              "name": "D10",
+              "role": "gpio"
+            },
+            {
+              "physical": "17",
+              "name": "D11",
+              "role": "gpio"
+            },
+            {
+              "physical": "18",
+              "name": "D12",
+              "role": "gpio"
+            },
+            {
+              "physical": "19",
+              "name": "D13",
+              "role": "gpio"
+            },
+            {
+              "physical": "20",
+              "name": "AVCC",
+              "role": "power"
+            },
+            {
+              "physical": "21",
+              "name": "AREF",
+              "role": "reference"
+            },
+            {
+              "physical": "22",
+              "name": "GND2",
+              "role": "ground"
+            },
+            {
+              "physical": "23",
+              "name": "A0",
+              "role": "gpio"
+            },
+            {
+              "physical": "24",
+              "name": "A1",
+              "role": "gpio"
+            },
+            {
+              "physical": "25",
+              "name": "A2",
+              "role": "gpio"
+            },
+            {
+              "physical": "26",
+              "name": "A3",
+              "role": "gpio"
+            },
+            {
+              "physical": "27",
+              "name": "A4",
+              "role": "gpio"
+            },
+            {
+              "physical": "28",
+              "name": "A5",
+              "role": "gpio"
+            }
+          ]
+        },
+        "reference": "U1"
+      },
+      {
+        "id": "83bb50f5-f6f5-4da2-9c53-c31c04fd9ba2",
+        "type": "DCVoltageElm",
+        "engineType": "DCVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "V1"
+        },
+        "x": 160,
+        "y": 256,
+        "x2": 160,
+        "y2": 160,
+        "pins": [
+          {
+            "id": "45f95440-ce7b-44c7-a8af-3d4f87b960e0",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "9699a992-0f5c-4ba4-b129-4886599549d2",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 160,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "V1"
+      },
+      {
+        "id": "955d7e93-633f-4fd2-ad24-9ea6c560cbf0",
+        "type": "GroundElm",
+        "engineType": "GroundElm",
+        "value": "",
+        "meta": {
+          "reference": "GND1"
+        },
+        "x": 160,
+        "y": 256,
+        "x2": 160,
+        "y2": 288,
+        "pins": [
+          {
+            "id": "4c8c6e0e-7e3c-48c7-872e-283694407bdb",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "GND1"
+      },
+      {
+        "id": "472e9944-ebc8-4811-9324-3563999523a3",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W1"
+        },
+        "x": 160,
+        "y": 160,
+        "x2": 160,
+        "y2": 64,
+        "pins": [
+          {
+            "id": "dbee759e-c301-4853-b537-878d6c7082b1",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 160,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "ec2336a0-3655-43ac-af0a-2f378c97cbe4",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W1"
+      },
+      {
+        "id": "0d2cbf6e-7624-4d8b-9535-1fef317cc29d",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W2"
+        },
+        "x": 160,
+        "y": 64,
+        "x2": 208,
+        "y2": 64,
+        "pins": [
+          {
+            "id": "251d0b10-3181-44a6-8498-8453f4e8ef02",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "18447f3e-9ece-4ec8-9acb-064142614802",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 208,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W2"
+      },
+      {
+        "id": "0f736b92-d65a-44d2-b824-a558a0ca135d",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W3"
+        },
+        "x": 208,
+        "y": 64,
+        "x2": 208,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "96c17187-d5aa-40e6-8580-2cb6443992c7",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 208,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "c9f5fdcf-7f2a-49df-aa7e-4845b16cb4cc",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 208,
+            "y": 336,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W3"
+      },
+      {
+        "id": "b3f1894e-0e47-4cbf-a856-7f5ecb885a86",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W4"
+        },
+        "x": 208,
+        "y": 336,
+        "x2": 320,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "023962f7-a007-4032-ab4c-5e9ba2be8698",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 208,
+            "y": 336,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "a856553b-8bfd-4c1e-8722-6c54bc9f390a",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 320,
+            "y": 336,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W4"
+      },
+      {
+        "id": "a6b43160-806d-4d7b-9926-021872db2265",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W5"
+        },
+        "x": 160,
+        "y": 64,
+        "x2": 640,
+        "y2": 64,
+        "pins": [
+          {
+            "id": "36ca24b8-e904-4bfe-a8f8-4b7fa3088109",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "0d568797-7d9d-445b-b6ce-cfde027889db",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 640,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W5"
+      },
+      {
+        "id": "9bb61c54-3fe5-4c2c-8f78-ad853fd617b6",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W6"
+        },
+        "x": 640,
+        "y": 64,
+        "x2": 640,
+        "y2": 400,
+        "pins": [
+          {
+            "id": "153ffae7-1cbc-4852-9ccf-03481e727d25",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 640,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "21739703-c275-4f25-b192-22c1fdc4f041",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 640,
+            "y": 400,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W6"
+      },
+      {
+        "id": "dd6dafa9-fd6b-4b69-9ea4-4a4566dacffb",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W7"
+        },
+        "x": 640,
+        "y": 400,
+        "x2": 576,
+        "y2": 400,
+        "pins": [
+          {
+            "id": "1f3f2a54-a493-435b-8940-6570bfd2093f",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 640,
+            "y": 400,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "8d945ec6-87f0-459d-a768-0d21fd514d2f",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 576,
+            "y": 400,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W7"
+      },
+      {
+        "id": "562f7f0c-6f60-4ddd-8d80-ee59d4e50cef",
+        "type": "ResistorElm",
+        "engineType": "ResistorElm",
+        "value": "10000",
+        "meta": {
+          "reference": "R_RESET"
+        },
+        "x": 240,
+        "y": 144,
+        "x2": 320,
+        "y2": 144,
+        "pins": [
+          {
+            "id": "19774c1e-a858-4924-b166-04e040e2fc23",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 240,
+            "y": 144,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "4f986cc5-1f11-4a52-8cd0-b573fdca846d",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 1,
+            "x": 320,
+            "y": 144,
+            "netId": "0d252ec0-4744-4d89-8727-a592374e9ac8"
+          }
+        ],
+        "reference": "R_RESET"
+      },
+      {
+        "id": "3f4c8b30-d937-4565-84e0-aae63baf9dfe",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W8"
+        },
+        "x": 208,
+        "y": 64,
+        "x2": 240,
+        "y2": 64,
+        "pins": [
+          {
+            "id": "0c381aa8-6a49-4136-87b6-aa2a9816779c",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 208,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "e7c7a323-d259-4999-8594-8c120e16e192",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 240,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W8"
+      },
+      {
+        "id": "94e5d149-e427-4e9a-a9a0-a450962cd4e1",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W9"
+        },
+        "x": 240,
+        "y": 64,
+        "x2": 240,
+        "y2": 144,
+        "pins": [
+          {
+            "id": "c7b5ef48-6b72-4170-b8bb-8a58b6617766",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 240,
+            "y": 64,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "41e9af7d-d028-43f1-ba94-924a39ab36c0",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 240,
+            "y": 144,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W9"
+      },
+      {
+        "id": "ab333718-3698-4ece-b2bd-befeb5a86ba5",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W10"
+        },
+        "x": 320,
+        "y": 368,
+        "x2": 288,
+        "y2": 368,
+        "pins": [
+          {
+            "id": "176cd510-c385-447b-80bc-bd7ab9eeaf73",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 320,
+            "y": 368,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "b089ad87-fa9c-4ab9-b6d7-1273d6d50e8c",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 288,
+            "y": 368,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W10"
+      },
+      {
+        "id": "6a3210fd-eed8-4953-bd26-93d75267852e",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W11"
+        },
+        "x": 288,
+        "y": 368,
+        "x2": 288,
+        "y2": 656,
+        "pins": [
+          {
+            "id": "83ec966e-1a8b-4435-b395-7fac791e6ee9",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 288,
+            "y": 368,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "64b1b264-0bc0-4db0-b04a-4caf95a9eb30",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 288,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W11"
+      },
+      {
+        "id": "d90cc92a-fcde-4695-a66e-f3762403d1d8",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W12"
+        },
+        "x": 288,
+        "y": 656,
+        "x2": 160,
+        "y2": 656,
+        "pins": [
+          {
+            "id": "427f73e4-077f-40d0-b357-fccd86db4c1f",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 288,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "7a797fa4-c94e-41e6-a498-2a8a67f548e7",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W12"
+      },
+      {
+        "id": "89ea35e3-2dcb-44ac-95bc-ee94b6ee1cc1",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W13"
+        },
+        "x": 160,
+        "y": 656,
+        "x2": 160,
+        "y2": 256,
+        "pins": [
+          {
+            "id": "2742297b-c050-4ea8-9521-6380ce2d0b2d",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "1ae58c3b-5b70-4133-aeb0-2da7e2dbac0b",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W13"
+      },
+      {
+        "id": "f4ce147d-9669-48ba-8b8f-1c7bd0871984",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W14"
+        },
+        "x": 576,
+        "y": 336,
+        "x2": 672,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "021b73e8-1c05-4a36-aa93-3d39897a8a4b",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 576,
+            "y": 336,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "5e971772-5ff0-491f-beb8-bc0ffa7d695a",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 672,
+            "y": 336,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W14"
+      },
+      {
+        "id": "e44da51f-8a0c-4c5e-ad70-d7c08e64e24f",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W15"
+        },
+        "x": 672,
+        "y": 336,
+        "x2": 672,
+        "y2": 656,
+        "pins": [
+          {
+            "id": "504e247e-49ad-4b27-bdf6-e50f07297fe8",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 672,
+            "y": 336,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "45bc1ebe-62a0-491a-8cbb-08a7a7b84fa4",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 672,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W15"
+      },
+      {
+        "id": "270e207c-6a8f-4382-9d1d-8c5d739537c7",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W16"
+        },
+        "x": 672,
+        "y": 656,
+        "x2": 288,
+        "y2": 656,
+        "pins": [
+          {
+            "id": "d65db873-35e3-4f5d-aaa1-3c17d9af1e0f",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 672,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "214ca118-0dfc-4b80-abb4-e9c543ad73db",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 288,
+            "y": 656,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W16"
+      },
+      {
+        "id": "603721b8-228c-47cb-92f9-3ef1a24ff70d",
+        "type": "CapacitorElm",
+        "engineType": "CapacitorElm",
+        "value": "1e-7",
+        "meta": {
+          "reference": "C1"
+        },
+        "x": 48,
+        "y": 160,
+        "x2": 48,
+        "y2": 256,
+        "pins": [
+          {
+            "id": "8c9ec4ea-74c2-4c82-9c5d-fc4763ca423a",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 48,
+            "y": 160,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "02dcd268-6def-490f-8d4c-38dc999e3a5b",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 48,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "C1"
+      },
+      {
+        "id": "c4e55a19-70eb-4380-b3a6-3fa036465192",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W17"
+        },
+        "x": 48,
+        "y": 160,
+        "x2": 160,
+        "y2": 160,
+        "pins": [
+          {
+            "id": "5cd4521f-d2fa-4525-ae20-a4d6591914c0",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 7,
+            "x": 48,
+            "y": 160,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          },
+          {
+            "id": "2214fa32-af7d-4612-a585-b3aeb44c5bcd",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 7,
+            "x": 160,
+            "y": 160,
+            "netId": "9bc222cc-6006-4472-b714-6b35ab883666"
+          }
+        ],
+        "reference": "W17"
+      },
+      {
+        "id": "48692bef-4777-4a8b-af61-c6951d161675",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W18"
+        },
+        "x": 48,
+        "y": 256,
+        "x2": 160,
+        "y2": 256,
+        "pins": [
+          {
+            "id": "0b985618-4ea1-49a7-88ee-e410928da50f",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 48,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          },
+          {
+            "id": "78865682-aa1b-4055-96bb-329954c78ce1",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 256,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "W18"
+      },
+      {
+        "id": "43cfe9d7-ed82-40ef-89e4-385cbad92814",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W19"
+        },
+        "x": 576,
+        "y": 432,
+        "x2": 704,
+        "y2": 432,
+        "pins": [
+          {
+            "id": "814065c6-03b1-4eaa-9a91-b2446626f559",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 18,
+            "x": 576,
+            "y": 432,
+            "netId": "2c885c2e-bc66-45cd-bd65-118b4509462e"
+          },
+          {
+            "id": "305580ea-7f1b-43f3-b8e6-b2f0763ca5a6",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 18,
+            "x": 704,
+            "y": 432,
+            "netId": "2c885c2e-bc66-45cd-bd65-118b4509462e"
+          }
+        ],
+        "reference": "W19"
+      },
+      {
+        "id": "c9958a33-be9b-4613-b7ac-e73ed153cabb",
+        "type": "ResistorElm",
+        "engineType": "ResistorElm",
+        "value": "330",
+        "meta": {
+          "reference": "R_LED"
+        },
+        "x": 704,
+        "y": 432,
+        "x2": 832,
+        "y2": 432,
+        "pins": [
+          {
+            "id": "cdaa1bcb-e668-4fa6-abce-8aea254ef553",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 18,
+            "x": 704,
+            "y": 432,
+            "netId": "2c885c2e-bc66-45cd-bd65-118b4509462e"
+          },
+          {
+            "id": "8a915c80-adc8-4832-91db-05fd294e71e0",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 47,
+            "x": 832,
+            "y": 432,
+            "netId": "8051c91a-1230-4abf-840d-b8db8c85c3ee"
+          }
+        ],
+        "reference": "R_LED"
+      },
+      {
+        "id": "3d864770-f9ae-4785-a5b0-84fc66fb4dfe",
+        "type": "LEDElm",
+        "engineType": "LEDElm",
+        "value": "",
+        "meta": {
+          "reference": "D1"
+        },
+        "x": 832,
+        "y": 432,
+        "x2": 832,
+        "y2": 528,
+        "pins": [
+          {
+            "id": "ba76ce3e-1abb-4979-b2c0-3b6605f565a9",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 47,
+            "x": 832,
+            "y": 432,
+            "netId": "8051c91a-1230-4abf-840d-b8db8c85c3ee"
+          },
+          {
+            "id": "8e1be424-310e-4573-acb4-d6f5337a0285",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 0,
+            "x": 832,
+            "y": 528,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "D1"
+      },
+      {
+        "id": "93c473c9-808d-4c22-8fa6-4abda5de685b",
+        "type": "GroundElm",
+        "engineType": "GroundElm",
+        "value": "",
+        "meta": {
+          "reference": "GND2"
+        },
+        "x": 832,
+        "y": 528,
+        "x2": 832,
+        "y2": 560,
+        "pins": [
+          {
+            "id": "2bfc22a7-bd95-464b-a9c4-78a6cb2b750c",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 832,
+            "y": 528,
+            "netId": "63d95b9b-16fc-4e47-b605-61b07226e4a2"
+          }
+        ],
+        "reference": "GND2"
+      },
+      {
+        "id": "5c59cfb8-f810-4a11-a511-288b0e496eff",
+        "type": "LabeledNodeElm",
+        "engineType": "LabeledNodeElm",
+        "value": "",
+        "meta": {
+          "reference": "N_OUT"
+        },
+        "x": 576,
+        "y": 432,
+        "x2": 608,
+        "y2": 448,
+        "pins": [
+          {
+            "id": "453d5839-40a2-4cc7-9f97-6138b32c46ee",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 18,
+            "x": 576,
+            "y": 432,
+            "netId": "2c885c2e-bc66-45cd-bd65-118b4509462e"
+          }
+        ],
+        "reference": "N_OUT"
+      }
+    ],
+    "nets": [
+      {
+        "id": "0d252ec0-4744-4d89-8727-a592374e9ac8",
+        "name": "",
+        "solver": 1,
+        "pins": [
+          "44f30cca-e460-4d48-aa93-ca1b49ccf8a3",
+          "4f986cc5-1f11-4a52-8cd0-b573fdca846d"
+        ]
+      },
+      {
+        "id": "c63932eb-9552-4930-9093-e63bd1687ef9",
+        "name": "",
+        "solver": 2,
+        "pins": [
+          "5e721bda-bcfc-40f8-b7fb-a4c47eca397d"
+        ]
+      },
+      {
+        "id": "96306063-18f0-44b1-b066-e17aeabd0bae",
+        "name": "",
+        "solver": 3,
+        "pins": [
+          "4ee077f9-2931-4864-9fcd-a66306752ce5"
+        ]
+      },
+      {
+        "id": "6d98bdda-de39-415a-881e-308a402bcde2",
+        "name": "",
+        "solver": 4,
+        "pins": [
+          "d4ec0090-b230-488c-a974-741f61887d49"
+        ]
+      },
+      {
+        "id": "9a5c3ace-fcd5-47fb-9adb-92c97f327462",
+        "name": "",
+        "solver": 5,
+        "pins": [
+          "31c11a24-b669-4191-8747-2765e94de0be"
+        ]
+      },
+      {
+        "id": "f1cc8b16-a6f4-4865-ab8c-3ab7434e17f3",
+        "name": "",
+        "solver": 6,
+        "pins": [
+          "92835007-7749-428f-93c9-214eb10d95ad"
+        ]
+      },
+      {
+        "id": "9bc222cc-6006-4472-b714-6b35ab883666",
+        "name": "",
+        "solver": 7,
+        "pins": [
+          "023962f7-a007-4032-ab4c-5e9ba2be8698",
+          "0c381aa8-6a49-4136-87b6-aa2a9816779c",
+          "0d568797-7d9d-445b-b6ce-cfde027889db",
+          "153ffae7-1cbc-4852-9ccf-03481e727d25",
+          "18447f3e-9ece-4ec8-9acb-064142614802",
+          "19774c1e-a858-4924-b166-04e040e2fc23",
+          "1f3f2a54-a493-435b-8940-6570bfd2093f",
+          "21739703-c275-4f25-b192-22c1fdc4f041",
+          "2214fa32-af7d-4612-a585-b3aeb44c5bcd",
+          "251d0b10-3181-44a6-8498-8453f4e8ef02",
+          "36ca24b8-e904-4bfe-a8f8-4b7fa3088109",
+          "41e9af7d-d028-43f1-ba94-924a39ab36c0",
+          "5cd4521f-d2fa-4525-ae20-a4d6591914c0",
+          "8c9ec4ea-74c2-4c82-9c5d-fc4763ca423a",
+          "8d945ec6-87f0-459d-a768-0d21fd514d2f",
+          "9699a992-0f5c-4ba4-b129-4886599549d2",
+          "96c17187-d5aa-40e6-8580-2cb6443992c7",
+          "a286f4b8-471e-46d0-b63f-1aaacb48ad0e",
+          "a856553b-8bfd-4c1e-8722-6c54bc9f390a",
+          "a995b146-a4da-40de-bdbd-3323410eb6c7",
+          "c7b5ef48-6b72-4170-b8bb-8a58b6617766",
+          "c9f5fdcf-7f2a-49df-aa7e-4845b16cb4cc",
+          "dbee759e-c301-4853-b537-878d6c7082b1",
+          "e7c7a323-d259-4999-8594-8c120e16e192",
+          "ec2336a0-3655-43ac-af0a-2f378c97cbe4"
+        ]
+      },
+      {
+        "id": "63d95b9b-16fc-4e47-b605-61b07226e4a2",
+        "name": "GND",
+        "solver": 0,
+        "pins": [
+          "021b73e8-1c05-4a36-aa93-3d39897a8a4b",
+          "02dcd268-6def-490f-8d4c-38dc999e3a5b",
+          "0b985618-4ea1-49a7-88ee-e410928da50f",
+          "176cd510-c385-447b-80bc-bd7ab9eeaf73",
+          "1ae58c3b-5b70-4133-aeb0-2da7e2dbac0b",
+          "214ca118-0dfc-4b80-abb4-e9c543ad73db",
+          "2742297b-c050-4ea8-9521-6380ce2d0b2d",
+          "2bfc22a7-bd95-464b-a9c4-78a6cb2b750c",
+          "427f73e4-077f-40d0-b357-fccd86db4c1f",
+          "45bc1ebe-62a0-491a-8cbb-08a7a7b84fa4",
+          "45f95440-ce7b-44c7-a8af-3d4f87b960e0",
+          "4c8c6e0e-7e3c-48c7-872e-283694407bdb",
+          "504e247e-49ad-4b27-bdf6-e50f07297fe8",
+          "564dfb31-cf3f-4569-b5e7-ead0ddea4ec7",
+          "5e971772-5ff0-491f-beb8-bc0ffa7d695a",
+          "64b1b264-0bc0-4db0-b04a-4caf95a9eb30",
+          "78865682-aa1b-4055-96bb-329954c78ce1",
+          "7a797fa4-c94e-41e6-a498-2a8a67f548e7",
+          "83ec966e-1a8b-4435-b395-7fac791e6ee9",
+          "8e1be424-310e-4573-acb4-d6f5337a0285",
+          "b089ad87-fa9c-4ab9-b6d7-1273d6d50e8c",
+          "d65db873-35e3-4f5d-aaa1-3c17d9af1e0f",
+          "fb76fa6a-44ca-4521-bc4e-88f76d2329af"
+        ]
+      },
+      {
+        "id": "30e772b2-7b0c-425e-8fff-c3c585a29663",
+        "name": "",
+        "solver": 8,
+        "pins": [
+          "381ff728-9987-4f6b-b535-071a4229a6cb"
+        ]
+      },
+      {
+        "id": "024c7a13-6ac2-4ece-bf39-52af4c401339",
+        "name": "",
+        "solver": 9,
+        "pins": [
+          "555c7587-8af7-4872-af27-aa7e48b68f3b"
+        ]
+      },
+      {
+        "id": "0e28dba8-4995-4742-942d-5d8b3645f871",
+        "name": "",
+        "solver": 10,
+        "pins": [
+          "0b056aef-c01d-4ec6-b646-43a769cf6a35"
+        ]
+      },
+      {
+        "id": "93044eb5-4125-4f6d-b3f5-70a0375577b8",
+        "name": "",
+        "solver": 11,
+        "pins": [
+          "e6592f0f-a956-42fc-ad28-e543ae1c268e"
+        ]
+      },
+      {
+        "id": "01269690-e457-40f1-aef8-4c0fd2f6026e",
+        "name": "",
+        "solver": 12,
+        "pins": [
+          "be14d499-b270-4490-843e-688765f4dc52"
+        ]
+      },
+      {
+        "id": "c7cd4c67-8da3-48ef-97e5-e47befe396e2",
+        "name": "",
+        "solver": 13,
+        "pins": [
+          "8b394c25-80a0-4420-8834-1fd06868c831"
+        ]
+      },
+      {
+        "id": "962bafb8-3643-4fb5-b9e4-238511ece5e3",
+        "name": "",
+        "solver": 14,
+        "pins": [
+          "b3e9b5c3-e04a-485d-92ee-1ad4832c5bf7"
+        ]
+      },
+      {
+        "id": "9a07686a-33d1-4bc3-9245-80b2cb920fa9",
+        "name": "",
+        "solver": 15,
+        "pins": [
+          "8e437ea5-3c7a-410a-ac0a-84130399c739"
+        ]
+      },
+      {
+        "id": "7a47970e-76cc-4e4f-9dcb-eb443e971a44",
+        "name": "",
+        "solver": 16,
+        "pins": [
+          "89f70915-e30d-44dc-8b85-0f43bf994b09"
+        ]
+      },
+      {
+        "id": "19a5c8aa-5339-4df6-a635-ad81bdc2971f",
+        "name": "",
+        "solver": 17,
+        "pins": [
+          "9308149b-5385-428f-aa77-3982d3f49478"
+        ]
+      },
+      {
+        "id": "2c885c2e-bc66-45cd-bd65-118b4509462e",
+        "name": "",
+        "solver": 18,
+        "pins": [
+          "305580ea-7f1b-43f3-b8e6-b2f0763ca5a6",
+          "453d5839-40a2-4cc7-9f97-6138b32c46ee",
+          "814065c6-03b1-4eaa-9a91-b2446626f559",
+          "9fa48049-01da-409a-87e9-42c14079e84c",
+          "cdaa1bcb-e668-4fa6-abce-8aea254ef553"
+        ]
+      },
+      {
+        "id": "dc2fba83-a8a3-4fa3-afe3-caaeff876a2d",
+        "name": "",
+        "solver": 19,
+        "pins": [
+          "7f10f40c-a9a7-4cf3-890e-55d50816a62e"
+        ]
+      },
+      {
+        "id": "3bc2b9fe-1bb1-43f9-b093-a551975653f4",
+        "name": "",
+        "solver": 20,
+        "pins": [
+          "b4b4e0ff-9597-4cfb-a10c-fccd328b5232"
+        ]
+      },
+      {
+        "id": "b5765203-567a-47f6-ba3f-786e77f0accc",
+        "name": "",
+        "solver": 21,
+        "pins": [
+          "d6a0eb7b-e836-43d9-8477-56c6f5f6ef19"
+        ]
+      },
+      {
+        "id": "daff4eb8-8717-4116-89df-2f03047e06c6",
+        "name": "",
+        "solver": 22,
+        "pins": [
+          "8c242850-64ca-41ef-a82b-f1d87ecb38eb"
+        ]
+      },
+      {
+        "id": "18aaf65a-4a2d-4b71-9b08-932fe7d5394b",
+        "name": "",
+        "solver": 23,
+        "pins": [
+          "d0e8ce6f-ae0c-4408-839e-81d14e03a3df"
+        ]
+      },
+      {
+        "id": "29800a28-a84f-444a-8cbe-5e23e72f217d",
+        "name": "",
+        "solver": 24,
+        "pins": [
+          "4db72499-d04e-461d-9e7e-584f19d7a27c"
+        ]
+      },
+      {
+        "id": "f5cadbc3-7535-40b5-92e8-9b2d04457b77",
+        "name": "",
+        "solver": 25,
+        "pins": [
+          "1dbe19cb-1be3-49dc-8e06-9e32f482753d"
+        ]
+      },
+      {
+        "id": "8051c91a-1230-4abf-840d-b8db8c85c3ee",
+        "name": "",
+        "solver": 47,
+        "pins": [
+          "8a915c80-adc8-4832-91db-05fd294e71e0",
+          "ba76ce3e-1abb-4979-b2c0-3b6605f565a9"
+        ]
+      }
+    ]
+  },
+  "library": {
+    "revision": "2026.10.26",
+    "assets": [
+      {
+        "instanceId": "48573c0f-c264-4656-8a11-2d6c1930b3a4",
+        "libraryId": "studio:MCUPackageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/prabinadkri/circuit-studio",
+          "license": "GPL-2.0-or-later",
+          "original": true
+        },
+        "footprint": "DIP-28-N",
+        "padMap": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28"
+        ]
+      },
+      {
+        "instanceId": "83bb50f5-f6f5-4da2-9c53-c31c04fd9ba2",
+        "libraryId": "circuitjs:DCVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "955d7e93-633f-4fd2-ad24-9ea6c560cbf0",
+        "libraryId": "circuitjs:GroundElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "472e9944-ebc8-4811-9324-3563999523a3",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "0d2cbf6e-7624-4d8b-9535-1fef317cc29d",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "0f736b92-d65a-44d2-b824-a558a0ca135d",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "b3f1894e-0e47-4cbf-a856-7f5ecb885a86",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "a6b43160-806d-4d7b-9926-021872db2265",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "9bb61c54-3fe5-4c2c-8f78-ad853fd617b6",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "dd6dafa9-fd6b-4b69-9ea4-4a4566dacffb",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "562f7f0c-6f60-4ddd-8d80-ee59d4e50cef",
+        "libraryId": "circuitjs:ResistorElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "3f4c8b30-d937-4565-84e0-aae63baf9dfe",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "94e5d149-e427-4e9a-a9a0-a450962cd4e1",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "ab333718-3698-4ece-b2bd-befeb5a86ba5",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "6a3210fd-eed8-4953-bd26-93d75267852e",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "d90cc92a-fcde-4695-a66e-f3762403d1d8",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "89ea35e3-2dcb-44ac-95bc-ee94b6ee1cc1",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "f4ce147d-9669-48ba-8b8f-1c7bd0871984",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "e44da51f-8a0c-4c5e-ad70-d7c08e64e24f",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "270e207c-6a8f-4382-9d1d-8c5d739537c7",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "603721b8-228c-47cb-92f9-3ef1a24ff70d",
+        "libraryId": "circuitjs:CapacitorElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "c4e55a19-70eb-4380-b3a6-3fa036465192",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "48692bef-4777-4a8b-af61-c6951d161675",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "43cfe9d7-ed82-40ef-89e4-385cbad92814",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "c9958a33-be9b-4613-b7ac-e73ed153cabb",
+        "libraryId": "circuitjs:ResistorElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "3d864770-f9ae-4785-a5b0-84fc66fb4dfe",
+        "libraryId": "circuitjs:LEDElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "93c473c9-808d-4c22-8fa6-4abda5de685b",
+        "libraryId": "circuitjs:GroundElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "5c59cfb8-f810-4a11-a511-288b0e496eff",
+        "libraryId": "circuitjs:LabeledNodeElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      }
+    ]
+  },
+  "firmware": "",
+  "picFirmware": "",
+  "firmwareByDevice": {
+    "avr": "",
+    "pic": "",
+    "atmega328p": ":10000000259A2D9A87E29FEFAFEFAA95F1F79A957F\n:10001000D9F78A95C1F72D9887E29FEFAFEFAA95A0\n:0C002000F1F79A95D9F78A95C1F7EBCF5C\n:00000001FF\n"
+  },
+  "device": "atmega328p",
+  "simulation": {
+    "mode": "coupled",
+    "quantumUs": 100
+  },
+  "board": {
+    "parts": [],
+    "tracks": [],
+    "vias": [],
+    "zones": [],
+    "sourceNetlist": ""
+  },
+  "analysis": {
+    "circuit": "V1 in 0 5\nR1 in out 1k\nR2 out 0 1k",
+    "mode": "dc",
+    "start": "0",
+    "stop": "5",
+    "step": ".1",
+    "probe": "out",
+    "result": null
+  },
+  "firmwareWorkspace": {
+    "source": "#include <avr/io.h>\nvolatile unsigned char count = 0;\nint main(void) {\n    DDRB = 32;\n    while (1) {\n        count++;\n        PORTB ^= 32;\n    }\n}\n",
+    "breakLine": 0
+  }
+}

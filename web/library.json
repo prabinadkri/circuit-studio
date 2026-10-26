@@ -4015,6 +4015,41 @@
         "license": "GPL-2.0-or-later"
       },
       "fixtures": []
+    },
+    {
+      "id": "studio:MCUPackageElm",
+      "revision": 1,
+      "type": "MCUPackageElm",
+      "label": "Microcontroller package",
+      "category": "Mixed signal",
+      "aliases": [
+        "MCU",
+        "firmware",
+        "Arduino",
+        "PIC",
+        "ATmega"
+      ],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MCUPackageElm",
+        "pinContract": "Physical package pin numbers with stable pin UUIDs; choose a profile in Firmware"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Configure using Place selected MCU in Firmware. One MCU; fixed backend clock, 5 V supply and generic GPIO impedance. No oscillator, power consumption or USB model.",
+        "electricalStatus": "generic-model-tested"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/prabinadkri/circuit-studio",
+        "license": "GPL-2.0-or-later",
+        "original": true
+      },
+      "fixtures": [
+        "tests/mcu-package.cjs"
+      ]
     }
   ]
 }

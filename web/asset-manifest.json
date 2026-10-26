@@ -1,18 +1,18 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.2",
+  "revision": "0.4.0-alpha.3",
   "assets": [
     {
       "path": "library.json",
-      "sha256": "06a109ca46135bb0492a201a605822e0873e952420a23ff23f8d3841d937ac71"
+      "sha256": "de89373356f9062de1ed83da782e911fc247817b58de55ec788f81c72ff92dbf"
     },
     {
       "path": "footprints.js",
-      "sha256": "3452274856fc1f1d71c4767a53db250453cb0a046d72ce17ba9c937781f3a445"
+      "sha256": "b653a821dc977674164ec882f9adf33a1a02809e4e53cd54c9048754a5b5e5fa"
     },
     {
       "path": "mcu.js",
-      "sha256": "e755c669b54b4bdaa430549f5cd1103132b12393c38f65fcc033292c7da97096"
+      "sha256": "5e1ace1fa5d4e138522174552f4e14797243c80740cec52380bb3ea25ab7bc1a"
     },
     {
       "path": "scheduler.js",
@@ -24,11 +24,11 @@
     },
     {
       "path": "board3d.js",
-      "sha256": "9d3d5c44485e63f6b75388372bdac51fc9786cb6bbd07288a991f3b5e64a293c"
+      "sha256": "950b5f9fe631772c727e5989ddecee2337a129e02dfae97c2dfd482ac8a58675"
     },
     {
       "path": "automation.js",
-      "sha256": "c084bf634012ba3b7dfabf7373289bc98f57000b775810349ef2e1d0ae5672c5"
+      "sha256": "5f3c90ebee3f443ccac6e3d6aa79875b100006fae4d114e0872b22555152b933"
     },
     {
       "path": "pcb.js",
@@ -40,15 +40,35 @@
     },
     {
       "path": "studio.js",
-      "sha256": "a1e479108fbd8115df2df3a45455da10ab38f04c4e3192b6e7957061d2094540"
+      "sha256": "1dbb1d50064dc3a8badbd7737c9efae09a685e98006aea69e4714c65cc2b5e4c"
+    },
+    {
+      "path": "digital.js",
+      "sha256": "40bd0afdeb918ab18804eb1975a9df0ed44242298d61ac5f7f200e09c8e193d8"
+    },
+    {
+      "path": "cosim.js",
+      "sha256": "b236c43f3b2e3d64a19c36ab54f5a37c90d766577261565965c9b1a3e0948581"
+    },
+    {
+      "path": "instruments.js",
+      "sha256": "8dd4c169a42175a59bb84195dcdfa33cea2b135003c91ed48bdb546c7d5b853b"
+    },
+    {
+      "path": "mcu-package.js",
+      "sha256": "480aacbd1fb5a981e261ae987f2d198780ed2a1338b695d227e01d98d3689a3c"
+    },
+    {
+      "path": "compiler.js",
+      "sha256": "fa4e6bdf77620a410f034e153a9666b900a81ad6f8099e399cb40a9fa3795679"
     },
     {
       "path": "engine/circuitjs.html",
-      "sha256": "ac204456beb6ac5a2b19149afa32270d6b93012269133cc1df03354d0f51a8f8"
+      "sha256": "d9cd8c8fa9b085332dbc7673598c2240f97238456a411f7c95d9693bdf8dec9f"
     },
     {
-      "path": "engine/circuitjs/circuitjs-C97U_KIc.js",
-      "sha256": "2208ba8e9480dbe202adf91755e1c87253cdcf35c30cfc5c7529d0570285ab43"
+      "path": "engine/circuitjs/circuitjs-gul2n7IX.js",
+      "sha256": "aaa0c1d1cfee026d6866521001ad7310c9169336275df08dfbfd040d80525930"
     }
   ]
 }

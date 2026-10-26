@@ -1,3 +1,7 @@
+# Current status: 24/29 tickets
+
+See [MILESTONE-24.md](MILESTONE-24.md) for tested deliveries and five remaining tickets. Ticket count does not measure Proteus feature parity.
+
 # Circuit Studio: path to a professional Linux circuit lab
 
 **Audit date:** 26 October 2026. **Baseline:** `2b6eb6b791391f18e1de9e8c4d6dff0a748791d2`, v0.2 alpha. **Current progress:** 19 of 29 tickets pass their recorded acceptance gates in v0.4 alpha. See [current milestone evidence](MILESTONE-19.md), [feasibility results](SPIKES.md) and [current backlog](BACKLOG.csv). This percentage counts tickets, not Proteus feature parity. The comparison and estimates below retain the original v0.2 audit baseline; use the milestone ledger for implemented behavior.
