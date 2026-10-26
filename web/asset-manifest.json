@@ -20,11 +20,11 @@
     },
     {
       "path": "engine/circuitjs.html",
-      "sha256": "c68b585bdce10a34e906ecbfeb7e97a8b66d874e478243fb43007578030b755a"
+      "sha256": "29d618d8d5c6df526b326823fbff6df9540a61108a94b72e41009467e4fe89b2"
     },
     {
-      "path": "engine/circuitjs/circuitjs-CP4425Sl.js",
-      "sha256": "eee7d1b02a43b420de5998f39b054725676ce7eddd101857ecaa79a8c551802b"
+      "path": "engine/circuitjs/circuitjs-B1h1_kAJ.js",
+      "sha256": "f7dd037778066db702db3e366f3c63761c3ba26b035542bdf336474be7679ff5"
     }
   ]
 }

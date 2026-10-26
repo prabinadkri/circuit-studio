@@ -501,9 +501,11 @@ export class CirSim {
     ensureStudioIds(): void {
         const ids=new Set<string>(), pins=new Set<string>();
         for(const e of this.elmList){
+            const oldPins=[...e.studioPins];
             if(ids.has(e.studioId)){e.studioId=crypto.randomUUID();e.studioPins=[];e.studioMeta={...e.studioMeta,reference:''};}
             ids.add(e.studioId);e.ensureStudioIdentity();
             e.studioPins=e.studioPins.map((p:string)=>{if(pins.has(p))p=crypto.randomUUID();pins.add(p);return p;});
+            if(Array.isArray(e.studioMeta.noConnect))e.studioMeta.noConnect=e.studioMeta.noConnect.map((id:string)=>e.studioPins[oldPins.indexOf(id)]).filter(Boolean);
         }
     }
 
