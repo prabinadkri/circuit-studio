@@ -2,3 +2,6 @@
 # Preserve generated JavaScript string literals and upstream license bytes.
 web/engine/circuitjs/*.js -whitespace
 sources/ngspice/COPYRIGHT -whitespace
+# Preserve generated upstream documentation and exact license text.
+web/board3d.js -whitespace
+licenses/jsbn-LICENSE.txt -whitespace

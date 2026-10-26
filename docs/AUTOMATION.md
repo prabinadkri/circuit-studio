@@ -1,0 +1,110 @@
+# Circuit Studio automation and Coding Hub
+
+The command uses the same CircuitJS component factory, solver, project validator,
+ERC, PCB editor and export checks as the desktop application. Python 3 and an
+installed Chrome/Chromium are sufficient; npm, a cloud account and a running
+editor window are not required. Each command launches a private headless browser
+profile and shuts it down afterwards. It does not take control of an open editor.
+
+## Coding Hub workflow
+
+In Coding Hub, select a project folder containing your circuit files. Initialize
+its integration once with `codehub circuit init --project /path/to/lab --studio
+/path/to/circuit-studio`. This writes `circuit-studio.json`, `CIRCUITS.md`, a local API reference/example and a
+reference in `CODING_HUB.md`, preserving existing guidance. Enable **Allow edits
+& commands** for an agent to make circuits. Analysis-only tasks retain Coding
+Hub's existing read-only permissions. No model or account settings change.
+
+Example instruction: “Create a 5 V divider with two 10k resistors in divider.circuit.
+Use Circuit Studio's catalog and documented JSON plans. Run the analog simulation,
+verify the output is 2.5 V, and export a schematic SVG. Report ERC findings.”
+
+The agent can call `codehub circuit catalog --project .`, then `new`, `inspect`,
+`apply`, `check`, `simulate`, `svg` or `kicad` using `--file divider.circuit`.
+Use `--plan plan.json` for edits. `apply` requires the SHA-256
+`--expected-revision` from the most recent inspection. Open the resulting `.circuit`
+file using Circuit Studio's **Open** button to continue graphical editing.
+Save an open editor's changes before asking an agent to edit the same file, then
+reopen the result. There is no live synchronization with unsaved editor buffers.
+
+## Direct CLI
+
+```sh
+python3 circuitctl.py catalog
+python3 circuitctl.py new --project /path/to/lab/divider.circuit --plan examples/automation/voltage-divider.json
+python3 circuitctl.py inspect --project /path/to/lab/divider.circuit
+python3 circuitctl.py apply --project /path/to/lab/divider.circuit --plan edit.json --expected-revision REVISION_FROM_INSPECT
+python3 circuitctl.py simulate --project /path/to/lab/divider.circuit --steps 1000 --time-step 0.000005
+python3 circuitctl.py check --project /path/to/lab/divider.circuit
+python3 circuitctl.py svg --project /path/to/lab/divider.circuit --output /path/to/lab/divider.svg
+```
+
+JSON is printed on stdout. Command failures use stderr and exit 2. `check` exits
+1 for ERC errors or PCB DRC findings; warnings are returned explicitly. A project
+can be a work in progress: creating/editing it does not require zero ERC findings.
+Manufacturing export requires passing board checks. Simulation is bounded at
+100,000 analog time steps; it does **not** run attached MCU firmware.
+
+`new` refuses an existing file. `apply` holds an advisory lock and checks the file
+revision before and after the engine operation. All operations in a plan form one
+transaction. Invalid operations leave the file unchanged; successful edits use
+fsync and atomic rename, preserving the previous bytes in `.circuit.previous`.
+Do not delete the hidden `.circuit.lock` file while commands are active.
+
+## JSON plans (version 1)
+
+A plan is `{ "version": 1, "name": "Name for new projects", "operations": [...] }`.
+At most 500 operations and 2,000 schematic elements are supported per command.
+Use actual types from `catalog`; generic op-amps are simulation models, not
+manufacturer-validated LM358/741 models. Component references must be unique.
+Coordinates must be multiples of 8. Pin indices are **zero-based engine indices**,
+not physical package numbers; inspect them before wiring. Physical pad mappings
+are explicit metadata.
+
+Supported operations:
+
+* `add`: `type`, `ref`, `x`, `y`, `x2`, `y2`; optional `properties` and `meta`.
+* `set`: `ref` (reference or stable UUID), `properties` and/or `meta`.
+* `connect`: `from` and `to` objects `{ "ref": "R1", "pin": 0 }`; optional
+  `bends` array of `{ "x": 160, "y": 80 }`. Pins can also use stable pin UUIDs.
+  Segments must be horizontal or vertical. Coincident pins already connect.
+* `delete`: `ref`. Attached wires remain for explicit subsequent editing.
+* `board-sync`: transfers packaged components and preserves valid placements/routes.
+* `board-place`: `ref`, optional `x`, `y` in mm, `rotation` (0/90/180/270),
+  `side` (`F.Cu` or `B.Cu`).
+* `board-via`: `id` (optional `via:` identifier), `net`, `x`, `y`, optional `diameter`/`drill` in mm.
+* `board-zone`: `id` (optional), `net`, `layer`, polygon `points` in mm. Solid fill; no thermal reliefs.
+* `board-route`: `from`/`to` physical pad IDs such as `R1:2`, `layer`, `bends` in mm.
+
+`properties` maps inspector indices to numbers or engineering strings (`"10k"`,
+`"100n"`); text properties take literal strings. Read each component's supported
+indices from `inspect`. Dropdown/model selections still use the graphical editor.
+`meta` accepts `reference`, `footprint`, `padMap` and `noConnect`. A footprint must
+include a unique physical pad number for each simulation pin. No-connect entries
+are pin UUIDs, available from inspection. Arbitrary JavaScript is never accepted.
+
+Example edit:
+
+```json
+{"version":1,"operations":[{"op":"set","ref":"R2","properties":{"0":"20k"}}]}
+```
+
+## Optional MCP stdio server
+
+Clients with MCP support can launch:
+
+```json
+{"mcpServers":{"circuit-studio":{"command":"python3","args":["/path/to/circuit-studio/circuit_mcp.py","--workspace","/path/to/lab"]}}}
+```
+
+Eight tools mirror the CLI. Resources `circuit-studio://automation` and `circuit-studio://example` expose the local API guide and a complete plan to the client. `circuit_new`/`circuit_apply` accept an inline `plan`;
+`circuit_apply` also requires `expectedRevision`. File paths must be relative to
+the configured workspace. Requests cannot escape it through `..` or symlinks.
+The server implements newline-delimited JSON-RPC over stdin/stdout, with errors
+on stderr, per the [official MCP stdio transport specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
+No network listener is exposed by MCP; temporary engine servers bind only to
+127.0.0.1 and require a per-run secret for project payloads and result submission.
+
+Coding Hub deliberately supplies empty MCP configuration to some providers and
+disables inherited plugins. Its command integration works with those existing
+restrictions; installing an MCP server globally is not required or assumed.

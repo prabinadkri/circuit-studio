@@ -80,7 +80,14 @@ def main():
     server.pic=None
     server.pic_init_lock=threading.Lock()
     server.analysis_lock=threading.Lock()
-    server.projects=ProjectStore(Path(os.environ.get('CIRCUIT_STUDIO_PROJECTS',str(ROOT/'projects'))))
+    data_root=Path(os.environ.get('XDG_DATA_HOME',str(Path.home()/'.local/share')))/'circuit-studio'
+    project_root=Path(os.environ.get('CIRCUIT_STUDIO_PROJECTS',str(data_root/'projects')))
+    server.projects=ProjectStore(project_root)
+    if 'CIRCUIT_STUDIO_PROJECTS' not in os.environ and (ROOT/'projects').is_dir():
+        for legacy in (ROOT/'projects').glob('*.circuit'):
+            if not (project_root/legacy.name).exists():
+                try:server.projects.save(json.loads(legacy.read_text()))
+                except (ValueError,OSError,KeyError):pass
     url = f'http://127.0.0.1:{server.server_port}/'
     print(f'Circuit Studio: {url}', flush=True)
     if args.serve:
@@ -92,7 +99,8 @@ def main():
             if server.pic: server.pic.close()
             server.server_close()
         return
-    browser = next((shutil.which(x) for x in ['google-chrome', 'chromium', 'chromium-browser', 'microsoft-edge'] if shutil.which(x)), None)
+    bundled=ROOT/'runtime/electron/electron'
+    browser = str(bundled) if bundled.is_file() else next((shutil.which(x) for x in ['google-chrome', 'chromium', 'chromium-browser', 'microsoft-edge'] if shutil.which(x)), None)
     if not browser:
         server.server_close()
         sys.exit('Install Chrome or Chromium, or use ./run.sh --serve and open the printed URL in your browser.')
@@ -101,7 +109,8 @@ def main():
     threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
         with (state / 'browser.log').open('a') as log:
-            subprocess.run([browser, f'--app={url}', f'--user-data-dir={state / "profile"}', '--class=CircuitStudio', '--no-first-run', '--no-default-browser-check', '--window-size=1440,940'], stdout=log, stderr=log, check=True)
+            command=[browser,str(ROOT/'runtime/desktop.cjs')] if bundled.is_file() else [browser, f'--app={url}', f'--user-data-dir={state / "profile"}', '--class=CircuitStudio', '--no-first-run', '--no-default-browser-check', '--window-size=1440,940']
+            subprocess.run(command,env={**os.environ,'STUDIO_URL':url,'STUDIO_PROFILE':str(state/'desktop-profile')},stdout=log,stderr=log,check=True)
     except subprocess.CalledProcessError:
         print(f'Browser could not start. See {state / "browser.log"}', file=sys.stderr)
     finally:

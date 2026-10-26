@@ -15,3 +15,27 @@ SimulIDE and KiCad were evaluated during development. They are not launched by o
 - **ngspice 42**, Berkeley CAD Group/ngspice contributors: https://ngspice.sourceforge.io/ — mixed BSD/LGPL/GPL notices, preserved in `sources/ngspice/COPYRIGHT` with full GPL-2/LGPL-2 texts. `native/ngspice` is the unmodified Ubuntu noble amd64 package binary `42+ds-3build1`. Matching upstream/doc source archives, Debian patches/build recipe and signed source descriptor are included in `sources/ngspice`; checksums were verified against that descriptor. System shared libraries are not bundled. This restricted adapter does not redistribute third-party vendor models.
 - **Electron 41.0.0** was used only for the runtime feasibility benchmark. The optional prototype and measurements are included; Electron runtime code/binaries are not shipped. Install an appropriate supported Electron version separately to repeat the experiment.
 - **Generic footprint assets** are original Circuit Studio parametric geometry, GPL-2.0-or-later. No KiCad library assets were copied. Exact dimensions and limitations are in `web/footprints.js`; these generic variants are not manufacturer certification.
+
+## Copper geometry and mechanical preview
+
+- JavaScript Clipper 6.4.2 (library header 6.4.2.2), Angus Johnson and Timo:
+  [upstream](https://github.com/junmer/clipper-lib), Boost Software License 1.0.
+  Its embedded JSBN code retains Tom Wu's license and acknowledgement:
+  **This product includes software developed by Tom Wu and his collaborators.**
+  License texts are in `licenses/clipper-Boost-1.0.txt` and `licenses/jsbn-LICENSE.txt`.
+- earcut 3.0.2, Mapbox: [upstream](https://github.com/mapbox/earcut), ISC;
+  `licenses/earcut-ISC.txt`.
+- Three.js 0.180.0 and its OrbitControls/glTF/STL exporters:
+  [upstream](https://github.com/mrdoob/three.js), MIT; `licenses/three-MIT.txt`.
+  Original package envelopes in Circuit Studio are approximate, not manufacturer models.
+
+Optional full desktop archives contain Electron and Chromium in `runtime/electron/`,
+including the upstream `LICENSE`, `LICENSES.chromium.html` and `version` files.
+Their binaries are copied without modification. Electron is MIT; Chromium contains
+multiple licenses listed in its bundled notices. The desktop shell is Circuit Studio code.
+
+The simavr/uCsim/Renode feasibility probes do not bundle those engines or their
+firmware fixtures into the app. `spikes/backends/simavr-audit.c` is GPL-3.0-or-later
+because it links to simavr's GPL-3.0-or-later API when built separately. The other
+original application files remain GPL-2.0-or-later. Exact backend versions and
+externally obtained fixture hashes are recorded in `docs/evidence/backend-audit.json`.

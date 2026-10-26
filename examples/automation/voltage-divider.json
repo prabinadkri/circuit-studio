@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "name": "Coding Hub voltage divider",
+  "operations": [
+    {"op":"add","type":"DCVoltageElm","ref":"V1","x":80,"y":240,"x2":80,"y2":80,"properties":{"0":5}},
+    {"op":"add","type":"ResistorElm","ref":"R1","x":80,"y":80,"x2":240,"y2":80,"properties":{"0":"10k"}},
+    {"op":"add","type":"ResistorElm","ref":"R2","x":240,"y":80,"x2":240,"y2":240,"properties":{"0":"10k"}},
+    {"op":"add","type":"GroundElm","ref":"G1","x":80,"y":240,"x2":80,"y2":272},
+    {"op":"connect","from":{"ref":"R2","pin":1},"to":{"ref":"V1","pin":0}}
+  ]
+}

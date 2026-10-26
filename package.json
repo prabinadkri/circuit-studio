@@ -1,6 +1,6 @@
 {
   "name": "circuit-studio",
-  "version": "0.3.0-alpha.1",
+  "version": "0.4.0-alpha.1",
   "private": true,
   "description": "An integrated offline Linux circuit, firmware and PCB workbench",
   "license": "GPL-2.0-or-later",
@@ -10,11 +10,15 @@
     "build": "node scripts/build.mjs",
     "build:examples": "python3 scripts/build-examples.py",
     "test": "node --test tests/design.test.mjs && python3 -m unittest discover -s tests -p 'test_*.py' && node tests/run.cjs",
-    "test:engine": "npm test --prefix sources/circuitjs1/ts"
+    "test:engine": "npm test --prefix sources/circuitjs1/ts",
+    "test:automation": "TEST_REAL_AUTOMATION=1 python3 -m unittest discover -s tests -p test_automation.py -v"
   },
   "dependencies": {
     "avr8js": "0.21.1",
-    "fflate": "0.8.3"
+    "clipper-lib": "6.4.2",
+    "earcut": "3.0.2",
+    "fflate": "0.8.3",
+    "three": "0.180.0"
   },
   "devDependencies": {
     "esbuild": "0.28.2",

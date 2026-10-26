@@ -25,3 +25,26 @@ The paused deterministic stepping API supports the isolated `web/scheduler-sourc
 ## Remaining engineering
 
 Shared-time production simulation and drive resolution, on-schematic MCUs, protocol instruments/peripherals, source debugging, vias/zones/full DRC, extra MCU audits, installable bundled runtime, hierarchy/variants and 3D remain open. The tested milestone does not imply those features exist.
+
+## Automation and manufacturing in v0.4
+
+`web/automation.js` applies bounded JSON operations through the real engine API
+and shared project history; failure restores the previous project. `circuitctl.py`
+loads an isolated headless editor per operation, requires optimistic file revisions
+for edits, and writes atomically. `circuit_mcp.py` confines optional stdio tools to
+one project directory. Coding Hub invokes the CLI using argument arrays and
+project guidance rather than changing provider plugins or permissions.
+
+`web/copper-source.js` uses fixed-point Clipper polygons for layer-aware copper
+connectivity and pour clearances, with earcut triangulation for portable exports.
+Pads, tracks, vias and filled regions share connectivity; through-hole objects
+join both layers. The PCB's cached geometry invalidates on serialized design
+changes. KiCad and Gerber exports share the same DRC policy and fill geometry.
+`web/board3d-source.js` builds a Three.js assembly from that geometry, subtracts
+drills from copper, and exports glTF (meters) or STL (millimeters) with approximate
+component bodies. Mechanical manifests retain exact PCB component origins.
+
+`distribution.py`, `scripts/package.py` and `install.py` implement checksummed,
+versioned offline distributions. The optional Electron shell uses sandboxed,
+isolated renderers without Node integration, denies renderer permissions and
+non-local resource requests, and keeps project storage outside installed releases.

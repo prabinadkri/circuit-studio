@@ -121,7 +121,12 @@ export class EditDialog extends Dialog {
         // Focus first text input after the dialog opens
         if (this.firstInput !== null) {
             const inp = this.firstInput;
-            requestAnimationFrame(() => { inp.focus(); inp.select(); });
+            requestAnimationFrame(() => {
+                // Do not steal focus from the host inspector/search after a canvas click.
+                if (inp.isConnected && (!window.frameElement || window.parent.document.activeElement === window.frameElement)) {
+                    inp.focus(); inp.select();
+                }
+            });
         }
 
         if (this.firstInputNumeric && ce instanceof CircuitElm)

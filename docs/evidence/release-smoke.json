@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "platform": "Linux-6.17.0-40-generic-x86_64-with-glibc2.39",
+  "runtime": "bundled Electron",
+  "network": "Desktop renderer blocks all non-local network requests; tests use only bundled files/local backend",
+  "freshInstall": true,
+  "dividerVolts": 2.5,
+  "dividerAmps": 0.00025,
+  "backendChecks": {
+    "test_pic.py": [
+      "----------------------------------------------------------------------",
+      "Ran 5 tests in 0.041s",
+      "",
+      "OK"
+    ],
+    "test_devices.py": [
+      "----------------------------------------------------------------------",
+      "Ran 9 tests in 0.277s",
+      "",
+      "OK"
+    ],
+    "test_analysis.py": [
+      "----------------------------------------------------------------------",
+      "Ran 7 tests in 0.044s",
+      "",
+      "OK"
+    ],
+    "test_workers_store.py": [
+      "----------------------------------------------------------------------",
+      "Ran 4 tests in 0.243s",
+      "",
+      "OK"
+    ]
+  },
+  "uninstallRetainedProject": true,
+  "criticalFileSha256": {
+    "launch.py": "def9d3003dfad38681c8196486f7b15bd10eb31d57cf3281910033fad0f3d661",
+    "circuitctl.py": "f95939937d0faa874c54760d18190c1c46c75836306c17958da6574306e6d13f",
+    "install.py": "26f7923ce568dc380c104b92cec26fb03a3c9bd4b4d1c011772f8c122d7ea2e2",
+    "web/asset-manifest.json": "22d28e952f29f8053532ecbd7ba6ef1c6d004016e2d91d9f1611442353f6e2bb"
+  }
+}

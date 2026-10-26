@@ -65,6 +65,8 @@ export class JSInterface {
         const that = this;
         const studio = new StudioAPI(this.app);
         (window as any).CircuitJS1 = {
+            addElement: (type:string,x:number,y:number,x2:number,y2:number) => studio.add(type,x,y,x2,y2),
+            removeElement: (id:string) => studio.remove(id),
             advanceSteps: (count:number) => studio.advanceSteps(count),
             getNetlist: () => studio.elements(),
             getDesignElements: () => studio.elements(),

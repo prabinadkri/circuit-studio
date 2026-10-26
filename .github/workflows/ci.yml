@@ -24,3 +24,6 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run test:engine
+      - run: npm run test:automation
+      - name: Package verified offline sources and runtime assets
+        run: python3 scripts/package.py --output circuit-studio-linux-x86_64.tar.gz

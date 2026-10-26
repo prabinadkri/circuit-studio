@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "workflow": "codehub circuit init \u2192 new \u2192 simulate \u2192 svg",
+  "source": "examples/automation/voltage-divider.json",
+  "voltageV": 2.5,
+  "currentA": 0.00025,
+  "erc": [],
+  "providerCallMade": false,
+  "scope": "Real CLI/engine integration, not a live AI-model test"
+}

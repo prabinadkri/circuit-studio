@@ -47,7 +47,7 @@ let browser;
  await page.mouse.move(p.x+24,p.y);await page.mouse.down();
  await page.mouse.move(p.x+25,p.y+1);await page.mouse.up();
  assert.equal(await counts(),2,'small pointer jitter over an existing component must not place duplicates');
- await page.locator('#search').fill('no-such-part');assert.match(await page.locator('#parts').textContent(),/No matching/);
+ await page.locator('#search').fill('no-such-part');await page.waitForFunction(()=>document.getElementById('parts').textContent.includes('No matching'));assert.match(await page.locator('#parts').textContent(),/No matching/);
  await page.locator('#search').fill('');
  await page.locator('#select').click();assert.equal(await page.locator('#parts [aria-pressed="true"]').count(),0);
  const dlPromise=page.waitForEvent('download');await page.locator('#save').click();

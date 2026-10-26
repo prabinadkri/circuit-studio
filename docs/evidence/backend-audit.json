@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "classification": "feasibility only; no new editor device support",
+  "avr": [
+    {
+      "target": "atmega32",
+      "frequencyHz": 1000000,
+      "cycles": 50040,
+      "edges": 11117,
+      "badEdgeIntervals": 0,
+      "highCycles": 4,
+      "lowCycles": 5,
+      "inputMirrorChecks": 100,
+      "firstEdges": [
+        16,
+        20,
+        25,
+        29,
+        34,
+        38,
+        43,
+        47,
+        52,
+        56,
+        61,
+        65
+      ],
+      "repeatIdentical": true,
+      "firmwareSha256": "5356e43c87a197d4008a9d70f8e7146f24fcc20f13afbe15fb435ccfa047cf8d"
+    },
+    {
+      "target": "atmega2560",
+      "frequencyHz": 1000000,
+      "cycles": 50039,
+      "edges": 11116,
+      "badEdgeIntervals": 0,
+      "highCycles": 4,
+      "lowCycles": 5,
+      "inputMirrorChecks": 100,
+      "firstEdges": [
+        19,
+        23,
+        28,
+        32,
+        37,
+        41,
+        46,
+        50,
+        55,
+        59,
+        64,
+        68
+      ],
+      "repeatIdentical": true,
+      "firmwareSha256": "f43032083878989ef9822331af9e394b1b7d0b0b539844a7337c6637cf0d67df"
+    }
+  ],
+  "8052": {
+    "backend": "uCsim 0.6.4 / SDCC 4.2.0 C52",
+    "genericCoreOnly": true,
+    "exactAT89S52Model": false,
+    "oscillatorHz": 12000000,
+    "testedEdges": 10000,
+    "oscillatorTicksPerEdge": 36,
+    "secondsPerEdge": 3e-06,
+    "port": "P1.0",
+    "decision": "Do not advertise AT89S52; S52 ISP/watchdog/fuses are unvalidated and no exact target is listed."
+  },
+  "stm32": {
+    "backend": "Renode 1.17.0",
+    "target": "STM32F407VG Discovery (selected feasibility board)",
+    "flashBytes": 1048576,
+    "sramBytes": 131072,
+    "ccmBytes": 65536,
+    "firmwareSha1": "2180a4018e82fcbc8821ef4330c9b5f3caf2dcdb",
+    "simulatedSeconds": 0.5,
+    "uart": [
+      "*** Booting Zephyr OS build zephyr-v2.3.0-1539-g8b531aa996bb  ***",
+      "Hello World! stm32f4_disco"
+    ],
+    "warnings": [
+      "nvic: Writing to CCR.DIV_0_TRP, but FilterCcrDiv0Write is set. The field won't be updated.",
+      "nvic: Unhandled write to offset 0xD2C. Unhandled bits: [0, 2-29, 31] when writing value 0xFFFFFFFF. Tags: RESERVED (0x1), RESERVED (0xFFFFFFF), DEBUGEVT (0x1).",
+      "usart2: Unhandled write to offset 0x0. Unhandled bits: [0-2, 8-31] when writing value 0xFFFFFFBF. Tags: PE (0x1), FE (0x1), NF (0x1), LBD (0x1), CTS (0x1), RESERVED (0x3FFFFF).",
+      "usart2: Unhandled write to offset 0x0. Unhandled bits: [0-2, 8-31] when writing value 0xFFFFFFBF. Tags: PE (0x1), FE (0x1), NF (0x1), LBD (0x1), CTS (0x1), RESERVED (0x3FFFFF). (94)"
+    ],
+    "decision": "Boot/UART feasibility only; no analog accuracy, radio, USB, pin package, mixed-signal timing or debugger claim."
+  }
+}

@@ -39,3 +39,26 @@ The v0.3 multi-package fixture adds DIP-28, bottom-side rotated SOIC-8 and a rot
 ## Not yet validated
 
 Precise AVR/PIC-to-analog synchronization, arbitrary real-world firmware, every upstream component model, large circuit performance, manufacturer-specific footprints and complete fabrication DRC. In-app source compilation, MCU models beyond the supported catalog, PIC serial monitor, USB, SPI/I2C circuit coupling, electrical pin-drive fidelity and advanced PCB features remain outside this alpha. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.
+
+## v0.4 automation, copper and mechanical acceptance
+
+- `npm run test:automation`: real Chromium component creation (including op-amp
+  and named external source), 5 V divider numerical result, atomic rollback,
+  revision conflicts, stable identities, SVG and bounded MCP stdio/path tests.
+- `tests/routing.cjs`: copper intersection connectivity, layer isolation, vias,
+  solid zones with clearance holes, matching export gates and WebGL/model exports.
+- `spikes/verify-routing.py`: Gerbonara + KiCad CLI + Shapely comparison of zone
+  area/clearance and drill sizes; Trimesh model-unit/origin/drill-section checks.
+  Run after the browser fixture and KiCad Gerber export. Optional verifier packages:
+  `gerbonara shapely trimesh numpy scipy networkx`.
+- `tests/test_install.py`: checksummed installation, idempotence, original project
+  retention, modified-file preservation, unrelated shortcuts and symlink boundaries.
+- `scripts/verify_release.py`: fresh extracted install with bundled Electron,
+  actual solver output, PIC/device/ngspice/worker-storage suites and uninstall.
+- `spikes/backends/audit.py`: separate native feasibility evidence for exact AVR
+  GPIO timing, generic 8052 behavior and selected STM32 boot/UART. Not device support.
+- Coding Hub's own `test_circuit_integration.py` checks command boundaries and
+  instruction-context delivery; `tools/check_all.py --no-gui` passes after integration.
+
+The 3D renderer uses procedural envelopes. The roadmap's common MCU clock,
+protocol/peripheral/debugger integration and advanced routing acceptance remain open.

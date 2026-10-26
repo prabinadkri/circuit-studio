@@ -24,6 +24,20 @@ export class StudioAPI {
   return this.app.sim.t-before;
  }
  find(id:string):any {const e=this.app.elmList.find((e:any)=>e.studioId===id);if(!e)throw Error('Component no longer exists');return e;}
+ add(type:string,x:number,y:number,x2:number,y2:number):string {
+  if(!this.catalog().some(e=>e.type===type))throw Error('Unknown library component: '+type);
+  for(const n of [x,y,x2,y2])if(!Number.isInteger(n)||Math.abs(n)>100000||n%8)throw Error('Coordinates must be multiples of 8 within ±100000');
+  if(x===x2&&y===y2)throw Error('Component endpoints must differ');
+  const e=this.app.constructElement(type,x,y);if(!e)throw Error('Component cannot be constructed');
+  e.studioType=type;e.x2=x2;e.y2=y2;e.setPoints();
+  if(e.creationFailed()){e.delete();throw Error('Component requires configuration in the editor');}
+  this.app.undoManager.pushUndo();this.app.elmList.push(e);e.draggingDone();
+  this.app.ensureStudioIds();this.app.needAnalyze();this.app.unsavedChanges=true;this.app.repaint();return e.studioId;
+ }
+ remove(id:string):void {
+  const e=this.find(id);this.app.undoManager.pushUndo();e.delete();
+  this.app.elmList.splice(this.app.elmList.indexOf(e),1);this.app.needAnalyze();this.app.unsavedChanges=true;this.app.repaint();
+ }
  select(id:string,center=false):void {
   const e=this.find(id);this.app.mouse.clearSelection();e.setSelected(true);
   this.app.mouse.setMouseElm(e);
@@ -43,7 +57,7 @@ export class StudioAPI {
  }
  setProperty(id:string,index:number,value:string|number):void {
   const e=this.find(id),p=e.getEditInfo(index);if(!p||p.choice||p.checkbox||p.button||p.widget||p.loadFile)throw Error('Use detailed properties for this field');
-  if(p.text!==null){if(typeof value!=='string'||value.length>4096)throw Error('Invalid text');p.text=value;}
+  if(p.text!==null){if(typeof value!=='string'||value.length>4096)throw Error('Invalid text');p.text=value;p.textf=document.createElement('input');p.textf.value=value;}
   else{if(typeof value!=='number'||!Number.isFinite(value)||p.positive&&value<=0||p.nonNegative&&value<0||p.integer&&!Number.isInteger(value))throw Error('Value is outside the supported range');p.value=value;}
   this.app.undoManager.pushUndo();e.setEditValue(index,p);if(p.error)throw Error(p.error);
   e.setPoints();this.app.needAnalyze();this.app.unsavedChanges=true;this.app.repaint();

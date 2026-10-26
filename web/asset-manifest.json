@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "0.3.0-alpha.1",
+  "revision": "0.4.0-alpha.1",
   "assets": [
     {
       "path": "library.json",
@@ -19,12 +19,36 @@
       "sha256": "4021c3546090f69b9be06becbcfd7f03f9611b8ebfae73cbfc388505a42098c7"
     },
     {
-      "path": "engine/circuitjs.html",
-      "sha256": "29d618d8d5c6df526b326823fbff6df9540a61108a94b72e41009467e4fe89b2"
+      "path": "copper.js",
+      "sha256": "21bd480053eed97de566d26cdc3bb75df826aedd26e6cb933b7497e879dd0593"
     },
     {
-      "path": "engine/circuitjs/circuitjs-B1h1_kAJ.js",
-      "sha256": "f7dd037778066db702db3e366f3c63761c3ba26b035542bdf336474be7679ff5"
+      "path": "board3d.js",
+      "sha256": "9d3d5c44485e63f6b75388372bdac51fc9786cb6bbd07288a991f3b5e64a293c"
+    },
+    {
+      "path": "automation.js",
+      "sha256": "c084bf634012ba3b7dfabf7373289bc98f57000b775810349ef2e1d0ae5672c5"
+    },
+    {
+      "path": "pcb.js",
+      "sha256": "5639f09d1ec1534b13d99421714f7b2c0df0eff4f636cfe957fee166919bc2ed"
+    },
+    {
+      "path": "manufacture.js",
+      "sha256": "7630f651299239578e5fb3e3833833ddfe437247ba709151a86cb2f0dfbd7b79"
+    },
+    {
+      "path": "studio.js",
+      "sha256": "b7a20b150ebb1ea05659704ebe6b0840038417dc9005d242fe037d8b5eb12ccb"
+    },
+    {
+      "path": "engine/circuitjs.html",
+      "sha256": "ac204456beb6ac5a2b19149afa32270d6b93012269133cc1df03354d0f51a8f8"
+    },
+    {
+      "path": "engine/circuitjs/circuitjs-C97U_KIc.js",
+      "sha256": "2208ba8e9480dbe202adf91755e1c87253cdcf35c30cfc5c7529d0570285ab43"
     }
   ]
 }
