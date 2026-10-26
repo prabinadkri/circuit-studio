@@ -12,7 +12,7 @@ Run `npm test` after building:
 - A real schematic `IN_RA0` node at 1.25 V overrides the manual slider and produces an ADC value of 255. The manual control becomes disabled and shows the schematic voltage.
 - All eight independent firmware payloads survive a project save/reopen. The AVR built-in blink instruction image matches the independently assembled source.
 - Browser tests: known voltage-divider results (5 V and 2.5 V), paused clock stability, component placement and undo, AVR single-step and D13 output, netlist transfer and PCB routing, and board export.
-- All 19 quick-palette tools are checked for click/drag placement, single undo/redo and schematic serialization. Wires intentionally require a drag. Additional checks cover repeated op-amps, filtered search, selection state, project save/reopen, zoom and cancellation when leaving the canvas. This validates placement, not all model electrical behavior.
+- All 19 quick-palette tools are checked for click/drag placement, single undo/redo and schematic serialization. Wires intentionally require a drag. Additional checks cover repeated op-amps, double-click editing without duplicate placement, filtered search, selection state, project save/reopen, zoom and cancellation when leaving the canvas. This validates placement, not all model electrical behavior.
 - One-file project save/reopen preserves schematic, firmware, device selection, footprints and routes.
 - PIC RB0 drives nonzero current through the resistor/LED schematic.
 - Invalid firmware checksums are rejected; PCB connectivity and same-layer clearance conflicts are detected; opposite-layer crossings are distinguished.

@@ -58,7 +58,7 @@ Baseline UI evidence: [schematic](current-schematic.png), [firmware](current-fir
 
 After the repair: [op-amp click placement](placement-after.png).
 
-The new regression suite `tests/placement.cjs` reproduces the user's gesture and checks all palette items, undo/redo, serialization, op-amp project persistence, zoom and cancellation. Run `npm run build`, `npm test`, and `npm run test:engine` from the repository root. Tests use an isolated server/browser profile and do not close or overwrite the user's open application.
+The new regression suite `tests/placement.cjs` reproduces the user's gesture and checks all palette items, undo/redo, serialization, op-amp project persistence, double-click editing without duplicates, zoom and cancellation. Run `npm run build`, `npm test`, and `npm run test:engine` from the repository root. Tests use an isolated server/browser profile and do not close or overwrite the user's open application.
 
 ## Limits and maintenance
 

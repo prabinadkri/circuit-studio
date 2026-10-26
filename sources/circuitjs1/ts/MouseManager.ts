@@ -70,6 +70,7 @@ export class MouseManager {
     dragElm: CircuitElm | null = null;
     menuElm: CircuitElm | null = null;
     private mouseElm: CircuitElm | null = null;
+    private mouseDownElm: CircuitElm | null = null;
     didSwitch: boolean = false;
     mousePost: number = -1;
     highlightedNode: CircuitNode | null = null;
@@ -1083,6 +1084,7 @@ export class MouseManager {
 
 	// set mouseElm in case we are on mobile
 	this.mouseSelect(e);
+	this.mouseDownElm = this.mouseElm;
 
 	this.mouseDragging = true;
 	this.didSwitch = false;
@@ -1253,10 +1255,16 @@ export class MouseManager {
 		// A palette selection followed by a click uses the element's existing
 		// toolbar placement geometry. Wires still require two explicit endpoints.
 		// Do this only on mouseup: leaving the canvas must not create a part.
-		if (this.tempMouseMode === MouseManager.MODE_ADD_ELM &&
-		    this.dragElm != null && !this.dragElm.isWireElm()) {
-		    this.dragElm.dragPlace(this.snapGrid(this.initDragGridX),
-			this.snapGrid(this.initDragGridY), false);
+		// Preserve editing even if a slight mouse movement cleared the hover target.
+		if (this.tempMouseMode === MouseManager.MODE_ADD_ELM && this.dragElm != null) {
+		    if (this.mouseDownElm != null) {
+			this.dragElm.delete();
+			this.dragElm = null;
+			this.setMouseElm(this.mouseDownElm);
+		    } else if (!this.dragElm.isWireElm()) {
+			this.dragElm.dragPlace(this.snapGrid(this.initDragGridX),
+			    this.snapGrid(this.initDragGridY), false);
+		    }
 		}
 		if (this.mouseElm != null && !this.mouseElm.isSwitchElm())
 		    clickedElm = this.mouseElm;

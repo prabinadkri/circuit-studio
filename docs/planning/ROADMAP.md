@@ -10,9 +10,9 @@ This comparison uses official Labcenter documentation, a source audit of our app
 
 A reproducible usability defect affected every quick-access part: selecting it and clicking the canvas produced a zero-length element which the engine discarded. All 19 tools worked when dragged. The op-amp was available, but the expected placement gesture failed.
 
-Components now use their existing default geometry on a simple click. Dragging still sets length/orientation; wires still require a drag between endpoints. The palette gets consistent vector icons, clearer instructions, selected-button accessibility state and an explicit empty search result. The op-amp tooltip identifies the ideal model. This does not introduce an LM358/LM741 electrical model or an IC PCB footprint.
+Components now use their existing default geometry on a simple click in empty canvas space. Clicking/double-clicking an existing part preserves editing instead of placing duplicates. Dragging still sets length/orientation; wires still require a drag between endpoints. The palette gets consistent vector icons, clearer instructions, selected-button accessibility state and an explicit empty search result. The op-amp tooltip identifies the ideal model. This does not introduce an LM358/LM741 electrical model or an IC PCB footprint.
 
-`tests/placement.cjs` exercises every quick-access tool, undo/redo and serialization, plus repeated op-amp placement, project save/reopen, zoom, cancellation and selection mode. This is a placement regression suite, not electrical validation of all upstream components.
+`tests/placement.cjs` exercises every quick-access tool, undo/redo and serialization, plus repeated op-amp placement, double-click editing, project save/reopen, zoom, cancellation and selection mode. This is a placement regression suite, not electrical validation of all upstream components.
 
 ## Capability comparison
 
