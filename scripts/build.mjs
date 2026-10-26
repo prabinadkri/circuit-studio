@@ -7,6 +7,8 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 process.chdir(root);
 const run=(cmd,args,cwd=root)=>execFileSync(cmd,args,{cwd,stdio:'inherit'});
 for(const name of ['mcu','manufacture'])await build({entryPoints:[`web/${name}-source.js`],bundle:true,format:'esm',outfile:`web/${name}.js`});
+fs.mkdirSync('web/demos',{recursive:true});
+for(const file of fs.readdirSync('examples/lab')){if(/\.(hex|asm|c|S)$/.test(file))fs.copyFileSync('examples/lab/'+file,'web/demos/'+file.replace('pic16f84a-','pic-'));}
 const engine=path.join(root,'sources/circuitjs1/ts');
 if(!fs.existsSync(path.join(engine,'node_modules')))run('npm',['ci'],engine);
 run('npm',['run','build'],engine);

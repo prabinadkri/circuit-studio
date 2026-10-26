@@ -2401,8 +2401,57 @@ var WDTCSR_WDP0 = 1;
 var WDTCSR_WDP210 = WDTCSR_WDP2 | WDTCSR_WDP1 | WDTCSR_WDP0;
 var WDTCSR_PROTECT_MASK = WDTCSR_WDE | WDTCSR_WDP3 | WDTCSR_WDP210;
 
-// web/mcu-source.js
+// web/device-ui.js
 var $ = (id) => document.getElementById(id);
+function makePins(mcu) {
+  return mcu.spec.pins.filter((p) => !p.analogOnly).map((p) => {
+    const button = document.createElement("button");
+    button.dataset.pin = p.name;
+    button.title = `${p.name} \xB7 ${mcu.spec.package} pin ${p.physical} \xB7 ${p.function}`;
+    button.onclick = () => {
+      mcu.inputs[p.name] = !mcu.inputs[p.name];
+      mcu.render();
+    };
+    button.textContent = p.name;
+    return button;
+  });
+}
+function renderRegisters(values) {
+  $("registers").replaceChildren();
+  for (const [name, value] of Object.entries(values)) {
+    const item = document.createElement("span");
+    const b = document.createElement("b");
+    b.textContent = "0x" + value.toString(16).padStart(2, "0").toUpperCase();
+    item.append(document.createTextNode(name + " "), b);
+    $("registers").append(item);
+  }
+}
+function inputSnapshot(mcu) {
+  const sim = mcu.getSim();
+  const labels = new Set(sim?.getElements().filter((e) => e.getType() === "LabeledNodeElm").map((e) => e.getLabelName()) || []);
+  const inputs = {}, analog = {};
+  for (const pin of mcu.spec.pins) {
+    const name = pin.name;
+    const voltage = labels.has("IN_" + name) ? sim.getNodeVoltage("IN_" + name) : NaN;
+    if (!pin.analogOnly) inputs[name] = Number.isFinite(voltage) ? voltage > 2.5 : !!mcu.inputs[name];
+    if ("analog" in pin) analog[name] = Math.min(5, Math.max(0, Number.isFinite(voltage) ? voltage : mcu.analogInputs[name] || 0));
+  }
+  return { inputs, analog };
+}
+function renderAnalogSources(mcu) {
+  const sim = mcu.getSim();
+  const labels = new Set(sim?.getElements().filter((e) => e.getType() === "LabeledNodeElm").map((e) => e.getLabelName()) || []);
+  for (const input of $("analogInputs").querySelectorAll("input")) {
+    const name = input.dataset.analog, connected = labels.has("IN_" + name);
+    input.disabled = connected;
+    const value = connected ? sim.getNodeVoltage("IN_" + name) : Number(input.value);
+    input.nextElementSibling.textContent = value.toFixed(2) + " V" + (connected ? " \u2197" : "");
+    input.parentElement.title = connected ? "Driven by schematic node IN_" + name : "Manual test voltage";
+  }
+}
+
+// web/mcu-source.js
+var $2 = (id) => document.getElementById(id);
 function parseHex(text) {
   const bytes = new Uint8Array(32768);
   bytes.fill(255);
@@ -2442,74 +2491,76 @@ function toHex(words) {
 }
 var demoHex = toHex(blinkWords);
 var MCU = class {
-  constructor(getSim, status) {
+  constructor(getSim, status, spec) {
     this.getSim = getSim;
     this.status = status;
-    this.active = true;
+    this.active = false;
     this.running = false;
     this.source = "";
-    this.inputs = Array(14).fill(false);
-    this.buttons = [];
-    for (let n = 0; n < 14; n++) {
-      const b = document.createElement("button");
-      b.textContent = "D" + n;
-      b.onclick = () => {
-        this.inputs[n] = !this.inputs[n];
-        this.portFor(n)?.setPin(n < 8 ? n : n - 8, this.inputs[n]);
-        this.render();
-      };
-      $("pins").append(b);
-      this.buttons.push(b);
-    }
+    this.configure(spec);
     setInterval(() => this.render(), 100);
   }
-  portFor(n) {
-    return n < 8 ? this.portD : this.portB;
+  configure(spec) {
+    this.clear();
+    this.spec = spec;
+    this.inputs = {};
+    this.analogInputs = {};
+    this.buttons = makePins(this);
+  }
+  portFor(name) {
+    if (name.startsWith("A")) return [this.portC, Number(name.slice(1))];
+    const n = Number(name.slice(1));
+    return [n < 8 ? this.portD : this.portB, n < 8 ? n : n - 8];
   }
   load(text) {
     const program = parseHex(text);
     this.stop();
     this.source = text;
-    this.cpu = new CPU(program);
+    this.cpu = new CPU(program, this.spec.ramBytes);
     this.portB = new AVRIOPort(this.cpu, portBConfig);
     this.portC = new AVRIOPort(this.cpu, portCConfig);
     this.portD = new AVRIOPort(this.cpu, portDConfig);
     this.timers = [timer0Config, timer1Config, timer2Config].map((t) => new AVRTimer(this.cpu, t));
     this.eeprom = new AVREEPROM(this.cpu, new EEPROMMemoryBackend(1024), eepromConfig);
     this.adc = new AVRADC(this.cpu, adcConfig);
-    this.uart = new AVRUSART(this.cpu, usart0Config, 16e6);
-    $("serial").textContent = "";
+    this.uart = new AVRUSART(this.cpu, usart0Config, this.spec.clockHz);
+    $2("serial").textContent = "";
     this.uart.onByteTransmit = (b) => {
-      $("serial").textContent = ($("serial").textContent + String.fromCharCode(b)).slice(-12e3);
+      $2("serial").textContent = ($2("serial").textContent + String.fromCharCode(b)).slice(-12e3);
     };
-    this.portB.addListener(() => this.syncOutputs());
-    this.portD.addListener(() => this.syncOutputs());
+    for (const port of [this.portB, this.portC, this.portD]) port.addListener(() => this.syncOutputs());
     this.render();
-    this.status("Firmware loaded \xB7 " + text.trim().split("\n").length + " HEX records");
+    this.status(this.spec.label + " firmware loaded \xB7 " + text.trim().split("\n").length + " HEX records");
   }
   clear() {
     this.stop();
+    this.releaseOutputs();
     this.source = "";
     this.cpu = null;
     this.portB = null;
+    this.portC = null;
     this.portD = null;
-    this.render();
+    if (this.spec) this.render();
+  }
+  releaseOutputs() {
+    for (const pin of this.spec?.pins || []) if (!pin.analogOnly) this.getSim()?.setExtVoltage(pin.name, 0);
   }
   syncOutputs() {
     const sim = this.getSim();
     if (!sim || !this.cpu) return;
-    for (let n = 0; n < 14; n++) {
-      const state = this.portFor(n).pinState(n < 8 ? n : n - 8);
-      sim.setExtVoltage("D" + n, state === PinState.High || state === PinState.InputPullUp ? 5 : 0);
+    for (const pin of this.spec.pins) {
+      if (pin.analogOnly) continue;
+      const [port, n] = this.portFor(pin.name), state = port.pinState(n);
+      sim.setExtVoltage(pin.name, state === PinState.High || state === PinState.InputPullUp ? 5 : 0);
     }
   }
   syncInputs() {
-    const sim = this.getSim();
-    const labels = new Set(sim?.getElements().filter((e) => e.getType() === "LabeledNodeElm").map((e) => e.getLabelName()) || []);
-    for (let n = 0; n < 14; n++) {
-      let value = labels.has("IN_D" + n) ? sim.getNodeVoltage("IN_D" + n) : NaN;
-      this.portFor(n).setPin(n < 8 ? n : n - 8, Number.isFinite(value) ? value > 2.5 : this.inputs[n]);
+    const { inputs, analog } = inputSnapshot(this);
+    for (const [name, value] of Object.entries(inputs)) {
+      const [port, n] = this.portFor(name);
+      port.setPin(n, value);
     }
+    for (const p of this.spec.pins) if ("analog" in p) this.adc.channelValues[p.analog] = analog[p.name];
   }
   step() {
     if (!this.cpu) throw Error("Load firmware first");
@@ -2545,20 +2596,26 @@ var MCU = class {
   stop() {
     this.running = false;
     clearTimeout(this.timer);
-    if ($("mcuRun")) $("mcuRun").textContent = "\u25B6 Run firmware";
+    if (this.active) $2("mcuRun").textContent = "\u25B6 Run firmware";
   }
   render() {
     if (!this.active) return;
-    $("mcuRun").textContent = this.running ? "\u2161 Pause firmware" : "\u25B6 Run firmware";
-    $("pc").textContent = "0x" + (this.cpu?.pc ?? 0).toString(16).padStart(4, "0").toUpperCase();
-    $("cycles").textContent = (this.cpu?.cycles ?? 0).toLocaleString();
-    $("cpuTime").textContent = ((this.cpu?.cycles ?? 0) / 16e6).toFixed(4) + " s";
-    this.buttons.forEach((b, n) => {
-      let state = this.cpu ? this.portFor(n).pinState(n < 8 ? n : n - 8) : PinState.Input;
-      let high = state === PinState.High || state === PinState.InputPullUp || state === PinState.Input && this.inputs[n];
+    renderAnalogSources(this);
+    $2("mcuRun").textContent = this.running ? "\u2161 Pause firmware" : "\u25B6 Run firmware";
+    $2("pc").textContent = "0x" + (this.cpu?.pc ?? 0).toString(16).padStart(4, "0").toUpperCase();
+    $2("cycles").textContent = (this.cpu?.cycles ?? 0).toLocaleString();
+    $2("cpuTime").textContent = ((this.cpu?.cycles ?? 0) / this.spec.clockHz).toFixed(4) + " s";
+    this.buttons.forEach((b) => {
+      const name = b.dataset.pin;
+      const [port, n] = this.portFor(name);
+      const state = this.cpu ? port.pinState(n) : PinState.Input;
+      const high = state === PinState.High || state === PinState.InputPullUp || state === PinState.Input && this.inputs[name];
       b.className = high ? "high" : "";
-      b.textContent = "D" + n + " \xB7 " + (state < 2 ? high ? "HIGH" : "LOW" : "IN");
+      b.textContent = name + " \xB7 " + (state < 2 ? high ? "HIGH" : "LOW" : "IN");
     });
+    const registers = {};
+    for (const [name, addr] of Object.entries({ DDRB: 36, PORTB: 37, DDRC: 39, PORTC: 40, DDRD: 42, PORTD: 43, TCNT0: 70, ADCL: 120, ADCH: 121, SREG: 95 })) registers[name] = this.cpu?.data[addr] ?? 0;
+    renderRegisters(registers);
   }
 };
 export {

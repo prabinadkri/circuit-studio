@@ -27,7 +27,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path=='/api/session':
             if self.headers.get('Host')!=self.server.local_host:
                 return self.json_response({'error':'Invalid host'},403)
-            return self.json_response({'token':self.server.cs_token})
+            return self.json_response({'token':self.server.cs_token,'apiVersion':2})
         super().do_GET()
     def do_POST(self):
         if self.path!='/api/pic': return self.json_response({'error':'Not found'},404)

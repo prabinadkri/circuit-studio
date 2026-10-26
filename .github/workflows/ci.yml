@@ -18,6 +18,9 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Select browser
         run: node -e "console.log('CHROME_BIN='+require('playwright').chromium.executablePath())" >> "$GITHUB_ENV"
+      - name: Install lab firmware toolchains
+        run: sudo apt-get update && sudo apt-get install -y gputils gcc-avr avr-libc
+      - run: npm run build:examples
       - run: npm run build
       - run: npm test
       - run: npm run test:engine

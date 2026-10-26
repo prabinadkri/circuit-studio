@@ -6,7 +6,11 @@ Validated locally on Ubuntu 24.04, x86-64, Python 3.12, Node.js 22 and Google Ch
 
 Run `npm test` after building:
 
-- Five Python tests: PIC HEX checksum, missing EOF, memory bounds, bounded step requests, and real PIC16F84A Blink execution through 1.6 million instruction cycles with both RB0 states observed.
+- Fourteen Python tests, including parameterized checks across all five PIC models: compiled blink through 1.6 million cycles, RB1 input driving RB0, DIP pin numbers, target-specific HEX bounds, configuration/EEPROM records, isolated C contexts, stale-session rejection, analog input validation and compatibility with an already-running 0.1 launcher.
+- PIC16F877A, PIC18F4520 and PIC18F4550 compiled ADC programs return 0, 255, 511 and 1023 for 0, 1.25, 2.5 and 5 V respectively.
+- Browser tests exercise all eight profiles: real compiled button firmware, live input/output changes, device-specific pin references and ADC midpoint readings where available. Nano A7 returns full-scale at 5 V and has no digital output button.
+- A real schematic `IN_RA0` node at 1.25 V overrides the manual slider and produces an ADC value of 255. The manual control becomes disabled and shows the schematic voltage.
+- All eight independent firmware payloads survive a project save/reopen. The AVR built-in blink instruction image matches the independently assembled source.
 - Browser tests: known voltage-divider results (5 V and 2.5 V), paused clock stability, component placement and undo, AVR single-step and D13 output, netlist transfer and PCB routing, and board export.
 - One-file project save/reopen preserves schematic, firmware, device selection, footprints and routes.
 - PIC RB0 drives nonzero current through the resistor/LED schematic.
@@ -23,4 +27,4 @@ During development, KiCad CLI 10.0.7 opened generated `.kicad_pcb` files and gen
 
 ## Not yet validated
 
-Precise AVR/PIC-to-analog synchronization, arbitrary real-world firmware, every upstream component model, large circuit performance, manufacturer-specific footprints and complete fabrication DRC. Firmware source compilation, MCU models beyond the two listed in README, and advanced PCB features remain outside this alpha.
+Precise AVR/PIC-to-analog synchronization, arbitrary real-world firmware, every upstream component model, large circuit performance, manufacturer-specific footprints and complete fabrication DRC. In-app source compilation, MCU models beyond the supported catalog, PIC serial monitor, USB, SPI/I2C circuit coupling, electrical pin-drive fidelity and advanced PCB features remain outside this alpha. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.

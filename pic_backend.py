@@ -1,16 +1,27 @@
-"""Bounded, local PIC16F84A simulation adapter; GPL-2.0-or-later."""
+"""Bounded local PIC simulation adapter; GPL-2.0-or-later."""
 import ctypes
+import json
+import math
 import re
 from pathlib import Path
+import secrets
 import tempfile
 import threading
+import weakref
 
-PINS = [('RA0',17),('RA1',18),('RA2',1),('RA3',2),('RA4',3)]+[(f'RB{i}',6+i) for i in range(8)]
+DEVICES = {d['id']: d for d in json.loads((Path(__file__).parent/'web/devices.json').read_text()) if d['engine']=='pic'}
 
-def validate_hex(text):
+def validate_hex(text, device='pic'):
+    if device not in DEVICES:
+        raise ValueError('Unsupported PIC device')
+    spec=DEVICES[device]
     if not isinstance(text,str) or len(text)>100000:
         raise ValueError('Firmware must be an Intel HEX file under 100 KB')
-    data_seen = eof = False
+    if spec['family']=='PIC16':
+        ranges=[(0,spec['flashBytes']),(0x4000,0x4008),(0x400e,0x4010),(0x4200,0x4200+spec['eepromBytes']*2)]
+    else:
+        ranges=[(0,spec['flashBytes']),(0x200000,0x200008),(0x300000,0x30000e),(0xf00000,0xf00000+spec['eepromBytes']),(0x310000,0x310000+spec['eepromBytes'])]
+    program_seen=eof=False
     base=0
     lines=[]
     for line in text.strip().splitlines():
@@ -23,58 +34,86 @@ def validate_hex(text):
         if len(data)<5 or len(data)!=data[0]+5 or sum(data)%256:
             raise ValueError('HEX checksum or length error')
         count,typ=data[0],data[3]
-        addr=int.from_bytes(data[1:3],'big')+base
+        offset=int.from_bytes(data[1:3],'big')
+        addr=offset+base
         if typ==0:
-            if count%2 or addr%2: raise ValueError('PIC words need aligned, even-length data')
-            allowed=any(lo<=addr and addr+count<=hi for lo,hi in [(0,2048),(0x4000,0x4008),(0x400e,0x4010),(0x4200,0x4280)])
-            if not allowed: raise ValueError('HEX address is outside PIC16F84A memory')
-            data_seen=True
+            if not count or offset+count>65536: raise ValueError('Invalid data record range')
+            if spec['family']=='PIC16' and (count%2 or addr%2):
+                raise ValueError('PIC16 words need aligned, even-length data')
+            if not any(lo<=addr and addr+count<=hi for lo,hi in ranges):
+                raise ValueError('HEX address is outside '+spec['model']+' memory')
+            if addr<spec['flashBytes']: program_seen=True
         elif typ==1:
-            if count!=0: raise ValueError('Invalid end record')
+            if count!=0 or offset!=0: raise ValueError('Invalid end record')
             eof=True
         elif typ==4:
-            if count!=2: raise ValueError('Invalid address record')
+            if count!=2 or offset!=0: raise ValueError('Invalid address record')
             base=int.from_bytes(data[4:6],'big')<<16
         else: raise ValueError('Unsupported PIC HEX record type')
-        lines.append(line)
-    if not data_seen or not eof: raise ValueError('HEX requires data and an end record')
+        lines.append(line.upper())
+    if not program_seen or not eof: raise ValueError('HEX requires program data and an end record')
     return '\n'.join(lines)+'\n'
 
 class PicBackend:
     def __init__(self, root):
         self.lib=ctypes.CDLL(str(Path(root)/'native/libcircuitpic.so'))
-        self.lib.cs_load.argtypes=[ctypes.c_char_p]
-        self.lib.cs_load.restype=ctypes.c_int
-        self.lib.cs_step.argtypes=[ctypes.c_uint]
-        self.lib.cs_step.restype=None
-        self.lib.cs_pc.restype=ctypes.c_uint
-        self.lib.cs_cycles.restype=ctypes.c_ulonglong
-        self.lib.cs_pin.argtypes=[ctypes.c_uint]
-        self.lib.cs_dir.argtypes=[ctypes.c_uint]
-        self.lib.cs_input.argtypes=[ctypes.c_uint,ctypes.c_int]
-        self.lib.cs_input.restype=None
+        ptr=ctypes.c_void_p
+        signatures={
+            'cs2_create':([],ptr),'cs2_destroy':([ptr],None),
+            'cs2_load':([ptr,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_uint],ctypes.c_int),
+            'cs2_step':([ptr,ctypes.c_uint],None),
+            'cs2_pc':([ptr],ctypes.c_uint),'cs2_cycles':([ptr],ctypes.c_ulonglong),
+            'cs2_input':([ptr,ctypes.c_uint,ctypes.c_int],None),
+            'cs2_analog':([ptr,ctypes.c_uint,ctypes.c_float],None),
+            **{name:([ptr,ctypes.c_uint],ctypes.c_int) for name in ['cs2_pin','cs2_dir','cs2_type','cs2_ram']},
+        }
+        for name,(args,result) in signatures.items():
+            fn=getattr(self.lib,name);fn.argtypes=args;fn.restype=result
+        self.context=self.lib.cs2_create()
+        if not self.context: raise OSError('Could not allocate PIC simulator')
+        self._cleanup=weakref.finalize(self,self.lib.cs2_destroy,self.context)
         self.lock=threading.Lock()
         self.loaded=False
+        self.device='pic'
+        self.generation=None
     def handle(self, request):
         with self.lock:
             if request.get('action')=='load':
-                text=validate_hex(request.get('hex'))
+                device=request.get('device','pic')
+                if not isinstance(device,str) or device not in DEVICES: raise ValueError('Unsupported PIC device')
+                text=validate_hex(request.get('hex'),device)
+                spec=DEVICES[device]
+                self.loaded=False
                 with tempfile.NamedTemporaryFile(suffix='.hex') as f:
                     f.write(text.encode('ascii'));f.flush()
-                    if self.lib.cs_load(f.name.encode())!=0:
-                        self.loaded=False
+                    if self.lib.cs2_load(self.context,spec['model'].encode(),f.name.encode(),spec['clockHz'])!=0:
                         raise ValueError('PICsim rejected the firmware')
+                self.device=device
+                self.generation=secrets.token_hex(16)
                 self.loaded=True
             elif request.get('action')=='step':
                 if not self.loaded: raise ValueError('Load PIC firmware first')
+                if request.get('generation',self.generation)!=self.generation:
+                    raise ValueError('PIC session changed in another window. Reload firmware.')
                 count=request.get('count',1)
                 if type(count)!=int or not 1<=count<=50000: raise ValueError('Invalid step count')
                 values=request.get('inputs',{})
-                if not isinstance(values,dict): raise ValueError('Invalid GPIO inputs')
-                for label,pin in PINS:
-                    if label in values:
-                        if type(values[label])!=bool: raise ValueError('GPIO must be boolean')
-                        self.lib.cs_input(pin,int(values[label]))
-                self.lib.cs_step(count)
+                analog=request.get('analog',{})
+                pins={p['name']:p for p in DEVICES[self.device]['pins']}
+                if not isinstance(values,dict) or not isinstance(analog,dict): raise ValueError('Invalid GPIO inputs')
+                # Validate all input before changing the native state.
+                for name,value in values.items():
+                    if name not in pins or type(value)!=bool: raise ValueError('GPIO must be a supported pin and boolean')
+                for name,value in analog.items():
+                    if name not in pins or 'analog' not in pins[name] or type(value) not in (int,float) or not math.isfinite(value) or not 0<=value<=5:
+                        raise ValueError('ADC input must be a supported pin and a voltage from 0 to 5 V')
+                for name,value in values.items():self.lib.cs2_input(self.context,pins[name]['physical'],int(value))
+                for name,value in analog.items():self.lib.cs2_analog(self.context,pins[name]['physical'],value)
+                self.lib.cs2_step(self.context,count)
             else: raise ValueError('Unknown simulation action')
-            return {'pc':self.lib.cs_pc(),'cycles':self.lib.cs_cycles(),'pins':[{'name':label,'value':self.lib.cs_pin(pin),'input':bool(self.lib.cs_dir(pin))} for label,pin in PINS]}
+            spec=DEVICES[self.device]
+            return {'device':self.device,'generation':self.generation,'pc':self.lib.cs2_pc(self.context),'cycles':self.lib.cs2_cycles(self.context),
+                'registers':{name:self.lib.cs2_ram(self.context,addr) for name,addr in spec['registers'].items()},
+                'pins':[{'name':p['name'],'physical':p['physical'],'value':self.lib.cs2_pin(self.context,p['physical']),
+                         'input':bool(p.get('inputOnly') or self.lib.cs2_dir(self.context,p['physical'])),
+                         'analog':self.lib.cs2_type(self.context,p['physical']) in (4,5)} for p in spec['pins']]}

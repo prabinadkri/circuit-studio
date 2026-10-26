@@ -2,7 +2,7 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.1.0.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.2.0.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 
@@ -27,15 +27,19 @@ For a regular browser window: `./run.sh --serve`, then open the printed local ad
 ## What works
 
 - **Circuit lab:** component placement, wiring, editing values, undo/redo, analog and digital simulation, oscilloscope views, example circuits, measurements and SVG export. CircuitJS1 supplies the simulation and schematic engine.
-- **Firmware:** ATmega328P / Arduino Uno at 16 MHz via AVR8js, and PIC16F84A at 4 MHz via native PICsim. Load compiled Intel HEX, run, pause, reset and step; inspect GPIO and program counter. AVR USART0 output appears in the serial monitor. Both devices include a Blink demo.
-- **Circuit connections:** AVR outputs use External Voltage components named `D0`–`D13`; PIC outputs use `RA0`–`RA4` and `RB0`–`RB7`. Inputs use labeled nodes prefixed with `IN_`, for example `IN_D2` or `IN_RB0`. The firmware workspace can load a ready-to-use LED circuit.
+- **Firmware:** eight lab profiles: Arduino Uno R3, classic Nano, bare ATmega328P, PIC16F84A, PIC16F628A, PIC16F877A, PIC18F4520 and PIC18F4550. Load compiled Intel HEX, run, pause, reset and step; inspect GPIO, registers and program counter. AVR USART0 output appears in the serial monitor. Each profile includes blink and button-to-LED exercises with source; ADC-capable devices also include a voltage-sweep exercise.
+- **Circuit connections:** AVR GPIO uses `D0`–`D13` and `A0`–`A5`; PIC signals follow the selected chip’s pin reference. External Voltage components receive outputs; labeled `IN_` nodes supply inputs. Analog sliders provide 0–5 V test stimuli, overridden by a connected schematic node. Classic Nano A6/A7 are analog-only. Physical pin references and manufacturer links help translate an exercise to hardware.
 - **PCB:** import supported schematic nets, move through-hole parts, route front/back tracks with bend points, undo edits, inspect airwires, check basic clearances and connectivity, and export KiCad boards or Gerber/drill ZIPs.
-- **Projects:** `.circuit` JSON files contain schematic, AVR firmware, PIC firmware, selected device and PCB layout. Open also accepts CircuitJS text/XML circuits. Browser autosave is a recovery aid; use Save file for a portable backup.
+- **Projects:** `.circuit` JSON files contain schematic, separate firmware for every device profile, selected device and PCB layout. Open also accepts CircuitJS text/XML circuits. Browser autosave is a recovery aid; use Save file for a portable backup.
+
+See [the lab guide](docs/LAB_GUIDE.md) for device choices, exercises, source files and physical wiring references.
 
 ## Current boundaries
 
 - Firmware and analog simulation have independent clocks and exchange sampled GPIO states. Fast PWM, serial protocols across the circuit bridge and precise mixed-signal timing are not validated. This is functional GPIO coupling, not timing-accurate co-simulation.
-- MCU support is limited to ATmega328P and PIC16F84A. Source compilers, board packages and a source-level debugger are not bundled. PIC16F84A has no hardware USART.
+- MCU support is limited to the eight profiles listed above (six distinct chip models). Uno, Nano and bare ATmega328P share the same AVR core. AT89S52/8051, ATmega32/2560, ESP32 and STM32 are not implemented. Compilers, board packages and source debugging are not built into the app; the supplied examples can be rebuilt with external AVR-GCC/gputils.
+- All profiles use 5 V logic with implicit power/reset and fixed clocks: 16 MHz for AVR, 4 MHz for PIC. Config-dependent clock changes, oscillator-pin GPIO, USB, and SPI/I2C devices across the schematic bridge are not implemented. The PIC serial monitor is not connected. Output voltage sources approximate digital levels; they do not model tri-state buses, open-drain drive or pin current limits.
+- Automated device checks cover blink, button GPIO, ADC reference points and project persistence. They do not certify all silicon peripherals, interrupts, instruction edge cases or arbitrary firmware. Pin references describe exposed signals, not a complete power/oscillator wiring diagram.
 - PCB transfer supports two-pin resistors, capacitors, inductors, diodes, LEDs, switches and voltage-source connectors. Other components are rejected with a message; IC footprint mapping is unfinished.
 - PCB layout currently uses generic horizontal two-pin through-hole footprints, a fixed 100 × 60 mm board, 0.5 mm tracks, 2 mm round pads and 0.8 mm drills. There are no vias, pours, autorouter, rotation or manufacturer-specific footprint library yet.
 - Design checks cover endpoint connectivity, copper/pad clearance and board edges. Same-net track intersections are conservatively not counted as intentional junctions; terminate routes at pads. Checks do not cover every manufacturing or assembly constraint. Gerber export requires the available checks to pass. Verify footprint pitch, polarity and fabrication outputs before ordering.
@@ -53,9 +57,13 @@ npm test
 npm run test:engine
 ```
 
+To rebuild the lab examples, install `gputils`, `gcc-avr`, `binutils-avr` and `avr-libc`, then run `npm run build:examples` before `npm run build`. CI rebuilds these examples before testing them.
+
 The build bundles AVR8js and the Gerber ZIP writer, builds the vendored TypeScript simulation engine and compiles the PIC backend. The first engine build installs its locked development dependencies. `CHROME_BIN=/path/to/chromium npm test` selects a different Chromium binary.
 
 The runnable `web/` assets and `native/libcircuitpic.so` are included for convenience. All corresponding source is included under `web/*-source.js`, `native/`, `sources/`, and the Python files. See [ARCHITECTURE.md](ARCHITECTURE.md), [VALIDATION.md](VALIDATION.md), and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+After updating an existing installation, save your project and close/reopen Circuit Studio so the Python backend and frontend use the same version.
 
 ## License
 

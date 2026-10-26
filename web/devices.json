@@ -1,0 +1,1186 @@
+[
+  {
+    "id": "avr",
+    "engine": "avr",
+    "family": "AVR",
+    "model": "ATmega328P",
+    "label": "Arduino Uno R3",
+    "package": "Uno headers",
+    "clockHz": 16000000,
+    "flashBytes": 32768,
+    "eepromBytes": 1024,
+    "ramBytes": 2048,
+    "pins": [
+      {
+        "name": "D0",
+        "physical": "D0",
+        "function": "PD0 / RX"
+      },
+      {
+        "name": "D1",
+        "physical": "D1",
+        "function": "PD1 / TX"
+      },
+      {
+        "name": "D2",
+        "physical": "D2",
+        "function": "PD2 / INT0"
+      },
+      {
+        "name": "D3",
+        "physical": "D3",
+        "function": "PD3 / INT1 / PWM"
+      },
+      {
+        "name": "D4",
+        "physical": "D4",
+        "function": "PD4 / T0"
+      },
+      {
+        "name": "D5",
+        "physical": "D5",
+        "function": "PD5 / PWM"
+      },
+      {
+        "name": "D6",
+        "physical": "D6",
+        "function": "PD6 / PWM"
+      },
+      {
+        "name": "D7",
+        "physical": "D7",
+        "function": "PD7 / AIN1"
+      },
+      {
+        "name": "D8",
+        "physical": "D8",
+        "function": "PB0 / ICP1"
+      },
+      {
+        "name": "D9",
+        "physical": "D9",
+        "function": "PB1 / PWM"
+      },
+      {
+        "name": "D10",
+        "physical": "D10",
+        "function": "PB2 / SS / PWM"
+      },
+      {
+        "name": "D11",
+        "physical": "D11",
+        "function": "PB3 / MOSI / PWM"
+      },
+      {
+        "name": "D12",
+        "physical": "D12",
+        "function": "PB4 / MISO"
+      },
+      {
+        "name": "D13",
+        "physical": "D13",
+        "function": "PB5 / SCK / LED"
+      },
+      {
+        "name": "A0",
+        "physical": "A0",
+        "function": "PC0 / ADC0",
+        "analog": 0
+      },
+      {
+        "name": "A1",
+        "physical": "A1",
+        "function": "PC1 / ADC1",
+        "analog": 1
+      },
+      {
+        "name": "A2",
+        "physical": "A2",
+        "function": "PC2 / ADC2",
+        "analog": 2
+      },
+      {
+        "name": "A3",
+        "physical": "A3",
+        "function": "PC3 / ADC3",
+        "analog": 3
+      },
+      {
+        "name": "A4",
+        "physical": "A4",
+        "function": "PC4 / ADC4 / SDA",
+        "analog": 4
+      },
+      {
+        "name": "A5",
+        "physical": "A5",
+        "function": "PC5 / ADC5 / SCL",
+        "analog": 5
+      }
+    ],
+    "demoPin": "D13",
+    "demo": "avr",
+    "source": "https://www.microchip.com/en-us/product/atmega328p",
+    "notes": "5 V logic. Power, reset and a 16 MHz oscillator are provided by the simulator. USB and bootloader upload are not simulated. SPI/I2C peripheral devices are not connected to the circuit bridge."
+  },
+  {
+    "id": "nano",
+    "engine": "avr",
+    "family": "AVR",
+    "model": "ATmega328P",
+    "label": "Arduino Nano (classic)",
+    "package": "Nano headers",
+    "clockHz": 16000000,
+    "flashBytes": 32768,
+    "eepromBytes": 1024,
+    "ramBytes": 2048,
+    "pins": [
+      {
+        "name": "D0",
+        "physical": "D0",
+        "function": "PD0 / RX"
+      },
+      {
+        "name": "D1",
+        "physical": "D1",
+        "function": "PD1 / TX"
+      },
+      {
+        "name": "D2",
+        "physical": "D2",
+        "function": "PD2 / INT0"
+      },
+      {
+        "name": "D3",
+        "physical": "D3",
+        "function": "PD3 / INT1 / PWM"
+      },
+      {
+        "name": "D4",
+        "physical": "D4",
+        "function": "PD4 / T0"
+      },
+      {
+        "name": "D5",
+        "physical": "D5",
+        "function": "PD5 / PWM"
+      },
+      {
+        "name": "D6",
+        "physical": "D6",
+        "function": "PD6 / PWM"
+      },
+      {
+        "name": "D7",
+        "physical": "D7",
+        "function": "PD7 / AIN1"
+      },
+      {
+        "name": "D8",
+        "physical": "D8",
+        "function": "PB0 / ICP1"
+      },
+      {
+        "name": "D9",
+        "physical": "D9",
+        "function": "PB1 / PWM"
+      },
+      {
+        "name": "D10",
+        "physical": "D10",
+        "function": "PB2 / SS / PWM"
+      },
+      {
+        "name": "D11",
+        "physical": "D11",
+        "function": "PB3 / MOSI / PWM"
+      },
+      {
+        "name": "D12",
+        "physical": "D12",
+        "function": "PB4 / MISO"
+      },
+      {
+        "name": "D13",
+        "physical": "D13",
+        "function": "PB5 / SCK / LED"
+      },
+      {
+        "name": "A0",
+        "physical": "A0",
+        "function": "PC0 / ADC0",
+        "analog": 0
+      },
+      {
+        "name": "A1",
+        "physical": "A1",
+        "function": "PC1 / ADC1",
+        "analog": 1
+      },
+      {
+        "name": "A2",
+        "physical": "A2",
+        "function": "PC2 / ADC2",
+        "analog": 2
+      },
+      {
+        "name": "A3",
+        "physical": "A3",
+        "function": "PC3 / ADC3",
+        "analog": 3
+      },
+      {
+        "name": "A4",
+        "physical": "A4",
+        "function": "PC4 / ADC4 / SDA",
+        "analog": 4
+      },
+      {
+        "name": "A5",
+        "physical": "A5",
+        "function": "PC5 / ADC5 / SCL",
+        "analog": 5
+      },
+      {
+        "name": "A6",
+        "physical": "A6",
+        "function": "ADC6 / analog input only",
+        "analog": 6,
+        "analogOnly": true
+      },
+      {
+        "name": "A7",
+        "physical": "A7",
+        "function": "ADC7 / analog input only",
+        "analog": 7,
+        "analogOnly": true
+      }
+    ],
+    "demoPin": "D13",
+    "demo": "avr",
+    "source": "https://docs.arduino.cc/resources/pinouts/A000005-full-pinout.pdf",
+    "notes": "5 V logic. Power, reset and a 16 MHz oscillator are provided by the simulator. USB and bootloader upload are not simulated. SPI/I2C peripheral devices are not connected to the circuit bridge."
+  },
+  {
+    "id": "atmega328p",
+    "engine": "avr",
+    "family": "AVR",
+    "model": "ATmega328P",
+    "label": "ATmega328P",
+    "package": "DIP-28",
+    "clockHz": 16000000,
+    "flashBytes": 32768,
+    "eepromBytes": 1024,
+    "ramBytes": 2048,
+    "pins": [
+      {
+        "name": "D0",
+        "physical": 2,
+        "function": "PD0 / RX"
+      },
+      {
+        "name": "D1",
+        "physical": 3,
+        "function": "PD1 / TX"
+      },
+      {
+        "name": "D2",
+        "physical": 4,
+        "function": "PD2 / INT0"
+      },
+      {
+        "name": "D3",
+        "physical": 5,
+        "function": "PD3 / INT1 / PWM"
+      },
+      {
+        "name": "D4",
+        "physical": 6,
+        "function": "PD4 / T0"
+      },
+      {
+        "name": "D5",
+        "physical": 11,
+        "function": "PD5 / PWM"
+      },
+      {
+        "name": "D6",
+        "physical": 12,
+        "function": "PD6 / PWM"
+      },
+      {
+        "name": "D7",
+        "physical": 13,
+        "function": "PD7 / AIN1"
+      },
+      {
+        "name": "D8",
+        "physical": 14,
+        "function": "PB0 / ICP1"
+      },
+      {
+        "name": "D9",
+        "physical": 15,
+        "function": "PB1 / PWM"
+      },
+      {
+        "name": "D10",
+        "physical": 16,
+        "function": "PB2 / SS / PWM"
+      },
+      {
+        "name": "D11",
+        "physical": 17,
+        "function": "PB3 / MOSI / PWM"
+      },
+      {
+        "name": "D12",
+        "physical": 18,
+        "function": "PB4 / MISO"
+      },
+      {
+        "name": "D13",
+        "physical": 19,
+        "function": "PB5 / SCK / LED"
+      },
+      {
+        "name": "A0",
+        "physical": 23,
+        "function": "PC0 / ADC0",
+        "analog": 0
+      },
+      {
+        "name": "A1",
+        "physical": 24,
+        "function": "PC1 / ADC1",
+        "analog": 1
+      },
+      {
+        "name": "A2",
+        "physical": 25,
+        "function": "PC2 / ADC2",
+        "analog": 2
+      },
+      {
+        "name": "A3",
+        "physical": 26,
+        "function": "PC3 / ADC3",
+        "analog": 3
+      },
+      {
+        "name": "A4",
+        "physical": 27,
+        "function": "PC4 / ADC4 / SDA",
+        "analog": 4
+      },
+      {
+        "name": "A5",
+        "physical": 28,
+        "function": "PC5 / ADC5 / SCL",
+        "analog": 5
+      }
+    ],
+    "demoPin": "D13",
+    "demo": "avr",
+    "source": "https://www.microchip.com/en-us/product/atmega328p",
+    "notes": "5 V logic. Power, reset and a 16 MHz oscillator are provided by the simulator. USB and bootloader upload are not simulated. SPI/I2C peripheral devices are not connected to the circuit bridge."
+  },
+  {
+    "id": "pic",
+    "model": "PIC16F84A",
+    "label": "PIC16F84A",
+    "engine": "pic",
+    "family": "PIC16",
+    "package": "DIP-18",
+    "clockHz": 4000000,
+    "flashBytes": 2048,
+    "eepromBytes": 64,
+    "ramBytes": 68,
+    "pins": [
+      {
+        "name": "RA0",
+        "physical": 17,
+        "function": ""
+      },
+      {
+        "name": "RA1",
+        "physical": 18,
+        "function": ""
+      },
+      {
+        "name": "RA2",
+        "physical": 1,
+        "function": ""
+      },
+      {
+        "name": "RA3",
+        "physical": 2,
+        "function": ""
+      },
+      {
+        "name": "RA4",
+        "physical": 3,
+        "function": "Open-drain output; external pull-up required on hardware"
+      },
+      {
+        "name": "RB0",
+        "physical": 6,
+        "function": "INT"
+      },
+      {
+        "name": "RB1",
+        "physical": 7,
+        "function": ""
+      },
+      {
+        "name": "RB2",
+        "physical": 8,
+        "function": ""
+      },
+      {
+        "name": "RB3",
+        "physical": 9,
+        "function": ""
+      },
+      {
+        "name": "RB4",
+        "physical": 10,
+        "function": ""
+      },
+      {
+        "name": "RB5",
+        "physical": 11,
+        "function": ""
+      },
+      {
+        "name": "RB6",
+        "physical": 12,
+        "function": ""
+      },
+      {
+        "name": "RB7",
+        "physical": 13,
+        "function": ""
+      }
+    ],
+    "demoPin": "RB0",
+    "demo": "pic",
+    "registers": {
+      "STATUS": 3,
+      "PORTA": 5,
+      "PORTB": 6,
+      "TRISA": 133,
+      "TRISB": 134,
+      "TMR0": 1
+    },
+    "source": "https://www.microchip.com/en-us/product/pic16f84a",
+    "notes": "5 V logic. Power, MCLR and a fixed 4 MHz oscillator are supplied by the simulator. Oscillator pins and MCLR cannot be reused as GPIO. No ADC. PIC serial monitor, peripheral protocol coupling and configuration-dependent clock changes are not implemented."
+  },
+  {
+    "id": "pic16f628a",
+    "model": "PIC16F628A",
+    "label": "PIC16F628A",
+    "engine": "pic",
+    "family": "PIC16",
+    "package": "DIP-18",
+    "clockHz": 4000000,
+    "flashBytes": 4096,
+    "eepromBytes": 128,
+    "ramBytes": 224,
+    "pins": [
+      {
+        "name": "RA0",
+        "physical": 17,
+        "function": ""
+      },
+      {
+        "name": "RA1",
+        "physical": 18,
+        "function": ""
+      },
+      {
+        "name": "RA2",
+        "physical": 1,
+        "function": ""
+      },
+      {
+        "name": "RA3",
+        "physical": 2,
+        "function": ""
+      },
+      {
+        "name": "RA4",
+        "physical": 3,
+        "function": "Open-drain output; external pull-up required on hardware"
+      },
+      {
+        "name": "RB0",
+        "physical": 6,
+        "function": "INT"
+      },
+      {
+        "name": "RB1",
+        "physical": 7,
+        "function": "RX"
+      },
+      {
+        "name": "RB2",
+        "physical": 8,
+        "function": "TX"
+      },
+      {
+        "name": "RB3",
+        "physical": 9,
+        "function": ""
+      },
+      {
+        "name": "RB4",
+        "physical": 10,
+        "function": ""
+      },
+      {
+        "name": "RB5",
+        "physical": 11,
+        "function": ""
+      },
+      {
+        "name": "RB6",
+        "physical": 12,
+        "function": ""
+      },
+      {
+        "name": "RB7",
+        "physical": 13,
+        "function": ""
+      }
+    ],
+    "demoPin": "RB0",
+    "demo": "pic16f628a",
+    "registers": {
+      "STATUS": 3,
+      "PORTA": 5,
+      "PORTB": 6,
+      "TRISA": 133,
+      "TRISB": 134,
+      "TMR0": 1
+    },
+    "source": "https://www.microchip.com/en-us/product/pic16f628a",
+    "notes": "5 V logic. Power, MCLR and a fixed 4 MHz oscillator are supplied by the simulator. Oscillator pins and MCLR cannot be reused as GPIO. No ADC. PIC serial monitor, peripheral protocol coupling and configuration-dependent clock changes are not implemented."
+  },
+  {
+    "id": "pic16f877a",
+    "model": "PIC16F877A",
+    "label": "PIC16F877A",
+    "engine": "pic",
+    "family": "PIC16",
+    "package": "DIP-40",
+    "clockHz": 4000000,
+    "flashBytes": 16384,
+    "eepromBytes": 256,
+    "ramBytes": 368,
+    "pins": [
+      {
+        "name": "RA0",
+        "physical": 2,
+        "function": "AN0",
+        "analog": 0
+      },
+      {
+        "name": "RA1",
+        "physical": 3,
+        "function": "AN1",
+        "analog": 1
+      },
+      {
+        "name": "RA2",
+        "physical": 4,
+        "function": "AN2",
+        "analog": 2
+      },
+      {
+        "name": "RA3",
+        "physical": 5,
+        "function": "AN3",
+        "analog": 3
+      },
+      {
+        "name": "RA4",
+        "physical": 6,
+        "function": "T0CKI"
+      },
+      {
+        "name": "RA5",
+        "physical": 7,
+        "function": "AN4",
+        "analog": 4
+      },
+      {
+        "name": "RB0",
+        "physical": 33,
+        "function": "INT"
+      },
+      {
+        "name": "RB1",
+        "physical": 34,
+        "function": ""
+      },
+      {
+        "name": "RB2",
+        "physical": 35,
+        "function": ""
+      },
+      {
+        "name": "RB3",
+        "physical": 36,
+        "function": ""
+      },
+      {
+        "name": "RB4",
+        "physical": 37,
+        "function": ""
+      },
+      {
+        "name": "RB5",
+        "physical": 38,
+        "function": ""
+      },
+      {
+        "name": "RB6",
+        "physical": 39,
+        "function": ""
+      },
+      {
+        "name": "RB7",
+        "physical": 40,
+        "function": ""
+      },
+      {
+        "name": "RC0",
+        "physical": 15,
+        "function": "T1CKI"
+      },
+      {
+        "name": "RC1",
+        "physical": 16,
+        "function": "CCP2"
+      },
+      {
+        "name": "RC2",
+        "physical": 17,
+        "function": "CCP1 / PWM"
+      },
+      {
+        "name": "RC3",
+        "physical": 18,
+        "function": "SCK / SCL"
+      },
+      {
+        "name": "RC4",
+        "physical": 23,
+        "function": "SDI / SDA"
+      },
+      {
+        "name": "RC5",
+        "physical": 24,
+        "function": "SDO"
+      },
+      {
+        "name": "RC6",
+        "physical": 25,
+        "function": "TX"
+      },
+      {
+        "name": "RC7",
+        "physical": 26,
+        "function": "RX"
+      },
+      {
+        "name": "RD0",
+        "physical": 19,
+        "function": ""
+      },
+      {
+        "name": "RD1",
+        "physical": 20,
+        "function": ""
+      },
+      {
+        "name": "RD2",
+        "physical": 21,
+        "function": ""
+      },
+      {
+        "name": "RD3",
+        "physical": 22,
+        "function": ""
+      },
+      {
+        "name": "RD4",
+        "physical": 27,
+        "function": ""
+      },
+      {
+        "name": "RD5",
+        "physical": 28,
+        "function": ""
+      },
+      {
+        "name": "RD6",
+        "physical": 29,
+        "function": ""
+      },
+      {
+        "name": "RD7",
+        "physical": 30,
+        "function": ""
+      },
+      {
+        "name": "RE0",
+        "physical": 8,
+        "function": "AN5",
+        "analog": 5
+      },
+      {
+        "name": "RE1",
+        "physical": 9,
+        "function": "AN6",
+        "analog": 6
+      },
+      {
+        "name": "RE2",
+        "physical": 10,
+        "function": "AN7",
+        "analog": 7
+      }
+    ],
+    "demoPin": "RB0",
+    "demo": "pic16f877a",
+    "registers": {
+      "STATUS": 3,
+      "PORTA": 5,
+      "PORTB": 6,
+      "TRISA": 133,
+      "TRISB": 134,
+      "TMR0": 1,
+      "PORTC": 7,
+      "PORTD": 8,
+      "ADRESH": 30,
+      "ADRESL": 158
+    },
+    "source": "https://www.microchip.com/en-us/product/pic16f877a",
+    "notes": "5 V logic. Power, MCLR and a fixed 4 MHz oscillator are supplied by the simulator. Oscillator pins and MCLR cannot be reused as GPIO. PIC serial monitor, peripheral protocol coupling and configuration-dependent clock changes are not implemented."
+  },
+  {
+    "id": "pic18f4520",
+    "model": "PIC18F4520",
+    "label": "PIC18F4520",
+    "engine": "pic",
+    "family": "PIC18",
+    "package": "DIP-40",
+    "clockHz": 4000000,
+    "flashBytes": 32768,
+    "eepromBytes": 256,
+    "ramBytes": 1536,
+    "pins": [
+      {
+        "name": "RA0",
+        "physical": 2,
+        "function": "AN0",
+        "analog": 0
+      },
+      {
+        "name": "RA1",
+        "physical": 3,
+        "function": "AN1",
+        "analog": 1
+      },
+      {
+        "name": "RA2",
+        "physical": 4,
+        "function": "AN2",
+        "analog": 2
+      },
+      {
+        "name": "RA3",
+        "physical": 5,
+        "function": "AN3",
+        "analog": 3
+      },
+      {
+        "name": "RA4",
+        "physical": 6,
+        "function": "T0CKI"
+      },
+      {
+        "name": "RA5",
+        "physical": 7,
+        "function": "AN4",
+        "analog": 4
+      },
+      {
+        "name": "RB0",
+        "physical": 33,
+        "function": "INT / AN12",
+        "analog": 12
+      },
+      {
+        "name": "RB1",
+        "physical": 34,
+        "function": " / AN10",
+        "analog": 10
+      },
+      {
+        "name": "RB2",
+        "physical": 35,
+        "function": " / AN8",
+        "analog": 8
+      },
+      {
+        "name": "RB3",
+        "physical": 36,
+        "function": " / AN9",
+        "analog": 9
+      },
+      {
+        "name": "RB4",
+        "physical": 37,
+        "function": " / AN11",
+        "analog": 11
+      },
+      {
+        "name": "RB5",
+        "physical": 38,
+        "function": ""
+      },
+      {
+        "name": "RB6",
+        "physical": 39,
+        "function": ""
+      },
+      {
+        "name": "RB7",
+        "physical": 40,
+        "function": ""
+      },
+      {
+        "name": "RC0",
+        "physical": 15,
+        "function": "T1CKI"
+      },
+      {
+        "name": "RC1",
+        "physical": 16,
+        "function": "CCP2"
+      },
+      {
+        "name": "RC2",
+        "physical": 17,
+        "function": "CCP1 / PWM"
+      },
+      {
+        "name": "RC3",
+        "physical": 18,
+        "function": "SCK / SCL"
+      },
+      {
+        "name": "RC4",
+        "physical": 23,
+        "function": "SDI / SDA"
+      },
+      {
+        "name": "RC5",
+        "physical": 24,
+        "function": "SDO"
+      },
+      {
+        "name": "RC6",
+        "physical": 25,
+        "function": "TX"
+      },
+      {
+        "name": "RC7",
+        "physical": 26,
+        "function": "RX"
+      },
+      {
+        "name": "RD0",
+        "physical": 19,
+        "function": ""
+      },
+      {
+        "name": "RD1",
+        "physical": 20,
+        "function": ""
+      },
+      {
+        "name": "RD2",
+        "physical": 21,
+        "function": ""
+      },
+      {
+        "name": "RD3",
+        "physical": 22,
+        "function": ""
+      },
+      {
+        "name": "RD4",
+        "physical": 27,
+        "function": ""
+      },
+      {
+        "name": "RD5",
+        "physical": 28,
+        "function": ""
+      },
+      {
+        "name": "RD6",
+        "physical": 29,
+        "function": ""
+      },
+      {
+        "name": "RD7",
+        "physical": 30,
+        "function": ""
+      },
+      {
+        "name": "RE0",
+        "physical": 8,
+        "function": "AN5",
+        "analog": 5
+      },
+      {
+        "name": "RE1",
+        "physical": 9,
+        "function": "AN6",
+        "analog": 6
+      },
+      {
+        "name": "RE2",
+        "physical": 10,
+        "function": "AN7",
+        "analog": 7
+      }
+    ],
+    "demoPin": "RB0",
+    "demo": "pic18f4520",
+    "registers": {
+      "STATUS": 4056,
+      "PORTA": 3968,
+      "PORTB": 3969,
+      "PORTC": 3970,
+      "PORTD": 3971,
+      "TRISB": 3987,
+      "LATB": 3978,
+      "TMR0L": 4054,
+      "ADRESH": 4036,
+      "ADRESL": 4035
+    },
+    "source": "https://www.microchip.com/en-us/product/pic18f4520",
+    "notes": "5 V logic. Power, MCLR and a fixed 4 MHz oscillator are supplied by the simulator. Oscillator pins and MCLR cannot be reused as GPIO. PIC serial monitor, peripheral protocol coupling and configuration-dependent clock changes are not implemented."
+  },
+  {
+    "id": "pic18f4550",
+    "model": "PIC18F4550",
+    "label": "PIC18F4550",
+    "engine": "pic",
+    "family": "PIC18",
+    "package": "DIP-40",
+    "clockHz": 4000000,
+    "flashBytes": 32768,
+    "eepromBytes": 256,
+    "ramBytes": 2048,
+    "pins": [
+      {
+        "name": "RA0",
+        "physical": 2,
+        "function": "AN0",
+        "analog": 0
+      },
+      {
+        "name": "RA1",
+        "physical": 3,
+        "function": "AN1",
+        "analog": 1
+      },
+      {
+        "name": "RA2",
+        "physical": 4,
+        "function": "AN2",
+        "analog": 2
+      },
+      {
+        "name": "RA3",
+        "physical": 5,
+        "function": "AN3",
+        "analog": 3
+      },
+      {
+        "name": "RA4",
+        "physical": 6,
+        "function": "T0CKI"
+      },
+      {
+        "name": "RA5",
+        "physical": 7,
+        "function": "AN4",
+        "analog": 4
+      },
+      {
+        "name": "RB0",
+        "physical": 33,
+        "function": "INT / AN12",
+        "analog": 12
+      },
+      {
+        "name": "RB1",
+        "physical": 34,
+        "function": " / AN10",
+        "analog": 10
+      },
+      {
+        "name": "RB2",
+        "physical": 35,
+        "function": " / AN8",
+        "analog": 8
+      },
+      {
+        "name": "RB3",
+        "physical": 36,
+        "function": " / AN9",
+        "analog": 9
+      },
+      {
+        "name": "RB4",
+        "physical": 37,
+        "function": " / AN11",
+        "analog": 11
+      },
+      {
+        "name": "RB5",
+        "physical": 38,
+        "function": ""
+      },
+      {
+        "name": "RB6",
+        "physical": 39,
+        "function": ""
+      },
+      {
+        "name": "RB7",
+        "physical": 40,
+        "function": ""
+      },
+      {
+        "name": "RC0",
+        "physical": 15,
+        "function": "T1CKI"
+      },
+      {
+        "name": "RC1",
+        "physical": 16,
+        "function": "CCP2"
+      },
+      {
+        "name": "RC2",
+        "physical": 17,
+        "function": "CCP1 / PWM"
+      },
+      {
+        "name": "RC4",
+        "physical": 23,
+        "function": "Digital input only / USB not simulated",
+        "inputOnly": true
+      },
+      {
+        "name": "RC5",
+        "physical": 24,
+        "function": "Digital input only / USB not simulated",
+        "inputOnly": true
+      },
+      {
+        "name": "RC6",
+        "physical": 25,
+        "function": "TX"
+      },
+      {
+        "name": "RC7",
+        "physical": 26,
+        "function": "RX"
+      },
+      {
+        "name": "RD0",
+        "physical": 19,
+        "function": ""
+      },
+      {
+        "name": "RD1",
+        "physical": 20,
+        "function": ""
+      },
+      {
+        "name": "RD2",
+        "physical": 21,
+        "function": ""
+      },
+      {
+        "name": "RD3",
+        "physical": 22,
+        "function": ""
+      },
+      {
+        "name": "RD4",
+        "physical": 27,
+        "function": ""
+      },
+      {
+        "name": "RD5",
+        "physical": 28,
+        "function": ""
+      },
+      {
+        "name": "RD6",
+        "physical": 29,
+        "function": ""
+      },
+      {
+        "name": "RD7",
+        "physical": 30,
+        "function": ""
+      },
+      {
+        "name": "RE0",
+        "physical": 8,
+        "function": "AN5",
+        "analog": 5
+      },
+      {
+        "name": "RE1",
+        "physical": 9,
+        "function": "AN6",
+        "analog": 6
+      },
+      {
+        "name": "RE2",
+        "physical": 10,
+        "function": "AN7",
+        "analog": 7
+      }
+    ],
+    "demoPin": "RB0",
+    "demo": "pic18f4550",
+    "registers": {
+      "STATUS": 4056,
+      "PORTA": 3968,
+      "PORTB": 3969,
+      "PORTC": 3970,
+      "PORTD": 3971,
+      "TRISB": 3987,
+      "LATB": 3978,
+      "TMR0L": 4054,
+      "ADRESH": 4036,
+      "ADRESL": 4035
+    },
+    "source": "https://www.microchip.com/en-us/product/pic18f4550",
+    "notes": "5 V logic. Power, MCLR and a fixed 4 MHz oscillator are supplied by the simulator. Oscillator pins and MCLR cannot be reused as GPIO. USB is not emulated. PIC serial monitor, peripheral protocol coupling and configuration-dependent clock changes are not implemented."
+  }
+]
