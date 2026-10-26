@@ -5,6 +5,7 @@ permissions:
 jobs:
   linux:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -15,9 +16,14 @@ jobs:
         with:
           python-version: '3.12'
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - name: Select browser
-        run: node -e "console.log('CHROME_BIN='+require('playwright').chromium.executablePath())" >> "$GITHUB_ENV"
+      - name: Select browser available on runner
+        run: |
+          if command -v google-chrome >/dev/null; then
+            echo "CHROME_BIN=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          else
+            timeout 300s npx playwright install --with-deps chromium
+            node -e "console.log('CHROME_BIN='+require('playwright').chromium.executablePath())" >> "$GITHUB_ENV"
+          fi
       - name: Install lab firmware toolchains
         run: sudo apt-get update && sudo apt-get install -y gputils gcc-avr avr-libc ngspice
       - run: npm run build:examples
