@@ -1,6 +1,6 @@
 # Component quality and workspace specification
 
-**26 October 2026 — proposed specification.** Only the click-placement repair and palette polish described in the roadmap are implemented by this change. This document defines the next work, not current support.
+**26 October 2026 — proposed specification.** The v0.3 implementation now covers the tested subset in [MILESTONE-15.md](MILESTONE-15.md). This document remains the broader target specification; requirements beyond that ledger remain future work.
 
 ## A component must say what it can do
 

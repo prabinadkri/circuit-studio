@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "revision": "0.3.0-alpha.1",
+  "assets": [
+    {
+      "path": "library.json",
+      "sha256": "06a109ca46135bb0492a201a605822e0873e952420a23ff23f8d3841d937ac71"
+    },
+    {
+      "path": "footprints.js",
+      "sha256": "3452274856fc1f1d71c4767a53db250453cb0a046d72ce17ba9c937781f3a445"
+    },
+    {
+      "path": "mcu.js",
+      "sha256": "e755c669b54b4bdaa430549f5cd1103132b12393c38f65fcc033292c7da97096"
+    },
+    {
+      "path": "scheduler.js",
+      "sha256": "4021c3546090f69b9be06becbcfd7f03f9611b8ebfae73cbfc388505a42098c7"
+    },
+    {
+      "path": "engine/circuitjs.html",
+      "sha256": "c68b585bdce10a34e906ecbfeb7e97a8b66d874e478243fb43007578030b755a"
+    },
+    {
+      "path": "engine/circuitjs/circuitjs-CP4425Sl.js",
+      "sha256": "eee7d1b02a43b420de5998f39b054725676ce7eddd101857ecaa79a8c551802b"
+    }
+  ]
+}

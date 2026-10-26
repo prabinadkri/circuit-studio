@@ -1,0 +1,11 @@
+{
+  "probes": [
+    "out"
+  ],
+  "circuit": "V1 in 0 PULSE(0 5 0 1n 1n 1 2)\nR1 in out 1k\nC1 out 0 1u",
+  "mode": "tran",
+  "settings": {
+    "step": 1e-05,
+    "stop": 0.005
+  }
+}

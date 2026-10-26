@@ -1,0 +1,4020 @@
+{
+  "schema": 1,
+  "revision": "2026.10.26",
+  "parts": [
+    {
+      "id": "circuitjs:WireElm",
+      "revision": 1,
+      "type": "WireElm",
+      "label": "Wire",
+      "category": "Connections",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "WireElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:RoutedWireElm",
+      "revision": 1,
+      "type": "RoutedWireElm",
+      "label": "Routed Wire",
+      "category": "Connections",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "RoutedWireElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ResistorElm",
+      "revision": 1,
+      "type": "ResistorElm",
+      "label": "Resistor",
+      "category": "Connections",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ResistorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:CapacitorElm",
+      "revision": 1,
+      "type": "CapacitorElm",
+      "label": "Capacitor",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CapacitorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:PolarCapacitorElm",
+      "revision": 1,
+      "type": "PolarCapacitorElm",
+      "label": "Capacitor (polarized)",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PolarCapacitorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:InductorElm",
+      "revision": 1,
+      "type": "InductorElm",
+      "label": "Inductor",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "InductorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:SwitchElm",
+      "revision": 1,
+      "type": "SwitchElm",
+      "label": "Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:PushSwitchElm",
+      "revision": 1,
+      "type": "PushSwitchElm",
+      "label": "Push Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PushSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:Switch2Elm",
+      "revision": 1,
+      "type": "Switch2Elm",
+      "label": "SPDT Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "Switch2Elm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:DPDTSwitchElm",
+      "revision": 1,
+      "type": "DPDTSwitchElm",
+      "label": "DPDT Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DPDTSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:MBBSwitchElm",
+      "revision": 1,
+      "type": "MBBSwitchElm",
+      "label": "Make-Before-Break Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MBBSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:PotElm",
+      "revision": 1,
+      "type": "PotElm",
+      "label": "Potentiometer",
+      "category": "Passives",
+      "aliases": [
+        "variable resistor",
+        "pot"
+      ],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PotElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:TransformerElm",
+      "revision": 1,
+      "type": "TransformerElm",
+      "label": "Transformer",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TransformerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:TappedTransformerElm",
+      "revision": 1,
+      "type": "TappedTransformerElm",
+      "label": "Tapped Transformer",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TappedTransformerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CustomTransformerElm",
+      "revision": 1,
+      "type": "CustomTransformerElm",
+      "label": "Custom Transformer",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CustomTransformerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TransLineElm",
+      "revision": 1,
+      "type": "TransLineElm",
+      "label": "Transmission Line",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TransLineElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:RelayElm",
+      "revision": 1,
+      "type": "RelayElm",
+      "label": "Relay",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "RelayElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:RelayCoilElm",
+      "revision": 1,
+      "type": "RelayCoilElm",
+      "label": "Relay Coil",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "RelayCoilElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:RelayContactElm",
+      "revision": 1,
+      "type": "RelayContactElm",
+      "label": "Relay Contact",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "RelayContactElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LDRElm",
+      "revision": 1,
+      "type": "LDRElm",
+      "label": "Photoresistor",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LDRElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ThermistorNTCElm",
+      "revision": 1,
+      "type": "ThermistorNTCElm",
+      "label": "Thermistor",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ThermistorNTCElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:MemristorElm",
+      "revision": 1,
+      "type": "MemristorElm",
+      "label": "Memristor",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MemristorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SparkGapElm",
+      "revision": 1,
+      "type": "SparkGapElm",
+      "label": "Spark Gap",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SparkGapElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:FuseElm",
+      "revision": 1,
+      "type": "FuseElm",
+      "label": "Fuse",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "FuseElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CrystalElm",
+      "revision": 1,
+      "type": "CrystalElm",
+      "label": "Crystal",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CrystalElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CrossSwitchElm",
+      "revision": 1,
+      "type": "CrossSwitchElm",
+      "label": "Cross Switch",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CrossSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:GyratorElm",
+      "revision": 1,
+      "type": "GyratorElm",
+      "label": "Gyrator",
+      "category": "Passives",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "GyratorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:GroundElm",
+      "revision": 1,
+      "type": "GroundElm",
+      "label": "Ground",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "GroundElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:DCVoltageElm",
+      "revision": 1,
+      "type": "DCVoltageElm",
+      "label": "Voltage Source (2-terminal)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DCVoltageElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:BatteryElm",
+      "revision": 1,
+      "type": "BatteryElm",
+      "label": "Battery",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "BatteryElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ACVoltageElm",
+      "revision": 1,
+      "type": "ACVoltageElm",
+      "label": "A/C Voltage Source (2-terminal)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ACVoltageElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:RailElm",
+      "revision": 1,
+      "type": "RailElm",
+      "label": "Voltage Source (1-terminal)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "RailElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ACRailElm",
+      "revision": 1,
+      "type": "ACRailElm",
+      "label": "A/C Voltage Source (1-terminal)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ACRailElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SquareRailElm",
+      "revision": 1,
+      "type": "SquareRailElm",
+      "label": "Square Wave Source (1-terminal)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SquareRailElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ClockElm",
+      "revision": 1,
+      "type": "ClockElm",
+      "label": "Clock",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ClockElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SweepElm",
+      "revision": 1,
+      "type": "SweepElm",
+      "label": "A/C Sweep",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SweepElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:VarRailElm",
+      "revision": 1,
+      "type": "VarRailElm",
+      "label": "Variable Voltage",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "VarRailElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AntennaElm",
+      "revision": 1,
+      "type": "AntennaElm",
+      "label": "Antenna",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AntennaElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AMElm",
+      "revision": 1,
+      "type": "AMElm",
+      "label": "AM Source",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AMElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:FMElm",
+      "revision": 1,
+      "type": "FMElm",
+      "label": "FM Source",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "FMElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CurrentElm",
+      "revision": 1,
+      "type": "CurrentElm",
+      "label": "Current Source",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CurrentElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NoiseElm",
+      "revision": 1,
+      "type": "NoiseElm",
+      "label": "Noise Generator",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NoiseElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AudioInputElm",
+      "revision": 1,
+      "type": "AudioInputElm",
+      "label": "Audio Input",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AudioInputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DataInputElm",
+      "revision": 1,
+      "type": "DataInputElm",
+      "label": "Data Input",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DataInputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ExtVoltageElm",
+      "revision": 1,
+      "type": "ExtVoltageElm",
+      "label": "External Voltage (JavaScript)",
+      "category": "Sources",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ExtVoltageElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:OutputElm",
+      "revision": 1,
+      "type": "OutputElm",
+      "label": "Analog Output",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OutputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:LEDElm",
+      "revision": 1,
+      "type": "LEDElm",
+      "label": "LED",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LEDElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:LampElm",
+      "revision": 1,
+      "type": "LampElm",
+      "label": "Lamp",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LampElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TextElm",
+      "revision": 1,
+      "type": "TextElm",
+      "label": "Text",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TextElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:BoxElm",
+      "revision": 1,
+      "type": "BoxElm",
+      "label": "Box",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "BoxElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LineElm",
+      "revision": 1,
+      "type": "LineElm",
+      "label": "Line",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LineElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LabeledNodeElm",
+      "revision": 1,
+      "type": "LabeledNodeElm",
+      "label": "Labeled Node",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LabeledNodeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:ProbeElm",
+      "revision": 1,
+      "type": "ProbeElm",
+      "label": "Voltmeter/Scope Probe",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ProbeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:OhmMeterElm",
+      "revision": 1,
+      "type": "OhmMeterElm",
+      "label": "Ohmmeter",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OhmMeterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AmmeterElm",
+      "revision": 1,
+      "type": "AmmeterElm",
+      "label": "Ammeter",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AmmeterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:WattmeterTrueElm",
+      "revision": 1,
+      "type": "WattmeterTrueElm",
+      "label": "Wattmeter",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "WattmeterTrueElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TestPointElm",
+      "revision": 1,
+      "type": "TestPointElm",
+      "label": "Test Point",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TestPointElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DecimalDisplayElm",
+      "revision": 1,
+      "type": "DecimalDisplayElm",
+      "label": "Decimal Display",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DecimalDisplayElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:InstructionDisplayElm",
+      "revision": 1,
+      "type": "InstructionDisplayElm",
+      "label": "Instruction Display",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "InstructionDisplayElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LEDArrayElm",
+      "revision": 1,
+      "type": "LEDArrayElm",
+      "label": "LED Array",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LEDArrayElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DataRecorderElm",
+      "revision": 1,
+      "type": "DataRecorderElm",
+      "label": "Data Export",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DataRecorderElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AudioOutputElm",
+      "revision": 1,
+      "type": "AudioOutputElm",
+      "label": "Audio Output",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AudioOutputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:StopTriggerElm",
+      "revision": 1,
+      "type": "StopTriggerElm",
+      "label": "Stop Trigger",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "StopTriggerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DCMotorElm",
+      "revision": 1,
+      "type": "DCMotorElm",
+      "label": "DC Motor",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DCMotorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ThreePhaseMotorElm",
+      "revision": 1,
+      "type": "ThreePhaseMotorElm",
+      "label": "3-Phase Motor",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ThreePhaseMotorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:WattmeterElm",
+      "revision": 1,
+      "type": "WattmeterElm",
+      "label": "Wattmeter (old)",
+      "category": "Instruments",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "WattmeterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DiodeElm",
+      "revision": 1,
+      "type": "DiodeElm",
+      "label": "Diode",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DiodeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:ZenerElm",
+      "revision": 1,
+      "type": "ZenerElm",
+      "label": "Zener Diode",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ZenerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NTransistorElm",
+      "revision": 1,
+      "type": "NTransistorElm",
+      "label": "Transistor (bipolar, NPN)",
+      "category": "Semiconductors",
+      "aliases": [
+        "bjt",
+        "NPN transistor"
+      ],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NTransistorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:PTransistorElm",
+      "revision": 1,
+      "type": "PTransistorElm",
+      "label": "Transistor (bipolar, PNP)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PTransistorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NMosfetElm",
+      "revision": 1,
+      "type": "NMosfetElm",
+      "label": "MOSFET (N-Channel)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NMosfetElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:PMosfetElm",
+      "revision": 1,
+      "type": "PMosfetElm",
+      "label": "MOSFET (P-Channel)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PMosfetElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NJfetElm",
+      "revision": 1,
+      "type": "NJfetElm",
+      "label": "JFET (N-Channel)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NJfetElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:PJfetElm",
+      "revision": 1,
+      "type": "PJfetElm",
+      "label": "JFET (P-Channel)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PJfetElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SCRElm",
+      "revision": 1,
+      "type": "SCRElm",
+      "label": "SCR",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SCRElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DiacElm",
+      "revision": 1,
+      "type": "DiacElm",
+      "label": "DIAC",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DiacElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TriacElm",
+      "revision": 1,
+      "type": "TriacElm",
+      "label": "TRIAC",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TriacElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:NDarlingtonElm",
+      "revision": 1,
+      "type": "NDarlingtonElm",
+      "label": "Darlington Pair (NPN)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NDarlingtonElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:PDarlingtonElm",
+      "revision": 1,
+      "type": "PDarlingtonElm",
+      "label": "Darlington Pair (PNP)",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PDarlingtonElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:VaractorElm",
+      "revision": 1,
+      "type": "VaractorElm",
+      "label": "Varactor/Varicap",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "VaractorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TunnelDiodeElm",
+      "revision": 1,
+      "type": "TunnelDiodeElm",
+      "label": "Tunnel Diode",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TunnelDiodeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TriodeElm",
+      "revision": 1,
+      "type": "TriodeElm",
+      "label": "Triode",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TriodeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:UnijunctionElm",
+      "revision": 1,
+      "type": "UnijunctionElm",
+      "label": "Unijunction Transistor",
+      "category": "Semiconductors",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "UnijunctionElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:OpAmpElm",
+      "revision": 1,
+      "type": "OpAmpElm",
+      "label": "Op amp (ideal)",
+      "category": "Analog",
+      "aliases": [
+        "opamp",
+        "operational amplifier"
+      ],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OpAmpElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Ideal amplifier. No bandwidth, slew-rate or supply-current model.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:OpAmpSwapElm",
+      "revision": 1,
+      "type": "OpAmpSwapElm",
+      "label": "Op Amp (ideal, + on top)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OpAmpSwapElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:OpAmpRealElm",
+      "revision": 1,
+      "type": "OpAmpRealElm",
+      "label": "Op Amp (real)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OpAmpRealElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AnalogSwitchElm",
+      "revision": 1,
+      "type": "AnalogSwitchElm",
+      "label": "Analog Switch (SPST)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AnalogSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AnalogSwitch2Elm",
+      "revision": 1,
+      "type": "AnalogSwitch2Elm",
+      "label": "Analog Switch (SPDT)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AnalogSwitch2Elm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:AnalogMuxElm",
+      "revision": 1,
+      "type": "AnalogMuxElm",
+      "label": "Analog Multiplexer",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AnalogMuxElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TriStateElm",
+      "revision": 1,
+      "type": "TriStateElm",
+      "label": "Tristate Buffer",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TriStateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SchmittElm",
+      "revision": 1,
+      "type": "SchmittElm",
+      "label": "Schmitt Trigger",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SchmittElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:InvertingSchmittElm",
+      "revision": 1,
+      "type": "InvertingSchmittElm",
+      "label": "Schmitt Trigger (Inverting)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "InvertingSchmittElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DelayBufferElm",
+      "revision": 1,
+      "type": "DelayBufferElm",
+      "label": "Delay Buffer",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DelayBufferElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CC2Elm",
+      "revision": 1,
+      "type": "CC2Elm",
+      "label": "CCII+",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CC2Elm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CC2NegElm",
+      "revision": 1,
+      "type": "CC2NegElm",
+      "label": "CCII-",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CC2NegElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ComparatorElm",
+      "revision": 1,
+      "type": "ComparatorElm",
+      "label": "Comparator (Hi-Z/GND output)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ComparatorElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:OTAElm",
+      "revision": 1,
+      "type": "OTAElm",
+      "label": "OTA (LM13700 style)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OTAElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:NortonAmpElm",
+      "revision": 1,
+      "type": "NortonAmpElm",
+      "label": "Norton Amp (LM3900)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NortonAmpElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ControlledVoltageElm",
+      "revision": 1,
+      "type": "ControlledVoltageElm",
+      "label": "Controlled Voltage Source (2-terminal)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ControlledVoltageElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ControlledCurrentElm",
+      "revision": 1,
+      "type": "ControlledCurrentElm",
+      "label": "Controlled Current Source (2-terminal)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ControlledCurrentElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:VCVSElm",
+      "revision": 1,
+      "type": "VCVSElm",
+      "label": "Voltage-Controlled Voltage Source (VCVS)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "VCVSElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:VCCSElm",
+      "revision": 1,
+      "type": "VCCSElm",
+      "label": "Voltage-Controlled Current Source (VCCS)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "VCCSElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CCVSElm",
+      "revision": 1,
+      "type": "CCVSElm",
+      "label": "Current-Controlled Voltage Source (CCVS)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CCVSElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CCCSElm",
+      "revision": 1,
+      "type": "CCCSElm",
+      "label": "Current-Controlled Current Source (CCCS)",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CCCSElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:OptocouplerElm",
+      "revision": 1,
+      "type": "OptocouplerElm",
+      "label": "Optocoupler",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OptocouplerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TimeDelayRelayElm",
+      "revision": 1,
+      "type": "TimeDelayRelayElm",
+      "label": "Time Delay Relay",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TimeDelayRelayElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:MotorProtectionSwitchElm",
+      "revision": 1,
+      "type": "MotorProtectionSwitchElm",
+      "label": "Motor Protection Switch",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MotorProtectionSwitchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SubcircuitElm",
+      "revision": 1,
+      "type": "SubcircuitElm",
+      "label": "Subcircuit Instance",
+      "category": "Analog",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SubcircuitElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LogicInputElm",
+      "revision": 1,
+      "type": "LogicInputElm",
+      "label": "Logic Input",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LogicInputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:LogicOutputElm",
+      "revision": 1,
+      "type": "LogicOutputElm",
+      "label": "Logic Output",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LogicOutputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:BusLogicInputElm",
+      "revision": 1,
+      "type": "BusLogicInputElm",
+      "label": "Bus Input",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "BusLogicInputElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:InverterElm",
+      "revision": 1,
+      "type": "InverterElm",
+      "label": "Inverter",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "InverterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NandGateElm",
+      "revision": 1,
+      "type": "NandGateElm",
+      "label": "NAND Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NandGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:NorGateElm",
+      "revision": 1,
+      "type": "NorGateElm",
+      "label": "NOR Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "NorGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:AndGateElm",
+      "revision": 1,
+      "type": "AndGateElm",
+      "label": "AND Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "AndGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:OrGateElm",
+      "revision": 1,
+      "type": "OrGateElm",
+      "label": "OR Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "OrGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:XorGateElm",
+      "revision": 1,
+      "type": "XorGateElm",
+      "label": "XOR Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "XorGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:XnorGateElm",
+      "revision": 1,
+      "type": "XnorGateElm",
+      "label": "XNOR Gate",
+      "category": "Logic",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "XnorGateElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DFlipFlopElm",
+      "revision": 1,
+      "type": "DFlipFlopElm",
+      "label": "D Flip-Flop",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DFlipFlopElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:JKFlipFlopElm",
+      "revision": 1,
+      "type": "JKFlipFlopElm",
+      "label": "JK Flip-Flop",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "JKFlipFlopElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:TFlipFlopElm",
+      "revision": 1,
+      "type": "TFlipFlopElm",
+      "label": "T Flip-Flop",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TFlipFlopElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:SevenSegElm",
+      "revision": 1,
+      "type": "SevenSegElm",
+      "label": "7 Segment LED",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SevenSegElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SevenSegDecoderElm",
+      "revision": 1,
+      "type": "SevenSegDecoderElm",
+      "label": "7 Segment Decoder",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SevenSegDecoderElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:MultiplexerElm",
+      "revision": 1,
+      "type": "MultiplexerElm",
+      "label": "Multiplexer",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MultiplexerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DeMultiplexerElm",
+      "revision": 1,
+      "type": "DeMultiplexerElm",
+      "label": "Demultiplexer",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DeMultiplexerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SipoShiftElm",
+      "revision": 1,
+      "type": "SipoShiftElm",
+      "label": "SIPO shift register",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SipoShiftElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:PisoShiftElm",
+      "revision": 1,
+      "type": "PisoShiftElm",
+      "label": "PISO shift register",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PisoShiftElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:CounterElm",
+      "revision": 1,
+      "type": "CounterElm",
+      "label": "Counter",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "CounterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:Counter2Elm",
+      "revision": 1,
+      "type": "Counter2Elm",
+      "label": "Counter w/ Load",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "Counter2Elm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DecadeElm",
+      "revision": 1,
+      "type": "DecadeElm",
+      "label": "Ring Counter",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DecadeElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:LatchElm",
+      "revision": 1,
+      "type": "LatchElm",
+      "label": "Latch/Register",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "LatchElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SeqGenElm",
+      "revision": 1,
+      "type": "SeqGenElm",
+      "label": "Sequence generator",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SeqGenElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:FullAdderElm",
+      "revision": 1,
+      "type": "FullAdderElm",
+      "label": "Adder",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "FullAdderElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:HalfAdderElm",
+      "revision": 1,
+      "type": "HalfAdderElm",
+      "label": "Half Adder",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "HalfAdderElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:UserDefinedLogicElm",
+      "revision": 1,
+      "type": "UserDefinedLogicElm",
+      "label": "Custom Logic",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "UserDefinedLogicElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:SRAMElm",
+      "revision": 1,
+      "type": "SRAMElm",
+      "label": "Static RAM",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "SRAMElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ROMElm",
+      "revision": 1,
+      "type": "ROMElm",
+      "label": "ROM",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ROMElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:BusTransceiverElm",
+      "revision": 1,
+      "type": "BusTransceiverElm",
+      "label": "Bus Transceiver",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "BusTransceiverElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:BusSplitterElm",
+      "revision": 1,
+      "type": "BusSplitterElm",
+      "label": "Bus Splitter",
+      "category": "Digital ICs",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "BusSplitterElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:TimerElm",
+      "revision": 1,
+      "type": "TimerElm",
+      "label": "555 timer (behavioral)",
+      "category": "Mixed signal",
+      "aliases": [
+        "555",
+        "NE555"
+      ],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "TimerElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "placement-tested",
+        "limits": "Generic timer behavior; not a validated manufacturer NE555 model.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": [
+        "tests/catalog.cjs",
+        "tests/placement.cjs"
+      ]
+    },
+    {
+      "id": "circuitjs:PhaseCompElm",
+      "revision": 1,
+      "type": "PhaseCompElm",
+      "label": "Phase Comparator",
+      "category": "Mixed signal",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "PhaseCompElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:DACElm",
+      "revision": 1,
+      "type": "DACElm",
+      "label": "DAC",
+      "category": "Mixed signal",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "DACElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:ADCElm",
+      "revision": 1,
+      "type": "ADCElm",
+      "label": "ADC",
+      "category": "Mixed signal",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "ADCElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:VCOElm",
+      "revision": 1,
+      "type": "VCOElm",
+      "label": "VCO",
+      "category": "Mixed signal",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "VCOElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    },
+    {
+      "id": "circuitjs:MonostableElm",
+      "revision": 1,
+      "type": "MonostableElm",
+      "label": "Monostable",
+      "category": "Mixed signal",
+      "aliases": [],
+      "symbol": {
+        "backend": "circuitjs",
+        "class": "MonostableElm",
+        "pinContract": "Runtime pin UUID, engine index/name, grid anchor and electrical role; see StudioAPI/pinRole"
+      },
+      "model": {
+        "backend": "CircuitJS1",
+        "license": "GPL-2.0-or-later",
+        "status": "unvalidated",
+        "limits": "Upstream behavioral model; no manufacturer or hardware certification.",
+        "electricalStatus": "unvalidated"
+      },
+      "package": null,
+      "provenance": {
+        "source": "https://github.com/pfalstad/circuitjs1",
+        "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+        "license": "GPL-2.0-or-later"
+      },
+      "fixtures": []
+    }
+  ]
+}

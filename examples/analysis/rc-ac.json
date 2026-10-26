@@ -1,0 +1,12 @@
+{
+  "probes": [
+    "out"
+  ],
+  "circuit": "V1 in 0 0 AC 1\nR1 in out 1k\nC1 out 0 1u",
+  "mode": "ac",
+  "settings": {
+    "start": 10,
+    "stop": 100000,
+    "points": 20
+  }
+}

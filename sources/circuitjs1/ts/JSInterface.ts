@@ -18,6 +18,8 @@
 */
 
 
+import { StudioAPI } from './StudioAPI';
+
 export class JSInterface {
     app: any;
 
@@ -61,11 +63,18 @@ export class JSInterface {
 
     setupJSInterface(): void {
         const that = this;
+        const studio = new StudioAPI(this.app);
         (window as any).CircuitJS1 = {
-            getNetlist: () => {
-                that.app.sim.analyzeCircuit();
-                return that.app.elmList.map((e: any, id: number) => ({id, type: e.getClassName(), value: String(e.resistance ?? e.capacitance ?? e.inductance ?? e.maxVoltage ?? ""), pins: Array.from({length: e.getPostCount()}, (_, i) => ({net: e.nodes[i]?.index ?? -1, x: e.getPost(i)?.x, y: e.getPost(i)?.y}))}));
-            },
+            advanceSteps: (count:number) => studio.advanceSteps(count),
+            getNetlist: () => studio.elements(),
+            getDesignElements: () => studio.elements(),
+            getCatalog: () => studio.catalog(),
+            selectElement: (id:string,center=false) => studio.select(id,center),
+            getSelection: () => studio.selection(),
+            getProperties: (id:string) => studio.properties(id),
+            setProperty: (id:string,index:number,value:string|number) => studio.setProperty(id,index,value),
+            setMetadata: (id:string,meta:any) => studio.metadata(id,meta),
+            editElement: (id:string) => studio.edit(id),
             command: (menu: string, item: string) => that.app.commands.menuPerformed(menu, item),
             reset: () => that.app.ui.resetAction(),
             setSimRunning:  (run: boolean) => that.setSimRunning(run),
@@ -79,7 +88,7 @@ export class JSInterface {
             setExtVoltage:  (n: string, v: number) => that.setExtVoltage(n, v),
             getElements:    () => that.getJSElements(),
             getCircuitAsSVG: () => that.doExportAsSVGFromAPI(),
-            exportCircuit:  () => that.dumpCircuit(),
+            exportCircuit:  (saveState=true) => that.app.dumpCircuit(saveState),
             importCircuit:  (circuit: string, subcircuitsOnly: boolean) => that.importCircuitFromText(circuit, subcircuitsOnly),
         };
         const hook = (window as any).oncircuitjsloaded;

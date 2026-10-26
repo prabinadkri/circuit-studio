@@ -74,10 +74,10 @@ var fdeb = new u8([
   0
 ]);
 var clim = new u8([16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]);
-var freb = function(eb, start2) {
+var freb = function(eb, start) {
   var b = new u16(31);
   for (var i2 = 0; i2 < 31; ++i2) {
-    b[i2] = start2 += 1 << eb[i2 - 1];
+    b[i2] = start += 1 << eb[i2 - 1];
   }
   var r = new i32(b[30]);
   for (var i2 = 1; i2 < 30; ++i2) {
@@ -708,42 +708,50 @@ function zipSync(data, opts) {
 // web/manufacture-source.js
 var coordinate = (v) => Math.round(v * 1e6).toString();
 var xy = (p) => "X" + coordinate(p.x) + "Y" + coordinate(80 - p.y);
-function start(name) {
-  return [`G04 Circuit Studio - ${name}*`, "%FSLAX46Y46*%", "%MOMM*%", "%LPD*%", "%ADD10C,0.500000*%", "%ADD11C,2.000000*%", "%ADD12C,2.100000*%", "%ADD13C,0.050000*%", "G01*"];
-}
 function manufacturingFiles(board) {
   const issues = board.issues();
   if (issues.length) throw Error("Resolve board checks before exporting Gerbers: " + issues.join("; "));
-  const files = {};
-  const pads = board.pads();
-  for (const [layer, extension] of [["F.Cu", "gtl"], ["B.Cu", "gbl"]]) {
-    let g = start(layer);
-    g.push("D11*");
-    for (const p of pads) g.push(xy(p) + "D03*");
-    g.push("D10*");
-    for (const t of board.tracks.filter((t2) => t2.layer === layer)) {
-      const ps = board.points(t);
-      g.push(xy(ps[0]) + "D02*");
-      for (const p of ps.slice(1)) g.push(xy(p) + "D01*");
+  const files = {}, pads = board.pads();
+  function gerber(name, selected, { expand = 0, tracks = false } = {}) {
+    const apertures = /* @__PURE__ */ new Map(), dimensions = (p) => {
+      let w = p.width + expand, h = p.height + expand;
+      if (p.rotation % 180) [w, h] = [h, w];
+      return { shape: p.shape === "rect" ? "R" : "C", w, h };
+    };
+    for (const p of selected) {
+      const d2 = dimensions(p), key = JSON.stringify(d2);
+      if (!apertures.has(key)) apertures.set(key, { ...d2, code: 20 + apertures.size });
     }
-    g.push("M02*");
-    files["board-" + layer + "." + extension] = g.join("\n") + "\n";
+    const g = [`G04 Circuit Studio ${name}*`, "%FSLAX46Y46*%", "%MOMM*%", "%LPD*%", "%ADD10C,0.500000*%", ...Array.from(apertures.values(), (a) => `%ADD${a.code}${a.shape},${a.w.toFixed(6)}${a.shape === "R" ? "X" + a.h.toFixed(6) : ""}*%`), "G01*"];
+    for (const p of selected) {
+      g.push("D" + apertures.get(JSON.stringify(dimensions(p))).code + "*", xy(p) + "D03*");
+    }
+    if (tracks) {
+      g.push("D10*");
+      for (const t of board.tracks.filter((t2) => t2.layer === name)) {
+        const ps = board.points(t);
+        g.push(xy(ps[0]) + "D02*");
+        for (const p of ps.slice(1)) g.push(xy(p) + "D01*");
+      }
+    }
+    return g.concat("M02*").join("\n") + "\n";
   }
-  for (const [side, ext] of [["F", "gts"], ["B", "gbs"]]) {
-    let g = start(side + " mask");
-    g.push("D12*");
-    for (const p of pads) g.push(xy(p) + "D03*");
-    g.push("M02*");
-    files["board-" + side + ".Mask." + ext] = g.join("\n") + "\n";
+  for (const [side, copper, mask, paste] of [["F", "gtl", "gts", "gtp"], ["B", "gbl", "gbs", "gbp"]]) {
+    const selected = pads.filter((p) => p.layers.includes(side + ".Cu"));
+    files[`board-${side}.Cu.${copper}`] = gerber(side + ".Cu", selected, { tracks: true });
+    files[`board-${side}.Mask.${mask}`] = gerber(side + " mask", selected, { expand: 0.1 });
+    files[`board-${side}.Paste.${paste}`] = gerber(side + " paste", selected.filter((p) => !p.drill));
   }
-  let edge = start("Edge.Cuts");
-  edge.push("D13*", xy({ x: 10, y: 10 }) + "D02*");
-  for (const p of [{ x: 110, y: 10 }, { x: 110, y: 70 }, { x: 10, y: 70 }, { x: 10, y: 10 }]) edge.push(xy(p) + "D01*");
-  edge.push("M02*");
-  files["board-Edge.Cuts.gm1"] = edge.join("\n") + "\n";
-  files["board-PTH.drl"] = ["M48", "; Circuit Studio plated through holes", "METRIC,TZ", "T01C0.800", "G90", "%", "G05", "T01", ...pads.map((p) => "X" + p.x.toFixed(4) + "Y" + (80 - p.y).toFixed(4)), "M30", ""].join("\n");
+  files["board-Edge.Cuts.gm1"] = ["G04 Circuit Studio board outline*", "%FSLAX46Y46*%", "%MOMM*%", "%ADD10C,0.050000*%", "G01*", "D10*", xy({ x: 10, y: 10 }) + "D02*", ...[{ x: 110, y: 10 }, { x: 110, y: 70 }, { x: 10, y: 70 }, { x: 10, y: 10 }].map((p) => xy(p) + "D01*"), "M02*", ""].join("\n");
+  const drills = [...new Set(pads.map((p) => p.drill).filter(Boolean))].sort((a, b) => a - b), d = ["M48", "; Plated through holes", "METRIC,TZ", ...drills.map((v, i2) => `T${String(i2 + 1).padStart(2, "0")}C${v.toFixed(3)}`), "G90", "%", "G05"];
+  for (const [i2, size] of drills.entries()) {
+    d.push("T" + String(i2 + 1).padStart(2, "0"));
+    for (const p of pads.filter((p2) => p2.drill === size)) d.push("X" + p.x.toFixed(4) + "Y" + (80 - p.y).toFixed(4));
+  }
+  d.push("M30", "");
+  files["board-PTH.drl"] = d.join("\n");
   files["board.kicad_pcb"] = board.toKiCad();
-  files["README.txt"] = "Circuit Studio fabrication export\n\nTwo copper layers; 100 x 60 mm outline; 1.6 mm nominal board thickness.\nThrough-hole pads: 2 mm diameter, 0.8 mm plated drill. Tracks: 0.5 mm.\nSolder mask openings: 2.1 mm diameter. No silkscreen or paste layers.\nGerber units: millimeters, 4 integer / 6 fractional digits, absolute coordinates.\nAll layers and drills use the same coordinate origin and Y direction.\n\nBasic local checks passed. Inspect Gerbers and verify footprint dimensions,\ncomponent polarity, hole sizes, and manufacturer capabilities before ordering.\nThese generic footprints are not a validated manufacturer part library.\n";
+  files["README.txt"] = "Circuit Studio fabrication export\n\n100 x 60 mm, two copper layers, 1.6 mm nominal thickness.\nPad sizes and drills come from the assigned package; SMD pads are side-specific.\nMask expansion is 0.05 mm per side; paste uses the SMD pad geometry.\nGerber uses millimeters, 4 integer / 6 fractional digits. All files share an origin.\nNo Gerber silkscreen output yet; KiCad export includes references.\nChecks cover supported connectivity, layer access, copper clearance and edges.\nVerify exact manufacturer dimensions, mask/paste rules and fabrication outputs.\n";
   return files;
 }
 function gerberZip(board) {

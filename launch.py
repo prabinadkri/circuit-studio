@@ -3,7 +3,9 @@
 import argparse
 import json
 import secrets
-from pic_backend import PicBackend
+from pic_worker import PicSessions
+from project_store import ProjectStore
+from analysis_backend import AnalysisBackend
 import functools
 import http.server
 import os
@@ -27,20 +29,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path=='/api/session':
             if self.headers.get('Host')!=self.server.local_host:
                 return self.json_response({'error':'Invalid host'},403)
-            return self.json_response({'token':self.server.cs_token,'apiVersion':2})
+            return self.json_response({'token':self.server.cs_token,'apiVersion':2,'capabilities':['project-store','isolated-pic','ngspice-analysis']})
         super().do_GET()
     def do_POST(self):
-        if self.path!='/api/pic': return self.json_response({'error':'Not found'},404)
+        if self.path not in ('/api/pic','/api/projects','/api/analysis'): return self.json_response({'error':'Not found'},404)
         if self.headers.get('Host')!=self.server.local_host or self.headers.get('Origin')!='http://'+self.server.local_host or self.headers.get('X-Studio-Token')!=self.server.cs_token:
             return self.json_response({'error':'Invalid local session'},403)
         try:
             length=int(self.headers.get('Content-Length','0'))
-            if not 0<length<=120000: raise ValueError('Request too large or empty')
+            if not 0<length<=(10_000_000 if self.path=='/api/projects' else 120000): raise ValueError('Request too large or empty')
             request=json.loads(self.rfile.read(length))
             if not isinstance(request,dict): raise ValueError('Expected a JSON object')
-            with self.server.pic_init_lock:
-                if self.server.pic is None: self.server.pic=PicBackend(ROOT)
-            result=self.server.pic.handle(request)
+            if self.path=='/api/projects':
+                action=request.get('action')
+                if action=='save': result=self.server.projects.save(request.get('project'))
+                elif action=='list': result=self.server.projects.list()
+                elif action=='load': result=self.server.projects.load(request.get('id'))
+                else: raise ValueError('Unknown project action')
+            elif self.path=='/api/analysis':
+                if not self.server.analysis_lock.acquire(blocking=False):raise ValueError('An analysis is already running')
+                try:result=AnalysisBackend().run(request)
+                finally:self.server.analysis_lock.release()
+            else:
+                with self.server.pic_init_lock:
+                    if self.server.pic is None: self.server.pic=PicSessions(ROOT)
+                result=self.server.pic.handle(request)
         except (ValueError,TypeError,OSError) as exc:
             return self.json_response({'error':str(exc)},400)
         self.json_response(result)
@@ -66,6 +79,8 @@ def main():
     server.local_host=f'127.0.0.1:{server.server_port}'
     server.pic=None
     server.pic_init_lock=threading.Lock()
+    server.analysis_lock=threading.Lock()
+    server.projects=ProjectStore(Path(os.environ.get('CIRCUIT_STUDIO_PROJECTS',str(ROOT/'projects'))))
     url = f'http://127.0.0.1:{server.server_port}/'
     print(f'Circuit Studio: {url}', flush=True)
     if args.serve:
@@ -74,6 +89,7 @@ def main():
         except KeyboardInterrupt:
             pass
         finally:
+            if server.pic: server.pic.close()
             server.server_close()
         return
     browser = next((shutil.which(x) for x in ['google-chrome', 'chromium', 'chromium-browser', 'microsoft-edge'] if shutil.which(x)), None)
@@ -90,6 +106,7 @@ def main():
         print(f'Browser could not start. See {state / "browser.log"}', file=sys.stderr)
     finally:
         server.shutdown()
+        if server.pic: server.pic.close()
         server.server_close()
 if __name__ == '__main__':
     main()

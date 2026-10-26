@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
@@ -6,7 +7,7 @@ import {build} from 'esbuild';
 const root=fileURLToPath(new URL('../',import.meta.url));
 process.chdir(root);
 const run=(cmd,args,cwd=root)=>execFileSync(cmd,args,{cwd,stdio:'inherit'});
-for(const name of ['mcu','manufacture'])await build({entryPoints:[`web/${name}-source.js`],bundle:true,format:'esm',outfile:`web/${name}.js`});
+for(const name of ['mcu','manufacture','scheduler'])await build({entryPoints:[`web/${name}-source.js`],bundle:true,format:'esm',outfile:`web/${name}.js`});
 fs.mkdirSync('web/demos',{recursive:true});
 for(const file of fs.readdirSync('examples/lab')){if(/\.(hex|asm|c|S)$/.test(file))fs.copyFileSync('examples/lab/'+file,'web/demos/'+file.replace('pic16f84a-','pic-'));}
 const engine=path.join(root,'sources/circuitjs1/ts');
@@ -17,4 +18,6 @@ fs.cpSync(path.join(engine,'dist'),'web/engine',{recursive:true});
 run('make',['-C','sources/picsim/src','-j4','static']);
 run('gcc',['-O2','-shared','-fPIC','-I','sources/picsim/include','native/pic_bridge.c','-Wl,--whole-archive','sources/picsim/src/libpicsim.a','-Wl,--no-whole-archive','-o','native/libcircuitpic.new.so']);
 fs.renameSync('native/libcircuitpic.new.so','native/libcircuitpic.so');
+const assets=['web/library.json','web/footprints.js','web/mcu.js','web/scheduler.js','web/engine/circuitjs.html',...fs.readdirSync('web/engine/circuitjs').filter(f=>f.endsWith('.js')).map(f=>'web/engine/circuitjs/'+f)];
+fs.writeFileSync('web/asset-manifest.json',JSON.stringify({schema:1,revision:'0.3.0-alpha.1',assets:assets.map(file=>({path:file.slice(4),sha256:createHash('sha256').update(fs.readFileSync(file)).digest('hex')}))},null,2)+'\n');
 console.log('Circuit Studio built. Run ./run.sh');

@@ -498,8 +498,18 @@ export class CirSim {
         return UndoManager.withoutSliders(this.dumpCircuit(false)) !== UndoManager.withoutSliders(this.savedDump);
     }
 
+    ensureStudioIds(): void {
+        const ids=new Set<string>(), pins=new Set<string>();
+        for(const e of this.elmList){
+            if(ids.has(e.studioId)){e.studioId=crypto.randomUUID();e.studioPins=[];e.studioMeta={...e.studioMeta,reference:''};}
+            ids.add(e.studioId);e.ensureStudioIdentity();
+            e.studioPins=e.studioPins.map((p:string)=>{if(pins.has(p))p=crypto.randomUUID();pins.add(p);return p;});
+        }
+    }
+
     // saveState=false: without simulation state or scopes (see CircuitXMLSerializer)
     dumpCircuit(saveState: boolean = true): string {
+        this.ensureStudioIds();
         CustomLogicModel.clearDumpedFlags();
         HookRegistry.clearSubcircuitModelDumpedFlags?.();
         DiodeModel.clearDumpedFlags();

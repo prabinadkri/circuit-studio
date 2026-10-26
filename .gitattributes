@@ -1,0 +1,4 @@
+
+# Preserve generated JavaScript string literals and upstream license bytes.
+web/engine/circuitjs/*.js -whitespace
+sources/ngspice/COPYRIGHT -whitespace

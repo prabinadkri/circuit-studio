@@ -23,4 +23,10 @@ with tempfile.TemporaryDirectory() as tmp:
             subprocess.run([os.environ.get('AVR_OBJCOPY','avr-objcopy'),'-O','ihex','-R','.eeprom',str(target.with_suffix('.elf')),str(target.with_suffix('.hex'))],check=True)
         else:continue
         src.with_suffix('.hex').write_text(target.with_suffix('.hex').read_text())
+with tempfile.TemporaryDirectory() as tmp:
+    elf=Path(tmp)/'scheduler.elf'
+    subprocess.run([os.environ.get('AVR_GCC','avr-gcc'),'-mmcu=atmega328p','-Os','-DF_CPU=16000000UL',str(ROOT/'spikes/pwm-adc.c'),'-o',str(elf)],check=True)
+    subprocess.run([os.environ.get('AVR_OBJCOPY','avr-objcopy'),'-O','ihex','-R','.eeprom',str(elf),str(ROOT/'web/demos/scheduler-pwm-adc.hex')],check=True)
+    generated=ROOT/'web/demos/scheduler-pwm-adc.hex'
+    generated.write_text(generated.read_text())
 print('Lab firmware rebuilt. Run npm run build to publish assets.')

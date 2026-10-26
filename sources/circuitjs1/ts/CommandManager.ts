@@ -127,6 +127,9 @@ export class CommandManager {
             this.doEdit(new EditOptions(this.app, this.app.sim));
         if (item == "devtools")
             CommandManager.toggleDevTools();
+        if ((item == "undo" || item == "redo") && (window as any).CircuitJS1?.onhistorycommand) {
+            (window as any).CircuitJS1.onhistorycommand(item); return;
+        }
         if (item == "undo")
             this.app.undoManager?.doUndo();
         if (item == "redo")

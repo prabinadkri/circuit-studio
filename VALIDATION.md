@@ -6,7 +6,7 @@ Validated locally on Ubuntu 24.04, x86-64, Python 3.12, Node.js 22 and Google Ch
 
 Run `npm test` after building:
 
-- Fourteen Python tests, including parameterized checks across all five PIC models: compiled blink through 1.6 million cycles, RB1 input driving RB0, DIP pin numbers, target-specific HEX bounds, configuration/EEPROM records, isolated C contexts, stale-session rejection, analog input validation and compatibility with an already-running 0.1 launcher.
+- Twenty-five Python tests, including parameterized checks across all five PIC models: compiled blink through 1.6 million cycles, RB1 input driving RB0, DIP pin numbers, target-specific HEX bounds, configuration/EEPROM records, isolated C contexts, stale-session rejection, analog input validation and compatibility with an already-running 0.1 launcher.
 - PIC16F877A, PIC18F4520 and PIC18F4550 compiled ADC programs return 0, 255, 511 and 1023 for 0, 1.25, 2.5 and 5 V respectively.
 - Browser tests exercise all eight profiles: real compiled button firmware, live input/output changes, device-specific pin references and ADC midpoint readings where available. Nano A7 returns full-scale at 5 V and has no digital output button.
 - A real schematic `IN_RA0` node at 1.25 V overrides the manual slider and produces an ADC value of 255. The manual control becomes disabled and shows the schematic voltage.
@@ -22,9 +22,19 @@ Run `npm test` after building:
 
 Run `npm run test:engine` for the upstream engine tests plus the local regression for redundant undo snapshots.
 
+## v0.3 milestone checks
+
+See [15-ticket acceptance ledger](docs/planning/MILESTONE-15.md) for exact gates and limitations. Eight domain tests cover topology IDs, history, recovery corruption, unit parsing, independent asset validation, package transforms, ERC and malformed project rejection. Browser suites add real v1 migration, clipboard identity, unit-aware inspector/package/NC edits, diagnostic navigation, cross-domain undo, atomic local storage, 32 common component placements, responsive layouts, non-destructive board updates and standalone analysis persistence/CSV.
+
+The scheduler fixture tests actual timer PWM through the CircuitJS RC solver back into AVR ADC under UI stalls. It is an isolated feasibility experiment; production mixed-signal synchronization remains unfinished. Five ngspice references are numerically compared with circuit equations/model bounds; unsupported directives are rejected. All five must execute without skips for milestone validation.
+
+Killed/timed-out PIC workers cannot mutate disk project files; two sessions and repeated reset/step sequences are tested. Atomic-save fault injection recovers the prior complete revision. Saved CPU execution state is intentionally outside the project contract.
+
 ## Independent file-format checks
 
 During development, KiCad CLI 10.0.7 opened generated `.kicad_pcb` files and generated Gerbers. Gerbonara parsed the application's own Gerber and Excellon output: four through-hole flashes per copper layer, two front-copper track segments for the test fixture, four outline edges, and four plated drill locations. Copper and drill coordinates matched.
+
+The v0.3 multi-package fixture adds DIP-28, bottom-side rotated SOIC-8 and a rotated header: 42 copper pads, 34 drilled pads, 8 bottom paste flashes. KiCad CLI 10.0.7 regenerated Gerbers successfully. Gerbonara independently verified copper coordinates on both sides, rotated SMD pad sizes and drill positions/diameters against the source geometry. `spikes/verify-packages.py` reproduces this check. This does not complete the broader CS-043 routing/manufacturing parity ticket.
 
 ## Not yet validated
 

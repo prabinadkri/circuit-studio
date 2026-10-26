@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-26T13:04:57.339Z",
+  "machine": {
+    "platform": "linux",
+    "release": "6.17.0-40-generic",
+    "cpus": "12th Gen Intel(R) Core(TM) i5-12450H",
+    "memoryGB": 15
+  },
+  "offline": "All non-local HTTP requests blocked",
+  "results": [
+    {
+      "candidate": "system-chromium",
+      "trials": [
+        {
+          "startupMs": 566.393479,
+          "canvasMs": 57.69999999925494,
+          "ipcRoundtripMs": 8.2,
+          "solver1000Ms": 4.900000000372529,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "nodeExposed": false
+        },
+        {
+          "startupMs": 578.7240570000001,
+          "canvasMs": 63.40000000037253,
+          "ipcRoundtripMs": 7.884999999962747,
+          "solver1000Ms": 4.099999999627471,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "nodeExposed": false
+        },
+        {
+          "startupMs": 632.5883920000001,
+          "canvasMs": 66.5,
+          "ipcRoundtripMs": 5.964999999944121,
+          "solver1000Ms": 4,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+          "nodeExposed": false
+        }
+      ]
+    },
+    {
+      "candidate": "bundled-electron",
+      "trials": [
+        {
+          "startupMs": 1866.9857189999998,
+          "canvasMs": 13,
+          "ipcRoundtripMs": 7.075,
+          "solver1000Ms": 5.900000000372529,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.65 Electron/41.0.0 Safari/537.36",
+          "nodeExposed": false
+        },
+        {
+          "startupMs": 1728.3006480000004,
+          "canvasMs": 18.90000000037253,
+          "ipcRoundtripMs": 7.579999999981373,
+          "solver1000Ms": 4.200000001117587,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.65 Electron/41.0.0 Safari/537.36",
+          "nodeExposed": false
+        },
+        {
+          "startupMs": 1591.274762,
+          "canvasMs": 14.400000000372529,
+          "ipcRoundtripMs": 5.870000000018626,
+          "solver1000Ms": 4.399999998509884,
+          "parts": 15,
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.65 Electron/41.0.0 Safari/537.36",
+          "nodeExposed": false
+        }
+      ]
+    }
+  ]
+}

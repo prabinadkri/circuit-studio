@@ -10,3 +10,5 @@ sources/picsim/src/picsim
 sources/picsim/src/modules
 .DS_Store
 *.log
+
+projects/

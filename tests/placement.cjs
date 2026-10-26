@@ -34,7 +34,7 @@ let browser;
  console.log('PASS all 19 palette tools: click/drag, single undo/redo and serialization (wires require a drag)');
  await clear();
  for(const query of ['op amp','opamp','Op-Amp']){
-  await page.locator('#search').fill(query);assert.equal(await page.locator('#parts button').count(),1);
+  await page.locator('#search').fill(query);assert.equal(await page.locator('#parts [data-part="OpAmpElm"]').count(),1);
  }
  await page.locator('[data-part="OpAmpElm"]').click();
  assert.equal(await page.locator('[data-part="OpAmpElm"]').getAttribute('aria-pressed'),'true');

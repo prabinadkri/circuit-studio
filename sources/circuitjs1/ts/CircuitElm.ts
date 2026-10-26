@@ -41,6 +41,15 @@ import { parseIntStrict } from "./NumberParse";
 
 // circuit element class
 export abstract class CircuitElm implements Editable {
+    studioId: string = crypto.randomUUID();
+    studioPins: string[] = [];
+    studioType: string = '';
+    studioMeta: Record<string, any> = {};
+    ensureStudioIdentity(): void {
+        if (!this.studioType) this.studioType = this.getClassName();
+        while (this.studioPins.length < this.getPostCount()) this.studioPins.push(crypto.randomUUID());
+    }
+
     static voltageRange: number = 5;
     static colorScaleCount: number = 201; // odd so ground = gray
     static colorScale: Color[];
@@ -1524,12 +1533,25 @@ export abstract class CircuitElm implements Editable {
     getClassName(): string { return this.constructor.name; }
 
     dumpXml(doc: Document, elem: Element): void {
+        this.ensureStudioIdentity();
+        CircuitXMLSerializer.dumpAttr(elem, "sid", this.studioId);
+        CircuitXMLSerializer.dumpAttr(elem, "sp", this.studioPins.join(','));
+        CircuitXMLSerializer.dumpAttr(elem, "stype", this.studioType);
+        CircuitXMLSerializer.dumpAttr(elem, "smeta", JSON.stringify(this.studioMeta));
         CircuitXMLSerializer.dumpAttr(elem, "x", this.x + " " + this.y + " " + this.x2 + " " + this.y2);
         //if (flags != 0)   // can't do this because some elements set flags to a nonzero value in constructor
         CircuitXMLSerializer.dumpAttr(elem, "f", this.flags);
     }
 
     undumpXml(xml: CircuitXMLDeserializer): void {
+        const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        const id=xml.parseStringAttr('sid', '');
+        if (id && uuid.test(id)) this.studioId=id;
+        const pins=(xml.parseStringAttr('sp','')||'').split(',');
+        if (pins.length<1024 && pins.every(p=>uuid.test(p))) this.studioPins=pins;
+        this.studioType=xml.parseStringAttr('stype','')||'';
+        const meta=xml.parseStringAttr('smeta','{}')||'{}';
+        try {const m=JSON.parse(meta);if(meta.length<32768&&m&&typeof m==='object'&&!Array.isArray(m))this.studioMeta=m;}catch{}
         this.flags = xml.parseIntAttr("f", this.flags);
     }
 

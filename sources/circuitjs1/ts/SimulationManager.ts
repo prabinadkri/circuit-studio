@@ -1387,7 +1387,8 @@ export class SimulationManager {
     converged: boolean = false;
     subIterations: number = 0;
 
-    runCircuit(didAnalyze: boolean): void {
+    runCircuit(didAnalyze: boolean, fixedSteps = 0): void {
+    let completed = 0;
 	if (this.matrices == null || this.elmList.length === 0) {
 	    this.matrices = null;
 	    return;
@@ -1399,14 +1400,14 @@ export class SimulationManager {
 	const steprate = Math.trunc(160 * this.app.getIterCount());
 	let tm = Date.now();
 	let lit = this.lastIterTime;
-	if (lit === 0) {
+	if (lit === 0 && !fixedSteps) {
 	    this.lastIterTime = tm;
 	    return;
 	}
 
 	// Check if we don't need to run simulation (for very slow simulation speeds).
 	// If the circuit changed, do at least one iteration to make sure everything is consistent.
-	if (1000 >= steprate * (tm - this.lastIterTime) && !didAnalyze)
+	if (!fixedSteps && 1000 >= steprate * (tm - this.lastIterTime) && !didAnalyze)
 	    return;
 
 	const delayWireProcessing = this.app.scopeManager.canDelayWireProcessing();
@@ -1550,6 +1551,7 @@ export class SimulationManager {
 	    }
 //	    SimulationManager.console("set lastrightside at " + this.t + " " + this.lastNodeVoltages);
 
+	    if (fixedSteps) { if (++completed >= fixedSteps) break; else continue; }
 	    tm = Date.now();
 	    lit = tm;
 

@@ -1,0 +1,13 @@
+{
+  "probes": [
+    "out"
+  ],
+  "circuit": "V1 in 0 5\nR1 in out 1k\nR2 out 0 1k",
+  "mode": "dc",
+  "settings": {
+    "source": "V1",
+    "start": 0,
+    "stop": 5,
+    "step": 0.1
+  }
+}

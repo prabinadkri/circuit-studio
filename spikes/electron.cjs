@@ -1,0 +1,3 @@
+// Runtime comparison prototype; not the production launcher.
+const {app,BrowserWindow,session}=require('electron');
+app.whenReady().then(()=>{session.defaultSession.webRequest.onBeforeRequest((details,callback)=>callback({cancel:!details.url.startsWith(process.env.STUDIO_URL)&&!details.url.startsWith('devtools:')}));const window=new BrowserWindow({show:false,width:1366,height:900,webPreferences:{sandbox:true,contextIsolation:true,nodeIntegration:false}});window.webContents.setWindowOpenHandler(()=>({action:'deny'}));window.loadURL(process.env.STUDIO_URL);});app.on('window-all-closed',()=>app.quit());

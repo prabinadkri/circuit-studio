@@ -27,7 +27,7 @@ export function partIcon(type) {
  svg.setAttribute('aria-hidden','true');
  svg.setAttribute('focusable','false');
  const path=document.createElementNS(svg.namespaceURI,'path');
- path.setAttribute('d',paths[type]);
+ path.setAttribute('d',paths[type]||'M10 3H30V21H10Z M3 7H10 M3 17H10 M30 7H37 M30 17H37');
  svg.append(path);
  return svg;
 }

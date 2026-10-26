@@ -1,0 +1,676 @@
+[
+  {
+    "type": "ResistorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "CapacitorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "InductorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "PotElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      },
+      {
+        "name": "3",
+        "x": 448,
+        "y": 304
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "SwitchElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "PushSwitchElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "Switch2Elm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 336
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "TransformerElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      },
+      {
+        "name": "3",
+        "x": 416,
+        "y": 352
+      },
+      {
+        "name": "4",
+        "x": 480,
+        "y": 352
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "DCVoltageElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 384
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "ACVoltageElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 384
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "CurrentElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "GroundElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "OutputElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "DiodeElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "ZenerElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "LEDElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "NTransistorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 336
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "PTransistorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 336
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 304
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "NMosfetElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 336
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 304
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "PMosfetElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 336
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 304
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "OpAmpElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "ComparatorElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "3",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "TimerElm",
+    "pins": [
+      {
+        "name": "dis",
+        "x": 416,
+        "y": 352
+      },
+      {
+        "name": "tr",
+        "x": 416,
+        "y": 416
+      },
+      {
+        "name": "th",
+        "x": 416,
+        "y": 448
+      },
+      {
+        "name": "Vcc",
+        "x": 480,
+        "y": 288
+      },
+      {
+        "name": "ctl",
+        "x": 480,
+        "y": 480
+      },
+      {
+        "name": "out",
+        "x": 544,
+        "y": 384
+      },
+      {
+        "name": "rst",
+        "x": 544,
+        "y": 352
+      },
+      {
+        "name": "gnd",
+        "x": 512,
+        "y": 480
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "AndGateElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 512,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "OrGateElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 512,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "XorGateElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 512,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "NandGateElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 512,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "NorGateElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 336
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 304
+      },
+      {
+        "name": "3",
+        "x": 512,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "InverterElm",
+    "pins": [
+      {
+        "name": "1",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 480,
+        "y": 320
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "DFlipFlopElm",
+    "pins": [
+      {
+        "name": "D",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 320
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 384
+      },
+      {
+        "name": "4",
+        "x": 416,
+        "y": 352
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "JKFlipFlopElm",
+    "pins": [
+      {
+        "name": "J",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "2",
+        "x": 416,
+        "y": 352
+      },
+      {
+        "name": "K",
+        "x": 416,
+        "y": 384
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 320
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 384
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  },
+  {
+    "type": "TFlipFlopElm",
+    "pins": [
+      {
+        "name": "T",
+        "x": 416,
+        "y": 320
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 320
+      },
+      {
+        "name": "Q",
+        "x": 512,
+        "y": 384
+      },
+      {
+        "name": "4",
+        "x": 416,
+        "y": 352
+      }
+    ],
+    "status": "placement-and-serialization-tested",
+    "electrical": "unvalidated unless separately listed"
+  }
+]

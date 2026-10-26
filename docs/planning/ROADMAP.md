@@ -1,12 +1,12 @@
 # Circuit Studio: path to a professional Linux circuit lab
 
-**Audit date:** 26 October 2026. **Baseline:** `2b6eb6b791391f18e1de9e8c4d6dff0a748791d2`, v0.2 alpha. **Status:** implementation plan, with the placement repair below delivered in the accompanying change. Other milestones are proposals, not implemented features.
+**Audit date:** 26 October 2026. **Baseline:** `2b6eb6b791391f18e1de9e8c4d6dff0a748791d2`, v0.2 alpha. **Current progress:** 15 of 29 tickets pass their recorded acceptance gates in v0.3 alpha. See [milestone evidence](MILESTONE-15.md), [feasibility results](SPIKES.md) and [current backlog](BACKLOG.csv). This percentage counts tickets, not Proteus feature parity. The comparison and estimates below retain the original v0.2 audit baseline; use the milestone ledger for implemented behavior.
 
 Circuit Studio is useful as an early circuit/firmware workbench. It is not yet a substitute for Proteus across a complete teaching lab or production PCB workflow. The largest gap is the connection between domains: firmware, analog simulation and PCB layout need to share stable component identities, real pin mappings and controlled simulation time. More icons or chip names alone will not close that gap.
 
 This comparison uses official Labcenter documentation, a source audit of our application and automated browser checks. No installed commercial Proteus version or physical lab hardware was tested. Proteus features vary by package; Advanced Simulation is an additional option. See [research and limitations](RESEARCH.md), [component and interface specification](COMPONENTS_AND_UX.md), and the [ordered implementation backlog](BACKLOG.csv).
 
-## What this change fixes now
+## Original v0.2 placement repair
 
 A reproducible usability defect affected every quick-access part: selecting it and clicking the canvas produced a zero-length element which the engine discarded. All 19 tools worked when dragged. The op-amp was available, but the expected placement gesture failed.
 
