@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {build} from 'esbuild';
+const root=fileURLToPath(new URL('../',import.meta.url));
+process.chdir(root);
+const run=(cmd,args,cwd=root)=>execFileSync(cmd,args,{cwd,stdio:'inherit'});
+for(const name of ['mcu','manufacture'])await build({entryPoints:[`web/${name}-source.js`],bundle:true,format:'esm',outfile:`web/${name}.js`});
+const engine=path.join(root,'sources/circuitjs1/ts');
+if(!fs.existsSync(path.join(engine,'node_modules')))run('npm',['ci'],engine);
+run('npm',['run','build'],engine);
+fs.rmSync('web/engine',{recursive:true,force:true});
+fs.cpSync(path.join(engine,'dist'),'web/engine',{recursive:true});
+run('make',['-C','sources/picsim/src','-j4','static']);
+run('gcc',['-O2','-shared','-fPIC','-I','sources/picsim/include','native/pic_bridge.c','-Wl,--whole-archive','sources/picsim/src/libpicsim.a','-Wl,--no-whole-archive','-o','native/libcircuitpic.new.so']);
+fs.renameSync('native/libcircuitpic.new.so','native/libcircuitpic.so');
+console.log('Circuit Studio built. Run ./run.sh');

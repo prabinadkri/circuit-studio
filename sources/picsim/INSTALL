@@ -1,0 +1,8 @@
+Installation:
+
+make           - Compile the picsim simulator
+
+make  install  - Install libpicsim.so in /usr/lib
+
+make uninstall - Remove libpicsim.so
+        

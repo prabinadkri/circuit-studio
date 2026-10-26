@@ -1,0 +1,12 @@
+node_modules/
+__pycache__/
+*.pyc
+.test-output/
+sources/**/dist/
+sources/**/*.o
+sources/**/*.a
+sources/**/*.so*
+sources/picsim/src/picsim
+sources/picsim/src/modules
+.DS_Store
+*.log

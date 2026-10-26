@@ -1,0 +1,9 @@
+include ../VERSION
+
+OBJS= common.o p16fxxx.o p16fxxxe.o p18fxxx.o hexfile.o periferic16.o periferic16e.o periferic18.o \
+      icsp.o icsp18.o util.o common/serial.o common/bitbang_uart.o
+OBJS+= $(patsubst p16/%.c,p16/%.o,$(wildcard p16/*.c)) 
+OBJS+= $(patsubst p16e/%.c,p16e/%.o,$(wildcard p16e/*.c)) 
+OBJS+= $(patsubst p18/%.c,p18/%.o,$(wildcard p18/*.c)) 
+OBJS+= $(patsubst pics/%.c,pics/%.o,$(wildcard pics/*.c)) 
+
