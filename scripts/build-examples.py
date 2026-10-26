@@ -22,5 +22,5 @@ with tempfile.TemporaryDirectory() as tmp:
             subprocess.run(args+[str(src),'-o',str(target.with_suffix('.elf'))],check=True)
             subprocess.run([os.environ.get('AVR_OBJCOPY','avr-objcopy'),'-O','ihex','-R','.eeprom',str(target.with_suffix('.elf')),str(target.with_suffix('.hex'))],check=True)
         else:continue
-        src.with_suffix('.hex').write_bytes(target.with_suffix('.hex').read_bytes())
+        src.with_suffix('.hex').write_text(target.with_suffix('.hex').read_text())
 print('Lab firmware rebuilt. Run npm run build to publish assets.')
