@@ -1,0 +1,30 @@
+ID,Priority,Status,Milestone,Title,Depends on,Affected areas,Acceptance gate,Rough effort
+CS-001,P0,Done,M0,Click placement and palette clarity,,Engine MouseManager; web palette; browser tests,All 19 tools support documented gestures; single undo/redo and op-amp save/reopen pass,Delivered with this change
+CS-002,P0,Planned,M0,Capability and regression fixture inventory,CS-001,tests; VALIDATION; model catalog,Every exposed model links to a fixture or an explicit unvalidated status,3–5 days
+CS-010,P0,Planned,M1,Project v2 and stable electrical identities,CS-002,studio state; JSInterface; project loader,v1 roundtrip retains parts/nets/properties; object IDs survive edit/save/reopen,2–4 weeks
+CS-011,P0,Planned,M1,Versioned component and asset contract,CS-010,new library schema and asset manifest,Symbol/model/package/pad mappings validate independently with provenance,1–2 weeks
+CS-012,P0,Planned,M1,Unified commands and migration recovery,CS-010,project commands; undo; persistence,Undo/redo crosses domain edits; interrupted save recovers without data loss,1–2 weeks
+CS-020,P1,Planned,M2,Full library browser and property inspector,CS-011,web shell; library adapter,Search aliases and category; inspect model/package; place from blank without hidden menus,1–2 weeks
+CS-021,P1,Planned,M2,Symbol geometry and common analog catalog,CS-011;CS-020,symbol assets; simulation adapter; fixtures,Wave A parts have consistent pins/text; named models ship only with declared electrical tests,2–4 weeks
+CS-022,P1,Planned,M2,Editing interaction and accessible layout,CS-012;CS-020,workspace panels; keyboard; canvas controls,Click/drag/rotate/mirror/escape work at zoom/scaling; text fields suppress drawing shortcuts,1–2 weeks
+CS-023,P0,Planned,M2,ERC and navigable diagnostics,CS-010;CS-011,connectivity graph; diagnostics panel,Missing power and conflicting outputs identified; intentional NC respected,1–2 weeks
+CS-030,P0,Spike,M3,Simulation scheduler feasibility,CS-010;CS-002,MCU adapters; CircuitJS bridge,PWM-RC-ADC fixture preserves trace under UI throttling; document causal step strategy,2–3 weeks
+CS-031,P0,Planned,M3,Shared clock and digital net resolution,CS-030,event scheduler; electrical pins,10k-edge deterministic traces; Z/open-drain/contention and analog thresholds tested,3–6 weeks
+CS-032,P0,Planned,M3,Native worker isolation and backend API,CS-030,Python server; native workers; bounded IPC,Worker crash does not lose project; pause/reset deterministic; two instances isolated,2–4 weeks
+CS-033,P1,Planned,M3,On-schematic MCU and firmware attachment,CS-011;CS-031;CS-032,MCU symbols; firmware state; pin mapping,Exact chip/package with explicit power/reset/clock; existing eight profiles migrate,2–3 weeks
+CS-034,P1,Planned,M4,Scope dock and timestamped logic analysis,CS-031,existing scope APIs; trace store; UI,Triggered scope and logic traces share time; cursor measurements and export verified,2–3 weeks
+CS-035,P1,Planned,M4,UART I2C SPI and lab peripherals,CS-031;CS-034,protocol models; LCD/OLED/EEPROM; fixtures,UART 9600/115200; I2C ACK/NACK/stretch; SPI four modes; display projects pass,3–6 weeks
+CS-036,P1,Planned,M4,Compiler and source debugger integration,CS-032;CS-033,toolchain discovery; ELF/debug; build UI,Compile error navigates to line; breakpoint pauses whole simulation; inspect variables,3–5 weeks
+CS-040,P0,Planned,M5,Real footprints transforms and pin maps,CS-011,PCB model; asset importer; geometry,DIP28/SOIC8/header packages preserve pad identities through rotation/mirror,2–4 weeks
+CS-041,P0,Planned,M5,Non-destructive schematic to PCB updates,CS-010;CS-040,connectivity diff; PCB update UI,Value change preserves routes; changed nets listed before apply; undo restores,1–2 weeks
+CS-042,P1,Planned,M5,Routing vias zones and complete connectivity,CS-040,route graph; polygon engine; PCB tools,Same-net intersections/vias connect correctly; two-layer board routes with zone clearance,3–5 weeks
+CS-043,P0,Planned,M5,DRC and manufacturing output parity,CS-041;CS-042,rules; KiCad/Gerber/Excellon/BOM outputs,Both export paths enforce policy; independent parse validates dimensions/drills/layers,2–4 weeks
+CS-050,P1,Spike,M6,ATmega32/2560 and AT89S52 backend audit,CS-032;CS-035,simavr/uCsim candidates; compiler fixtures,Exact target and peripheral support table with timing/pin tests before support claim,2–4 weeks per initial tranche
+CS-051,P2,Spike,M6,Selected STM32/ESP32 backend audit,CS-050,Renode/QEMU candidates; target adapters,Chosen board boots fixture; explicitly enumerate unsupported analog/radio/USB behavior,2–4 weeks feasibility only
+CS-060,P1,Spike,M7,Bundled Linux runtime selection,CS-010,desktop launcher; packaging prototypes,Compare canvas performance/offline startup/IPC on candidate wrappers and record decision,1 week
+CS-061,P1,Planned,M7,Installable app recovery and release pipeline,CS-012;CS-032;CS-060,desktop shell; installer; CI; sources/licenses,Fresh offline install runs examples; atomic saves; clean uninstall retains projects,3–5 weeks
+CS-062,P1,Planned,M7,Accessibility performance and lab guide,CS-022;CS-034;CS-043;CS-061,UI QA; benchmark fixtures; documentation,Reference-machine results recorded; scaling/focus tests pass; each lab exercise reproducible,2–3 weeks
+CS-070,P2,Spike,M8,ngspice analysis and model import,CS-011;CS-030,analysis adapter; model importer; graphs,Five analog reference circuits pass; unsupported model syntax rejected; sweep saved,2–3 weeks spike; estimate implementation after
+CS-071,P2,Planned,M8,Hierarchy variants and design reuse,CS-010;CS-023;CS-041,sheets; buses; annotation; BOM,Repeated hierarchical blocks preserve isolated nets and variant BOM/PCB mappings,Estimate after M2
+CS-072,P3,Planned,M8,3D and mechanical collaboration,CS-040;CS-043,3D assets; board viewer; mechanical exports,Board geometry and component origins agree with footprints in independent viewer,Estimate after M5
+CS-073,P3,Planned,M8,Advanced routing HDI and output jobs,CS-042;CS-043,router; stackup; constraints; output manager,Separate fixtures for push/shove differential pairs length matching and via spans,Estimate after M5

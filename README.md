@@ -32,6 +32,8 @@ For a regular browser window: `./run.sh --serve`, then open the printed local ad
 - **PCB:** import supported schematic nets, move through-hole parts, route front/back tracks with bend points, undo edits, inspect airwires, check basic clearances and connectivity, and export KiCad boards or Gerber/drill ZIPs.
 - **Projects:** `.circuit` JSON files contain schematic, separate firmware for every device profile, selected device and PCB layout. Open also accepts CircuitJS text/XML circuits. Browser autosave is a recovery aid; use Save file for a portable backup.
 
+The [professional-workbench roadmap](docs/planning/ROADMAP.md) compares this alpha with documented Proteus workflows and includes a component/UI specification and dependency-ordered backlog. The latest placement repair lets you select an op-amp or other component and **click the canvas to place it**; dragging still sets size, and wires require a drag between endpoints.
+
 See [the lab guide](docs/LAB_GUIDE.md) for device choices, exercises, source files and physical wiring references.
 
 ## Current boundaries

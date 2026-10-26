@@ -4,14 +4,42 @@ import {PICMCU} from './pic.js';
 import {BoardEditor} from './pcb.js';
 import {gerberZip} from './manufacture.js';
 import {showDevice} from './device-ui.js';
+import {partIcon} from './part-icons.js';
 const response=await fetch('./devices.json');
 if(!response.ok)throw Error('Device catalog unavailable');
 const devices=await response.json(),deviceMap=new Map(devices.map(d=>[d.id,d]));
 const $=id=>document.getElementById(id);
 const frame=$('sim'); let sim, dirty=false, lastSaved='', autosaveTimer, loading=false;
 const status=t=>$('status').textContent=t;
-const parts=[['Wire','WireElm','─'],['Resistor','ResistorElm','─▱─'],['Capacitor','CapacitorElm','─ǀǀ─'],['Inductor','InductorElm','∿'],['DC source','DCVoltageElm','+ −'],['Ground','GroundElm','⏚'],['Diode','DiodeElm','▷ǀ'],['LED','LEDElm','↗'],['Switch','SwitchElm','╱'],['NPN transistor','NTransistorElm','Q'],['Op amp','OpAmpElm','▷'],['555 timer','TimerElm','555'],['Logic input','LogicInputElm','0/1'],['AND gate','AndGateElm','&'],['OR gate','OrGateElm','≥1'],['NOT gate','InverterElm','¬'],['Voltage probe','OutputElm','V'],['MCU output','ExtVoltageElm','D↗'],['Node label','LabeledNodeElm','N']];
-function renderParts(){let q=$('search').value.toLowerCase();$('parts').replaceChildren();for(const [label,type,icon] of parts.filter(p=>p[0].toLowerCase().includes(q))){let b=document.createElement('button');let i=document.createElement('b');i.textContent=icon;b.append(i,document.createTextNode(label));b.onclick=()=>{if(!sim)return;sim.command('main',type);$('mode').textContent=`${label} · click and drag to place`;$('parts').querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');frame.contentWindow.focus();};$('parts').append(b);}$('partCount').textContent=parts.length;}
+const parts=[['Wire','WireElm'],['Resistor','ResistorElm'],['Capacitor','CapacitorElm'],['Inductor','InductorElm'],['DC source','DCVoltageElm'],['Ground','GroundElm'],['Diode','DiodeElm'],['LED','LEDElm'],['Switch','SwitchElm'],['NPN transistor','NTransistorElm'],['Op amp','OpAmpElm'],['555 timer','TimerElm'],['Logic input','LogicInputElm'],['AND gate','AndGateElm'],['OR gate','OrGateElm'],['NOT gate','InverterElm'],['Voltage probe','OutputElm'],['MCU output','ExtVoltageElm'],['Node label','LabeledNodeElm']];
+let selectedPart='';
+function renderParts(){
+ const q=$('search').value.trim().toLowerCase();
+ const normalized=q.replace(/[\s-]/g,'');
+ const visible=parts.filter(p=>p[0].toLowerCase().replace(/[\s-]/g,'').includes(normalized));
+ $('parts').replaceChildren();
+ for(const [label,type] of visible){
+  const b=document.createElement('button'),name=document.createElement('span');
+  name.textContent=label;b.dataset.part=type;b.append(partIcon(type),name);
+  const instruction=type==='WireElm'?'drag between two connection points':'click to place · drag to set size';
+  b.title=`${label}${type==='OpAmpElm'?' (ideal model)':''} — ${instruction}`;
+  b.setAttribute('aria-pressed',String(selectedPart===type));
+  b.classList.toggle('active',selectedPart===type);
+  b.onclick=()=>{
+   if(!sim)return;
+   sim.command('main',type);selectedPart=type;
+   $('mode').textContent=`${label} · ${instruction}`;
+   for(const button of $('parts').querySelectorAll('button')){
+    const active=button.dataset.part===type;
+    button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+   }
+   frame.contentWindow.focus();
+  };
+  $('parts').append(b);
+ }
+ if(!visible.length){const empty=document.createElement('p');empty.className='parts-empty';empty.textContent='No matching quick-access parts. Try another name, or open Draw in the editor for the full library.';$('parts').append(empty);}
+ $('partCount').textContent=q?`${visible.length} / ${parts.length}`:parts.length;
+}
 renderParts();$('search').oninput=renderParts;
 export function download(name,text,type='application/json'){const url=URL.createObjectURL(new Blob([text],{type}));let a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 const safeName=()=>($('projectName').value.trim()||'untitled').replace(/[^a-z0-9_-]/gi,'-');
@@ -41,7 +69,7 @@ const readyTimer=setInterval(bindSim,150);setTimeout(()=>{if(!sim)status('Engine
 function updateReadings(){if(!sim)return;const es=sim.getElements();$('count').textContent=es.length;$('time').textContent=sim.getTime().toFixed(4)+' s';$('run').textContent=sim.isRunning()?'Ⅱ Pause':'▶ Run';let resistors=es.filter(e=>e.getType()==='ResistorElm').slice(0,6);$('measurements').replaceChildren();resistors.forEach((e,i)=>{let div=document.createElement('div');div.className='reading';let label=document.createElement('span');label.textContent='R'+(i+1);let val=document.createElement('b');val.textContent=e.getVoltageDiff().toFixed(3)+' V · '+(e.getCurrent()*1000).toFixed(3)+' mA';div.append(label,val);$('measurements').append(div);});}
 $('run').onclick=()=>sim?.setSimRunning(!sim.isRunning());$('reset').onclick=()=>sim?.reset();
 for(const [id,item] of [['undo','undo'],['redo','redo'],['fit','centercircuit']])$(id).onclick=()=>{sim?.command('edit',item);markDirty();};
-$('select').onclick=()=>{sim?.command('main','Select');$('mode').textContent='Select · drag to move components';};
+$('select').onclick=()=>{sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move components';};
 $('new').onclick=()=>{if(!sim||!replaceAllowed())return;avr.clear();pic.clear();firmwareByDevice={avr:'',pic:''};$('hex').value='';board.clear();sim.importCircuit('$ 1 0.000005 10 50 5 50\n',false);sim.setSimRunning(false);$('projectName').value='Untitled circuit';markDirty();};
 $('save').onclick=()=>{if(!sim)return;const text=JSON.stringify(project(),null,2);download(safeName()+'.circuit',text);lastSaved=JSON.stringify(project());dirty=false;status('Project downloaded · schematic, firmware and PCB included');};
 $('open').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!sim||!replaceAllowed())return;try{if(f.size>10e6)throw Error('Project is larger than 10 MB');let t=await f.text();if(t.trim().startsWith('{'))loadProject(parseProject(t));else if(/^\s*(\$|<circuit)/.test(t)){avr.clear();pic.clear();firmwareByDevice={avr:'',pic:''};$('hex').value='';board.clear();sim.importCircuit(t,false);sim.setSimRunning(false);$('projectName').value=f.name;markDirty();}else throw Error('Choose a Circuit Studio project or CircuitJS circuit');}catch(e){status('Open failed: '+e.message);}};

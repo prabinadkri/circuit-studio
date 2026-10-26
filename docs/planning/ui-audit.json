@@ -1,0 +1,362 @@
+[
+  {
+    "width": 1440,
+    "page": "schematic",
+    "toolbarScrollWidth": 1440,
+    "toolbarClientWidth": 1440,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 222,
+      "y": 182,
+      "width": 1002,
+      "height": 690,
+      "top": 182,
+      "right": 1224,
+      "bottom": 872,
+      "left": 222
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "page": "firmware",
+    "toolbarScrollWidth": 1440,
+    "toolbarClientWidth": 1440,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "page": "pcb",
+    "toolbarScrollWidth": 1440,
+    "toolbarClientWidth": 1440,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "12px",
+        "color": "rgb(123, 140, 127)"
+      }
+    ]
+  },
+  {
+    "width": 1366,
+    "page": "schematic",
+    "toolbarScrollWidth": 1366,
+    "toolbarClientWidth": 1366,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 222,
+      "y": 182,
+      "width": 928,
+      "height": 690,
+      "top": 182,
+      "right": 1150,
+      "bottom": 872,
+      "left": 222
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1366,
+    "page": "firmware",
+    "toolbarScrollWidth": 1366,
+    "toolbarClientWidth": 1366,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1366,
+    "page": "pcb",
+    "toolbarScrollWidth": 1366,
+    "toolbarClientWidth": 1366,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "12px",
+        "color": "rgb(123, 140, 127)"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "page": "schematic",
+    "toolbarScrollWidth": 1024,
+    "toolbarClientWidth": 1024,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 180,
+      "y": 182,
+      "width": 844,
+      "height": 690,
+      "top": 182,
+      "right": 1024,
+      "bottom": 872,
+      "left": 180
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "page": "firmware",
+    "toolbarScrollWidth": 1024,
+    "toolbarClientWidth": 1024,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "9px",
+        "color": "rgb(124, 146, 134)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "page": "pcb",
+    "toolbarScrollWidth": 1024,
+    "toolbarClientWidth": 1024,
+    "overflow": false,
+    "quickParts": 19,
+    "visibleCanvas": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 0
+    },
+    "smallText": [
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "10px",
+        "color": "rgb(122, 142, 131)"
+      },
+      {
+        "font": "12px",
+        "color": "rgb(123, 140, 127)"
+      }
+    ]
+  }
+]

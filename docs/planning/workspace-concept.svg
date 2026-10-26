@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Circuit Studio proposed workspace</title><desc id="desc">Future interface concept with component search, schematic, inspector and waveform dock. This is a design proposal, not a screenshot or implemented functionality.</desc>
+<defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#dce5df"/></pattern></defs>
+<style>text{font-family:Inter,Arial,sans-serif;fill:#203c32;font-size:14px}.muted{fill:#596e64}.small{font-size:12px}.label{font-size:11px;font-weight:700;letter-spacing:1px}.heading{font-size:17px;font-weight:600}.mono{font-family:monospace}.wire{fill:none;stroke:#307157;stroke-width:2.2;stroke-linejoin:round}.symbol{fill:#fff;stroke:#294f3f;stroke-width:2.2;stroke-linejoin:round}.line{stroke:#d8e2da;stroke-width:1}</style>
+<rect width="1440" height="900" fill="#f4f7f4"/>
+<rect width="1440" height="52" fill="#15392d"/>
+<text x="24" y="33" style="fill:#f5fff8;font-size:18px;font-weight:600">Circuit Studio</text>
+<text x="230" y="33" style="fill:#c5dcd0">Analog lab / Op-amp follower</text>
+<rect x="1020" y="13" width="396" height="27" rx="5" fill="#335844"/>
+<text x="1034" y="31" class="small" style="fill:#eff9e8;letter-spacing:.4px">PROPOSED WORKSPACE · NOT IMPLEMENTED</text>
+<rect y="52" width="1440" height="48" fill="#fff"/><path d="M0 100H1440" class="line"/>
+<text x="24" y="82">Save</text><text x="82" y="82">Undo</text><text x="143" y="82">Redo</text>
+<rect x="246" y="61" width="115" height="32" rx="5" fill="#e2f0e7"/>
+<text x="260" y="82" style="fill:#1a6042;font-weight:600">Schematic</text><text x="386" y="82">Firmware</text><text x="504" y="82">PCB</text><text x="578" y="82">Analysis</text>
+<text x="1033" y="82" class="muted">Stopped · t = 0 s</text>
+<rect x="1210" y="61" width="94" height="31" rx="5" fill="#217b55"/><text x="1226" y="82" style="fill:white">▶ Run</text><text x="1330" y="82">Reset</text>
+<rect x="0" y="100" width="246" height="772" fill="#f7f9f7"/>
+<text x="20" y="132" class="label muted">COMPONENT LIBRARY</text>
+<rect x="16" y="149" width="214" height="38" rx="6" fill="white" stroke="#bdcfc1"/><text x="29" y="174">op amp</text>
+<text x="20" y="214" class="small muted">All parts   /   Amplifiers</text>
+<rect x="12" y="234" width="222" height="109" rx="6" fill="#e4f1e8" stroke="#7aa68a"/>
+<path d="M30 260L61 277 30 294Z M20 267H30 M20 286H30 M61 277H75" class="symbol"/>
+<text x="88" y="266" style="font-weight:600">Ideal op-amp</text><text x="88" y="288" class="small muted">Generic · 3 terminals</text>
+<text x="27" y="324" class="small" style="fill:#226443">Simulation available</text>
+<text x="24" y="378" style="font-weight:600">LM358</text><text x="24" y="400" class="small muted">Dual amplifier · DIP-8 / SOIC-8</text>
+<text x="24" y="423" class="small muted">Planned library entry</text><path d="M20 444H225" class="line"/>
+<text x="24" y="478" style="font-weight:600">LM741</text><text x="24" y="500" class="small muted">Single amplifier · DIP-8</text><text x="24" y="523" class="small muted">Planned library entry</text>
+<path d="M20 553H225" class="line"/>
+<text x="20" y="583" class="label muted">PLACEMENT</text><text x="20" y="611">Click to place</text><text x="20" y="637">Drag to set size</text><text x="20" y="663">Escape to cancel</text>
+<text x="20" y="813" class="small muted">Model details and pin maps</text><text x="20" y="833" class="small muted">stay visible before placement.</text>
+<rect x="246" y="100" width="874" height="531" fill="#fff"/><rect x="246" y="100" width="874" height="531" fill="url(#grid)"/>
+<text x="267" y="131" class="small muted">Sheet 1 / Analog lab</text>
+<rect x="552" y="235" width="234" height="210" rx="5" fill="#e2f0e7" fill-opacity=".4" stroke="#3b8a64" stroke-dasharray="5 5"/>
+<path d="M600 275L740 345 600 415Z" class="symbol"/>
+<text x="615" y="314" style="font-size:20px">−</text><text x="615" y="385" style="font-size:20px">+</text>
+<path d="M600 310H540V210H830V345 M740 345H965 M600 380H430V417 M430 473V505 M410 505H450 M416 513H444 M423 521H437" class="wire"/>
+<circle cx="430" cy="445" r="28" class="symbol"/><path d="M412 445Q421 419 430 445T448 445" class="wire"/>
+<circle cx="830" cy="345" r="4" fill="#307157"/>
+<text x="629" y="258" style="font-weight:600">U1</text><text x="617" y="463" class="small muted">Ideal amplifier</text>
+<text x="353" y="389" class="small">VIN</text><text x="338" y="444">V1</text><text x="307" y="468" class="small muted">Sine · 1 kHz</text>
+<rect x="910" y="312" width="87" height="23" rx="4" fill="#e8f2e9"/><text x="923" y="328" class="small">VOUT</text>
+<text x="270" y="598" class="small muted">Circuit illustration · waveform below is illustrative, not a solver result</text>
+<rect x="1120" y="100" width="320" height="772" fill="#fff"/><path d="M1120 100V872 M246 100V872" class="line"/>
+<text x="1144" y="133" class="label muted">COMPONENT INSPECTOR</text>
+<text x="1144" y="173" class="heading">U1 · Ideal op-amp</text><text x="1144" y="197" class="small muted">Generic simulation model</text>
+<path d="M1144 220H1416" class="line"/>
+<text x="1144" y="252" class="small muted">Reference</text><rect x="1253" y="233" width="160" height="31" rx="4" fill="#f7f9f7" stroke="#d8e2da"/><text x="1266" y="254">U1</text>
+<text x="1144" y="298" class="small muted">Open-loop gain</text><text x="1266" y="298" class="mono">100,000</text>
+<text x="1144" y="342" class="small muted">Output limits</text><text x="1266" y="342" class="mono">−15 / +15 V</text>
+<path d="M1144 370H1416" class="line"/>
+<text x="1144" y="402" class="label muted">MODEL LIMITS</text><text x="1144" y="430" class="small">Ideal behavior. No bandwidth,</text><text x="1144" y="450" class="small">slew-rate or supply-current model.</text>
+<text x="1144" y="491" class="label muted">PHYSICAL PACKAGE</text><text x="1144" y="519">None selected</text><text x="1144" y="544" class="small muted">Choose a real part before PCB transfer.</text>
+<rect x="1144" y="569" width="270" height="35" rx="5" fill="#f4f8f4" stroke="#cbdace"/><text x="1160" y="592">Choose compatible part…</text>
+<path d="M1144 636H1416" class="line"/>
+<text x="1144" y="668" class="label muted">CONNECTIONS</text><text x="1144" y="701" class="small">+  Non-inverting input</text><text x="1144" y="729" class="small">−  Inverting input</text><text x="1144" y="757" class="small">OUT  Output</text>
+<rect x="246" y="631" width="874" height="241" fill="#f8faf8"/><path d="M246 631H1120 M246 674H1120" class="line"/>
+<text x="267" y="658" style="font-weight:600">Waveforms</text><text x="386" y="658" class="muted">Logic</text><text x="456" y="658" class="muted">Terminal</text><text x="556" y="658" class="muted">Build</text><text x="625" y="658" class="muted">Design checks</text>
+<text x="272" y="706" class="small muted">VOUT · example trace</text><text x="933" y="706" class="small muted">1 V/div · 1 ms/div</text>
+<path d="M270 739H1092 M270 778H1092 M270 817H1092 M408 719V839 M547 719V839 M686 719V839 M825 719V839 M964 719V839" stroke="#e2e9e3" fill="none"/>
+<path d="M272 778C306 710 340 710 374 778S442 846 476 778 544 710 578 778 646 846 680 778 748 710 782 778 850 846 884 778 952 710 986 778 1054 846 1088 778" fill="none" stroke="#2d8760" stroke-width="2.4"/>
+<path d="M0 872H1440" class="line"/><text x="20" y="891" class="small muted">Design concept · component and UI roadmap</text><text x="762" y="891" class="small muted">Select / move</text><text x="931" y="891" class="small muted">Grid 10 mil</text><text x="1084" y="891" class="small muted">Zoom 100%</text><text x="1241" y="891" class="small muted">Local project</text>
+</svg>

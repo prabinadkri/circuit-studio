@@ -1250,6 +1250,14 @@ export class MouseManager {
 	    // editor for the scope's element, or close the editor)
 	    if (dx * dx + dy * dy < 16 && this.sim.scopeManager.scopeSelected === -1) {
 		// didn't move (much) since mousedown, so it's a click, not a drag
+		// A palette selection followed by a click uses the element's existing
+		// toolbar placement geometry. Wires still require two explicit endpoints.
+		// Do this only on mouseup: leaving the canvas must not create a part.
+		if (this.tempMouseMode === MouseManager.MODE_ADD_ELM &&
+		    this.dragElm != null && !this.dragElm.isWireElm()) {
+		    this.dragElm.dragPlace(this.snapGrid(this.initDragGridX),
+			this.snapGrid(this.initDragGridY), false);
+		}
 		if (this.mouseElm != null && !this.mouseElm.isSwitchElm())
 		    clickedElm = this.mouseElm;
 		else if (this.mouseElm == null)
