@@ -13,6 +13,7 @@ In **Circuit lab**, the drawing row sits above the component-editing controls.
 4. **Escape**, **Cancel wire**, or a right-click cancels unfinished wiring. A
    preview does not change the circuit or saved project. Completed wires remain
    available for Undo/Redo, and the wire tool stays active for the next connection.
+   An import or another command that changes circuit geometry cancels a stale preview.
 
 Clicking an existing wire deliberately creates a branch junction. Merely crossing
 a wire does not connect it; use visible junction dots and electrical checks to

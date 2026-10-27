@@ -11,13 +11,14 @@ export class SchematicDrawing {
  private target: {point:Point,connected:boolean}|null=null;
  private pressed: {x:number,y:number,starting:boolean}|null=null;
  private message='';
+ private baseline:any[][]=[];
  constructor(private app:any){
   const canvas=app.ui.cv as HTMLCanvasElement;
   canvas.addEventListener('mousedown',e=>{
    if(!this.active()||e.button!==0||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
    this.update(e);if(!this.target)return;this.stop(e);canvas.focus();
    this.pressed={x:e.clientX,y:e.clientY,starting:!this.corners.length};
-   if(!this.corners.length)this.corners=[this.target.point];
+   if(!this.corners.length){this.corners=[this.target.point];this.baseline=this.app.elmList.map((e:any)=>[e,e.x,e.y,e.x2,e.y2]);}
    this.app.repaint();
   },true);
   canvas.addEventListener('mousemove',e=>{if(this.active()){this.update(e);if(this.corners.length)this.stop(e);}},true);
@@ -46,7 +47,8 @@ export class SchematicDrawing {
   if(options.spacing===8||options.spacing===16){this.cancel();this.app.menus.smallGridCheckItem.setState(options.spacing===8);this.app.setGrid();}
   this.app.repaint();
  }
- cancel(){this.corners=[];this.legs=[];this.preview=[];this.target=null;this.pressed=null;this.message='';this.app.repaint();}
+ cancel(){this.corners=[];this.legs=[];this.preview=[];this.target=null;this.pressed=null;this.baseline=[];this.message='';this.app.repaint();}
+ private unchanged(){return this.baseline.length===this.app.elmList.length&&this.baseline.every(([e,x,y,x2,y2],i)=>this.app.elmList[i]===e&&e.x===x&&e.y===y&&e.x2===x2&&e.y2===y2);}
  back(){
   if(this.corners.length<=1){this.cancel();return;}
   this.corners.pop();this.legs.pop();this.preview=[];this.message='Last corner removed';this.app.repaint();
@@ -99,6 +101,7 @@ export class SchematicDrawing {
  }
  finish(){
   if(!this.active()||!this.corners.length)return;
+  if(!this.unchanged()){this.cancel();return;}
   if(this.target&&this.message)return;
   const legs=[...this.legs,...(this.preview.length>1?[this.preview]:[])];
   if(!legs.length)return;
@@ -124,6 +127,7 @@ export class SchematicDrawing {
   ctx.restore();
  }
  drawPreview(ctx:CanvasRenderingContext2D){
+  if(this.corners.length&&!this.unchanged()){this.cancel();return;}
   if(!this.active()){if(this.app.ui.mouseModeStr!=='RoutedWireElm'&&this.corners.length)this.cancel();return;}
   const scale=this.app.transform[0];ctx.save();ctx.strokeStyle=this.message?'#b45337':'#3269b5';ctx.lineWidth=2/scale;
   ctx.setLineDash([5/scale,3/scale]);

@@ -69,6 +69,10 @@ let browser;
  await click(104,96);await move(64,32);await page.mouse.click(...await position(64,32),{button:'right'});assert.equal((await state()).pending,false);
  await click(104,96);await click(64,64);await move(32,32);await canvas.focus();await page.keyboard.press('Enter');
  const guided=(await wires()).at(-1);assert.ok(guided.route.some(p=>p.x===64&&p.y===64),'manual corner is retained');assert.deepEqual(guided.route.at(-1),{x:32,y:32});
+ await click(104,96);await move(32,256);const completed=(await wires()).length;
+ await page.evaluate(()=>studioSim.addElement('ResistorElm',512,64,576,64));
+ await page.waitForFunction(()=>!studioSim.getDrawingState().pending);
+ assert.equal((await wires()).length,completed,'another editing command cancels stale preview without adding a wire');
  // Drag and straight-wire fallback remain usable.
  await load('$ 1 0.000005 10 50 5 50\nr 96 96 160 96 0 1000\nr 320 160 384 160 0 1000\n');
  await page.locator('#drawWire').click();await move(160,96);await page.mouse.down();await move(320,160);await page.mouse.up();assert.equal((await wires()).length,1);
