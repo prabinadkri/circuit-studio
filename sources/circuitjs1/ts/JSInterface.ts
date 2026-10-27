@@ -65,6 +65,10 @@ export class JSInterface {
         const that = this;
         const studio = new StudioAPI(this.app);
         (window as any).CircuitJS1 = {
+            getScopeSignals: () => studio.scopeSignals(),
+            getScopes: () => studio.scopes(),
+            showScope: (id:string) => studio.showScope(id),
+            scopeAction: (index:number,action:string) => studio.scopeAction(index,action),
             addElement: (type:string,x:number,y:number,x2:number,y2:number) => studio.add(type,x,y,x2,y2),
             removeElement: (id:string) => studio.remove(id),
             advanceTo: (time:number) => studio.advanceTo(time),

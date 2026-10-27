@@ -2,7 +2,7 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.4.0-alpha.6.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.4.0-alpha.7.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 
@@ -22,6 +22,15 @@ slate/blue icon as the header. See the [research and checks](docs/planning/UX-AL
 Action bars wrap
 at narrow widths; advanced engine menus remain available. Panning leaves circuit
 geometry, PCB connectivity, undo history and the running MCU timeline unchanged.
+
+## Oscilloscope and instruments
+
+Choose **Oscilloscope** above the schematic or **View in oscilloscope** in the
+component inspector. The scope toolbar exposes Run/Pause, time zoom, Properties,
+and CSV/image export. **Logic & instruments** opens shared firmware captures with
+grouped signal/timebase/trigger controls, voltage scaling, cursors, capture status
+and a guided setup. The peripheral lab stays available below the waveform.
+See the [instrument guide and research](docs/INSTRUMENTS.md).
 
 ## Roadmap progress
 

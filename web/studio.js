@@ -1,3 +1,4 @@
+import {SchematicScopes} from './scopes.js';
 import {commandSearch} from './commands.js';
 import {WorkspaceNavigation,boardViewport} from './navigation.js';
 import {PeripheralLab} from './peripheral-lab.js';
@@ -99,7 +100,7 @@ $('save').onclick=()=>{if(!sim)return;const text=JSON.stringify(project(),null,2
 $('open').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!sim||!replaceAllowed())return;try{if(f.size>10e6)throw Error('Project is larger than 10 MB');let t=await f.text();if(t.trim().startsWith('{'))loadProject(parseProject(t));else if(/^\s*(\$|<circuit)/.test(t)){avr.clear();pic.clear();firmwareByDevice={avr:'',pic:''};$('hex').value='';board.clear();sim.importCircuit(t,false);sim.setSimRunning(false);$('projectName').value=f.name;markDirty();}else throw Error('Choose a Circuit Studio project or CircuitJS circuit');}catch(e){status('Open failed: '+e.message);}};
 $('restore').onclick=()=>{if(!sim||!replaceAllowed())return;try{const saved=recovery.read();const legacy=localStorage.getItem('circuit-studio-autosave');if(saved)loadProject(parseProject(JSON.stringify(saved.project)));else if(legacy)loadProject(parseProject(legacy));else throw Error('No recovery copy available');}catch(e){status(e.message);}};
 $('projectName').oninput=markDirty;$('svg').onclick=()=>sim?.getCircuitAsSVG();$('help').onclick=()=>$('helpDialog').showModal();
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.page').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('nav button').forEach(item=>item.setAttribute('aria-current',item===b?'page':'false'));$(b.dataset.page).classList.add('active');if(b.dataset.page==='schematic')frame.contentWindow.dispatchEvent(new Event('resize'));if(b.dataset.page==='pcb')board.render();if(b.dataset.page==='reuse')reuse.render();if(b.dataset.page==='mechanical')refresh3d();});
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.page').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('nav button').forEach(item=>item.setAttribute('aria-current',item===b?'page':'false'));$(b.dataset.page).classList.add('active');if(b.dataset.page==='schematic')frame.contentWindow.dispatchEvent(new Event('resize'));if(b.dataset.page==='pcb')board.render();if(b.dataset.page==='instruments')instruments.render();if(b.dataset.page==='reuse')reuse.render();if(b.dataset.page==='mechanical')refresh3d();});
 $('loadHex').onclick=()=>$('hexFile').click();$('hexFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{if(f.size>1000000)throw Error('HEX file too large');let t=await f.text();await mcu.load(t);$('hex').value=t;markDirty();}catch(e){status(e.message);}};
 function updateExperiment(){
  const spec=deviceMap.get(device),hasADC=spec.pins.some(p=>'analog' in p);
@@ -123,7 +124,7 @@ $('blink').onclick=async()=>{try{
 }catch(e){status(e.message);}};
 $('poweredMCU').onclick=async()=>{if(!sim||!replaceAllowed())return;try{const response=await fetch('demos/powered-atmega328p.circuit');if(!response.ok)throw Error('Example unavailable');const p=parseProject(await response.text());loadProject({...p,id:uuid()});markDirty();status('Powered ATmega328P example opened · Run firmware to start');}catch(e){status(e.message);}};
 $('placeMCU').onclick=()=>{try{capture();clock.detach();placePackage(sim,deviceMap.get(device));$('timingMode').value='coupled';markDirty();capture();document.querySelector('nav [data-page=schematic]').click();status('MCU placed. Wire all supply/ground pins and pull reset high; attach firmware in Firmware. Clock is fixed at the displayed frequency.');}catch(e){status(e.message);}};
-$('mcuRun').onclick=async()=>{try{if(mcu.running)mcu.stop();else{if(mcu.source!==$('hex').value)await mcu.load($('hex').value);if($('timingMode').value==='coupled'){if(clock.source!==mcu&&(mcu.cpu?.cycles??mcu.state.cycles)>0)await mcu.load($('hex').value);await clock.start();}else{if(sim.getDesignElements().some(e=>e.engineType==='MCUPackageElm'))throw Error('Schematic MCU packages require Shared timeline timing');clock.detach();mcu.run();sim?.setSimRunning(true);}}}catch(e){status(e.message);}};
+$('mcuRun').onclick=async()=>{try{if(mcu.running)mcu.stop();else{if(mcu.source!==$('hex').value)await mcu.load($('hex').value);if($('timingMode').value==='coupled'){if(clock.source!==mcu&&(mcu.cpu?.cycles??mcu.state.cycles)>0)await mcu.load($('hex').value);await clock.start();}else{if(sim.getDesignElements().some(e=>e.engineType==='MCUPackageElm'))throw Error('Schematic MCU packages require Shared timeline timing');clock.detach();mcu.run();sim?.setSimRunning(true);}}}catch(e){status(e.message);if($('instruments').classList.contains('active'))instruments.error(e.message);}};
 $('mcuStep').onclick=async()=>{try{if(mcu.source!==$('hex').value)await mcu.load($('hex').value);if($('timingMode').value==='coupled'){clock.stop();await clock.idle();if(mcu.debug?.paused){mcu.debug.skip=mcu.cpu.pc;mcu.debug.paused=false;}await clock.step();mcu.render();}else await mcu.step();}catch(e){status(e.message);}};
 $('mcuReset').onclick=async()=>{try{clock.detach();await mcu.load($('hex').value);}catch(e){status(e.message);}};
 $('mcuCircuit').onclick=()=>{if(!sim||!replaceAllowed())return;sim.importCircuit('$ 1 0.000005 10 50 5 50\n418 160 160 160 96 0 1 40 5 0 0 0.5 '+deviceMap.get(device).demoPin+'\nr 160 160 288 160 0 330\n162 288 160 288 272 2 default-led 1 0 0 0.01\ng 288 272 288 304 0 0\n',false);$('projectName').value=deviceMap.get(device).label+' '+deviceMap.get(device).demoPin+' LED';board.clear();markDirty();status('LED circuit loaded in Circuit lab. Load Blink demo and run firmware.');};
@@ -136,7 +137,7 @@ $('boardMove').onclick=()=>{boardNavigation.setHand(false);board.setMode('move')
 window.addEventListener('beforeunload',e=>{checkpoint();if(dirty){e.preventDefault();e.returnValue='';}});
 function shortcut(e){
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();e.stopImmediatePropagation();commands.open();return;}
- if(document.querySelector('dialog[open]'))return;
+ if(document.querySelector('dialog[open]')||frame.contentDocument?.querySelector('dialog[open],.gwt-DialogBox'))return;
  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();e.stopImmediatePropagation();$('save').click();return;}
  if(typing)return;
@@ -184,7 +185,16 @@ async function openInitialProject(){try{const data=await assistantRequest({actio
 
 $('timingMode').onchange=()=>{clock.detach();mcu.stop();markDirty();status('Timing mode changed. Reset CPU before single-stepping a new shared timeline.');};$('couplingQuantum').onchange=()=>{clock.stop();clock.quantum=Number($('couplingQuantum').value)*2000;markDirty();};
 
-$('instrumentRun').onclick=()=>$('mcuRun').click();
+$('instrumentRun').onclick=()=>{
+ if($('timingMode').value!=='coupled'){instruments.error('Choose Shared timeline in Microcontrollers to capture aligned voltage and logic signals.');return;}
+ if(!$('hex').value.trim()){instruments.error('Load firmware in Microcontrollers, or open the powered MCU example.');return;}
+ if(!clock.running&&!instruments.validWindow())return;
+ if(!clock.running&&clock.trace.trigger&&clock.trace.triggeredAt!==null){const {channel,edge,level}=clock.trace.trigger;clock.trace.arm(channel,edge,level);}
+ instruments.error('');$('mcuRun').click();
+};
+$('instrumentSetup').onclick=()=>{go('firmware');$('timingMode').focus();};
+$('instrumentExample').onclick=()=>$('poweredMCU').click();
+$('openInstruments').onclick=()=>go('instruments');
 
 const routeAction=fn=>()=>{try{capture();fn();markDirty();capture();}catch(e){status(e.message);}};
 $('setStack').onclick=routeAction(()=>setStackup(board,$('stackCount').value));
@@ -199,7 +209,7 @@ peripheralLab.onExample=async()=>{if(!sim||!replaceAllowed())return;try{const r=
 // Keep viewport controls separate from the project and undo history.
 function initSchematicNavigation(){
  const canvas=frame.contentDocument.querySelector('canvas');
- const style=frame.contentDocument.createElement('style');style.textContent=`.gwt-MenuBar-horizontal{background:#f1f3f5!important;border-bottom:1px solid #d1d7df}.gwt-MenuBar,.menuDropdown{font-family:system-ui,sans-serif!important;color:#273343}td.gwt-MenuItem{font-size:12px!important;font-weight:500!important}td.gwt-MenuItem.open,td.gwt-MenuItem:hover{background:#dce8fa!important}`;frame.contentDocument.head.append(style);
+ const style=frame.contentDocument.createElement('style');style.textContent=`.gwt-MenuBar-horizontal{background:#f1f3f5!important;border-bottom:1px solid #d1d7df}.gwt-MenuBar,.menuDropdown{font-family:system-ui,sans-serif!important;color:#273343}td.gwt-MenuItem{font-size:12px!important;font-weight:500!important}td.gwt-MenuItem.open,td.gwt-MenuItem:hover{background:#dce8fa!important}.circuitDialog{font:13px/1.5 system-ui,sans-serif;color:#273343;background:#fff;border:1px solid #b9c7da;border-radius:9px;padding:18px;box-shadow:0 18px 55px #14223740;max-width:calc(100vw - 24px)}.circuitDialog::backdrop{background:#17253a45}.circuitDialog h3{font-size:16px!important}.circuitDialog button{font:inherit;border:1px solid #cbd6e5;border-radius:5px;background:#f5f7fa;color:#273343;padding:5px 10px;cursor:pointer}.circuitDialog button:hover{background:#e8effa}.circuitDialog input:not([type=radio]):not([type=checkbox]):not([type=range]),.circuitDialog select{font:inherit;border:1px solid #cbd6e5;border-radius:4px;padding:4px 6px}.circuitDialog input{accent-color:#3269b5}.circuitDialog button:focus-visible,.circuitDialog input:focus-visible,.circuitDialog select:focus-visible{outline:2px solid #3269b5;outline-offset:2px}.circuitDialog .expand-but{min-width:25px;margin:4px 5px 4px 0;padding:1px 5px}`;frame.contentDocument.head.append(style);
  schematicNavigation=new WorkspaceNavigation({surface:canvas,controls:$('schematicView'),pan:(x,y)=>sim.panViewport(x,y),zoom:f=>sim.zoomViewport(f),fit:()=>sim.command('edit','centercircuit'),scale:()=>sim.getViewport().scale,selected:()=>sim.getViewport().tool==='Select',active:()=>$('schematic').classList.contains('active'),onSelect:selectTool});
  setInterval(()=>{if($('schematic').classList.contains('active')){schematicNavigation.paint();paintSchematicMode();}},250);
 }
@@ -229,6 +239,8 @@ const commands=commandSearch({dialog:$('commandDialog'),input:$('commandQuery'),
  {label:'Find a component',group:'Schematic',keywords:'library search op amp resistor parts',available:()=>!!sim,run:()=>{go('schematic');setPanel('toggleLibrary',false);$('category').value='All components';$('search').value='';renderParts();$('search').focus();}},
  ...[...document.querySelectorAll('nav [data-page]')].map(b=>({label:'Open '+b.textContent,group:'Workspaces',keywords:b.dataset.page,run:()=>b.click()})),
  ...[['Pan workspace','pan'],['Select and move components','select'],['Fit circuit or board in view','fit'],['Zoom in','in'],['Zoom out','out']].map(([label,view])=>({label,group:'View',available:()=>!!sim,run:()=>{const pcb=$('pcb').classList.contains('active');if(!pcb)go('schematic');const control=$(pcb?'boardView':'schematicView').querySelector(`[data-view="${view}"]`);if(view!=='pan'||control.getAttribute('aria-pressed')!=='true')control.click();}})),
+ action('Open oscilloscope','Instruments','openScope',null,'scope waveform voltage current'),
+ action('Open logic analyzer','Instruments','openInstruments',null,'digital capture'),
  action('Design with Coding Hub','Assistant','assistant','schematic','AI circuit chat'),
  action('Save project file','Project','save',null,'download backup'),
  action('Save project locally','Project','saveLocal'),
@@ -239,3 +251,6 @@ const commands=commandSearch({dialog:$('commandDialog'),input:$('commandQuery'),
  action('Reset workspace layout','Layout','resetLayout','schematic','restore panels'),
  action('Help and keyboard shortcuts','Help','help')
 ]});
+
+const scopes=new SchematicScopes({getSim:()=>sim,getDesign:currentDesign,catalog,capture,changed:markDirty,status,go,run:()=>{if(clock.source||clock.running)$('instrumentRun').click();else $('run').click();}});
+inspector.onScope=id=>scopes.show(id);

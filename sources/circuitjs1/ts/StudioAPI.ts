@@ -2,6 +2,33 @@
 import type { CirSim } from './CirSim';
 export class StudioAPI {
  constructor(private app: CirSim) {}
+ scopeSignals(): any[] {
+  this.app.ensureStudioIds();
+  return this.app.elmList.filter(e=>e.canViewInScope()).map((e:any)=>({id:e.studioId,type:e.studioType||e.getClassName()}));
+ }
+ scopes(): any[] {
+  const m=this.app.scopeManager;
+  return m.scopes.slice(0,m.scopeCount).flatMap((s,index)=>s?.getElm()?[{index,id:(s.getElm() as any).studioId,speed:s.speed}]:[]);
+ }
+ showScope(id:string): number {
+  const e=this.find(id);if(!e.canViewInScope())throw Error('This component has no oscilloscope signal');
+  const existing=this.scopes().find(s=>s.id===id);if(existing)return existing.index;
+  const m=this.app.scopeManager;
+  if(m.scopeCount>=m.scopes.length)throw Error('All 20 scope slots are in use. Remove a scope first.');
+  const previous=this.app.mouse.menuElm;
+  try{this.app.mouse.menuElm=e;this.app.commands.menuPerformed('elm','viewInScope');}
+  finally{this.app.mouse.menuElm=previous;}
+  const scope=m.scopes[this.scopes().find(s=>s.id===id)!.index];scope.showScale=true;scope.showMax=true;scope.showMin=true;
+  m.scopeHeightFraction=Math.max(.32,m.scopeHeightFraction);this.app.repaint();
+  return this.scopes().find(s=>s.id===id)!.index;
+ }
+ scopeAction(index:number,action:string): void {
+  if(!Number.isInteger(index)||!this.scopes().some(s=>s.index===index))throw Error('Scope no longer exists');
+  if(!['speed2','speed1/2','properties','exportcsv','exportimage','remove'].includes(action))throw Error('Unknown scope action');
+  const m=this.app.scopeManager,previous=m.menuScope;m.menuScope=index;
+  try{this.app.commands.menuPerformed('scopepop',action);}finally{m.menuScope=previous;}
+  this.app.repaint();
+ }
  elements(): any[] {
   this.app.ensureStudioIds();
   if(this.app.analyzeFlag){this.app.sim.analyzeCircuit();this.app.analyzeFlag=false;}

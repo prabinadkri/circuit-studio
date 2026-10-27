@@ -15,7 +15,7 @@ export function commandSearch({dialog,input,results,count,trigger,commands}){
   count.textContent=matches.length?`${matches.length} commands · ↑ ↓ to browse · Enter to choose`:'No matching commands. Try “pan”, “components” or “save”.';
  }
  function open(){
-  if(document.querySelector('dialog[open]')||document.getElementById('sim')?.contentDocument?.querySelector('.gwt-DialogBox'))return;
+  if(document.querySelector('dialog[open]')||document.getElementById('sim')?.contentDocument?.querySelector('dialog[open],.gwt-DialogBox'))return;
   restoreFocus=true;returnFocus=document.activeElement;input.value='';render();dialog.showModal();input.focus();
  }
  trigger.addEventListener('click',open);input.addEventListener('input',render);

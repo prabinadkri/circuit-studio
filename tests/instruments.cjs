@@ -7,6 +7,17 @@ await page.locator('nav [data-page="instruments"]').click();await page.waitForFu
 const result=await page.evaluate(()=>({tick:studioClock.tick,trigger:studioClock.trace.triggeredAt,time:studioSim.getTime(),samples:studioClock.trace.samples.length,events:studioClock.trace.events.length}));assert.ok(result.tick>=result.trigger+20000&&result.tick<result.trigger+22000);assert.ok(Math.abs(result.time-result.tick/2e9)<1e-12);assert.ok(result.samples>10);await page.waitForTimeout(600);const paused=await page.evaluate(()=>studioClock.tick);assert.equal(paused,result.tick);
 await page.locator('#cursorA').fill('2');await page.locator('#cursorB').fill('10');await page.locator('#cursorB').press('Tab');assert.match(await page.locator('#traceMeasurements').textContent(),/Δt 8.000 µs/);const downloaded=page.waitForEvent('download');await page.locator('#exportTrace').click();const download=await downloaded;const csv=await fs.readFile(await download.path(),'utf8');assert.match(csv,/digital,"D13",1/);assert.match(csv,/analog,"V\(OUT\)"/);assert.equal(csv.split('\n')[0],'time_s,tick,kind,channel,value');await page.screenshot({path:process.env.TEST_OUTPUT+'/instruments.png'});
 const cursorPoint=await page.locator('#tracePlot').evaluate(e=>{const p=new DOMPoint(520,180).matrixTransform(e.getScreenCTM());return {x:p.x,y:p.y};});await page.mouse.click(cursorPoint.x,cursorPoint.y);assert.ok(Math.abs(Number(await page.locator('#cursorA').inputValue())-10)<.025,'cursor click within one rendered pixel');
+// Display controls must preserve recorded samples and simulation time.
+const frozen=await page.evaluate(()=>({tick:studioClock.tick,events:studioClock.trace.events,samples:studioClock.trace.samples}));
+await page.locator('#traceZoomIn').click();assert.equal(await page.locator('#traceWindow').inputValue(),'10.000');
+await page.locator('#traceZoomOut').click();await page.locator('#scopeScale').selectOption('1');await page.locator('#scopeCenter').fill('2.5');await page.locator('#scopeCenter').press('Tab');
+assert.match(await page.locator('#tracePlot').textContent(),/1.00 V\/div · Manual/);
+await page.locator('#traceWindow').fill('0');await page.locator('#traceWindow').press('Tab');assert.equal(await page.locator('#traceWindow').getAttribute('aria-invalid'),'true');
+await page.locator('#traceWindow').fill('20');await page.locator('#traceWindow').press('Tab');await page.locator('#traceFit').click();await page.locator('#cursorFit').click();
+assert.equal(await page.locator('#cursorA').inputValue(),'0.000');assert.match(await page.locator('#traceMeasurements').textContent(),/Vpp/);
+assert.deepEqual(await page.evaluate(()=>({tick:studioClock.tick,events:studioClock.trace.events,samples:studioClock.trace.samples})),frozen);
+await page.locator('#clearTrigger').click();assert.equal(await page.evaluate(()=>studioClock.trace.trigger),null);
+await page.screenshot({path:process.env.TEST_OUTPUT+'/instruments-polished.png'});
 // Trigger arming survives an explicit reset and a new coupled run.
 await page.locator('nav [data-page="firmware"]').click();await page.locator('#mcuReset').click();await page.locator('nav [data-page="instruments"]').click();await page.locator('#armTrace').click();await page.locator('#instrumentRun').click();await page.waitForFunction(()=>studioClock.trace.triggeredAt!==null&&!studioClock.running);assert.ok(await page.evaluate(()=>studioClock.trace.triggeredAt<2000));
 

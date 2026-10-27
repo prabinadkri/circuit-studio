@@ -1,14 +1,14 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.6",
+  "revision": "0.4.0-alpha.7",
   "assets": [
     {
       "path": "index.html",
-      "sha256": "0636cfd90259c043e6f790d3e892e3f18615ccbf96fa10dbfe15a3a78b52a5af"
+      "sha256": "146abfaef522a0310835740a51ebcd3f516f5fed534b77d6353ac7baa1d01f7b"
     },
     {
       "path": "studio.css",
-      "sha256": "33c493c6058e76f7d353c1bd3e75093e078a86c7e153807a977e88fccf8cb86d"
+      "sha256": "4942f00a0f2da6fac13a5684706c4a94efaed4786413339031d35df975fa6883"
     },
     {
       "path": "navigation.js",
@@ -24,7 +24,11 @@
     },
     {
       "path": "commands.js",
-      "sha256": "4b746efbed9ffe394f6b9bd3eab778d70ccb008fce75f93e3bbbb373a0a07b78"
+      "sha256": "f48448c3c0417fedc69faff54ff0959053e0b2133824a08f405689751a0742ba"
+    },
+    {
+      "path": "scopes.js",
+      "sha256": "8417b4b34740a0ddf08b7fd5d1ac361d9176528804187af9804c0593c5b0e69d"
     },
     {
       "path": "library.json",
@@ -64,7 +68,7 @@
     },
     {
       "path": "studio.js",
-      "sha256": "d3185a83bdefa99fbaf4dff637dd7bb1374fbd342c75ac3c6d8c9047e975222e"
+      "sha256": "dd8ee171e3b8a3e6f81d15b862de72a64179981458ea8240ec10cbd534ea962d"
     },
     {
       "path": "digital.js",
@@ -76,7 +80,7 @@
     },
     {
       "path": "instruments.js",
-      "sha256": "8dd4c169a42175a59bb84195dcdfa33cea2b135003c91ed48bdb546c7d5b853b"
+      "sha256": "37b354ba79d622e1427d46049449a0ab7220e1d5be1f32717b61a3caeb82eb0c"
     },
     {
       "path": "mcu-package.js",
@@ -104,11 +108,11 @@
     },
     {
       "path": "engine/circuitjs.html",
-      "sha256": "b1a0456feddd189372591c922ad92e6d46bdaa199b3649eabc788328dcfb1c47"
+      "sha256": "2f805b561cddebdebbbdd2d9acc0513acf2252445a828f7bc11973450a500c74"
     },
     {
-      "path": "engine/circuitjs/circuitjs-B0N9Q-ZO.js",
-      "sha256": "5155d179e9b907aa99654cb94dc01df734cd769be4272e5e0c62680cc3621717"
+      "path": "engine/circuitjs/circuitjs-DmiMYfff.js",
+      "sha256": "00754fbeb53d65acb9dad649d48df5dfa1f9ab29903f5b8e18c8e845e8b7b893"
     }
   ]
 }
