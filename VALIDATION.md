@@ -87,3 +87,17 @@ checks transaction rollback, validates per-layer connectivity and exported files
 `spikes/backends/esp32c3-audit.py` records a repeatable direct-ELF UART probe, not
 ESP-IDF or schematic integration. The backend audit explicitly leaves unsupported
 profiles disabled. See `docs/planning/MILESTONE-29.md` for all scope limits.
+
+
+## Alpha.5 navigation and UI regression
+
+`tests/navigation.cjs` uses real browser mouse/keyboard gestures against the bundled
+engine: hand, middle-button and Space-drag pan; pointer capture/release outside the
+iframe; placement immediately after pan; preserved geometry and undo; keyboard
+and clickable view movement; form input isolation; panel hide/show; PCB wheel
+anchor and unfinished-route preservation; running shared MCU timeline retention.
+`tests/usability.cjs` checks all workspaces at nine effective viewport/zoom sizes.
+The full existing regression suite remains required, including analog simulation,
+MCU coupling, component placement, project edits, PCB export, reuse and peripherals.
+Neutral UI colors do not change solver or fabrication outputs. Screenshots are
+visual review evidence, not a substitute for the interaction tests.

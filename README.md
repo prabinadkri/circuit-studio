@@ -2,9 +2,22 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.4.0-alpha.4.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.4.0-alpha.5.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
+
+## Workspace navigation
+
+Alpha.5 introduces a neutral slate/white interface with blue action controls.
+Both editors have a visible **Pan** tool, zoom buttons, a zoom readout and **Fit**.
+Hold **Space and drag**, or drag with the **middle mouse button**, to temporarily
+pan without changing the selected component or unfinished route. **H** selects
+Pan, **V** selects editing, **F** fits, and **+ / −** zoom. **Pan steps** or
+**Shift + arrow keys** move the view without dragging. Text fields retain normal typing.
+
+**Library** and **Inspector** toggle the schematic side panels. Action bars wrap
+at narrow widths; advanced engine menus remain available. Panning leaves circuit
+geometry, PCB connectivity, undo history and the running MCU timeline unchanged.
 
 ## Roadmap progress
 
@@ -19,7 +32,7 @@ full Proteus parity.
 
 ## Circuit assistant
 
-Click **Design with Coding Hub → Start circuit chat** in the Circuit lab toolbar.
+Click **Coding Hub → Start circuit chat** in the Circuit lab toolbar.
 Studio prepares a separate copy and opens a ready-to-use Coding Hub workspace in
 your browser. Describe your circuit or changes, choose your configured model,
 enable **Allow edits & commands**, and send. No paths, copied setup instructions

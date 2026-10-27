@@ -1,7 +1,23 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.4",
+  "revision": "0.4.0-alpha.5",
   "assets": [
+    {
+      "path": "index.html",
+      "sha256": "d78b97213643c23687abb90fb7bdafc07706f1b9b61316ce2ca61ca5db9e4b7f"
+    },
+    {
+      "path": "studio.css",
+      "sha256": "70a6cd77e723688c650e43a9de50b22b5baed37846ca8199438a0897fbf046cc"
+    },
+    {
+      "path": "navigation.js",
+      "sha256": "c988b4139e3023c19a2989125b2bd5e18a676c3a59110f95879237b73a06b09e"
+    },
+    {
+      "path": "icon.svg",
+      "sha256": "be8d57eefd2844e90a80e44c3c8b0e9400dffdc195c2b2a096d9c25fc1d10a14"
+    },
     {
       "path": "library.json",
       "sha256": "de89373356f9062de1ed83da782e911fc247817b58de55ec788f81c72ff92dbf"
@@ -32,7 +48,7 @@
     },
     {
       "path": "pcb.js",
-      "sha256": "627f054e1b44a9868208e16f63e67aa41fdb64e01b6a805d6e7d24174cdd218d"
+      "sha256": "10b0db1ac00f52aaf190f0fecb6c05d7f4c7432eeb5d94ba57d945186f470657"
     },
     {
       "path": "manufacture.js",
@@ -40,7 +56,7 @@
     },
     {
       "path": "studio.js",
-      "sha256": "5ce1849813332d565d419858c2a0a30caaafb1d182991e1e5df0b587c5696c2e"
+      "sha256": "336d1892a1ddf6d5bd2160b3b1baf747e489ecbdf4930e98a6cbdc218783e871"
     },
     {
       "path": "digital.js",
@@ -80,11 +96,11 @@
     },
     {
       "path": "engine/circuitjs.html",
-      "sha256": "d9cd8c8fa9b085332dbc7673598c2240f97238456a411f7c95d9693bdf8dec9f"
+      "sha256": "b1a0456feddd189372591c922ad92e6d46bdaa199b3649eabc788328dcfb1c47"
     },
     {
-      "path": "engine/circuitjs/circuitjs-gul2n7IX.js",
-      "sha256": "aaa0c1d1cfee026d6866521001ad7310c9169336275df08dfbfd040d80525930"
+      "path": "engine/circuitjs/circuitjs-B0N9Q-ZO.js",
+      "sha256": "5155d179e9b907aa99654cb94dc01df734cd769be4272e5e0c62680cc3621717"
     }
   ]
 }

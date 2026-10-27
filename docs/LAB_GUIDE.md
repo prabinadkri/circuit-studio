@@ -212,3 +212,35 @@ Expand **PCB design → Routing constraints & layer stack**.
 The 3D tool currently refuses boards with non-through via cavities. These routing
 features do not calculate controlled impedance or define a fabrication-qualified
 laminate stack.
+
+
+## Navigation and workspace layout (alpha.5)
+
+Use **Pan** above either canvas to drag the view with the left button. The cursor
+changes to an open hand, then a closed hand while dragging. **Select** / **V**
+returns to component editing; **Escape** also cancels the current placement/route.
+For a temporary pan, hold **Space** while dragging or use the middle mouse button.
+Releasing Space returns to the previous tool; an unfinished PCB route is retained.
+Panning during a shared-time firmware run does not pause or detach that run.
+
+Use the **+**, **−** and **Fit** buttons, or the matching keyboard shortcuts
+**+ / − / F**. PCB wheel zoom stays anchored beneath the pointer. Schematic wheel
+behavior retains CircuitJS scope/value preferences under its Options menu.
+**Pan steps** provides clickable arrows, and **Shift + arrow keys** provides the
+same view movement from the keyboard. These shortcuts do not intercept text input.
+
+**Library** and **Inspector** above the schematic hide/show the corresponding
+side panels. On narrow windows, toolbars wrap and the canvas appears before the
+panels; scroll the workspace to reach the library/inspector. All seven workspaces
+and the existing engine menus remain available. View movement does not create a
+project edit or alter saved geometry. Panel visibility is session-only.
+
+### Design references
+
+The navigation changes were informed by the [KiCad editor navigation guide](https://docs.kicad.org/10.0/en/getting_started_in_kicad/getting_started_in_kicad.html)
+(middle-button pan and wheel zoom), [Proteus routing documentation](https://www.labcenter.com/manualrouting/)
+(visible routing mode and context-specific controls), and [W3C guidance on dragging alternatives](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html)
+(clickable pan controls alongside gestures). The slate/blue palette is an original
+Circuit Studio design choice, not a claim of Proteus UI or accessibility certification.
+Electrical signal colors, LCD display colors and copper-layer colors retain
+their existing meanings.

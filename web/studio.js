@@ -1,3 +1,4 @@
+import {WorkspaceNavigation,boardViewport} from './navigation.js';
 import {PeripheralLab} from './peripheral-lab.js';
 import {setStackup,addSpannedVia,routePair,matchLength,shoveRoute,routeLength} from './routing.js';
 import {ReusePanel} from './reuse.js';
@@ -30,7 +31,8 @@ const devices=await response.json(),deviceMap=new Map(devices.map(d=>[d.id,d]));
 const $=id=>document.getElementById(id);
 const frame=$('sim'); let sim, dirty=false, lastSaved='', autosaveTimer, loading=false;
 const status=t=>$('status').textContent=t;
-let selectedPart='';
+let selectedPart='',schematicNavigation;
+const selectTool=()=>{schematicNavigation?.setHand(false);sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move components';};
 for(const name of ['Common lab','All components','Favorites',...new Set(catalog.parts.map(p=>p.category))])$('category').append(new Option(name,name));
 function renderParts(){
  const q=normalize($('search').value),category=$('category').value;
@@ -39,7 +41,7 @@ function renderParts(){
  for(const part of visible){
   const {label,type}=part,b=document.createElement('button'),name=document.createElement('span');name.textContent=label;b.dataset.part=type;b.append(partIcon(type),name);
   b.title=label+' · '+part.model.limits;b.setAttribute('aria-pressed',String(selectedPart===type));b.classList.toggle('active',selectedPart===type);
-  b.onclick=()=>{if(!sim)return;capture();sim.command('main',type);selectedPart=type;$('mode').textContent=label+' · '+(type==='WireElm'?'drag between pins':'click empty space to place');renderParts();showLibraryPart(part);frame.contentWindow.focus();};$('parts').append(b);
+  b.onclick=()=>{if(!sim)return;schematicNavigation?.setHand(false);capture();sim.command('main',type);selectedPart=type;$('mode').textContent=label+' · '+(type==='WireElm'?'drag between pins':'click empty space to place');renderParts();showLibraryPart(part);frame.contentWindow.focus();};$('parts').append(b);
  }
  if(!visible.length){const empty=document.createElement('p');empty.className='parts-empty';empty.textContent='No matching components. Try another name or category.';$('parts').append(empty);}
  $('partCount').textContent=visible.length+' / '+catalog.parts.length;
@@ -66,6 +68,7 @@ function selectDevice(next,remember=true){
 selectDevice('avr',false);
 $('device').onchange=()=>{selectDevice($('device').value);markDirty();};
 const board=new BoardEditor($('board'),status,markDirty);
+const boardNavigation=new WorkspaceNavigation({surface:$('board'),controls:$('boardView'),...boardViewport($('board')),active:()=>$('pcb').classList.contains('active'),onSelect:()=>board.setMode('move')});
 const reuse=new ReusePanel(()=>sim,currentDesign,()=>board,()=>{lastDesignDump='';markDirty();capture();},status,download);window.studioReuse=reuse;
 const analysis=new AnalysisPanel(()=>{markDirty();capture();},status,download);
 function renderOutline(d){const select=$('componentOutline'),key=d.instances.map(e=>e.id+e.reference).join();if(select.dataset.key===key)return;const selected=select.value;select.replaceChildren(...d.instances.map(e=>new Option(e.reference+' · '+e.type.replace('Elm',''),e.id)));select.value=selected;select.dataset.key=key;}
@@ -85,12 +88,11 @@ function loadProject(p,fromHistory=false){clock.detach();peripheralLab.load(p.pe
 function travel(direction){capture();const p=history[direction]();if(p)loadProject(p,true);}
 const examples=[['Voltage divider','voltdivide.txt'],['RC low-pass filter','filt-lopass.txt'],['555 oscillator','555square.txt'],['Half-wave rectifier','rectify.txt'],['Digital half adder','halfadd.txt']];
 for(const [name,file] of examples){let b=document.createElement('button');b.textContent=name+' ↗';b.onclick=async()=>{if(!sim||!replaceAllowed())return;try{const res=await fetch('engine/circuitjs/circuits/'+file);if(!res.ok)throw Error('Example could not be read');mcu.stop();sim.importCircuit(await res.text(),false);sim.setSimRunning(false);$('projectName').value=name;board.clear();design={};lastDesignDump='';markDirty();capture();status(name+' loaded');}catch(e){status(e.message);}};$('examples').append(b);}
-function bindSim(){if(sim)return;sim=frame.contentWindow.CircuitJS1;if(!sim)return;window.studioSim=sim;window.studioAutomation=createAutomation({sim,project,load:loadProject,validate:p=>validateProject(p,deviceMap,BoardEditor.validate),board,catalog,devices:deviceMap,setDevice:id=>{selectDevice(id);$('timingMode').value='coupled';},capture,changed:markDirty});sim.onhistorycommand=direction=>travel(direction);sim.onsvgrendered=(_,svg)=>download(safeName()+'.svg',svg,'image/svg+xml');sim.onanalyze=()=>{if(!loading)markDirty();};sim.command('main','Select');lastSaved=JSON.stringify(historyDocument());history.reset(historyDocument());historyTimer=setInterval(capture,300);frame.contentDocument.addEventListener('pointerdown',()=>{if(clock.running){clock.detach();status('Firmware paused for schematic editing. Reset CPU after changing connections.');}},true);frame.contentDocument.addEventListener('pointerup',()=>setTimeout(()=>{capture();const id=sim.getSelection();if(id){sim.selectElement(id);inspector.show(id);}},30));frame.contentDocument.addEventListener('keydown',shortcut,true);dirty=false;status('Ready · choose a component or run the example');openInitialProject();clearInterval(readyTimer);autosaveTimer=setInterval(checkpoint,4000);setInterval(updateReadings,200);}
+function bindSim(){if(sim)return;sim=frame.contentWindow.CircuitJS1;if(!sim)return;window.studioSim=sim;window.studioAutomation=createAutomation({sim,project,load:loadProject,validate:p=>validateProject(p,deviceMap,BoardEditor.validate),board,catalog,devices:deviceMap,setDevice:id=>{selectDevice(id);$('timingMode').value='coupled';},capture,changed:markDirty});sim.onhistorycommand=direction=>travel(direction);sim.onsvgrendered=(_,svg)=>download(safeName()+'.svg',svg,'image/svg+xml');sim.onanalyze=()=>{if(!loading)markDirty();};sim.command('main','Select');lastSaved=JSON.stringify(historyDocument());history.reset(historyDocument());historyTimer=setInterval(capture,300);initSchematicNavigation();frame.contentDocument.addEventListener('pointerdown',()=>{if(clock.running){clock.detach();status('Firmware paused for schematic editing. Reset CPU after changing connections.');}},true);frame.contentDocument.addEventListener('pointerup',()=>setTimeout(()=>{capture();const id=sim.getSelection();if(id){sim.selectElement(id);inspector.show(id);}},30));frame.contentDocument.addEventListener('keydown',shortcut,true);dirty=false;status('Ready · choose a component or run the example');openInitialProject();clearInterval(readyTimer);autosaveTimer=setInterval(checkpoint,4000);setInterval(updateReadings,200);}
 const readyTimer=setInterval(bindSim,150);setTimeout(()=>{if(!sim)status('Engine did not load. Restart Circuit Studio and check the terminal for errors.');},20000);
 function updateReadings(){if(!sim)return;const es=sim.getElements();$('count').textContent=es.length;$('time').textContent=sim.getTime().toFixed(4)+' s';$('run').textContent=sim.isRunning()?'Ⅱ Pause':'▶ Run';let resistors=es.filter(e=>e.getType()==='ResistorElm').slice(0,6);$('measurements').replaceChildren();resistors.forEach((e,i)=>{let div=document.createElement('div');div.className='reading';let label=document.createElement('span');label.textContent='R'+(i+1);let val=document.createElement('b');val.textContent=e.getVoltageDiff().toFixed(3)+' V · '+(e.getCurrent()*1000).toFixed(3)+' mA';div.append(label,val);$('measurements').append(div);});}
 $('run').onclick=()=>{if(clock.running){clock.stop();return;}if(clock.source){status('Use Run firmware to resume the shared timeline, or choose Independent timing.');return;}sim?.setSimRunning(!sim.isRunning());};$('reset').onclick=()=>{clock.detach();sim?.reset();};
-$('undo').onclick=()=>travel('undo');$('redo').onclick=()=>travel('redo');$('fit').onclick=()=>sim?.command('edit','centercircuit');
-$('select').onclick=()=>{sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move components';};
+$('undo').onclick=()=>travel('undo');$('redo').onclick=()=>travel('redo');
 $('new').onclick=()=>{if(!sim||!replaceAllowed())return;capture();compiler.load(null);peripheralLab.load();reuse.load();analysis.load(null);projectId=uuid();design={};lastDesignDump='';avr.clear();pic.clear();firmwareByDevice={avr:'',pic:''};$('hex').value='';board.clear();sim.importCircuit('$ 1 0.000005 10 50 5 50\n',false);sim.setSimRunning(false);$('projectName').value='Untitled circuit';markDirty();capture();};
 $('save').onclick=()=>{if(!sim)return;const text=JSON.stringify(project(),null,2);download(safeName()+'.circuit',text);lastSaved=JSON.stringify(historyDocument());dirty=false;$('saveState').textContent='File exported';status('Project downloaded · schematic, firmware and PCB included');};
 $('open').onclick=()=>$('file').click();$('file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!sim||!replaceAllowed())return;try{if(f.size>10e6)throw Error('Project is larger than 10 MB');let t=await f.text();if(t.trim().startsWith('{'))loadProject(parseProject(t));else if(/^\s*(\$|<circuit)/.test(t)){avr.clear();pic.clear();firmwareByDevice={avr:'',pic:''};$('hex').value='';board.clear();sim.importCircuit(t,false);sim.setSimRunning(false);$('projectName').value=f.name;markDirty();}else throw Error('Choose a Circuit Studio project or CircuitJS circuit');}catch(e){status('Open failed: '+e.message);}};
@@ -129,14 +131,14 @@ $('syncBoard').onclick=()=>{if(!sim)return;try{capture();boardPlan=board.planUpd
 $('applyBoardUpdate').onclick=()=>{try{board.applyUpdate(boardPlan);capture();$('boardUpdateDialog').close();}catch(e){status(e.message);}};
 $('boardRotate').onclick=()=>{capture();board.rotateSelected();capture();};$('boardFlip').onclick=()=>{capture();board.flipSelected();capture();};
 $('addVia').onclick=()=>{capture();board.dropVia();capture();};$('deleteVia').onclick=()=>{capture();board.deleteVia();capture();};$('pourZone').onclick=()=>{capture();board.pourLayer();capture();};$('clearZone').onclick=()=>{capture();board.clearZones();capture();};
-$('boardMove').onclick=()=>board.setMode('move');$('boardRoute').onclick=()=>board.setMode('route');$('boardUndo').onclick=()=>travel('undo');$('layer').onchange=()=>board.cancelRoute();$('drc').onclick=()=>board.check();$('deleteTrack').onclick=()=>board.deleteTrack();$('exportBoard').onclick=()=>{try{if(board.sourceNetlist!==BoardEditor.fingerprint(currentDesign().instances))throw Error('Schematic changed since PCB import. Re-import schematic nets before exporting.');download(safeName()+'.kicad_pcb',board.toKiCad(),'text/plain');status('KiCad board exported. Resolve design checks and verify footprints before fabrication.');}catch(e){status(e.message);}};
+$('boardMove').onclick=()=>{boardNavigation.setHand(false);board.setMode('move');};$('boardRoute').onclick=()=>{boardNavigation.setHand(false);board.setMode('route');};$('boardUndo').onclick=()=>travel('undo');$('layer').onchange=()=>board.cancelRoute();$('drc').onclick=()=>board.check();$('deleteTrack').onclick=()=>board.deleteTrack();$('exportBoard').onclick=()=>{try{if(board.sourceNetlist!==BoardEditor.fingerprint(currentDesign().instances))throw Error('Schematic changed since PCB import. Re-import schematic nets before exporting.');download(safeName()+'.kicad_pcb',board.toKiCad(),'text/plain');status('KiCad board exported. Resolve design checks and verify footprints before fabrication.');}catch(e){status(e.message);}};
 window.addEventListener('beforeunload',e=>{checkpoint();if(dirty){e.preventDefault();e.returnValue='';}});
 function shortcut(e){
  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();e.stopImmediatePropagation();$('save').click();return;}
  if(typing)return;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.stopImmediatePropagation();travel(e.shiftKey?'redo':'undo');}
- if(e.key==='Escape'){board.cancelRoute();sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move';}
+ if(e.key==='Escape'){schematicNavigation?.setHand(false);boardNavigation.setHand(false);board.cancelRoute();sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move';}
 }
 window.addEventListener('keydown',shortcut,true);
 for(const [id,cmd]of [['rotate','rotateCW'],['mirror','mirrorX'],['copy','copy'],['paste','paste'],['remove','delete']])$(id).onclick=()=>{capture();sim?.command('edit',cmd);lastDesignDump='';capture();};
@@ -190,3 +192,15 @@ $('spanVia').onclick=routeAction(()=>{const anchor=board.anchors().find(p=>p.id=
 $('outputJob').onclick=()=>{try{if(board.sourceNetlist!==BoardEditor.fingerprint(currentDesign().instances))throw Error('Update the PCB before running an output job');download(safeName()+'-outputs.zip',outputJobZip(board,{fabrication:$('jobFab').checked,bom:$('jobBOM').checked,variant:reuse.variant()}),'application/zip');status('Checked output job exported');}catch(e){status(e.message);}};
 
 peripheralLab.onExample=async()=>{if(!sim||!replaceAllowed())return;try{const r=await fetch('demos/peripheral-lab.circuit');if(!r.ok)throw Error('Peripheral example unavailable');loadProject(parseProject(await r.text()));markDirty();document.querySelector('nav [data-page=firmware]').click();status('Peripheral lab opened · Run firmware, then view Instruments');}catch(e){status(e.message);}};
+
+// Keep viewport controls separate from the project and undo history.
+function initSchematicNavigation(){
+ const canvas=frame.contentDocument.querySelector('canvas');
+ const style=frame.contentDocument.createElement('style');style.textContent=`.gwt-MenuBar-horizontal{background:#f1f3f5!important;border-bottom:1px solid #d1d7df}.gwt-MenuBar,.menuDropdown{font-family:system-ui,sans-serif!important;color:#273343}td.gwt-MenuItem{font-size:12px!important;font-weight:500!important}td.gwt-MenuItem.open,td.gwt-MenuItem:hover{background:#dce8fa!important}`;frame.contentDocument.head.append(style);
+ schematicNavigation=new WorkspaceNavigation({surface:canvas,controls:$('schematicView'),pan:(x,y)=>sim.panViewport(x,y),zoom:f=>sim.zoomViewport(f),fit:()=>sim.command('edit','centercircuit'),scale:()=>sim.getViewport().scale,selected:()=>sim.getViewport().tool==='Select',active:()=>$('schematic').classList.contains('active'),onSelect:selectTool});
+ setInterval(()=>{if($('schematic').classList.contains('active'))schematicNavigation.paint();},250);
+}
+for(const [button,panel,cls]of [['toggleLibrary','libraryPanel','hide-library'],['toggleInspector','inspectorPanel','hide-inspector']]){
+ const b=$(button),workspace=$('schematicWorkspace');
+ b.onclick=()=>{const hidden=workspace.classList.toggle(cls);$(panel).hidden=hidden;b.setAttribute('aria-expanded',String(!hidden));requestAnimationFrame(()=>frame.contentWindow.dispatchEvent(new Event('resize')));};
+}

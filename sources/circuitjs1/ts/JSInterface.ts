@@ -81,6 +81,22 @@ export class JSInterface {
             setMetadata: (id:string,meta:any) => studio.metadata(id,meta),
             editElement: (id:string) => studio.edit(id),
             command: (menu: string, item: string) => that.app.commands.menuPerformed(menu, item),
+            // View-only navigation must not move elements or create undo entries.
+            getViewport: () => ({scale:that.app.transform[0], x:that.app.transform[4], y:that.app.transform[5], tool:that.app.ui.mouseModeStr}),
+            panViewport: (dx:number,dy:number) => {
+                if (!Number.isFinite(dx)||!Number.isFinite(dy)) return;
+                that.app.transform[4]+=dx; that.app.transform[5]+=dy; that.app.repaint();
+            },
+            zoomViewport: (factor:number,x?:number,y?:number) => {
+                if (!Number.isFinite(factor)||factor<=0) return;
+                const t=that.app.transform, old=t[0];
+                if (!old) return;
+                const scale=Math.max(.2,Math.min(2.5,old*factor));
+                const cx=Number.isFinite(x)?x!:that.app.circuitArea.width/2;
+                const cy=Number.isFinite(y)?y!:that.app.circuitArea.height/2;
+                t[4]=cx-(cx-t[4])*scale/old; t[5]=cy-(cy-t[5])*scale/old;
+                t[0]=t[3]=scale; that.app.repaint();
+            },
             reset: () => that.app.ui.resetAction(),
             setSimRunning:  (run: boolean) => that.setSimRunning(run),
             getTime:        () => that.getTime(),
