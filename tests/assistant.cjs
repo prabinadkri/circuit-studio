@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');const {spawn}=require('node:child_process');const {createInterface}=require('node:readline');const {once}=require('node:events');const fs=require('node:fs/promises');const path=require('node:path');const assert=require('node:assert/strict');
+const {chromium}=require('playwright');const {spawn,execFileSync}=require('node:child_process');const {createHash}=require('node:crypto');const {createInterface}=require('node:readline');const {once}=require('node:events');const fs=require('node:fs/promises');const path=require('node:path');const assert=require('node:assert/strict');
 let browser,server,startup;
 (async()=>{
  server=spawn('python3',['tests/assistant-fixture.py'],{stdio:['ignore','pipe','inherit']});
@@ -11,11 +11,16 @@ let browser,server,startup;
  const folders=await fs.readdir(path.join(fixture.root,'assistant'));assert.equal(folders.length,1);
  const file=path.join(fixture.root,'assistant',folders[0],'design.circuit');const original=JSON.parse(await fs.readFile(file,'utf8'));
  assert.equal(await fs.readFile(path.join(path.dirname(file),'fixture-opened'),'utf8'),'True');
- await page.locator('#assistantCheck').click();await page.locator('#assistantState').filter({hasText:'No saved changes yet'}).waitFor();
- const edited={...original,name:'Assistant divider'};await fs.writeFile(file,JSON.stringify(edited));
+ await page.locator('#assistantCheck').click();await page.locator('#assistantState').filter({hasText:'No saved changes yet'}).waitFor();assert.match(await page.locator('#assistantState').textContent(),/enable Allow edits & commands/);assert.equal(await page.locator('#assistantResult').isVisible(),false);
+ const initialCount=await page.evaluate(()=>studioSim.getElements().length);
+ const plan=path.join(path.dirname(file),'edit.json');
+ await fs.writeFile(plan,JSON.stringify({version:1,operations:[{op:'add',type:'ResistorElm',ref:'RHELP',x:512,y:96,x2:608,y2:96}]}));
+ const revision=createHash('sha256').update(await fs.readFile(file)).digest('hex');
+ execFileSync('python3',['circuitctl.py','apply','--project',file,'--plan',plan,'--expected-revision',revision],{env:process.env,timeout:60000});
+ const edited=JSON.parse(await fs.readFile(file,'utf8'));edited.name='Assistant divider';await fs.writeFile(file,JSON.stringify(edited));
  await page.locator('#assistantCheck').click();await page.locator('#assistantApply').waitFor({state:'visible'});
- await page.locator('#assistantApply').click();await page.waitForFunction(()=>document.querySelector('#projectName').value==='Assistant divider');
- await page.locator('#undo').click();assert.equal(await page.locator('#projectName').inputValue(),original.name);
+ await page.locator('#assistantApply').click();await page.waitForFunction(()=>document.querySelector('#projectName').value==='Assistant divider');assert.equal(await page.evaluate(()=>studioSim.getElements().length),initialCount+1);
+ await page.locator('#undo').click();assert.equal(await page.locator('#projectName').inputValue(),original.name);assert.equal(await page.evaluate(()=>studioSim.getElements().length),initialCount);
  // A later result must not overwrite changes made in the live editor meanwhile.
  await page.locator('#assistant').click();await page.locator('#assistantStart').click();await page.locator('#assistantState').filter({hasText:'Your circuit chat is ready'}).waitFor();
  const latest=(await fs.readdir(path.join(fixture.root,'assistant'))).find(x=>!folders.includes(x));const next=path.join(fixture.root,'assistant',latest,'design.circuit');

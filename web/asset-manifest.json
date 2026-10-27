@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.9",
+  "revision": "0.4.0-alpha.10",
   "assets": [
     {
       "path": "index.html",
-      "sha256": "9587cf618d60c4b0424ed40918b905b4e3be66d6762eace5d7b5e9a1c158ead9"
+      "sha256": "3b8371a8fd346b1c105015faf52ef22e1b19a01b55b278ac71e4bd372a4ffb56"
     },
     {
       "path": "studio.css",
@@ -72,7 +72,7 @@
     },
     {
       "path": "studio.js",
-      "sha256": "380da1777dbaf5cfd4b83e7fb467afeb32315eb8b73018f96840bef820151b76"
+      "sha256": "ef15ef30e35ab92aedb44bf613eacae1dacdd4b8b2abda749895186d17e93a7f"
     },
     {
       "path": "digital.js",

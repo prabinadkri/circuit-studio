@@ -162,3 +162,9 @@ variants are in `reuse.variants` (`name`, `dnp` source UUIDs, `values` keyed by 
 UUID) and `reuse.active`; they affect assembly output only. Peripheral settings are
 in `peripherals`, including the explicit pin-role map. `simulate` remains analog
 only; use the interactive shared-time run for the peripheral lab.
+
+If the assistant only replies in chat, check its mode: **Allow edits & commands**
+must be enabled. Analysis mode cannot create a circuit. Ask it to save the actual
+`design.circuit`, then use **Check saved circuit** in Coding Hub. In the original
+Studio window use **Check for result → Bring into editor**. This is an explicit
+import, not live synchronization; a JSON example in chat is not imported.
