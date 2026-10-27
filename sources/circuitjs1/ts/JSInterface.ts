@@ -19,6 +19,7 @@
 
 
 import { StudioAPI } from './StudioAPI';
+import { SchematicDrawing } from './SchematicDrawing';
 
 export class JSInterface {
     app: any;
@@ -84,7 +85,12 @@ export class JSInterface {
             setProperty: (id:string,index:number,value:string|number) => studio.setProperty(id,index,value),
             setMetadata: (id:string,meta:any) => studio.metadata(id,meta),
             editElement: (id:string) => studio.edit(id),
-            command: (menu: string, item: string) => that.app.commands.menuPerformed(menu, item),
+            command: (menu: string, item: string) => {if(item!=='centercircuit')that.app.ui.studioDrawing?.cancel();that.app.commands.menuPerformed(menu, item);},
+            configureDrawing: (options:any={}) => {that.app.ui.studioDrawing??=new SchematicDrawing(that.app);that.app.ui.studioDrawing.configure(options);},
+            getDrawingState: () => that.app.ui.studioDrawing?.state(),
+            cancelWire: () => that.app.ui.studioDrawing?.cancel(),
+            finishWire: () => that.app.ui.studioDrawing?.finish(),
+            undoWireCorner: () => that.app.ui.studioDrawing?.back(),
             // View-only navigation must not move elements or create undo entries.
             getViewport: () => ({scale:that.app.transform[0], x:that.app.transform[4], y:that.app.transform[5], tool:that.app.ui.mouseModeStr}),
             panViewport: (dx:number,dy:number) => {
@@ -114,7 +120,7 @@ export class JSInterface {
             getElements:    () => that.getJSElements(),
             getCircuitAsSVG: () => that.doExportAsSVGFromAPI(),
             exportCircuit:  (saveState=true) => that.app.dumpCircuit(saveState),
-            importCircuit:  (circuit: string, subcircuitsOnly: boolean) => that.importCircuitFromText(circuit, subcircuitsOnly),
+            importCircuit:  (circuit: string, subcircuitsOnly: boolean) => {that.app.ui.studioDrawing?.cancel();that.importCircuitFromText(circuit, subcircuitsOnly);},
         };
         const hook = (window as any).oncircuitjsloaded;
         if (hook)

@@ -40,6 +40,7 @@ export class StudioAPI {
    pins:Array.from({length:e.getPostCount()},(_,i)=>({id:e.studioPins[i],index:i,name:e.pins?.[i]?.text||String(i+1),output:!!e.pins?.[i]?.output,net:e.nodes[i]?.index??-1,x:e.getPost(i)?.x,y:e.getPost(i)?.y})),
    mcu:e.getClassName()==='MCUPackageElm'?structuredClone(e.definition()):undefined,
    info:e.getInfoJS(),selected:e.isSelected(),
+   ...(e.isRoutedWireElm()?{route:e.routePoints?.map((p:any)=>({x:p.x,y:p.y}))}:{}),
   }));
  }
  advanceSteps(count:number):number {

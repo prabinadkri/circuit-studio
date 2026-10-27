@@ -1122,6 +1122,7 @@ export class UIManager {
             this.app.transform[4] * scale,
             this.app.transform[5] * scale);
 
+        (this as any).studioDrawing?.drawGrid(this.cvcontext);
         perfmon.startContext("elm.draw()");
         try {
             for (const ce of this.elmList) {
@@ -1209,6 +1210,7 @@ export class UIManager {
             g.drawLine(this.mouse.inverseTransformX(0), y, this.mouse.inverseTransformX(this.app.circuitArea.width), y);
         }
 
+        (this as any).studioDrawing?.drawPreview(this.cvcontext);
         /*if (WireRouter.lastRouter != null)
             WireRouter.lastRouter.drawGrid(g.context, true);*/
 

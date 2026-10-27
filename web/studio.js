@@ -1,4 +1,5 @@
 import {SchematicScopes} from './scopes.js';
+import {drawingControls} from './drawing.js';
 import {commandSearch} from './commands.js';
 import {WorkspaceNavigation,boardViewport} from './navigation.js';
 import {PeripheralLab} from './peripheral-lab.js';
@@ -33,7 +34,7 @@ const devices=await response.json(),deviceMap=new Map(devices.map(d=>[d.id,d]));
 const $=id=>document.getElementById(id);
 const frame=$('sim'); let sim, dirty=false, lastSaved='', autosaveTimer, loading=false;
 const status=t=>$('status').textContent=t;
-let selectedPart='',schematicNavigation;
+let selectedPart='',schematicNavigation,drawing;
 const selectTool=()=>{schematicNavigation?.setHand(false);sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move components';};
 for(const name of ['Common lab','All components','Favorites',...new Set(catalog.parts.map(p=>p.category))])$('category').append(new Option(name,name));
 function renderParts(){
@@ -141,6 +142,7 @@ function shortcut(e){
  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();e.stopImmediatePropagation();$('save').click();return;}
  if(typing)return;
+ if(drawing?.key(e))return;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.stopImmediatePropagation();travel(e.shiftKey?'redo':'undo');}
  if(e.key==='Escape'){schematicNavigation?.setHand(false);boardNavigation.setHand(false);board.cancelRoute();sim?.command('main','Select');selectedPart='';renderParts();$('mode').textContent='Select · drag to move';}
 }
@@ -209,6 +211,7 @@ peripheralLab.onExample=async()=>{if(!sim||!replaceAllowed())return;try{const r=
 // Keep viewport controls separate from the project and undo history.
 function initSchematicNavigation(){
  const canvas=frame.contentDocument.querySelector('canvas');
+ drawing=drawingControls({sim,capture,active:()=>$('schematic').classList.contains('active'),selectWire:type=>{schematicNavigation?.setHand(false);sim.command('main',type);selectedPart=type;renderParts();canvas.focus();paintSchematicMode();}});
  const style=frame.contentDocument.createElement('style');style.textContent=`.gwt-MenuBar-horizontal{background:#f1f3f5!important;border-bottom:1px solid #d1d7df}.gwt-MenuBar,.menuDropdown{font-family:system-ui,sans-serif!important;color:#273343}td.gwt-MenuItem{font-size:12px!important;font-weight:500!important}td.gwt-MenuItem.open,td.gwt-MenuItem:hover{background:#dce8fa!important}.circuitDialog{font:13px/1.5 system-ui,sans-serif;color:#273343;background:#fff;border:1px solid #b9c7da;border-radius:9px;padding:18px;box-shadow:0 18px 55px #14223740;max-width:calc(100vw - 24px)}.circuitDialog::backdrop{background:#17253a45}.circuitDialog h3{font-size:16px!important}.circuitDialog button{font:inherit;border:1px solid #cbd6e5;border-radius:5px;background:#f5f7fa;color:#273343;padding:5px 10px;cursor:pointer}.circuitDialog button:hover{background:#e8effa}.circuitDialog input:not([type=radio]):not([type=checkbox]):not([type=range]),.circuitDialog select{font:inherit;border:1px solid #cbd6e5;border-radius:4px;padding:4px 6px}.circuitDialog input{accent-color:#3269b5}.circuitDialog button:focus-visible,.circuitDialog input:focus-visible,.circuitDialog select:focus-visible{outline:2px solid #3269b5;outline-offset:2px}.circuitDialog .expand-but{min-width:25px;margin:4px 5px 4px 0;padding:1px 5px}`;frame.contentDocument.head.append(style);
  schematicNavigation=new WorkspaceNavigation({surface:canvas,controls:$('schematicView'),pan:(x,y)=>sim.panViewport(x,y),zoom:f=>sim.zoomViewport(f),fit:()=>sim.command('edit','centercircuit'),scale:()=>sim.getViewport().scale,selected:()=>sim.getViewport().tool==='Select',active:()=>$('schematic').classList.contains('active'),onSelect:selectTool});
  setInterval(()=>{if($('schematic').classList.contains('active')){schematicNavigation.paint();paintSchematicMode();}},250);
@@ -227,9 +230,10 @@ for(const [button]of panelSettings){setPanel(button,layout[button]===true);$(but
 $('resetLayout').onclick=()=>{for(const [button]of panelSettings)setPanel(button,false);status('Default workspace layout restored');};
 function paintSchematicMode(){
  if(!sim)return;const tool=sim.getViewport().tool;
+ const drawingState=drawing?.paint();
  const part=catalog.parts.find(p=>p.type===tool);
  const navigating=schematicNavigation?.hand||schematicNavigation?.space||schematicNavigation?.drag;
- const text=navigating?'Pan · drag workspace · Esc to select':tool==='Select'?'Select · drag to move components':(part?.label||tool.replace(/Elm$/, ''))+' · '+(tool==='WireElm'?'drag between pins':'click empty space to place');
+ const text=navigating?'Pan · drag workspace · Esc to select':tool==='Select'?'Select · drag to move components':tool==='RoutedWireElm'?(drawingState?.message||(drawingState?.pending?'Wire · click end pin or add corner · Enter finish · Backspace undo corner · Esc cancel':'Wire · click a start pin or drag between pins')):(part?.label||tool.replace(/Elm$/, ''))+' · '+(tool==='WireElm'?'drag between pins':'click empty space to place');
  if($('mode').textContent!==text)$('mode').textContent=text;
  if(selectedPart!==(part?tool:'')){selectedPart=part?tool:'';renderParts();}
 }
@@ -244,6 +248,8 @@ const commands=commandSearch({dialog:$('commandDialog'),input:$('commandQuery'),
  action('Design with Coding Hub','Assistant','assistant','schematic','AI circuit chat'),
  action('Save project file','Project','save',null,'download backup'),
  action('Save project locally','Project','saveLocal'),
+ action('Draw a wire','Schematic','drawWire','schematic','connect pins automatic bends'),
+ action('Show or hide grid','Schematic','gridVisible','schematic','snap drawing dots'),
  action('Open saved projects','Project','localProjects'),
  action('Run electrical checks','Schematic','erc','schematic','ERC'),
  action('Show or hide component library','Layout','toggleLibrary','schematic'),

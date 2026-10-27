@@ -6,7 +6,7 @@
       "id": "circuitjs:WireElm",
       "revision": 1,
       "type": "WireElm",
-      "label": "Wire",
+      "label": "Straight wire",
       "category": "Connections",
       "aliases": [],
       "symbol": {
@@ -35,7 +35,7 @@
       "id": "circuitjs:RoutedWireElm",
       "revision": 1,
       "type": "RoutedWireElm",
-      "label": "Routed Wire",
+      "label": "Auto-bend wire",
       "category": "Connections",
       "aliases": [],
       "symbol": {

@@ -1,18 +1,22 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.8",
+  "revision": "0.4.0-alpha.9",
   "assets": [
     {
       "path": "index.html",
-      "sha256": "146abfaef522a0310835740a51ebcd3f516f5fed534b77d6353ac7baa1d01f7b"
+      "sha256": "9587cf618d60c4b0424ed40918b905b4e3be66d6762eace5d7b5e9a1c158ead9"
     },
     {
       "path": "studio.css",
-      "sha256": "4942f00a0f2da6fac13a5684706c4a94efaed4786413339031d35df975fa6883"
+      "sha256": "7bd183b98dde73d95a287d7107fb3ce50079067ab64b75a7f26a21ede9d7b419"
     },
     {
       "path": "navigation.js",
       "sha256": "c988b4139e3023c19a2989125b2bd5e18a676c3a59110f95879237b73a06b09e"
+    },
+    {
+      "path": "drawing.js",
+      "sha256": "6aa7d510373a9723b2503fa2a9ba4ffcc92c813982498b2f70702c7829c14419"
     },
     {
       "path": "icon.svg",
@@ -32,7 +36,7 @@
     },
     {
       "path": "library.json",
-      "sha256": "de89373356f9062de1ed83da782e911fc247817b58de55ec788f81c72ff92dbf"
+      "sha256": "85cdde0f7c4949848d874e251f8a24b59732f9a2d325a3b86cd67d00a6026a4d"
     },
     {
       "path": "footprints.js",
@@ -68,7 +72,7 @@
     },
     {
       "path": "studio.js",
-      "sha256": "dd8ee171e3b8a3e6f81d15b862de72a64179981458ea8240ec10cbd534ea962d"
+      "sha256": "380da1777dbaf5cfd4b83e7fb467afeb32315eb8b73018f96840bef820151b76"
     },
     {
       "path": "digital.js",
@@ -108,11 +112,11 @@
     },
     {
       "path": "engine/circuitjs.html",
-      "sha256": "2f805b561cddebdebbbdd2d9acc0513acf2252445a828f7bc11973450a500c74"
+      "sha256": "4a54af2bdb31b942898b42e159fe640d0a0ee37e034baa9288ac43c7d55496f7"
     },
     {
-      "path": "engine/circuitjs/circuitjs-DmiMYfff.js",
-      "sha256": "00754fbeb53d65acb9dad649d48df5dfa1f9ab29903f5b8e18c8e845e8b7b893"
+      "path": "engine/circuitjs/circuitjs-BlUUMA6R.js",
+      "sha256": "6d5d83b99c6f5b79caf9eac7558f6ca57911712d72728300ce7dbe4110df0f03"
     }
   ]
 }
