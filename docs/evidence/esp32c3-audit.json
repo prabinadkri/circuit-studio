@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "target": "ESP32-C3",
+  "backend": "QEMU emulator version 9.2.2 (esp_develop_9.2.2_20260417)",
+  "fixture": "RV32I direct-ELF UART0 FIFO write; not ESP-IDF flash boot",
+  "firmwareSha256": "a1fa509c8b963dc549a9b8929466d3f6fac36c3aed981e7d41967d6938b58083",
+  "qemuSha256": "834699a726720f5273b79bb1e8b3f735f6e0540f17fdf466dfd20055605f2b4d",
+  "repeatIdentical": true,
+  "uart": [
+    "Circuit Studio ESP32-C3 UART probe OK"
+  ],
+  "icount": 3,
+  "timing": "8 ns per emulated instruction; not silicon cycle timing",
+  "unsupportedOrUnvalidated": [
+    "Circuit Studio schematic pin coupling",
+    "GPIO matrix",
+    "ADC/DAC analog accuracy",
+    "Wi-Fi",
+    "Bluetooth",
+    "USB",
+    "ESP-IDF bootloader and flash image",
+    "interrupt/timer timing",
+    "power and reset electrical behavior"
+  ],
+  "decision": "Direct-ELF firmware execution candidate only. Do not enable a supported schematic device profile."
+}

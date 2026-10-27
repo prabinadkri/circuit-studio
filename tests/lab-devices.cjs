@@ -64,7 +64,7 @@ let browser;
  assert.equal((await reg('ADRESH'))*256+await reg('ADRESL'),255);
  console.log('PASS schematic IN_RA0 voltage overrides the manual analog slider');
  assert.ok(await page.locator('[data-analog="RA0"]').isDisabled());
- await page.locator('.mcu-layout').evaluate(el=>el.scrollTop=0);
+ await page.locator('#firmware .mcu-layout').evaluate(el=>el.scrollTop=0);
  await page.screenshot({path:process.env.TEST_OUTPUT+'/lab-devices.png'});
  const promise=page.waitForEvent('download');await page.locator('[data-page="schematic"]').click();await page.locator('#save').click();
  const download=await promise,filename=await download.path();const project=JSON.parse(await fs.readFile(filename,'utf8'));

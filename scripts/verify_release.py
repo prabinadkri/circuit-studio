@@ -34,10 +34,15 @@ def main():
     mcu=json.loads(run(sys.executable,app/'circuitctl.py','new','--project',mcu_file,'--plan',mcu_plan).stdout)
     mcu_inspect=json.loads(run(sys.executable,app/'circuitctl.py','inspect','--project',mcu_file).stdout)
     chip=next(e for e in mcu_inspect['components'] if e['reference']=='U1');assert len(chip['pins'])==28 and chip['mcu']['device']=='atmega328p'
+    reuse_plan=work/'reuse-plan.json';reuse_plan.write_text(json.dumps({'version':1,'operations':[{'op':'block-save','name':'Divider'},{'op':'block-place','name':'Divider','instance':'Copy','x':640,'y':0}]}))
+    revision=hashlib.sha256(project.read_bytes()).hexdigest()
+    reused=json.loads(run(sys.executable,app/'circuitctl.py','apply','--project',project,'--plan',reuse_plan,'--expected-revision',revision).stdout)
+    inspected=json.loads(run(sys.executable,app/'circuitctl.py','inspect','--project',project).stdout)
+    assert any(e.get('meta',{}).get('hierarchy')=='Copy' for e in inspected['components'])
     hashes={name:hashlib.sha256((app/name).read_bytes()).hexdigest() for name in ['launch.py','circuitctl.py','install.py','web/asset-manifest.json']}
     payload=project.read_bytes();removed=json.loads(run(sys.executable,app/'install.py','--prefix',prefix,'--uninstall').stdout)
     assert removed['uninstalled'] and project.read_bytes()==payload and not (work/'bin/circuit-studio').exists() and not (prefix/'current').exists()
-    report={'schema':1,'platform':platform.platform(),'runtime':installed['runtime'],'network':'Desktop renderer blocks all non-local network requests; tests use only bundled files/local backend','freshInstall':True,'configuredMCUPackagePins':len(chip['pins']),'dividerVolts':resistor['voltages'][0],'dividerAmps':resistor['current'],'backendChecks':checks,'uninstallRetainedProject':True,'criticalFileSha256':hashes}
+    report={'schema':1,'platform':platform.platform(),'runtime':installed['runtime'],'network':'Desktop renderer blocks all non-local network requests; tests use only bundled files/local backend','freshInstall':True,'configuredMCUPackagePins':len(chip['pins']),'reusableBlockCLI':True,'dividerVolts':resistor['voltages'][0],'dividerAmps':resistor['current'],'backendChecks':checks,'uninstallRetainedProject':True,'criticalFileSha256':hashes}
     args.report.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 
 

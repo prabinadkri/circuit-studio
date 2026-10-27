@@ -26,7 +26,7 @@
         65
       ],
       "repeatIdentical": true,
-      "firmwareSha256": "5356e43c87a197d4008a9d70f8e7146f24fcc20f13afbe15fb435ccfa047cf8d"
+      "firmwareSha256": "e2f0851e85953fc4c0775e05dad10ca102765920d9731dbf98415517705d08b9"
     },
     {
       "target": "atmega2560",
@@ -52,7 +52,7 @@
         68
       ],
       "repeatIdentical": true,
-      "firmwareSha256": "f43032083878989ef9822331af9e394b1b7d0b0b539844a7337c6637cf0d67df"
+      "firmwareSha256": "93bc480a1d9945af5a028b47db9ec3ff516411c7a4cfadf95949ec855ac74d4f"
     }
   ],
   "8052": {

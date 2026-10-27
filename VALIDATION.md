@@ -38,7 +38,7 @@ The v0.3 multi-package fixture adds DIP-28, bottom-side rotated SOIC-8 and a rot
 
 ## Not yet validated
 
-Silicon-cycle-accurate AVR/PIC-to-analog synchronization, arbitrary firmware, every upstream component model, manufacturer-specific footprints and complete fabrication DRC remain unvalidated. The current compiler/debugger covers AVR C; additional MCU models, PIC source debugging/serial monitoring, USB, SPI/I2C circuit coupling, chip-specific electrical fidelity and advanced PCB features remain outside this alpha. Recorded performance covers the specified fixtures, not arbitrary large designs. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.
+Silicon-cycle-accurate AVR/PIC-to-analog synchronization, arbitrary firmware, every upstream component model, manufacturer-specific footprints and complete fabrication DRC remain unvalidated. The current compiler/debugger covers AVR C; additional MCU models, PIC source debugging/serial monitoring, USB, arbitrary SPI/I2C hardware-controller coupling, chip-specific electrical fidelity and PCB features beyond the bounded alpha.4 gates remain unvalidated. Recorded performance covers the specified fixtures, not arbitrary large designs. Test HEX images are rebuilt by external gputils/AVR-GCC in CI; this does not constitute testing on physical chips.
 
 ## v0.4 automation, copper and mechanical acceptance
 
@@ -60,7 +60,7 @@ Silicon-cycle-accurate AVR/PIC-to-analog synchronization, arbitrary firmware, ev
 - Coding Hub's own `test_circuit_integration.py` checks command boundaries and
   instruction-context delivery; `tools/check_all.py --no-gui` passes after integration.
 
-The 3D renderer uses procedural envelopes. Protocol/peripheral integration and advanced routing acceptance remain open; the shared-clock/AVR-debugger gates are recorded below.
+The 3D renderer uses procedural envelopes. The original protocol/peripheral and advanced-routing gates are recorded in MILESTONE-29.md; the shared-clock/AVR-debugger gates are recorded below.
 
 ## Alpha.3 embedded and usability acceptance
 
@@ -72,3 +72,18 @@ checks actual controls, CSV, triggers and in-flight PIC cancellation.
 `tests/compiler.cjs` builds real C, navigates a real diagnostic, and pauses both
 CPU and analog time on source breakpoints. `tests/usability.cjs` records measured
 performance and effective CSS zoom/width reflow, not all OS scaling combinations.
+
+## Alpha.4 original roadmap closure
+
+`tests/protocols.test.mjs` independently generates UART frames at two rates and
+SPI edges in four modes, and exercises I²C ACK/NACK/stretch/repeated START/read,
+EEPROM busy/page wrap, OLED addressing and LCD DDRAM. `tests/peripheral-lab.cjs`
+executes compiled AVR firmware against the actual analog return nets.
+`tests/reuse.cjs` checks isolated/nested block instances, editable copies, stable
+reopen IDs and assembly variants with unchanged PCB copper.
+`tests/advanced-routing.cjs` separates pair, length, shove and via-span fixtures,
+checks transaction rollback, validates per-layer connectivity and exported files.
+`spikes/verify-advanced-routing.py` independently parses Gerbers/drills.
+`spikes/backends/esp32c3-audit.py` records a repeatable direct-ELF UART probe, not
+ESP-IDF or schematic integration. The backend audit explicitly leaves unsupported
+profiles disabled. See `docs/planning/MILESTONE-29.md` for all scope limits.

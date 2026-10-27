@@ -31,3 +31,11 @@ header nav{overflow-x:auto;min-width:0}.trace-workspace{padding:22px;overflow:au
  #schematic,#pcb{overflow:auto}.workspace{display:flex;flex-direction:column;height:auto}.workspace>aside{max-height:260px;flex:none}.workspace>main{height:420px;flex:none}.workspace>.instruments{max-height:none}.board-layout{height:auto;grid-template-columns:1fr}.board-canvas{height:420px}.analysis-layout{grid-template-columns:1fr}.mcu-layout{padding:14px;gap:16px}.mcu-stats{grid-template-columns:1fr 1fr}#pins{grid-template-columns:repeat(4,1fr)}header{padding:0 10px;gap:8px}.brand{min-width:130px!important}footer{padding:0 8px}footer #saveState{display:none}
 }
 #componentOutline{width:100%;min-height:130px;margin:8px 0}textarea:focus-visible,summary:focus-visible{outline:3px solid #237c58;outline-offset:2px}.tip,.panel-title{color:#526b5d}.chip .tip{color:#c7dacc}
+
+#reuse label{display:block;margin:10px 0}#reuse input:not([type=checkbox]),#reuse select{max-width:100%}#hierarchyTree button{margin:4px}#variantParts>div{padding:8px;border-bottom:1px solid #dbe2e0}
+
+.peripheral-displays{display:flex;gap:24px;flex-wrap:wrap;padding:16px 0}.peripheral-displays pre{max-width:380px;white-space:pre-wrap}#lcdScreen{font:20px monospace;background:#c8df87;color:#1e3021;padding:14px;min-width:220px;min-height:60px}#oledScreen{width:256px;height:128px;image-rendering:pixelated}#labLog{max-height:220px;overflow:auto;background:#14242c;color:#c2e4dc;padding:12px}#peripheralPanel{margin-bottom:20px}header nav{overflow-x:auto;min-width:0}#pcb details input:not([type=checkbox]),#pcb details select{max-width:100%;width:100%}
+
+#oledScreen{display:block;margin-top:12px}.peripheral-displays>div{min-width:0}#labPins{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}#labPins label{display:flex;flex-direction:column}
+
+#routeList{max-height:180px;overflow:auto}#routeList button{font-size:11px;text-align:left;white-space:normal}

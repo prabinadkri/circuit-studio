@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "revision": "0.4.0-alpha.3",
+  "revision": "0.4.0-alpha.4",
   "assets": [
     {
       "path": "library.json",
@@ -20,27 +20,27 @@
     },
     {
       "path": "copper.js",
-      "sha256": "21bd480053eed97de566d26cdc3bb75df826aedd26e6cb933b7497e879dd0593"
+      "sha256": "51f93b247f3607318ca6e0bfc26cdb257cb6a2e7ecfc7481a00d8c8032a38be4"
     },
     {
       "path": "board3d.js",
-      "sha256": "950b5f9fe631772c727e5989ddecee2337a129e02dfae97c2dfd482ac8a58675"
+      "sha256": "40e33b0d0eb4599ec5a921bfc275d6359d1d2c1cd2ff02ce36e85f9425ddc5d0"
     },
     {
       "path": "automation.js",
-      "sha256": "5f3c90ebee3f443ccac6e3d6aa79875b100006fae4d114e0872b22555152b933"
+      "sha256": "98fba0abab507e709286d3640cad1a3d521e4131b3c1a42aae1a93053553a5c2"
     },
     {
       "path": "pcb.js",
-      "sha256": "5639f09d1ec1534b13d99421714f7b2c0df0eff4f636cfe957fee166919bc2ed"
+      "sha256": "627f054e1b44a9868208e16f63e67aa41fdb64e01b6a805d6e7d24174cdd218d"
     },
     {
       "path": "manufacture.js",
-      "sha256": "7630f651299239578e5fb3e3833833ddfe437247ba709151a86cb2f0dfbd7b79"
+      "sha256": "80f12d8f18c54887a6f3b7cbb18d32339b8580d30bd03ad7a6f312b3495c61d1"
     },
     {
       "path": "studio.js",
-      "sha256": "1dbb1d50064dc3a8badbd7737c9efae09a685e98006aea69e4714c65cc2b5e4c"
+      "sha256": "5ce1849813332d565d419858c2a0a30caaafb1d182991e1e5df0b587c5696c2e"
     },
     {
       "path": "digital.js",
@@ -48,7 +48,7 @@
     },
     {
       "path": "cosim.js",
-      "sha256": "b236c43f3b2e3d64a19c36ab54f5a37c90d766577261565965c9b1a3e0948581"
+      "sha256": "bccc2d737c5291b36d02393637f8ba5444b84b2c23e277b7ff353d4e178a3da8"
     },
     {
       "path": "instruments.js",
@@ -61,6 +61,22 @@
     {
       "path": "compiler.js",
       "sha256": "fa4e6bdf77620a410f034e153a9666b900a81ad6f8099e399cb40a9fa3795679"
+    },
+    {
+      "path": "protocols.js",
+      "sha256": "273abecc7015898f6991dbfa40ad77f620483d17eabd296160655426c966ce94"
+    },
+    {
+      "path": "peripheral-lab.js",
+      "sha256": "66441a0f1c5474ea8c287ffaaeb9c4b2d61dedf08dc58061214aa81d982939e3"
+    },
+    {
+      "path": "reuse.js",
+      "sha256": "fd0d6ce97d9a5e3b81e3d6363822ee9a91234199ad25d5763d304ead8c6476ec"
+    },
+    {
+      "path": "routing.js",
+      "sha256": "4f283819b3441899507f61b827f14a85802620e4f5d77b3227575b657589ef4f"
     },
     {
       "path": "engine/circuitjs.html",

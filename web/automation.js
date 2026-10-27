@@ -1,4 +1,6 @@
+import {setStackup,addSpannedVia,routePair,matchLength,shoveRoute} from './routing.js';
 // Structured, transactional editor operations for local coding agents. GPL-2.0-or-later.
+import {captureBlock} from './reuse.js';
 import {placePackage,packageDefinition} from './mcu-package.js';
 import {electricalCheck} from './library.js';
 import {parseEngineering} from './project.js';
@@ -14,7 +16,9 @@ export function createAutomation({sim,project,load,validate,board,catalog,device
  };
  function operation(op){
   if(!object(op))throw Error('Operation must be an object');
-  if(op.op==='mcu-package'){
+  if(op.op==='block-save'){const panel=window.studioReuse;if(panel.state.blocks.some(b=>b.name===op.name))throw Error('Block already exists');panel.state.blocks.push(captureBlock(sim,project().design,op.name));
+  }else if(op.op==='block-place'){window.studioReuse.place(op.name,op.instance,op.x,op.y,op.ports||{});
+  }else if(op.op==='mcu-package'){
    const spec=devices?.get(op.device);if(!spec)throw Error('Choose an available MCU profile');if(!reference(op.ref)||project().design.instances.some(e=>e.reference===op.ref))throw Error('Unique MCU reference required');
    const id=placePackage(sim,spec,op.x??160,op.y??96);sim.setMetadata(id,{...sim.getDesignElements().find(e=>e.id===id).meta,reference:op.ref});setDevice(op.device);
   }else if(op.op==='add'){
@@ -28,6 +32,11 @@ export function createAutomation({sim,project,load,validate,board,catalog,device
    const points=[a,...bends,b];for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i];if(a.x===b.x&&a.y===b.y)continue;if(a.x!==b.x&&a.y!==b.y)throw Error('Use explicit orthogonal bends for wires');sim.addElement('WireElm',a.x,a.y,b.x,b.y);}
   }else if(op.op==='board-sync'){
    const plan=board.planUpdate(project().design.instances);if(plan.unsupported?.length)throw Error('Assign packages before PCB transfer: '+plan.unsupported.join(', '));board.applyUpdate(plan);
+  }else if(op.op==='board-stack'){setStackup(board,op.stack);
+  }else if(op.op==='board-pair'){routePair(board,op);
+  }else if(op.op==='board-tune'){matchLength(board,op.index,op.length,op.side??1);
+  }else if(op.op==='board-shove'){shoveRoute(board,op);
+  }else if(op.op==='board-spanned-via'){addSpannedVia(board,{...op,id:op.id||'via:'+crypto.randomUUID()});
   }else if(op.op==='board-place'){
    const p=board.parts.find(p=>p.ref===op.ref);if(!p)throw Error('Unknown PCB reference');for(const k of ['x','y','rotation','side'])if(op[k]!==undefined)p[k]=op[k];board.constructor.validate(board.serialize());board.render();
   }else if(op.op==='board-via'){
@@ -46,7 +55,7 @@ export function createAutomation({sim,project,load,validate,board,catalog,device
    if(!Array.isArray(request.operations)||request.operations.length>500)throw Error('Provide at most 500 operations');
    const before=project(),savedHistory={entries:[...window.studioProject.history.entries],cursor:window.studioProject.history.cursor};
    try{
-    if(request.action==='new'){if(typeof request.name!=='string'||!request.name.trim()||request.name.length>120)throw Error('Project name required (1–120 characters)');load({...before,id:crypto.randomUUID(),name:request.name,schematic:'$ 1 0.000005 10 50 5 50\n',design:{schema:1,instances:[],nets:[]},firmware:'',picFirmware:'',firmwareByDevice:{},board:{parts:[],tracks:[]},analysis:undefined});}
+    if(request.action==='new'){if(typeof request.name!=='string'||!request.name.trim()||request.name.length>120)throw Error('Project name required (1–120 characters)');load({...before,id:crypto.randomUUID(),name:request.name,schematic:'$ 1 0.000005 10 50 5 50\n',design:{schema:1,instances:[],nets:[]},firmware:'',picFirmware:'',firmwareByDevice:{},board:{parts:[],tracks:[]},analysis:undefined,reuse:undefined,peripherals:undefined});}
     for(const op of request.operations)operation(op);
     if(project().design.instances.length>2000)throw Error('Automation limit: 2000 elements');
     const after=validate(project());if(electricalCheck(after.design).some(f=>f.code==='duplicate-reference'))throw Error('Duplicate component references');

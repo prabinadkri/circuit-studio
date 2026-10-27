@@ -128,3 +128,37 @@ A snapshot comparison refuses import over subsequent editor changes. Import is
 undoable. The assistant's copy is never automatically written back to the source.
 `launch.py --project PATH --port 0` opens a saved project in a separate window and
 uses an isolated browser profile, leaving other windows intact.
+
+## Alpha.4 reuse and constrained PCB operations
+
+The same transactional `apply` plan supports:
+
+- `block-save`: `name`; snapshots the current supported primitive circuit.
+- `block-place`: saved block `name`, unique `instance`, grid offset `x`/`y`, optional
+  `ports` map from a block label to a parent net label. Omitted ports are private.
+- `board-stack`: `stack` is `two` or `four`.
+- `board-pair`: `positive` and `negative` each contain `from`/`to` pad IDs; `layer`,
+  optional center-path `center` points in mm, `gap` (copper gap, ≥0.25 mm),
+  `tolerance` (length mismatch in mm). Endpoints must match the offset path.
+- `board-tune`: zero-based route `index`, total `length` in mm, `side` 1 or -1.
+- `board-shove`: `from`, `to`, `layer`, optional `bends`. The bounded search is
+  allowed to fail and leaves the original project unchanged.
+- `board-spanned-via`: `net`, `x`, `y`, `diameter`, `drill`, `span` (two ordered layer
+  names), `kind` (`through`, `blind`, `micro`), optional `id` beginning `via:`.
+
+For example, after creating a divider, save and repeat it with:
+
+```json
+{"version":1,"operations":[
+  {"op":"block-save","name":"Divider"},
+  {"op":"block-place","name":"Divider","instance":"ChannelB","x":640,"y":0}
+]}
+```
+
+The resulting project includes the block library and explicit `meta.hierarchy`
+paths. Stable source/pin IDs and parent-port mappings survive save/reopen. Imported
+block dependencies outside the supported built-in primitives are rejected. Assembly
+variants are in `reuse.variants` (`name`, `dnp` source UUIDs, `values` keyed by source
+UUID) and `reuse.active`; they affect assembly output only. Peripheral settings are
+in `peripherals`, including the explicit pin-role map. `simulate` remains analog
+only; use the interactive shared-time run for the peripheral lab.

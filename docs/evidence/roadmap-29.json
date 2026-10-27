@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-27",
+  "version": "0.4.0-alpha.4",
+  "originalTickets": 29,
+  "completedAcceptanceGates": 29,
+  "notProteusParity": true,
+  "supportedMCUProfiles": 8,
+  "newMCUFamiliesEnabled": 0,
+  "independentPCB": {
+    "parser": "Gerbonara",
+    "kicad": "10.0.7",
+    "unconnectedItems": 0,
+    "remainingNotices": [
+      {
+        "type": "lib_footprint_issues",
+        "severity": "warning",
+        "description": "The current configuration does not include the footprint library 'CircuitStudio'"
+      },
+      {
+        "type": "lib_footprint_issues",
+        "severity": "warning",
+        "description": "The current configuration does not include the footprint library 'CircuitStudio'"
+      }
+    ]
+  },
+  "fixtures": [
+    "tests/protocols.test.mjs",
+    "tests/peripheral-lab.cjs",
+    "tests/reuse.cjs",
+    "tests/advanced-routing.cjs",
+    "spikes/verify-advanced-routing.py",
+    "spikes/backends/audit.py",
+    "spikes/backends/esp32c3-audit.py"
+  ],
+  "limits": "docs/planning/MILESTONE-29.md"
+}

@@ -4,7 +4,7 @@ import {TICK_HZ,resolveDigital,threshold,TraceStore} from './digital.js';
 export class CoupledRunner {
  constructor(getSim,getMCU,status){Object.assign(this,{getSim,getMCU,status});this.trace=new TraceStore();this.running=false;this.epoch=0;this.tick=0;this.quantum=2000;this.source=null;this.pending=[];}
  stop(){this.running=false;this.epoch++;clearTimeout(this.timer);if(this.source)this.source.running=false;}
- detach(){this.stop();this.getSim()?.setDigitalDrive('*',null);if(this.source){this.source.coupled=false;this.source.clock=null;}this.source=null;this.signature=null;this.prepared=false;}
+ detach(){this.stop();this.getSim()?.setDigitalDrive('*',null);this.peripherals?.release();if(this.source){this.source.coupled=false;this.source.clock=null;}this.source=null;this.signature=null;this.prepared=false;}
  identity(source){return source.cpu||source.state.generation;}
  prepare(){
   const sim=this.getSim(),source=this.getMCU();if(!sim||!source.source)throw Error('Load firmware first');
@@ -23,7 +23,7 @@ export class CoupledRunner {
   this.drive=source.outputStates();for(const p of this.ports)sim.setDigitalDrive(p.key,this.drive[p.name]??'Z');
   this.cyclesHz=source.spec.clockHz/(source.spec.engine==='pic'?4:1);this.ticksPerCycle=TICK_HZ/this.cyclesHz;
   if(!Number.isInteger(this.ticksPerCycle))throw Error('Clock does not fit the shared timeline');
-  this.elements=sim.getDesignElements();this.ports=this.ports.map(p=>({...p,pins:[this.elements.find(e=>e.id===p.id).pins[p.index]]}));this.dump=sim.exportCircuit(false);this.origin=0;if(this.package){sim.advanceTo(1e-6);this.tick=this.origin=2000;this.checkPower();}this.record(this.tick);this.sample(this.tick);this.prepared=true;
+  this.peripherals?.prepare(source,this.ports);this.elements=sim.getDesignElements();this.ports=this.ports.map(p=>({...p,pins:[this.elements.find(e=>e.id===p.id).pins[p.index]]}));this.dump=sim.exportCircuit(false);this.origin=0;if(this.package){sim.advanceTo(1e-6);this.tick=this.origin=2000;this.checkPower();}this.peripherals?.update(this.tick,this.drive);this.record(this.tick);this.sample(this.tick);this.prepared=true;
  }
  inputs(){
   const sim=this.getSim(),source=this.source,elements=sim.getElements(),inputs={},analog={};
@@ -65,9 +65,9 @@ export class CoupledRunner {
     const edge=this.pending.shift();if(edge.tick<this.tick)throw Error('Backend returned a past event');
     sim.advanceTo(edge.tick/TICK_HZ);
     this.drive=edge.pins;for(const p of this.ports)sim.setDigitalDrive(p.key,this.drive[p.name]??'Z');
-    this.record(edge.tick);
+    this.peripherals?.update(edge.tick,this.drive);this.record(edge.tick);
    }
-   sim.advanceTo(target/TICK_HZ);this.tick=target;this.checkPower();this.sample(target);
+   sim.advanceTo(target/TICK_HZ);this.tick=target;this.peripherals?.update(target,this.drive);this.checkPower();this.sample(target);
    if(result.paused){this.stop();this.source.render();return;}
    if(epoch!==this.epoch)return;
    if(this.trace.triggeredAt!==null&&this.freezeAfter!==null&&Number.isFinite(this.freezeAfter)&&target>=this.trace.triggeredAt+this.freezeAfter){this.stop();return;}

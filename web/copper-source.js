@@ -3,6 +3,7 @@ import ClipperLib from 'clipper-lib';
 import earcut from 'earcut';
 const C=ClipperLib,S=100000,EPS=1e-7;
 export const layers=['F.Cu','B.Cu'];
+export const copperLayers=b=>b.layers||layers;
 export const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 export function pointSegment(p,a,b){const d=(b.x-a.x)**2+(b.y-a.y)**2;if(!d)return distance(p,a);const t=Math.max(0,Math.min(1,((p.x-a.x)*(b.x-a.x)+(p.y-a.y)*(b.y-a.y))/d));return distance(p,{x:a.x+t*(b.x-a.x),y:a.y+t*(b.y-a.y)});}
 const cross=(a,b,c)=>(b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x);
@@ -19,15 +20,16 @@ function offset(paths,delta,closed=true){const o=new C.ClipperOffset(2,.001*S),r
 function regions(tree){const out=[];function walk(node){for(const child of node.Childs()){if(!child.IsHole())out.push({outer:floatPath(child.Contour()),holes:child.Childs().filter(c=>c.IsHole()).map(c=>floatPath(c.Contour()))});walk(child);}}walk(tree);return out;}
 function regionPaths(region){const outer=positive(intPath(region.outer));return [outer,...region.holes.map(h=>positive(intPath(h)).reverse())];}
 export function triangles(region){const points=[...region.outer,...region.holes.flat()],starts=[];let n=region.outer.length;for(const hole of region.holes){starts.push(n);n+=hole.length;}const indices=earcut(points.flatMap(p=>[p.x,p.y]),starts,2);const out=[];for(let i=0;i<indices.length;i+=3)out.push(indices.slice(i,i+3).map(j=>points[j]));return out;}
-export function viaPad(v){return {id:v.id,ref:v.id,number:'',x:v.x,y:v.y,width:v.diameter,height:v.diameter,drill:v.drill,shape:'circle',rotation:0,layers:[...layers],net:v.net};}
+export function viaPad(v,stack=layers){const start=stack.indexOf(v.span?.[0]||stack[0]),end=stack.indexOf(v.span?.[1]||stack.at(-1));return {id:v.id,ref:v.id,number:'',x:v.x,y:v.y,width:v.diameter,height:v.diameter,drill:v.drill,shape:'circle',rotation:0,layers:stack.slice(start,end+1),net:v.net};}
 export function validateCopper(b,pads){
+ const stack=copperLayers(b);if(![JSON.stringify(layers),JSON.stringify(['F.Cu','In1.Cu','In2.Cu','B.Cu'])].includes(JSON.stringify(stack)))throw Error('Invalid layer stack');
  const finite=n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<10000,net=n=>typeof n==='string'&&n.length>0&&n.length<200||Number.isInteger(n),point=p=>p&&finite(p.x)&&finite(p.y);
  if(b.vias!==undefined&&!Array.isArray(b.vias)||b.zones!==undefined&&!Array.isArray(b.zones)||(b.vias||[]).length>1000||(b.zones||[]).length>32)throw Error('Invalid vias or zones');
- const ids=new Set(pads.map(p=>p.id));for(const v of b.vias||[]){if(!v||typeof v.id!=='string'||!/^via:[a-zA-Z0-9-]{1,64}$/.test(v.id)||ids.has(v.id)||!point(v)||!net(v.net)||!finite(v.diameter)||!finite(v.drill)||v.drill<.2||v.diameter>4||v.diameter-v.drill<.2-1e-9)throw Error('Invalid through via (minimum 0.2 mm drill / 0.1 mm annular ring)');ids.add(v.id);}
- for(const z of b.zones||[]){if(!z||typeof z.id!=='string'||ids.has(z.id)||!net(z.net)||!layers.includes(z.layer)||!Array.isArray(z.points)||z.points.length<3||z.points.length>128||!z.points.every(point)||Math.abs(C.Clipper.Area(intPath(z.points)))<S*S*.01)throw Error('Invalid copper zone');ids.add(z.id);}
+ const ids=new Set(pads.map(p=>p.id));for(const v of b.vias||[]){if(!v||typeof v.id!=='string'||!/^via:[a-zA-Z0-9-]{1,64}$/.test(v.id)||ids.has(v.id)||!point(v)||!net(v.net)||!finite(v.diameter)||!finite(v.drill)||v.drill<(v.kind==='micro'?.1:.2)||v.diameter>4||v.diameter-v.drill<(v.kind==='micro'?.1:.2)-1e-9)throw Error('Invalid through via (minimum 0.2 mm drill / 0.1 mm annular ring)');const span=v.span||[stack[0],stack.at(-1)],a=stack.indexOf(span[0]),z=stack.indexOf(span[1]);if(span.length!==2||a<0||z<=a||v.kind&&!['through','blind','micro'].includes(v.kind)||v.kind==='micro'&&(z-a!==1||a!==0&&z!==stack.length-1)||v.kind==='through'&&(a!==0||z!==stack.length-1))throw Error('Invalid via layer span');ids.add(v.id);}
+ for(const z of b.zones||[]){if(!z||typeof z.id!=='string'||ids.has(z.id)||!net(z.net)||!stack.includes(z.layer)||!Array.isArray(z.points)||z.points.length<3||z.points.length>128||!z.points.every(point)||Math.abs(C.Clipper.Area(intPath(z.points)))<S*S*.01)throw Error('Invalid copper zone');ids.add(z.id);}
 }
-export function copperGeometry(pads,vias,tracks,zones,points){
- const anchors=[...pads,...vias.map(viaPad)],items=anchors.map(p=>({id:p.id,net:p.net,layers:p.layers,paths:[positive(intPath(padPolygon(p)))],pad:p}));
+export function copperGeometry(pads,vias,tracks,zones,points,stack=layers){
+ const anchors=[...pads,...vias.map(v=>viaPad(v,stack))],items=anchors.map(p=>({id:p.id,net:p.net,layers:p.layers,paths:[positive(intPath(padPolygon(p)))],pad:p}));
  for(const [i,t]of tracks.entries()){const ps=points(t),net=anchors.find(p=>p.id===t.from).net;items.push({id:'track:'+i,net,layers:[t.layer],paths:offset([intPath(ps)],.25,false)});}
  const bounds=[intPath([{x:10.25,y:10.25},{x:109.75,y:10.25},{x:109.75,y:69.75},{x:10.25,y:69.75}])],fills=[];
  for(const z of zones){const base=boolean([positive(intPath(z.points))],bounds,C.ClipType.ctIntersection);let obstacles=[];for(const item of items)if(item.net!==z.net&&item.layers.includes(z.layer))obstacles.push(...offset(item.paths,.252));for(const other of zones)if(other.id!==z.id&&other.layer===z.layer&&other.net!==z.net)obstacles.push(...offset([positive(intPath(other.points))],.252));const tree=boolean(C.Clipper.PolyTreeToPaths(base),obstacles,C.ClipType.ctDifference);for(const [i,region]of regions(tree).entries()){const fill={...region,id:z.id+':'+i,net:z.net,layer:z.layer,zoneId:z.id};fills.push(fill);items.push({id:'fill:'+fill.id,net:z.net,layers:[z.layer],paths:regionPaths(region)});}}

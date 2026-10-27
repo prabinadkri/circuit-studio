@@ -36364,6 +36364,7 @@ function extrude(s, depth, z, mat) {
   return mesh;
 }
 function boardScene(board, { components = true } = {}) {
+  if (board.vias.some((v) => v.span && (v.span[0] !== board.layers[0] || v.span[1] !== board.layers.at(-1)))) throw Error("Mechanical preview/export of blind or microvia cavities is not implemented");
   const root = new Group();
   root.name = "Circuit Studio assembly";
   root.userData = { units: "millimeter", coordinateSystem: "x=PCB x, y=-PCB y, z=height; board top z=0", thickness: 1.6, modelFidelity: "Procedural package envelopes, not manufacturer mechanical models" };
@@ -36378,7 +36379,7 @@ function boardScene(board, { components = true } = {}) {
   pcb.name = "PCB substrate 100x60x1.6 mm";
   root.add(pcb);
   for (const surface of [...board.copper().surfaces, ...board.copper().fills.map((f) => ({ ...f, layers: [f.layer] }))]) for (const region of withoutDrills(surface, pads)) for (const layer of surface.layers) {
-    const mesh = extrude(shape(region.outer, region.holes), 0.035, layer === "F.Cu" ? 0 : -1.635, gold);
+    const mesh = extrude(shape(region.outer, region.holes), 0.035, layer === "F.Cu" ? 0 : layer === "B.Cu" ? -1.635 : -1.6 * board.layers.indexOf(layer) / (board.layers.length - 1), gold);
     mesh.name = surface.id + " " + layer;
     root.add(mesh);
   }

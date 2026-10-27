@@ -1,0 +1,905 @@
+{
+  "format": "circuit-studio",
+  "version": 2,
+  "id": "4833ef25-2b79-407e-bf5e-66da0372093f",
+  "name": "Wired peripheral lab",
+  "schematic": "<cir f=\"1\" ts=\"0.000005\" ic=\"10.20027730826997\" cb=\"50\" pb=\"50\" vr=\"5\" mts=\"5e-11\">\n  <ExtVoltage sid=\"c068f3c9-faa3-4239-bfb2-0b5c25ce33a6\" sp=\"6abc2dfb-1ac0-417f-a57b-f68307b01f9a\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;MCU_A5&amp;quot;}\" x=\"160 240 160 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"A5\"/>\n  <ExtVoltage sid=\"ee45e9d5-1607-4399-b025-4f594190c98a\" sp=\"1acc9ef3-2b83-491c-b50c-6c3392e50dce\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;LAB_A5&amp;quot;}\" x=\"256 240 256 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"LAB_SCL\"/>\n  <w sid=\"7192b776-f63a-45e2-90ec-59411e576ceb\" sp=\"65d1469a-6841-4cbf-a522-8b09ab546539,6c2050dc-9ac1-4c8f-b743-5bc44dfdb53f\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W0&amp;quot;}\" x=\"160 240 256 240\" f=\"0\"/>\n  <r sid=\"4fa589dc-a755-45fd-9afd-fc191b85074d\" sp=\"bcb48dc3-4243-4c2d-be8d-dc56327a5b25,5baab912-2e70-4ca5-86dc-e46f568d3e4f\" stype=\"ResistorElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;R_PULL0&amp;quot;}\" x=\"160 240 160 336\" f=\"0\" r=\"4700\"/>\n  <v sid=\"211e1759-79db-4500-b91b-573feb49e061\" sp=\"cacc5a73-5b01-45ad-8762-1878f17d4836,47463ddd-d59b-4547-946b-94b79d4e763e\" stype=\"DCVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;V0&amp;quot;}\" x=\"160 432 160 336\" f=\"16\" wf=\"0\" maxv=\"5\"/>\n  <g sid=\"ae0f3011-b4fb-4d07-b54f-a0f339eb3a7b\" sp=\"29dd42c3-2b35-43fc-a424-61ab1dd75c9a\" stype=\"GroundElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;G0&amp;quot;}\" x=\"160 432 160 464\" f=\"0\"/>\n  <ln sid=\"77d763db-6c11-4213-9565-150fbd733741\" sp=\"5ac8c010-ff8d-460c-ac8f-eb55da394c32\" stype=\"LabeledNodeElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;N0&amp;quot;}\" x=\"160 240 96 240\" f=\"0\" te=\"SCL\"/>\n  <ExtVoltage sid=\"339dd71d-c8bb-4b0c-a1c5-45eb2d7567af\" sp=\"ecc8ef83-18ad-443d-af33-fd733260c365\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;MCU_A4&amp;quot;}\" x=\"400 240 400 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"A4\"/>\n  <ExtVoltage sid=\"8c918646-abdf-459f-9844-ba396599b0d1\" sp=\"cb96c6ed-1780-46b2-9702-a93323ca80f2\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;LAB_A4&amp;quot;}\" x=\"496 240 496 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"LAB_SDA\"/>\n  <w sid=\"0c8f62c8-fef9-46ce-a59c-97316d95b6f7\" sp=\"3296b87a-01b1-4fd5-9541-d879edf4cfd0,e861ce70-7ac9-4023-b968-776622c2cbb1\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W1&amp;quot;}\" x=\"400 240 496 240\" f=\"0\"/>\n  <r sid=\"62c41daa-178a-4da6-a870-fb2302c6ad76\" sp=\"2c7b265a-5ac4-4d3e-81f6-04b0437d873c,5ccb0236-ab5c-46fb-a79b-12bea743a088\" stype=\"ResistorElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;R_PULL1&amp;quot;}\" x=\"400 240 400 336\" f=\"0\" r=\"4700\"/>\n  <v sid=\"76eadbdc-decc-4122-945a-865e1244151a\" sp=\"8bc43ffd-3321-4a17-a4ca-09e384067e15,60356d17-3d07-4ae8-8da7-6a6dce564726\" stype=\"DCVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;V1&amp;quot;}\" x=\"400 432 400 336\" f=\"16\" wf=\"0\" maxv=\"5\"/>\n  <g sid=\"00132df3-3b00-4b6b-bb44-2d5f87a09b7a\" sp=\"f63b1784-94f9-4efd-8f81-964bf4be473a\" stype=\"GroundElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;G1&amp;quot;}\" x=\"400 432 400 464\" f=\"0\"/>\n  <ln sid=\"1c563561-3e12-45a7-bfd4-4630822b205e\" sp=\"d0946b8b-9fe1-452c-aa64-6691a79ab03d\" stype=\"LabeledNodeElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;N1&amp;quot;}\" x=\"400 240 336 240\" f=\"0\" te=\"SDA\"/>\n  <ExtVoltage sid=\"efc07649-86e7-437d-97c0-92fa19a8ef14\" sp=\"b6bf66ff-3a8c-44a8-a86d-302345717951\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;MCU_D12&amp;quot;}\" x=\"640 240 640 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"D12\"/>\n  <ExtVoltage sid=\"8b7fced0-1c1e-49eb-a1bb-2d85bbb1a656\" sp=\"dfb68990-0251-46cc-83e5-797091cd3ad2\" stype=\"ExtVoltageElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;LAB_D12&amp;quot;}\" x=\"736 240 736 176\" f=\"16\" wf=\"1\" fr=\"60\" maxv=\"5\" ir=\"0.001\" nm=\"LAB_MISO\"/>\n  <w sid=\"b8f9e6fc-b226-4bd0-adce-4d50b4e4462b\" sp=\"88a256ca-4d20-4f4c-be4b-97dc0de4e38f,f70f9022-41c2-48a3-90ec-c04e22fb4220\" stype=\"WireElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;W2&amp;quot;}\" x=\"640 240 736 240\" f=\"0\"/>\n  <ln sid=\"46412c75-24aa-4f5a-92ed-4963e1f4d549\" sp=\"0b177b37-ff4d-4a7d-808d-d79d568877ea\" stype=\"LabeledNodeElm\" smeta=\"{&amp;quot;reference&amp;quot;:&amp;quot;N2&amp;quot;}\" x=\"640 240 576 240\" f=\"0\" te=\"MISO\"/>\n</cir>\n",
+  "design": {
+    "schema": 1,
+    "sheetId": "12524c88-6964-46c9-bec8-a9d497f3e08c",
+    "instances": [
+      {
+        "id": "c068f3c9-faa3-4239-bfb2-0b5c25ce33a6",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "MCU_A5"
+        },
+        "x": 160,
+        "y": 240,
+        "x2": 160,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "6abc2dfb-1ac0-417f-a57b-f68307b01f9a",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 1,
+            "x": 160,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          }
+        ],
+        "reference": "MCU_A5"
+      },
+      {
+        "id": "ee45e9d5-1607-4399-b025-4f594190c98a",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "LAB_A5"
+        },
+        "x": 256,
+        "y": 240,
+        "x2": 256,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "1acc9ef3-2b83-491c-b50c-6c3392e50dce",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 1,
+            "x": 256,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          }
+        ],
+        "reference": "LAB_A5"
+      },
+      {
+        "id": "7192b776-f63a-45e2-90ec-59411e576ceb",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W0"
+        },
+        "x": 160,
+        "y": 240,
+        "x2": 256,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "65d1469a-6841-4cbf-a522-8b09ab546539",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 1,
+            "x": 160,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          },
+          {
+            "id": "6c2050dc-9ac1-4c8f-b743-5bc44dfdb53f",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 1,
+            "x": 256,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          }
+        ],
+        "reference": "W0"
+      },
+      {
+        "id": "4fa589dc-a755-45fd-9afd-fc191b85074d",
+        "type": "ResistorElm",
+        "engineType": "ResistorElm",
+        "value": "4700",
+        "meta": {
+          "reference": "R_PULL0"
+        },
+        "x": 160,
+        "y": 240,
+        "x2": 160,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "bcb48dc3-4243-4c2d-be8d-dc56327a5b25",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 1,
+            "x": 160,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          },
+          {
+            "id": "5baab912-2e70-4ca5-86dc-e46f568d3e4f",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 4,
+            "x": 160,
+            "y": 336,
+            "netId": "c6faba46-ed14-48f9-b708-e94c57d6726c"
+          }
+        ],
+        "reference": "R_PULL0"
+      },
+      {
+        "id": "211e1759-79db-4500-b91b-573feb49e061",
+        "type": "DCVoltageElm",
+        "engineType": "VoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "V0"
+        },
+        "x": 160,
+        "y": 432,
+        "x2": 160,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "cacc5a73-5b01-45ad-8762-1878f17d4836",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 432,
+            "netId": "8b9c5732-0185-4cb4-a77d-499db6c94ebe"
+          },
+          {
+            "id": "47463ddd-d59b-4547-946b-94b79d4e763e",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 4,
+            "x": 160,
+            "y": 336,
+            "netId": "c6faba46-ed14-48f9-b708-e94c57d6726c"
+          }
+        ],
+        "reference": "V0"
+      },
+      {
+        "id": "ae0f3011-b4fb-4d07-b54f-a0f339eb3a7b",
+        "type": "GroundElm",
+        "engineType": "GroundElm",
+        "value": "",
+        "meta": {
+          "reference": "G0"
+        },
+        "x": 160,
+        "y": 432,
+        "x2": 160,
+        "y2": 464,
+        "pins": [
+          {
+            "id": "29dd42c3-2b35-43fc-a424-61ab1dd75c9a",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 160,
+            "y": 432,
+            "netId": "8b9c5732-0185-4cb4-a77d-499db6c94ebe"
+          }
+        ],
+        "reference": "G0"
+      },
+      {
+        "id": "77d763db-6c11-4213-9565-150fbd733741",
+        "type": "LabeledNodeElm",
+        "engineType": "LabeledNodeElm",
+        "value": "",
+        "meta": {
+          "reference": "N0"
+        },
+        "x": 160,
+        "y": 240,
+        "x2": 96,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "5ac8c010-ff8d-460c-ac8f-eb55da394c32",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 1,
+            "x": 160,
+            "y": 240,
+            "netId": "cdd2539d-78d1-4766-9bfc-80f9ce972907"
+          }
+        ],
+        "reference": "N0"
+      },
+      {
+        "id": "339dd71d-c8bb-4b0c-a1c5-45eb2d7567af",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "MCU_A4"
+        },
+        "x": 400,
+        "y": 240,
+        "x2": 400,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "ecc8ef83-18ad-443d-af33-fd733260c365",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 5,
+            "x": 400,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          }
+        ],
+        "reference": "MCU_A4"
+      },
+      {
+        "id": "8c918646-abdf-459f-9844-ba396599b0d1",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "LAB_A4"
+        },
+        "x": 496,
+        "y": 240,
+        "x2": 496,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "cb96c6ed-1780-46b2-9702-a93323ca80f2",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 5,
+            "x": 496,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          }
+        ],
+        "reference": "LAB_A4"
+      },
+      {
+        "id": "0c8f62c8-fef9-46ce-a59c-97316d95b6f7",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W1"
+        },
+        "x": 400,
+        "y": 240,
+        "x2": 496,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "3296b87a-01b1-4fd5-9541-d879edf4cfd0",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 5,
+            "x": 400,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          },
+          {
+            "id": "e861ce70-7ac9-4023-b968-776622c2cbb1",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 5,
+            "x": 496,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          }
+        ],
+        "reference": "W1"
+      },
+      {
+        "id": "62c41daa-178a-4da6-a870-fb2302c6ad76",
+        "type": "ResistorElm",
+        "engineType": "ResistorElm",
+        "value": "4700",
+        "meta": {
+          "reference": "R_PULL1"
+        },
+        "x": 400,
+        "y": 240,
+        "x2": 400,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "2c7b265a-5ac4-4d3e-81f6-04b0437d873c",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 5,
+            "x": 400,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          },
+          {
+            "id": "5ccb0236-ab5c-46fb-a79b-12bea743a088",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 8,
+            "x": 400,
+            "y": 336,
+            "netId": "c9aec282-681d-4b2d-9de0-d595484d90fd"
+          }
+        ],
+        "reference": "R_PULL1"
+      },
+      {
+        "id": "76eadbdc-decc-4122-945a-865e1244151a",
+        "type": "DCVoltageElm",
+        "engineType": "VoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "V1"
+        },
+        "x": 400,
+        "y": 432,
+        "x2": 400,
+        "y2": 336,
+        "pins": [
+          {
+            "id": "8bc43ffd-3321-4a17-a4ca-09e384067e15",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 400,
+            "y": 432,
+            "netId": "8b9c5732-0185-4cb4-a77d-499db6c94ebe"
+          },
+          {
+            "id": "60356d17-3d07-4ae8-8da7-6a6dce564726",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 8,
+            "x": 400,
+            "y": 336,
+            "netId": "c9aec282-681d-4b2d-9de0-d595484d90fd"
+          }
+        ],
+        "reference": "V1"
+      },
+      {
+        "id": "00132df3-3b00-4b6b-bb44-2d5f87a09b7a",
+        "type": "GroundElm",
+        "engineType": "GroundElm",
+        "value": "",
+        "meta": {
+          "reference": "G1"
+        },
+        "x": 400,
+        "y": 432,
+        "x2": 400,
+        "y2": 464,
+        "pins": [
+          {
+            "id": "f63b1784-94f9-4efd-8f81-964bf4be473a",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 0,
+            "x": 400,
+            "y": 432,
+            "netId": "8b9c5732-0185-4cb4-a77d-499db6c94ebe"
+          }
+        ],
+        "reference": "G1"
+      },
+      {
+        "id": "1c563561-3e12-45a7-bfd4-4630822b205e",
+        "type": "LabeledNodeElm",
+        "engineType": "LabeledNodeElm",
+        "value": "",
+        "meta": {
+          "reference": "N1"
+        },
+        "x": 400,
+        "y": 240,
+        "x2": 336,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "d0946b8b-9fe1-452c-aa64-6691a79ab03d",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 5,
+            "x": 400,
+            "y": 240,
+            "netId": "98b1e4a5-51df-4a25-810a-96a8a97deacd"
+          }
+        ],
+        "reference": "N1"
+      },
+      {
+        "id": "efc07649-86e7-437d-97c0-92fa19a8ef14",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "MCU_D12"
+        },
+        "x": 640,
+        "y": 240,
+        "x2": 640,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "b6bf66ff-3a8c-44a8-a86d-302345717951",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 9,
+            "x": 640,
+            "y": 240,
+            "netId": "7d4614f9-9116-4aea-b986-9fd1c405b16f"
+          }
+        ],
+        "reference": "MCU_D12"
+      },
+      {
+        "id": "8b7fced0-1c1e-49eb-a1bb-2d85bbb1a656",
+        "type": "ExtVoltageElm",
+        "engineType": "ExtVoltageElm",
+        "value": "5",
+        "meta": {
+          "reference": "LAB_D12"
+        },
+        "x": 736,
+        "y": 240,
+        "x2": 736,
+        "y2": 176,
+        "pins": [
+          {
+            "id": "dfb68990-0251-46cc-83e5-797091cd3ad2",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 9,
+            "x": 736,
+            "y": 240,
+            "netId": "7d4614f9-9116-4aea-b986-9fd1c405b16f"
+          }
+        ],
+        "reference": "LAB_D12"
+      },
+      {
+        "id": "b8f9e6fc-b226-4bd0-adce-4d50b4e4462b",
+        "type": "WireElm",
+        "engineType": "WireElm",
+        "value": "",
+        "meta": {
+          "reference": "W2"
+        },
+        "x": 640,
+        "y": 240,
+        "x2": 736,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "88a256ca-4d20-4f4c-be4b-97dc0de4e38f",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 9,
+            "x": 640,
+            "y": 240,
+            "netId": "7d4614f9-9116-4aea-b986-9fd1c405b16f"
+          },
+          {
+            "id": "f70f9022-41c2-48a3-90ec-c04e22fb4220",
+            "index": 1,
+            "name": "2",
+            "output": false,
+            "net": 9,
+            "x": 736,
+            "y": 240,
+            "netId": "7d4614f9-9116-4aea-b986-9fd1c405b16f"
+          }
+        ],
+        "reference": "W2"
+      },
+      {
+        "id": "46412c75-24aa-4f5a-92ed-4963e1f4d549",
+        "type": "LabeledNodeElm",
+        "engineType": "LabeledNodeElm",
+        "value": "",
+        "meta": {
+          "reference": "N2"
+        },
+        "x": 640,
+        "y": 240,
+        "x2": 576,
+        "y2": 240,
+        "pins": [
+          {
+            "id": "0b177b37-ff4d-4a7d-808d-d79d568877ea",
+            "index": 0,
+            "name": "1",
+            "output": false,
+            "net": 9,
+            "x": 640,
+            "y": 240,
+            "netId": "7d4614f9-9116-4aea-b986-9fd1c405b16f"
+          }
+        ],
+        "reference": "N2"
+      }
+    ],
+    "nets": [
+      {
+        "id": "cdd2539d-78d1-4766-9bfc-80f9ce972907",
+        "name": "",
+        "solver": 1,
+        "pins": [
+          "1acc9ef3-2b83-491c-b50c-6c3392e50dce",
+          "5ac8c010-ff8d-460c-ac8f-eb55da394c32",
+          "65d1469a-6841-4cbf-a522-8b09ab546539",
+          "6abc2dfb-1ac0-417f-a57b-f68307b01f9a",
+          "6c2050dc-9ac1-4c8f-b743-5bc44dfdb53f",
+          "bcb48dc3-4243-4c2d-be8d-dc56327a5b25"
+        ]
+      },
+      {
+        "id": "c6faba46-ed14-48f9-b708-e94c57d6726c",
+        "name": "",
+        "solver": 4,
+        "pins": [
+          "47463ddd-d59b-4547-946b-94b79d4e763e",
+          "5baab912-2e70-4ca5-86dc-e46f568d3e4f"
+        ]
+      },
+      {
+        "id": "8b9c5732-0185-4cb4-a77d-499db6c94ebe",
+        "name": "GND",
+        "solver": 0,
+        "pins": [
+          "29dd42c3-2b35-43fc-a424-61ab1dd75c9a",
+          "8bc43ffd-3321-4a17-a4ca-09e384067e15",
+          "cacc5a73-5b01-45ad-8762-1878f17d4836",
+          "f63b1784-94f9-4efd-8f81-964bf4be473a"
+        ]
+      },
+      {
+        "id": "98b1e4a5-51df-4a25-810a-96a8a97deacd",
+        "name": "",
+        "solver": 5,
+        "pins": [
+          "2c7b265a-5ac4-4d3e-81f6-04b0437d873c",
+          "3296b87a-01b1-4fd5-9541-d879edf4cfd0",
+          "cb96c6ed-1780-46b2-9702-a93323ca80f2",
+          "d0946b8b-9fe1-452c-aa64-6691a79ab03d",
+          "e861ce70-7ac9-4023-b968-776622c2cbb1",
+          "ecc8ef83-18ad-443d-af33-fd733260c365"
+        ]
+      },
+      {
+        "id": "c9aec282-681d-4b2d-9de0-d595484d90fd",
+        "name": "",
+        "solver": 8,
+        "pins": [
+          "5ccb0236-ab5c-46fb-a79b-12bea743a088",
+          "60356d17-3d07-4ae8-8da7-6a6dce564726"
+        ]
+      },
+      {
+        "id": "7d4614f9-9116-4aea-b986-9fd1c405b16f",
+        "name": "",
+        "solver": 9,
+        "pins": [
+          "0b177b37-ff4d-4a7d-808d-d79d568877ea",
+          "88a256ca-4d20-4f4c-be4b-97dc0de4e38f",
+          "b6bf66ff-3a8c-44a8-a86d-302345717951",
+          "dfb68990-0251-46cc-83e5-797091cd3ad2",
+          "f70f9022-41c2-48a3-90ec-c04e22fb4220"
+        ]
+      }
+    ]
+  },
+  "library": {
+    "revision": "2026.10.26",
+    "assets": [
+      {
+        "instanceId": "c068f3c9-faa3-4239-bfb2-0b5c25ce33a6",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "ee45e9d5-1607-4399-b025-4f594190c98a",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "7192b776-f63a-45e2-90ec-59411e576ceb",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "4fa589dc-a755-45fd-9afd-fc191b85074d",
+        "libraryId": "circuitjs:ResistorElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "211e1759-79db-4500-b91b-573feb49e061",
+        "libraryId": "circuitjs:DCVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "ae0f3011-b4fb-4d07-b54f-a0f339eb3a7b",
+        "libraryId": "circuitjs:GroundElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "77d763db-6c11-4213-9565-150fbd733741",
+        "libraryId": "circuitjs:LabeledNodeElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "339dd71d-c8bb-4b0c-a1c5-45eb2d7567af",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "8c918646-abdf-459f-9844-ba396599b0d1",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "0c8f62c8-fef9-46ce-a59c-97316d95b6f7",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "62c41daa-178a-4da6-a870-fb2302c6ad76",
+        "libraryId": "circuitjs:ResistorElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "76eadbdc-decc-4122-945a-865e1244151a",
+        "libraryId": "circuitjs:DCVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "00132df3-3b00-4b6b-bb44-2d5f87a09b7a",
+        "libraryId": "circuitjs:GroundElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "1c563561-3e12-45a7-bfd4-4630822b205e",
+        "libraryId": "circuitjs:LabeledNodeElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "efc07649-86e7-437d-97c0-92fa19a8ef14",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "8b7fced0-1c1e-49eb-a1bb-2d85bbb1a656",
+        "libraryId": "circuitjs:ExtVoltageElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "b8f9e6fc-b226-4bd0-adce-4d50b4e4462b",
+        "libraryId": "circuitjs:WireElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      },
+      {
+        "instanceId": "46412c75-24aa-4f5a-92ed-4963e1f4d549",
+        "libraryId": "circuitjs:LabeledNodeElm",
+        "revision": 1,
+        "provenance": {
+          "source": "https://github.com/pfalstad/circuitjs1",
+          "commit": "e952e788a4135a693bfd4cee7883f9b3314e3e76",
+          "license": "GPL-2.0-or-later"
+        },
+        "footprint": null,
+        "padMap": []
+      }
+    ]
+  },
+  "firmware": ":100000000C9434000C9451000C9451000C94510049\n:100010000C9451000C9451000C9451000C9451001C\n:100020000C9451000C9451000C9451000C9451000C\n:100030000C9451000C9451000C9451000C945100FC\n:100040000C9451000C9451000C9451000C945100EC\n:100050000C9451000C9451000C9451000C945100DC\n:100060000C9451000C94510011241FBECFEFD8E026\n:10007000DEBFCDBF11E0A0E0B1E0ECEEF3E002C0E6\n:1000800005900D92AA32B107D9F721E0AAE2B1E0BA\n:1000900001C01D92AD32B207E1F70E9404010C9439\n:1000A000F4010C940000882329F03C9880E28A95A2\n:1000B000F1F708953C9AFACF882339F03D98359BA3\n:1000C000FECF80E28A95F1F708953D9AFACF81E05C\n:1000D0000E94530081E00E945C0080E00E94530077\n:1000E00080E00C945C0080E00E94530081E00E945C\n:1000F0005C0081E00C945300CF93DF93D82FC8E0CD\n:100100008D2F80780E94530081E00E945C0080E087\n:100110000E945C00DD0FC15099F781E00E945300FE\n:1001200081E00E945C00349B05C080912C018F5FB0\n:1001300080932C0180E0DF91CF910C945C00599862\n:10014000EFE9F1E03197F1F700C0000098E080FF9F\n:1001500012C0599AEFE9F1E03197F1F700C00000C1\n:1001600086959150A1F7599A8FE991E00197F1F79F\n:1001700000C0000008955998EDCF282F2A9830E24A\n:100180003A95F1F798E080E027FF16C02B9A30E20D\n:100190003A95F1F72D9A30E23A95F1F733B132956D\n:1001A0003170880F832B2D9830E23A95F1F7220FAA\n:1001B000915051F72A9A08952B98E9CF9BB19370EB\n:1001C00040E0611148E050E1859F90011124892FA2\n:1001D000822B842B8BB95A9A8AE08A95F1F700C05A\n:1001E0005A9850EF5A95F1F70895CF93DF93C82F9F\n:1001F000D62F82958F700E94DE006D2F8C2F8F700E\n:10020000DF91CF910C94DE0082E08BB98EEF8AB93A\n:1002100084E085B98CE284B918B817B88FE19EE400\n:100220000197F1F700C0000060E083E00E94DE006B\n:100230008FE19EE40197F1F700C0000060E083E0E9\n:100240000E94DE0060E083E00E94DE0060E082E069\n:100250000E94DE0060E088E20E94F50060E08CE031\n:100260000E94F50060E081E00E94F5008FE39FE1CD\n:100270000197F1F700C0000060E080E80E94F500FF\n:10028000CAE1D1E089918111A3C00E94670080EA90\n:100290000E947C0080E00E947C0080E00E947C0044\n:1002A0008AE50E947C000E9473008FEB9DE5019718\n:1002B000F1F700C000000E94670080EA0E947C0005\n:1002C00080E00E947C0080E00E947C000E94670029\n:1002D00081EA0E947C0081E00E945300D8E0C0E0E7\n:1002E00081E00E945C0086B182958170CC0FC82BA2\n:1002F00080E00E945C00D15099F781E00E94530099\n:1003000081E00E945C0080E00E945C00C0932B01B1\n:100310000E94730060E080EC0E94F50080912B0148\n:10032000C0E0D1E08A3511F4CEE0D1E089918111AD\n:1003300053C00E94670088E70E947C0080E00E9412\n:100340007C008FEA0E947C0080E20E947C0080E0BA\n:100350000E947C0081E20E947C0080E00E947C0080\n:100360008FE70E947C0082E20E947C0080E00E9475\n:100370007C0087E00E947C000E9473000E9467005E\n:1003800088E70E947C0080E40E947C00C0E085E554\n:10039000C0FD8AEA0E947C00CF5FC038C1F70E948E\n:1003A00073008CE30E94BD0080932A0186E90E94BD\n:1003B000BD0080912C01811113C08FE40E949F0029\n:1003C00080912A01853A71F086E40E949F00FFCF58\n:1003D00061E00E94F50056CF61E00E94F500A6CFD3\n:0C03E00085E4ECCF8BE4F1CFF894FFCF64\n:1003EC00454550524F4D206661696C65640045452A\n:1003FC0050524F4D203D2035410043697263756961\n:0A040C00742053747564696F0000DA\n:00000001FF\n",
+  "picFirmware": "",
+  "firmwareByDevice": {
+    "avr": ":100000000C9434000C9451000C9451000C94510049\n:100010000C9451000C9451000C9451000C9451001C\n:100020000C9451000C9451000C9451000C9451000C\n:100030000C9451000C9451000C9451000C945100FC\n:100040000C9451000C9451000C9451000C945100EC\n:100050000C9451000C9451000C9451000C945100DC\n:100060000C9451000C94510011241FBECFEFD8E026\n:10007000DEBFCDBF11E0A0E0B1E0ECEEF3E002C0E6\n:1000800005900D92AA32B107D9F721E0AAE2B1E0BA\n:1000900001C01D92AD32B207E1F70E9404010C9439\n:1000A000F4010C940000882329F03C9880E28A95A2\n:1000B000F1F708953C9AFACF882339F03D98359BA3\n:1000C000FECF80E28A95F1F708953D9AFACF81E05C\n:1000D0000E94530081E00E945C0080E00E94530077\n:1000E00080E00C945C0080E00E94530081E00E945C\n:1000F0005C0081E00C945300CF93DF93D82FC8E0CD\n:100100008D2F80780E94530081E00E945C0080E087\n:100110000E945C00DD0FC15099F781E00E945300FE\n:1001200081E00E945C00349B05C080912C018F5FB0\n:1001300080932C0180E0DF91CF910C945C00599862\n:10014000EFE9F1E03197F1F700C0000098E080FF9F\n:1001500012C0599AEFE9F1E03197F1F700C00000C1\n:1001600086959150A1F7599A8FE991E00197F1F79F\n:1001700000C0000008955998EDCF282F2A9830E24A\n:100180003A95F1F798E080E027FF16C02B9A30E20D\n:100190003A95F1F72D9A30E23A95F1F733B132956D\n:1001A0003170880F832B2D9830E23A95F1F7220FAA\n:1001B000915051F72A9A08952B98E9CF9BB19370EB\n:1001C00040E0611148E050E1859F90011124892FA2\n:1001D000822B842B8BB95A9A8AE08A95F1F700C05A\n:1001E0005A9850EF5A95F1F70895CF93DF93C82F9F\n:1001F000D62F82958F700E94DE006D2F8C2F8F700E\n:10020000DF91CF910C94DE0082E08BB98EEF8AB93A\n:1002100084E085B98CE284B918B817B88FE19EE400\n:100220000197F1F700C0000060E083E00E94DE006B\n:100230008FE19EE40197F1F700C0000060E083E0E9\n:100240000E94DE0060E083E00E94DE0060E082E069\n:100250000E94DE0060E088E20E94F50060E08CE031\n:100260000E94F50060E081E00E94F5008FE39FE1CD\n:100270000197F1F700C0000060E080E80E94F500FF\n:10028000CAE1D1E089918111A3C00E94670080EA90\n:100290000E947C0080E00E947C0080E00E947C0044\n:1002A0008AE50E947C000E9473008FEB9DE5019718\n:1002B000F1F700C000000E94670080EA0E947C0005\n:1002C00080E00E947C0080E00E947C000E94670029\n:1002D00081EA0E947C0081E00E945300D8E0C0E0E7\n:1002E00081E00E945C0086B182958170CC0FC82BA2\n:1002F00080E00E945C00D15099F781E00E94530099\n:1003000081E00E945C0080E00E945C00C0932B01B1\n:100310000E94730060E080EC0E94F50080912B0148\n:10032000C0E0D1E08A3511F4CEE0D1E089918111AD\n:1003300053C00E94670088E70E947C0080E00E9412\n:100340007C008FEA0E947C0080E20E947C0080E0BA\n:100350000E947C0081E20E947C0080E00E947C0080\n:100360008FE70E947C0082E20E947C0080E00E9475\n:100370007C0087E00E947C000E9473000E9467005E\n:1003800088E70E947C0080E40E947C00C0E085E554\n:10039000C0FD8AEA0E947C00CF5FC038C1F70E948E\n:1003A00073008CE30E94BD0080932A0186E90E94BD\n:1003B000BD0080912C01811113C08FE40E949F0029\n:1003C00080912A01853A71F086E40E949F00FFCF58\n:1003D00061E00E94F50056CF61E00E94F500A6CFD3\n:0C03E00085E4ECCF8BE4F1CFF894FFCF64\n:1003EC00454550524F4D206661696C65640045452A\n:1003FC0050524F4D203D2035410043697263756961\n:0A040C00742053747564696F0000DA\n:00000001FF\n",
+    "pic": ""
+  },
+  "device": "avr",
+  "simulation": {
+    "mode": "coupled",
+    "quantumUs": 1
+  },
+  "board": {
+    "parts": [],
+    "tracks": [],
+    "vias": [],
+    "zones": [],
+    "layers": [
+      "F.Cu",
+      "B.Cu"
+    ],
+    "pairs": [],
+    "sourceNetlist": ""
+  },
+  "analysis": {
+    "circuit": "V1 in 0 5\nR1 in out 1k\nR2 out 0 1k",
+    "mode": "dc",
+    "start": "0",
+    "stop": "5",
+    "step": ".1",
+    "probe": "out",
+    "result": null
+  },
+  "firmwareWorkspace": {
+    "source": "#include <avr/io.h>\nvolatile unsigned char count = 0;\nint main(void) {\n    DDRB = 32;\n    while (1) {\n        count++;\n        PORTB ^= 32;\n    }\n}\n",
+    "breakLine": 0
+  },
+  "reuse": {
+    "version": 1,
+    "blocks": [],
+    "variants": [],
+    "active": ""
+  },
+  "peripherals": {
+    "version": 1,
+    "enabled": true,
+    "baud": 9600,
+    "spiMode": 0,
+    "stretchUs": 10,
+    "pins": {
+      "uart": "D1",
+      "scl": "A5",
+      "sda": "A4",
+      "cs": "D10",
+      "sck": "D13",
+      "mosi": "D11",
+      "miso": "D12",
+      "en": "D2",
+      "rs": "D3",
+      "d4": "D4",
+      "d5": "D5",
+      "d6": "D6",
+      "d7": "D7"
+    }
+  }
+}

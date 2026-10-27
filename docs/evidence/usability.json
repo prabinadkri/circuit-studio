@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-26T17:26:06.550Z",
+  "date": "2026-10-27T04:43:58.059Z",
   "cpu": "12th Gen Intel(R) Core(TM) i5-12450H",
   "memoryGiB": 15.287078857421875,
   "platform": "linux",
@@ -62,17 +62,17 @@
     }
   ],
   "perf": {
-    "captureMillionMs": 44.29999999701977,
-    "renderMs": 38.5,
+    "captureMillionMs": 38.60000000009313,
+    "renderMs": 29,
     "retained": 200000,
     "discarded": 800000,
     "firstTick": 800000
   },
   "circuitPerf": {
     "components": 503,
-    "analyzeMs": 35.599999997764826,
-    "steps100Ms": 6.800000000745058,
-    "serializeMs": 3.800000000745058,
+    "analyzeMs": 50.60000000009313,
+    "steps100Ms": 10.599999999860302,
+    "serializeMs": 5,
     "bytes": 97935,
     "midpoint": 2.499999999999719
   }

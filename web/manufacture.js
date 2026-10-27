@@ -1,3 +1,8 @@
+// web/reuse.js
+function assemblyBOM(parts, variant) {
+  return parts.map((p) => ({ reference: p.ref, sourceId: p.sourceId, footprint: p.footprint, value: variant?.values[p.sourceId] ?? p.value, populate: !variant?.dnp.includes(p.sourceId), pads: [...p.padMap || []], nets: [...p.nets] }));
+}
+
 // node_modules/fflate/esm/browser.js
 var u8 = Uint8Array;
 var u16 = Uint16Array;
@@ -6579,8 +6584,8 @@ function manufacturingFiles(board) {
       return { shape: p.shape === "rect" ? "R" : "C", w, h };
     };
     for (const p of selected) {
-      const d2 = dimensions(p), key = JSON.stringify(d2);
-      if (!apertures.has(key)) apertures.set(key, { ...d2, code: 20 + apertures.size });
+      const d = dimensions(p), key = JSON.stringify(d);
+      if (!apertures.has(key)) apertures.set(key, { ...d, code: 20 + apertures.size });
     }
     const g = [`G04 Circuit Studio ${name}*`, "%FSLAX46Y46*%", "%MOMM*%", "%LPD*%", "%ADD10C,0.500000*%", ...Array.from(apertures.values(), (a) => `%ADD${a.code}${a.shape},${a.w.toFixed(6)}${a.shape === "R" ? "X" + a.h.toFixed(6) : ""}*%`), "G01*"];
     if (tracks) for (const fill of board.copper().fills.filter((f) => f.layer === name)) for (const triangle of triangles(fill)) {
@@ -6606,21 +6611,45 @@ function manufacturingFiles(board) {
     files[`board-${side}.Paste.${paste}`] = gerber(side + " paste", selected.filter((p) => !p.drill));
   }
   files["board-Edge.Cuts.gm1"] = ["G04 Circuit Studio board outline*", "%FSLAX46Y46*%", "%MOMM*%", "%ADD10C,0.050000*%", "G01*", "D10*", xy({ x: 10, y: 10 }) + "D02*", ...[{ x: 110, y: 10 }, { x: 110, y: 70 }, { x: 10, y: 70 }, { x: 10, y: 10 }].map((p) => xy(p) + "D01*"), "M02*", ""].join("\n");
-  const drills = [...new Set(pads.map((p) => p.drill).filter(Boolean))].sort((a, b) => a - b), d = ["M48", "; Plated through holes", "METRIC,TZ", ...drills.map((v, i2) => `T${String(i2 + 1).padStart(2, "0")}C${v.toFixed(3)}`), "G90", "%", "G05"];
-  for (const [i2, size] of drills.entries()) {
-    d.push("T" + String(i2 + 1).padStart(2, "0"));
-    for (const p of pads.filter((p2) => p2.drill === size)) d.push("X" + p.x.toFixed(4) + "Y" + (80 - p.y).toFixed(4));
+  for (const layer of board.layers.filter((l) => l.startsWith("In"))) files["board-" + layer + ".g" + (board.layers.indexOf(layer) + 1)] = gerber(layer, pads.filter((p) => p.layers.includes(layer)), { tracks: true });
+  const groups = /* @__PURE__ */ new Map();
+  for (const p of pads.filter((p2) => p2.drill)) {
+    const span = p.layers[0] + "-" + p.layers.at(-1);
+    if (!groups.has(span)) groups.set(span, []);
+    groups.get(span).push(p);
   }
-  d.push("M30", "");
-  files["board-PTH.drl"] = d.join("\n");
+  for (const [span, holes] of groups) {
+    const drills = [...new Set(holes.map((p) => p.drill))].sort((a, b) => a - b), d = ["M48", "; Plated holes spanning " + span, "METRIC,TZ", ...drills.map((v, i2) => `T${String(i2 + 1).padStart(2, "0")}C${v.toFixed(3)}`), "G90", "%", "G05"];
+    for (const [i2, size] of drills.entries()) {
+      d.push("T" + String(i2 + 1).padStart(2, "0"));
+      for (const p of holes.filter((p2) => p2.drill === size)) d.push("X" + p.x.toFixed(4) + "Y" + (80 - p.y).toFixed(4));
+    }
+    d.push("M30", "");
+    files[span === "F.Cu-B.Cu" ? "board-PTH.drl" : "board-" + span + ".drl"] = d.join("\n");
+  }
+  files["stackup.json"] = JSON.stringify({ layers: board.layers, nominalThicknessMm: 1.6, dielectricThickness: "Fabricator must define dielectric thicknesses for the selected process", vias: board.vias.map((v) => ({ id: v.id, kind: v.kind || "through", span: v.span || [board.layers[0], board.layers.at(-1)], diameter: v.diameter, drill: v.drill })) }, null, 2);
   files["board.kicad_pcb"] = board.toKiCad();
-  files["README.txt"] = "Circuit Studio fabrication export\n\n100 x 60 mm, two copper layers, 1.6 mm nominal thickness.\nPad sizes and drills come from the assigned package; SMD pads are side-specific.\nMask expansion is 0.05 mm per side; paste uses the SMD pad geometry.\nGerber uses millimeters, 4 integer / 6 fractional digits. All files share an origin.\nNo Gerber silkscreen output yet; KiCad export includes references.\nThrough vias span both layers; solid zones use 0.25 mm clearance without thermal reliefs.\nChecks cover supported connectivity, layer access, copper clearance and edges.\nVerify exact manufacturer dimensions, mask/paste rules and fabrication outputs.\n";
+  files["board.kicad_pro"] = JSON.stringify({ board: { design_settings: { rules: { min_clearance: 0.25, min_track_width: 0.5, min_through_hole_diameter: 0.2, min_microvia_drill: 0.1, min_microvia_diameter: 0.3, min_via_annular_width: 0.1 } } } }, null, 2);
+  files["README.txt"] = "Circuit Studio fabrication export\n\n100 x 60 mm, selected two/four-layer stack, 1.6 mm nominal thickness. See stackup.json.\nPad sizes and drills come from the assigned package; SMD pads are side-specific.\nMask expansion is 0.05 mm per side; paste uses the SMD pad geometry.\nGerber uses millimeters, 4 integer / 6 fractional digits. All files share an origin.\nNo Gerber silkscreen output yet; KiCad export includes references.\nDrill files are separated by plated layer span; blind/microvia processes require fabrication review; solid zones use 0.25 mm clearance without thermal reliefs.\nChecks cover supported connectivity, layer access, copper clearance and edges.\nVerify exact manufacturer dimensions, mask/paste rules and fabrication outputs.\n";
   return files;
 }
 function gerberZip(board) {
   return zipSync(Object.fromEntries(Object.entries(manufacturingFiles(board)).map(([n, t]) => [n, strToU8(t)])), { level: 6 });
 }
+function outputJobZip(board, { fabrication = true, bom = true, variant = null } = {}) {
+  const issues = board.issues();
+  if (issues.length) throw Error("Output job blocked by DRC: " + issues.join("; "));
+  if (!fabrication && !bom) throw Error("Select at least one output");
+  const files = fabrication ? manufacturingFiles(board) : {};
+  if (bom) {
+    const q = (s) => '"' + String(s ?? "").replaceAll('"', '""') + '"';
+    files["assembly.csv"] = ["reference,source_id,footprint,value,populate", ...assemblyBOM(board.parts, variant).map((p) => [p.reference, p.sourceId, p.footprint, p.value, p.populate ? "yes" : "DNP"].map(q).join(","))].join("\n");
+  }
+  files["job.json"] = JSON.stringify({ schema: 1, variant: variant?.name || "base", layers: board.layers, checks: "passed", pairConstraints: board.pairs, routingGeometry: "Pair constraints are recorded here; importing PCB alone does not configure KiCad custom routing rules", outputs: Object.keys(files) }, null, 2);
+  return zipSync(Object.fromEntries(Object.entries(files).map(([n, t]) => [n, strToU8(t)])), { level: 6 });
+}
 export {
   gerberZip,
-  manufacturingFiles
+  manufacturingFiles,
+  outputJobZip
 };

@@ -144,3 +144,71 @@ in CI. `tests/usability.cjs` records the host/browser, nine effective zoom/width
 combinations, a 503-component divider and bounded million-edge trace handling.
 Recorded results are in `docs/evidence/usability.json`. They are software checks,
 not oscilloscope measurements on physical boards or a full screen-reader audit.
+
+## Protocol and display lab (alpha.4)
+
+1. Open **Instruments → Open wired peripheral lab**. It includes AVR HEX and
+   three connected return-driver nets. **Run firmware** in Microcontrollers.
+2. Return to Instruments. At about 54 ms simulated time, the LCD reads
+   `Circuit Studio` / `EEPROM = 5A`, EEPROM byte 0 is `5a`, and the OLED shows a
+   checker stripe. The transaction log includes I²C ACK/read/stretch, SPI MOSI
+   3C/96 and UART `OK` (hex 4F/4B). Export the timestamped transactions as JSON.
+3. The source is `examples/lab/peripheral-lab.c`. It uses GPIO bit-banging and
+   waits for SCL to rise, so the example works with the 10 µs stretch setting.
+   Use Shared timeline with a 1 µs exchange interval. Reset firmware after changing
+   protocol settings. EEPROM/display contents reset for each new coupled run.
+4. **Assign MCU pins** lists the current profile's pins. Assign each signal once,
+   apply, and wire LAB_SCL/LAB_SDA/LAB_MISO to the corresponding MCU net. Keep the
+   two I²C 4.7k pull-ups to 5 V. Update your firmware for the chosen pinout.
+
+The SPI test slave sends A5 then echoes the previous byte; it is not a sensor.
+The GPIO UART decoder is 8N1, 9600 or 115200; hardware USART still has its existing
+serial monitor. LCD R/W is implicitly low in the virtual instrument. OLED and LCD
+have deliberately limited command sets. See MILESTONE-29 for unsupported commands,
+analog loading and timing limitations.
+
+## Reuse and assembly variants
+
+1. Draw a small working circuit using built-in primitive models. Give each desired
+   port a Labeled Node name such as IN, OUT or DATA0. Ground is common.
+2. In **Reuse & assembly**, enter a snapshot name and **Save current circuit as
+   block**. Choose an instance name and a grid-aligned offset in empty space.
+3. Leave a port's parent-net field empty for an isolated private net, or enter the
+   same parent label on two instances to connect their ports. **Place block instance**.
+   The hierarchy browser selects and centers its referenced components. A snapshot
+   containing existing instances creates nested paths when reused.
+4. Edit any copy independently. Snapshots do not propagate later edits to other
+   copies. Update the PCB from the schematic before creating assembly outputs.
+5. Create an assembly variant, uncheck DNP components and edit procurement values.
+   **Assembly BOM** exports reference, stable source ID, package, value and populate
+   status. Copper and simulation retain the base circuit. Undo/save/reopen include
+   block definitions and assembly variant settings.
+
+## Constrained PCB routing and output jobs
+
+Expand **PCB design → Routing constraints & layer stack**.
+
+- Select a two/four-layer stack. Internal layers become available in the route
+  selector. Do not reduce the stack while internal copper still exists.
+- For an aligned differential pair, enter four pad IDs such as J1:1/J2:1 and
+  J1:2/J2:2, choose the copper gap and mismatch tolerance, then **Route straight
+  pair**. Header 2.54 mm pitch with 0.5 mm tracks uses a 2.04 mm copper gap.
+- Length tuning takes a zero-based route index, total target length in mm and a
+  side. It inserts a rectangular detour into a straight axis-aligned segment.
+  It refuses clearances/self-contact or a constrained-pair mismatch.
+- For shove, start a normal route, add bend points, enter the destination pad ID,
+  then **Finish pending route with shove**. The bounded search moves conflicting
+  unconstrained routes while keeping endpoints, pads, vias and pairs fixed. If no
+  legal candidate is found, the board is restored.
+- To add a non-through via, select its net using an existing pad ID, position,
+  ordered span and kind. Outer microvias join adjacent layers; buried/blind vias
+  use the declared span. Connect tracks only to layers that the via actually reaches.
+- **Run checked output job** combines selected fabrication files and the active
+  variant BOM. It includes inner-layer Gerbers, per-span plated drills, a KiCad
+  board/project-rule file and stackup/process manifest. Any connectivity/clearance
+  failure blocks the entire job. The PCB alone does not transfer pair routing rules
+  to KiCad; the job manifest records them. Verify the actual fabrication process.
+
+The 3D tool currently refuses boards with non-through via cavities. These routing
+features do not calculate controlled impedance or define a fabrication-qualified
+laminate stack.

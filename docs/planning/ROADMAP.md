@@ -1,10 +1,10 @@
-# Current status: 24/29 tickets
+# Current status: 29/29 original acceptance gates
 
-See [MILESTONE-24.md](MILESTONE-24.md) for tested deliveries and five remaining tickets. Ticket count does not measure Proteus feature parity.
+See [MILESTONE-29.md](MILESTONE-29.md) for tested deliveries, completed feasibility decisions and exact implementation limits. Ticket count does not measure Proteus feature parity.
 
 # Circuit Studio: path to a professional Linux circuit lab
 
-**Audit date:** 26 October 2026. **Baseline:** `2b6eb6b791391f18e1de9e8c4d6dff0a748791d2`, v0.2 alpha. **Current progress:** 19 of 29 tickets pass their recorded acceptance gates in v0.4 alpha. See [current milestone evidence](MILESTONE-19.md), [feasibility results](SPIKES.md) and [current backlog](BACKLOG.csv). This percentage counts tickets, not Proteus feature parity. The comparison and estimates below retain the original v0.2 audit baseline; use the milestone ledger for implemented behavior.
+**Audit date:** 26 October 2026. **Baseline:** `2b6eb6b791391f18e1de9e8c4d6dff0a748791d2`, v0.2 alpha. **Current progress:** 29 of 29 original gates pass within the scope recorded for v0.4.0-alpha.4. See [current milestone evidence](MILESTONE-29.md), [feasibility results](SPIKES.md) and [current backlog](BACKLOG.csv). This percentage counts tickets, not Proteus feature parity. The comparison and estimates below retain the original v0.2 audit baseline; use the milestone ledger for implemented behavior.
 
 Circuit Studio is useful as an early circuit/firmware workbench. It is not yet a substitute for Proteus across a complete teaching lab or production PCB workflow. The largest gap is the connection between domains: firmware, analog simulation and PCB layout need to share stable component identities, real pin mappings and controlled simulation time. More icons or chip names alone will not close that gap.
 

@@ -1,3 +1,5 @@
+import {validatePeripherals} from './protocols.js';
+import {validateReuse} from './reuse.js';
 // Versioned design documents, topology identities and recovery. GPL-2.0-or-later.
 export const uuid=()=>crypto.randomUUID();
 export function validateProject(p,devices,validateBoard){
@@ -8,6 +10,8 @@ export function validateProject(p,devices,validateBoard){
  if(p.analysis!==undefined){const a=p.analysis;if(!a||typeof a.circuit!=='string'||a.circuit.length>32000||!['dc','ac','tran'].includes(a.mode))throw Error('Invalid saved analysis');if(a.result){const r=a.result;if(!Array.isArray(r.columns)||r.columns.length>20||!r.columns.every(c=>typeof c==='string')||!Array.isArray(r.rows)||r.rows.length>20000||!r.rows.length||r.rows.some(row=>!Array.isArray(row)||row.length!==r.columns.length||!row.every(Number.isFinite)))throw Error('Invalid analysis results');}}
  if(p.simulation!==undefined&&(!p.simulation||!['legacy','coupled'].includes(p.simulation.mode)||![1,10,100].includes(p.simulation.quantumUs)))throw Error('Invalid simulation timing settings');
  if(p.firmwareWorkspace!==undefined){const w=p.firmwareWorkspace;if(!w||typeof w.source!=='string'||w.source.length>64000||!Number.isInteger(w.breakLine)||w.breakLine<0||w.breakLine>64000)throw Error('Invalid source workspace');}
+ validatePeripherals(p.peripherals);
+ validateReuse(p.reuse);
  validateBoard(p.board);
  if(p.version===2){
   const isId=x=>typeof x==='string'&&/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(x);

@@ -2,19 +2,20 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.4.0-alpha.3.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.4.0-alpha.4.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 
 ## Roadmap progress
 
-**24 of 29 original tickets pass their recorded acceptance gates.** New in alpha.3:
-shared AVR/PIC timing, triggered scope/logic capture, on-schematic MCU packages,
-AVR C build/source debugging, and keyboard/scaling/performance improvements.
-The full roadmap is not finished. Protocol/peripheral labs, extra silicon audits,
-hierarchy/variants and advanced/HDI routing remain open. See
-[the acceptance record and precise limitations](docs/planning/MILESTONE-24.md)
-and the [lab guide](docs/LAB_GUIDE.md).
+**29 of 29 original ticket acceptance gates are complete.** Alpha.4 adds a wired
+UART/I²C/SPI peripheral lab, reusable hierarchical snapshots and assembly variants,
+constrained PCB routing, four-layer via spans, and checked output jobs. The MCU
+feasibility audits now have repeatable AVR/8052/STM32/ESP32-C3 probes and explicit
+integration decisions; they do **not** add supported device profiles.
+See [the acceptance record and scope limits](docs/planning/MILESTONE-29.md) and
+[the lab guide](docs/LAB_GUIDE.md). Completing these bounded tickets does not establish
+full Proteus parity.
 
 ## Circuit assistant
 
@@ -60,7 +61,9 @@ For a regular browser window: `./run.sh --serve`, then open the printed local ad
 - **Circuit lab:** 146 searchable component entries with categories/favorites and explicit model limits, unit-aware property inspector, component references, navigable electrical checks, placement, wiring, rotate/mirror, copy/paste, cross-workspace undo/redo, analog and digital simulation, oscilloscope views, example circuits, measurements and SVG export. CircuitJS1 supplies the simulation and schematic engine.
 - **Firmware:** eight lab profiles: Arduino Uno R3, classic Nano, bare ATmega328P, PIC16F84A, PIC16F628A, PIC16F877A, PIC18F4520 and PIC18F4550. Load compiled Intel HEX, run, pause, reset and step; inspect GPIO, registers and program counter. AVR USART0 output appears in the serial monitor. Each profile includes blink and button-to-LED exercises with source; ADC-capable devices also include a voltage-sweep exercise.
 - **Circuit connections:** AVR GPIO uses `D0`–`D13` and `A0`–`A5`; PIC signals follow the selected chip’s pin reference. External Voltage components receive outputs; labeled `IN_` nodes supply inputs. Analog sliders provide 0–5 V test stimuli, overridden by a connected schematic node. Classic Nano A6/A7 are analog-only. Physical pin references and manufacturer links help translate an exercise to hardware.
-- **PCB:** assign DIP/SOIC/header/passive packages and pin maps, rotate/flip footprints, preview schematic updates while preserving placement and unaffected routes, route front/back tracks with bend points and through vias, fill solid copper pours with clearance, inspect physical same-net intersections, run shared export checks, and export KiCad boards or Gerber/drill ZIPs.
+- **PCB:** assign DIP/SOIC/header/passive packages and pin maps, rotate/flip footprints, use two/four-layer stacks and explicit via spans, preview schematic updates while preserving placement and unaffected routes, route front/back tracks with bend points and through vias, fill solid copper pours with clearance, inspect physical same-net intersections, run shared export checks, and export KiCad boards or Gerber/drill ZIPs.
+- **Reuse and assembly:** snapshot circuit blocks with private named nets, nested instance paths, explicit parent ports and stable PCB identities. Assembly variants export DNP/procurement-value BOMs while retaining copper and simulation.
+- **Peripheral lab:** shared-time UART/I²C/SPI transactions, EEPROM readback, LCD character view and OLED display RAM; open the wired example from Instruments.
 - **Projects:** v2 `.circuit` files retain stable component/pin/net identities, schematic, firmware per profile, selected device, PCB layout and analysis results. v1 projects migrate on opening. Save locally uses atomic disk writes with a previous revision; browser recovery retains two checked revisions. Open also accepts CircuitJS text/XML circuits. Use Save file for a portable backup; local disk projects are under `$XDG_DATA_HOME/circuit-studio/projects/`.
 
 - **Analysis:** standalone ngspice DC/AC/transient sweeps, first-probe plots, CSV export and local diode/BJT model import with explicit syntax limits. Matching ngspice source and licenses are included.
@@ -68,7 +71,9 @@ For a regular browser window: `./run.sh --serve`, then open the printed local ad
 - **3D:** interactive board preview, glTF/STL export and mechanical origin manifest. Board/drill geometry follows the PCB; package bodies are approximate envelopes.
 - **Coding Hub / automation:** transactional JSON plans, actual-engine analog simulation, SVG/KiCad export, optimistic revision checks, project-scoped `codehub circuit` integration and an optional MCP stdio adapter. See [automation setup and examples](docs/AUTOMATION.md).
 
-**Milestone delivered:** [24 of 29 tested roadmap tickets](docs/planning/MILESTONE-24.md), including the previous feasibility experiments. The full roadmap remains open. This is a ticket-count milestone, not 50% Proteus parity.
+**Milestone delivered:** [29 original acceptance gates](docs/planning/MILESTONE-29.md),
+including feasibility decisions. The original backlog is closed within its recorded
+scope; the application remains an alpha with the boundaries below.
 
 The [professional-workbench roadmap](docs/planning/ROADMAP.md) compares this alpha with documented Proteus workflows and includes a component/UI specification and dependency-ordered backlog. The latest placement repair lets you select an op-amp or other component and **click empty canvas space to place it**; dragging still sets size, and wires require a drag between endpoints.
 
@@ -76,12 +81,12 @@ See [the lab guide](docs/LAB_GUIDE.md) for device choices, exercises, source fil
 
 ## Current boundaries
 
-- Firmware offers legacy independent timing or a shared timeline with timestamped output edges and sampled analog feedback. GPIO/PWM/RC/ADC fixtures pass, but feedback has exchange-interval latency and instruction quantization. Serial protocols across the circuit bridge remain unvalidated.
+- Firmware offers legacy independent timing or a shared timeline with timestamped output edges and sampled analog feedback. GPIO/PWM/RC/ADC fixtures pass, but feedback has exchange-interval latency and instruction quantization. The wired peripheral lab validates bit-banged I²C/SPI return paths and GPIO UART, with the behavioral limits in the acceptance record.
 - MCU support is limited to the eight profiles listed above (six distinct chip models). Uno, Nano and bare ATmega328P share the same AVR core. AT89S52/8051, ATmega32/2560, ESP32 and STM32 are not implemented. An AVR C editor/debugger uses an installed AVR-GCC toolchain. PIC compilation/debugging remains external; supplied examples can be rebuilt with AVR-GCC/gputils.
-- Profiles use 5 V logic and fixed clocks (16 MHz AVR, 4 MHz PIC). Legacy connectors assume power/reset; on-schematic MCU packages require explicit supply/reset wiring. Shared mode models generic strong/weak/high-Z drivers and PIC16 RA4 open-drain behavior. It does not model chip-specific electrical limits, oscillator waveforms, fuse-dependent clocks, USB, PIC serial monitoring or SPI/I2C schematic devices.
+- Profiles use 5 V logic and fixed clocks (16 MHz AVR, 4 MHz PIC). Legacy connectors assume power/reset; on-schematic MCU packages require explicit supply/reset wiring. Shared mode models generic strong/weak/high-Z drivers and PIC16 RA4 open-drain behavior. It does not model chip-specific electrical limits, oscillator waveforms, fuse-dependent clocks, USB or PIC hardware serial monitoring. The protocol instruments are behavioral subsets, not electrically characterized device packages.
 - Automated device checks cover blink, button GPIO, ADC reference points and project persistence. They do not certify all silicon peripherals, interrupts, instruction edge cases or arbitrary firmware. Pin references describe exposed signals, not a complete power/oscillator wiring diagram.
 - Basic two-pin parts receive generic packages automatically; other components require an explicit package/pad map. The behavioral 555 has a default DIP-8 mapping. Generic symbols/models do not certify manufacturer pinouts or electrical behavior.
-- PCB uses a fixed 100 × 60 mm board and 0.5 mm tracks. Pad sizes/drills follow assigned packages. DIP-28/40 are the wide 15.24 mm variants; exact narrow/manufacturer variants must be verified or added. Through vias and solid pours are supported; thermal reliefs, autorouting, courtyards and HDI are not.
+- PCB uses a fixed 100 × 60 mm board and 0.5 mm tracks. Pad sizes/drills follow assigned packages. DIP-28/40 are the wide 15.24 mm variants; exact narrow/manufacturer variants must be verified or added. Two/four-layer routing, bounded shove, constrained pairs, length tuning and through/blind/microvia spans are supported. Thermal reliefs, general autorouting, courtyards and arbitrary HDI stackups are not.
 - Design checks cover physical copper connectivity across intersections/vias/pours, layer access, copper/pad clearance and board edges. Checks do not cover every manufacturing or assembly constraint. Both KiCad and Gerber UI exports require the available checks to pass. Verify footprint pitch, polarity and fabrication outputs before ordering.
 - Schematic changes do not automatically rewrite an existing PCB. Export rejects a board whose imported netlist no longer matches the schematic; Update from schematic previews changes and retains placement/routes whose endpoint nets still match.
 - There is no Proteus `.dsn` / `.pdsprj` compatibility or general-purpose vendor SPICE model import. The experimental Analysis tab accepts a limited local D/NPN/PNP syntax and does not translate the schematic.
