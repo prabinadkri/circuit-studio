@@ -15,6 +15,10 @@ circuit-studio
 The installer verifies SHA-256 hashes, copies files to a versioned directory under
 `$XDG_DATA_HOME/circuit-studio/releases/`, and switches the `current` symlink.
 It registers an application-menu entry and `~/.local/bin/circuit-studio`.
+The menu uses the `circuit-studio` themed icon, installed in the sibling
+`icons/hicolor` directory at 16–256 pixel sizes plus scalable SVG. Available
+GTK icon-cache and desktop-database utilities are refreshed after installation
+and removal. Uninstall preserves customized icons, just like modified shortcuts.
 If that directory is not on PATH, use the applications menu or the full launcher path.
 Existing unrelated launchers are preserved. A previous Circuit Studio shortcut
 can be upgraded. The source checkout can be moved after installation.
@@ -41,6 +45,14 @@ Save work and close the application before switching versions. The installer
 keeps earlier release directories until uninstall; it does not replace an open
 editor's unsaved project. The launcher reports a port conflict if another instance
 is already listening. `./run.sh --serve --port 0` starts an isolated local server.
+
+The desktop window asks **Keep editing / Close without saving** when a project
+has unsaved changes. Keep editing is the default; use **Save locally** or
+**Save file** before closing to retain your work. The normal recovery checkpoint
+also runs on close, but a recovery copy does not replace an explicitly saved project.
+If upgrading from alpha.7 or earlier while its window refuses to close, choose
+**Save locally**, wait for **Saved on disk**, then close and reopen from Applications.
+The new confirmation takes effect in the reopened window.
 
 ## Create a distribution
 

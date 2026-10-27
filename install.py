@@ -7,12 +7,21 @@ import os
 from pathlib import Path
 import shlex
 import shutil
+import subprocess
 import tempfile
 from distribution import ROOT,source_files,verify,digest
 from circuitctl import atomic_write
 
 
 def desktop_quote(path):return '"'+str(path).replace('\\','\\\\').replace('"','\\"').replace('`','\\`').replace('$','\\$').replace('%','%%')+'"'
+
+
+def refresh_desktop(applications,theme):
+    # Cache utilities are optional on minimal desktops and source-only installs.
+    for command in [('gtk-update-icon-cache','--force','--ignore-theme-index',str(theme)),('update-desktop-database',str(applications))]:
+        if shutil.which(command[0]):
+            try:subprocess.run(command,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=15,check=False)
+            except (OSError,subprocess.TimeoutExpired):pass
 
 
 def legacy_shortcut(path):
@@ -49,19 +58,27 @@ def install(prefix,bin_dir,applications):
     bin_dir.mkdir(parents=True,exist_ok=True);applications.mkdir(parents=True,exist_ok=True)
     launcher=bin_dir/'circuit-studio';desktop=applications/'circuit-studio.desktop'
     script=('#!/bin/sh\nexec '+shlex.quote(str(current/'run.sh'))+' "$@"\n').encode()
-    # Immutable paths prevent shells reusing an old icon cached through current/.
-    icon=release/('web/icon.png' if (release/'web/icon.png').is_file() else 'web/icon.svg')
+    theme=applications.parent/'icons/hicolor'
+    icons={theme/'scalable/apps/circuit-studio.svg':(release/'web/icon.svg').read_bytes()}
+    for image in (release/'packaging/icons').glob('*.png'):
+        size=int(image.stem)
+        icons[theme/f'{size}x{size}/apps/circuit-studio.png']=image.read_bytes()
+    if (release/'web/icon.png').is_file():icons[theme/'256x256/apps/circuit-studio.png']=(release/'web/icon.png').read_bytes()
     wm_class='Circuit Studio' if (release/'runtime/electron/electron').is_file() else 'CircuitStudio'
-    entry=('[Desktop Entry]\nType=Application\nName=Circuit Studio\nComment=Circuit design, firmware and PCB workbench\nExec='+desktop_quote(launcher)+'\nIcon='+str(icon)+'\nTerminal=false\nCategories=Education;Electronics;Engineering;\nStartupWMClass='+wm_class+'\n').encode()
-    for path,payload in [(launcher,script),(desktop,entry)]:
+    entry=('[Desktop Entry]\nType=Application\nName=Circuit Studio\nComment=Circuit design, firmware and PCB workbench\nExec='+desktop_quote(launcher)+'\nIcon=circuit-studio\nTerminal=false\nCategories=Education;Electronics;Engineering;\nStartupWMClass='+wm_class+'\n').encode()
+    shortcuts={launcher:script,desktop:entry,**icons}
+    for path,payload in shortcuts.items():
         if path.exists() and str(path) not in old.get('shortcuts',{}) and path.read_bytes()!=payload and not (path==desktop and legacy_shortcut(path)):raise ValueError('Existing shortcut belongs to another installation: '+str(path))
     current=prefix/'current'
     if current.exists() and not current.is_symlink():raise ValueError('Refusing to replace non-symlink current path')
     temporary=prefix/('.current-'+identity)
     temporary.unlink(missing_ok=True);temporary.symlink_to(release.relative_to(prefix));os.replace(temporary,current)
-    atomic_write(launcher,script);launcher.chmod(0o755);atomic_write(desktop,entry)
-    old['releases'][identity]=files;old['current']=identity;old['shortcuts']={str(p):digest(p) for p in (launcher,desktop)}
+    for path,payload in shortcuts.items():
+        path.parent.mkdir(parents=True,exist_ok=True);atomic_write(path,payload)
+    launcher.chmod(0o755)
+    old['releases'][identity]=files;old['current']=identity;old['shortcuts']={**old.get('shortcuts',{}),**{str(p):digest(p) for p in shortcuts}}
     atomic_write(metadata,(json.dumps(old,sort_keys=True)+'\n').encode())
+    refresh_desktop(applications,theme)
     return {'installed':str(release),'launcher':str(launcher),'projects':str(Path(os.environ.get('XDG_DATA_HOME',str(Path.home()/'.local/share')))/'circuit-studio/projects'),'runtime':'bundled Electron' if (release/'runtime/electron/electron').exists() else 'system Chrome/Chromium'}
 
 
@@ -73,6 +90,8 @@ def uninstall(prefix):
         path=Path(name)
         if path.is_file() and not path.is_symlink() and digest(path)==checksum:path.unlink()
         elif path.exists():preserved.append(str(path))
+    for name in record['shortcuts']:
+        if Path(name).name=='circuit-studio.desktop':refresh_desktop(Path(name).parent,Path(name).parent.parent/'icons/hicolor')
     current=prefix/'current'
     if current.is_symlink() and current.resolve().parent==(prefix/'releases').resolve():current.unlink()
     for identity,files in record['releases'].items():

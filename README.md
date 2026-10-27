@@ -2,7 +2,7 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.4.0-alpha.7.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.4.0-alpha.8.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 

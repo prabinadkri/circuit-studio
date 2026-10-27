@@ -27,10 +27,12 @@ class InstallTests(unittest.TestCase):
         outcome=install.uninstall(self.prefix)
         self.assertTrue(outcome['uninstalled']);self.assertEqual(saved.read_text(),'user project');self.assertTrue((release/'package.json').exists());self.assertFalse((self.bin/'circuit-studio').exists());self.assertFalse((self.prefix/'current').exists())
 
-    def test_desktop_identity_and_immutable_icon_follow_runtime(self):
+    def test_desktop_identity_and_themed_icon_follow_runtime(self):
         result=install.install(self.prefix,self.bin,self.apps)
         entry=(self.apps/'circuit-studio.desktop').read_text()
-        self.assertIn('Icon='+result['installed']+'/web/icon.svg',entry)
+        self.assertIn('Icon=circuit-studio\n',entry)
+        svg=self.root/'icons/hicolor/scalable/apps/circuit-studio.svg'
+        self.assertEqual(svg.read_bytes(),(self.source/'web/icon.svg').read_bytes())
         self.assertIn('StartupWMClass=CircuitStudio',entry)
         for name in ['web/icon.png','runtime/electron/electron']:
             path=self.source/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'fixture')
@@ -38,8 +40,20 @@ class InstallTests(unittest.TestCase):
         updated=install.install(self.prefix,self.bin,self.apps)
         entry=(self.apps/'circuit-studio.desktop').read_text()
         self.assertNotEqual(result['installed'],updated['installed'])
-        self.assertIn('Icon='+updated['installed']+'/web/icon.png',entry)
+        self.assertIn('Icon=circuit-studio\n',entry)
+        png=self.root/'icons/hicolor/256x256/apps/circuit-studio.png'
+        self.assertEqual(png.read_bytes(),b'fixture')
         self.assertIn('StartupWMClass=Circuit Studio',entry)
+        svg.write_text('user customized icon')
+        removed=install.uninstall(self.prefix)
+        self.assertFalse(png.exists());self.assertIn(str(svg),removed['preservedModifiedFiles'])
+        self.assertEqual(svg.read_text(),'user customized icon')
+
+    def test_unrelated_icon_is_not_replaced(self):
+        icon=self.root/'icons/hicolor/scalable/apps/circuit-studio.svg'
+        icon.parent.mkdir(parents=True);icon.write_text('other icon')
+        with self.assertRaises(ValueError):install.install(self.prefix,self.bin,self.apps)
+        self.assertEqual(icon.read_text(),'other icon');self.assertFalse((self.prefix/'current').exists())
 
     def test_bad_manifest_does_not_install(self):
         (self.source/'run.sh').write_text('corrupt')
