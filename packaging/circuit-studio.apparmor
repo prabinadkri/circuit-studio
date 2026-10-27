@@ -1,0 +1,9 @@
+# Circuit Studio's default per-user installation. Keep Chromium sandboxing on.
+# Ubuntu 24.04+ requires an explicit userns grant for local Electron binaries.
+abi <abi/4.0>,
+include <tunables/global>
+
+profile circuit-studio "@{HOME}/.local/share/circuit-studio/releases/*/runtime/electron/electron" flags=(unconfined) {
+  userns,
+  include if exists <local/circuit-studio>
+}

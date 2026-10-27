@@ -66,3 +66,35 @@ toolchain can instead be installed under
 `~/.local/share/circuit-studio/toolchains/avr/usr/`, retaining its bin/lib layout,
 or selected with `CIRCUIT_STUDIO_AVR_BIN=/path/to/bin`. The app never installs system
 packages automatically. The compiler integration currently targets ATmega328P.
+
+## Applications menu launch on Ubuntu 24.04 and later
+
+Ubuntu restricts unprivileged user namespaces for applications without an
+AppArmor profile. A bundled Electron build in a user-local directory can therefore
+abort with `The SUID sandbox helper binary was found, but is not configured correctly`
+when opened from Applications, even if it works from a development terminal.
+
+For the default `~/.local/share/circuit-studio` installation, install the supplied
+application-specific profile once:
+
+```sh
+sudo install -o root -g root -m 0644 packaging/circuit-studio.apparmor /etc/apparmor.d/circuit-studio
+sudo apparmor_parser -r /etc/apparmor.d/circuit-studio
+```
+
+Alpha.5 archives released before this fix do not contain the profile; download
+`circuit-studio.apparmor` from the alpha.5 release assets and use that file in the
+first command. Future source packages include it under `packaging/`.
+The rule matches only Circuit Studio's bundled Electron executables under its
+versioned default install directory, so ordinary upgrades retain the fix. Custom
+install prefixes require an appropriately adjusted executable path. This setup is
+specific to AppArmor-capable Ubuntu systems; it does not disable Chromium's
+sandbox, change global kernel restrictions, set user-owned files setuid, or alter
+projects/profiles. The system profile persists after uninstall and may be removed
+by an administrator if no Circuit Studio installation uses it.
+
+Reference: [Ubuntu's user namespace restrictions and app-specific profiles](https://documentation.ubuntu.com/release-notes/24.04/#unprivileged-user-namespace-restrictions).
+Verified on 27 October 2026 by launching the installed `.desktop` entry via the
+user session service manager (outside the development app's profile): a visible
+Circuit Studio window, the `circuit-studio` AppArmor label, and renderer seccomp
+filtering were present. No `--no-sandbox` flag was added.
