@@ -49,7 +49,10 @@ def install(prefix,bin_dir,applications):
     bin_dir.mkdir(parents=True,exist_ok=True);applications.mkdir(parents=True,exist_ok=True)
     launcher=bin_dir/'circuit-studio';desktop=applications/'circuit-studio.desktop'
     script=('#!/bin/sh\nexec '+shlex.quote(str(current/'run.sh'))+' "$@"\n').encode()
-    entry=('[Desktop Entry]\nType=Application\nName=Circuit Studio\nComment=Circuit design, firmware and PCB workbench\nExec='+desktop_quote(launcher)+'\nIcon='+str(current/'web/icon.svg')+'\nTerminal=false\nCategories=Education;Electronics;Engineering;\nStartupWMClass=CircuitStudio\n').encode()
+    # Immutable paths prevent shells reusing an old icon cached through current/.
+    icon=release/('web/icon.png' if (release/'web/icon.png').is_file() else 'web/icon.svg')
+    wm_class='Circuit Studio' if (release/'runtime/electron/electron').is_file() else 'CircuitStudio'
+    entry=('[Desktop Entry]\nType=Application\nName=Circuit Studio\nComment=Circuit design, firmware and PCB workbench\nExec='+desktop_quote(launcher)+'\nIcon='+str(icon)+'\nTerminal=false\nCategories=Education;Electronics;Engineering;\nStartupWMClass='+wm_class+'\n').encode()
     for path,payload in [(launcher,script),(desktop,entry)]:
         if path.exists() and str(path) not in old.get('shortcuts',{}) and path.read_bytes()!=payload and not (path==desktop and legacy_shortcut(path)):raise ValueError('Existing shortcut belongs to another installation: '+str(path))
     current=prefix/'current'

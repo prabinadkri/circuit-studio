@@ -27,6 +27,20 @@ class InstallTests(unittest.TestCase):
         outcome=install.uninstall(self.prefix)
         self.assertTrue(outcome['uninstalled']);self.assertEqual(saved.read_text(),'user project');self.assertTrue((release/'package.json').exists());self.assertFalse((self.bin/'circuit-studio').exists());self.assertFalse((self.prefix/'current').exists())
 
+    def test_desktop_identity_and_immutable_icon_follow_runtime(self):
+        result=install.install(self.prefix,self.bin,self.apps)
+        entry=(self.apps/'circuit-studio.desktop').read_text()
+        self.assertIn('Icon='+result['installed']+'/web/icon.svg',entry)
+        self.assertIn('StartupWMClass=CircuitStudio',entry)
+        for name in ['web/icon.png','runtime/electron/electron']:
+            path=self.source/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'fixture')
+            self.files[name]={'sha256':digest(path),'mode':0o644}
+        updated=install.install(self.prefix,self.bin,self.apps)
+        entry=(self.apps/'circuit-studio.desktop').read_text()
+        self.assertNotEqual(result['installed'],updated['installed'])
+        self.assertIn('Icon='+updated['installed']+'/web/icon.png',entry)
+        self.assertIn('StartupWMClass=Circuit Studio',entry)
+
     def test_bad_manifest_does_not_install(self):
         (self.source/'run.sh').write_text('corrupt')
         with self.assertRaises(ValueError):install.install(self.prefix,self.bin,self.apps)

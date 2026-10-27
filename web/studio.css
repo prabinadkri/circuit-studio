@@ -93,3 +93,18 @@ dialog{color:var(--ink);border-color:#b7c2d1;border-radius:8px;box-shadow:0 12px
 .toolbar #redo{display:inline-block}
 #hex::placeholder{color:#a4b1c4}
 @media(max-width:700px){.workspace{flex:none;min-height:0}.workspace>main{order:0}.workspace>#libraryPanel{order:1}.workspace>#inspectorPanel{order:2}.board-layout{flex:none}.board-canvas{min-height:520px}.toolbar{min-height:56px;gap:5px}.toolbar .spacer{display:none}}
+/* Global command search stays available even when side panels are hidden. */
+header .command-trigger{flex-shrink:0;background:#344255;color:#f5f7fb;border:1px solid #60718a;font-size:12px;padding:8px 10px}
+.command-trigger kbd{margin-left:6px;color:#d2def0;font:11px system-ui,sans-serif}
+.command-dialog{width:560px;max-width:calc(100vw - 40px);padding:22px;border:1px solid #c6cfdb;border-radius:10px;background:#fff;color:#273343;box-shadow:0 18px 60px #101a3040}
+.command-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}.command-heading h2{margin:0;font-size:20px}.command-heading form{margin:0}
+.command-dialog label{display:block;margin-top:18px;font-size:12px;color:#526176}.command-dialog input{width:100%;margin-top:7px;font:15px system-ui,sans-serif;padding:12px}
+#commandCount{font-size:12px;color:#526176;min-height:18px}#commandResults{max-height:48vh;overflow:auto;display:grid;gap:4px}
+#commandResults button{display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;min-height:42px;padding:10px 12px;background:#f5f7fa;border:1px solid transparent;color:#273343}
+#commandResults button small{color:#526176;font-size:11px}#commandResults button:focus-visible{outline:2px solid #356fbd;outline-offset:-2px;background:#e9f0fc}#commandResults button:hover{background:#e9f0fc}#commandResults button:disabled{opacity:.45}
+@media(max-width:1400px){header .local{display:none}header{flex-wrap:wrap;height:auto;min-height:64px;padding-block:10px}}
+@media(max-width:700px){header .command-trigger{margin-left:auto}.command-trigger kbd{display:none}.command-dialog{padding:16px}#commandResults button{gap:8px}}
+/* Header wrapping must not push the canvas or status bar below the window. */
+body{display:flex;flex-direction:column}header,footer{flex-shrink:0}.page{flex:1;min-height:0;height:auto}
+@media(max-width:1400px){header{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px}header nav{height:auto}}
+@media(max-width:700px){header{grid-template-columns:1fr auto;gap:8px}header .brand{grid-column:1;grid-row:1}header .command-trigger{grid-column:2;grid-row:1}header nav{grid-column:1/-1;grid-row:2}}

@@ -1,0 +1,43 @@
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+let browser;
+(async()=>{
+ browser=await chromium.launch({executablePath:process.env.CHROME_BIN||'/usr/bin/google-chrome'});
+ const page=await browser.newPage({viewport:{width:1440,height:940}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
+ await page.goto(process.env.STUDIO_URL);await page.waitForFunction(()=>window.studioSim?.getViewport);
+ const canvas=page.frameLocator('#sim').locator('canvas').first();
+ const dump=()=>page.evaluate(()=>studioSim.exportCircuit(false));let before=await dump();
+ await page.locator('#schematicView [data-view=pan]').click();
+ await page.waitForFunction(()=>document.getElementById('mode').textContent.startsWith('Pan'));
+ await canvas.focus();await page.keyboard.press('Control+k');
+ assert.equal(await page.locator('#commandDialog').evaluate(d=>d.open),true);
+ await page.locator('#commandQuery').fill('nonsense123');assert.match(await page.locator('#commandCount').textContent(),/No matching/);
+ await page.keyboard.press('Escape');
+ assert.equal(await page.locator('#schematicView [data-view=pan]').getAttribute('aria-pressed'),'true','Escape closes search without exiting the current tool');
+ await page.locator('#findCommand').click();await page.locator('#commandQuery').fill('pan workspace');await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#schematicView [data-view=pan]').getAttribute('aria-pressed'),'true','Pan command is idempotent');
+ await page.locator('#select').click();await canvas.focus();await page.keyboard.press('r');
+ await page.waitForFunction(()=>document.getElementById('mode').textContent.includes('Resistor'));
+ await page.locator('#toggleLibrary').click();await page.locator('#toggleInspector').click();
+ assert.equal(await dump(),before);
+ await page.reload();await page.waitForFunction(()=>window.studioSim?.getViewport);
+ before=await dump();
+ assert.equal(await page.locator('#libraryPanel').isVisible(),false);assert.equal(await page.locator('#inspectorPanel').isVisible(),false);
+ await page.locator('#findCommand').click();await page.locator('#commandQuery').fill('find component');await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#libraryPanel').isVisible(),true);assert.equal(await page.locator('#search').evaluate(e=>document.activeElement===e),true);
+ assert.equal(await page.locator('#category').inputValue(),'All components');
+ await page.locator('#search').fill('op amp');assert.ok(await page.locator('#parts button[data-part=OpAmpElm]').count());
+ await page.locator('#findCommand').click();await page.locator('#commandQuery').fill('reset layout');await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#inspectorPanel').isVisible(),true);assert.equal(await dump(),before);
+ await page.locator('#findCommand').click();await page.locator('#commandQuery').fill('Coding Hub');await page.keyboard.press('Enter');
+ assert.equal(await page.locator('#assistantDialog').evaluate(d=>d.open),true);await page.keyboard.press('Escape');
+ assert.equal(await page.locator('#assistantDialog').evaluate(d=>d.open),false);
+ for(const width of [1440,1024,700,390]){
+  await page.setViewportSize({width,height:940});
+  const footer=await page.locator('footer').boundingBox();assert.ok(footer.y+footer.height<=941);
+  const trigger=await page.locator('#findCommand').boundingBox();assert.ok(trigger.x>=0&&trigger.x+trigger.width<=width+1);
+  await page.locator('#findCommand').click();const box=await page.locator('#commandDialog').boundingBox();assert.ok(box.x>=0&&box.x+box.width<=width+1);
+  await page.keyboard.press('Escape');
+ }
+ assert.deepEqual(errors,[]);await browser.close();console.log('PASS command search, iframe shortcut, focus, mode labels, persistent/recoverable layout, unchanged circuit and responsive controls');
+})().catch(async e=>{console.error(e);await browser?.close();process.exitCode=1;});

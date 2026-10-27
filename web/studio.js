@@ -1,3 +1,4 @@
+import {commandSearch} from './commands.js';
 import {WorkspaceNavigation,boardViewport} from './navigation.js';
 import {PeripheralLab} from './peripheral-lab.js';
 import {setStackup,addSpannedVia,routePair,matchLength,shoveRoute,routeLength} from './routing.js';
@@ -134,6 +135,8 @@ $('addVia').onclick=()=>{capture();board.dropVia();capture();};$('deleteVia').on
 $('boardMove').onclick=()=>{boardNavigation.setHand(false);board.setMode('move');};$('boardRoute').onclick=()=>{boardNavigation.setHand(false);board.setMode('route');};$('boardUndo').onclick=()=>travel('undo');$('layer').onchange=()=>board.cancelRoute();$('drc').onclick=()=>board.check();$('deleteTrack').onclick=()=>board.deleteTrack();$('exportBoard').onclick=()=>{try{if(board.sourceNetlist!==BoardEditor.fingerprint(currentDesign().instances))throw Error('Schematic changed since PCB import. Re-import schematic nets before exporting.');download(safeName()+'.kicad_pcb',board.toKiCad(),'text/plain');status('KiCad board exported. Resolve design checks and verify footprints before fabrication.');}catch(e){status(e.message);}};
 window.addEventListener('beforeunload',e=>{checkpoint();if(dirty){e.preventDefault();e.returnValue='';}});
 function shortcut(e){
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();e.stopImmediatePropagation();commands.open();return;}
+ if(document.querySelector('dialog[open]'))return;
  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();e.stopImmediatePropagation();$('save').click();return;}
  if(typing)return;
@@ -198,9 +201,41 @@ function initSchematicNavigation(){
  const canvas=frame.contentDocument.querySelector('canvas');
  const style=frame.contentDocument.createElement('style');style.textContent=`.gwt-MenuBar-horizontal{background:#f1f3f5!important;border-bottom:1px solid #d1d7df}.gwt-MenuBar,.menuDropdown{font-family:system-ui,sans-serif!important;color:#273343}td.gwt-MenuItem{font-size:12px!important;font-weight:500!important}td.gwt-MenuItem.open,td.gwt-MenuItem:hover{background:#dce8fa!important}`;frame.contentDocument.head.append(style);
  schematicNavigation=new WorkspaceNavigation({surface:canvas,controls:$('schematicView'),pan:(x,y)=>sim.panViewport(x,y),zoom:f=>sim.zoomViewport(f),fit:()=>sim.command('edit','centercircuit'),scale:()=>sim.getViewport().scale,selected:()=>sim.getViewport().tool==='Select',active:()=>$('schematic').classList.contains('active'),onSelect:selectTool});
- setInterval(()=>{if($('schematic').classList.contains('active'))schematicNavigation.paint();},250);
+ setInterval(()=>{if($('schematic').classList.contains('active')){schematicNavigation.paint();paintSchematicMode();}},250);
 }
-for(const [button,panel,cls]of [['toggleLibrary','libraryPanel','hide-library'],['toggleInspector','inspectorPanel','hide-inspector']]){
- const b=$(button),workspace=$('schematicWorkspace');
- b.onclick=()=>{const hidden=workspace.classList.toggle(cls);$(panel).hidden=hidden;b.setAttribute('aria-expanded',String(!hidden));requestAnimationFrame(()=>frame.contentWindow.dispatchEvent(new Event('resize')));};
+// Layout preferences never enter project files or undo history.
+const panelSettings=[['toggleLibrary','libraryPanel','hide-library'],['toggleInspector','inspectorPanel','hide-inspector']];
+let layout={};try{layout=JSON.parse(localStorage.getItem('circuit-studio-layout')||'{}')||{};}catch{}
+if(typeof layout!=='object'||Array.isArray(layout))layout={};
+function setPanel(button,hidden){
+ const setting=panelSettings.find(([id])=>id===button);if(!setting)return;
+ const [,panel,cls]=setting;$('schematicWorkspace').classList.toggle(cls,hidden);$(panel).hidden=hidden;$(button).setAttribute('aria-expanded',String(!hidden));
+ layout[button]=hidden;try{localStorage.setItem('circuit-studio-layout',JSON.stringify(layout));}catch{}
+ requestAnimationFrame(()=>frame.contentWindow.dispatchEvent(new Event('resize')));
 }
+for(const [button]of panelSettings){setPanel(button,layout[button]===true);$(button).onclick=()=>setPanel(button,$(button).getAttribute('aria-expanded')==='true');}
+$('resetLayout').onclick=()=>{for(const [button]of panelSettings)setPanel(button,false);status('Default workspace layout restored');};
+function paintSchematicMode(){
+ if(!sim)return;const tool=sim.getViewport().tool;
+ const part=catalog.parts.find(p=>p.type===tool);
+ const navigating=schematicNavigation?.hand||schematicNavigation?.space||schematicNavigation?.drag;
+ const text=navigating?'Pan · drag workspace · Esc to select':tool==='Select'?'Select · drag to move components':(part?.label||tool.replace(/Elm$/, ''))+' · '+(tool==='WireElm'?'drag between pins':'click empty space to place');
+ if($('mode').textContent!==text)$('mode').textContent=text;
+ if(selectedPart!==(part?tool:'')){selectedPart=part?tool:'';renderParts();}
+}
+const go=page=>document.querySelector(`nav [data-page="${page}"]`).click();
+const action=(label,group,id,page,keywords='')=>({label,group,keywords,available:()=>!!sim&&!$(id).disabled,run:()=>{if(page)go(page);$(id).click();}});
+const commands=commandSearch({dialog:$('commandDialog'),input:$('commandQuery'),results:$('commandResults'),count:$('commandCount'),trigger:$('findCommand'),commands:[
+ {label:'Find a component',group:'Schematic',keywords:'library search op amp resistor parts',available:()=>!!sim,run:()=>{go('schematic');setPanel('toggleLibrary',false);$('category').value='All components';$('search').value='';renderParts();$('search').focus();}},
+ ...[...document.querySelectorAll('nav [data-page]')].map(b=>({label:'Open '+b.textContent,group:'Workspaces',keywords:b.dataset.page,run:()=>b.click()})),
+ ...[['Pan workspace','pan'],['Select and move components','select'],['Fit circuit or board in view','fit'],['Zoom in','in'],['Zoom out','out']].map(([label,view])=>({label,group:'View',available:()=>!!sim,run:()=>{const pcb=$('pcb').classList.contains('active');if(!pcb)go('schematic');const control=$(pcb?'boardView':'schematicView').querySelector(`[data-view="${view}"]`);if(view!=='pan'||control.getAttribute('aria-pressed')!=='true')control.click();}})),
+ action('Design with Coding Hub','Assistant','assistant','schematic','AI circuit chat'),
+ action('Save project file','Project','save',null,'download backup'),
+ action('Save project locally','Project','saveLocal'),
+ action('Open saved projects','Project','localProjects'),
+ action('Run electrical checks','Schematic','erc','schematic','ERC'),
+ action('Show or hide component library','Layout','toggleLibrary','schematic'),
+ action('Show or hide inspector','Layout','toggleInspector','schematic'),
+ action('Reset workspace layout','Layout','resetLayout','schematic','restore panels'),
+ action('Help and keyboard shortcuts','Help','help')
+]});

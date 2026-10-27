@@ -2,20 +2,24 @@
 
 An integrated, offline Linux electronics workbench with schematic simulation, AVR and PIC firmware execution, and a PCB editor sharing one project file.
 
-**Status: working alpha, 0.4.0-alpha.5.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
+**Status: working alpha, 0.4.0-alpha.6.** This is an independent application built with open-source simulation engines. It is not affiliated with Proteus, does not import Proteus projects, and does not yet offer Proteus feature parity.
 
 ![Circuit Studio schematic workspace](docs/circuit-studio.png)
 
 ## Workspace navigation
 
-Alpha.5 introduces a neutral slate/white interface with blue action controls.
+The workbench uses a neutral slate/white interface with blue action controls.
 Both editors have a visible **Pan** tool, zoom buttons, a zoom readout and **Fit**.
 Hold **Space and drag**, or drag with the **middle mouse button**, to temporarily
 pan without changing the selected component or unfinished route. **H** selects
 Pan, **V** selects editing, **F** fits, and **+ / −** zoom. **Pan steps** or
 **Shift + arrow keys** move the view without dragging. Text fields retain normal typing.
 
-**Library** and **Inspector** toggle the schematic side panels. Action bars wrap
+**Find command** (Ctrl+K) searches common actions and all workspaces, including Coding Hub.
+**Library** and **Inspector** remember panel visibility; **Reset layout** restores both.
+The mode label follows keyboard tool changes. The Linux menu and window use the same
+slate/blue icon as the header. See the [research and checks](docs/planning/UX-ALPHA6.md).
+Action bars wrap
 at narrow widths; advanced engine menus remain available. Panning leaves circuit
 geometry, PCB connectivity, undo history and the running MCU timeline unchanged.
 
